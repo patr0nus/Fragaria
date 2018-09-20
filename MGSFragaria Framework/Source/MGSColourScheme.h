@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *      to the MGSFragariaView property names.
  */
 
-@interface MGSColourScheme : NSObject
+@interface MGSColourScheme : NSObject <NSCopying, NSMutableCopying>
 
 
 #pragma mark - Initializing a Colour Scheme
@@ -57,15 +57,9 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 - (instancetype)init;
 
 
-#pragma mark - Saving and Loading Colour Schemes
-/// @name Saving and Loading Colour Schemes
+#pragma mark - Saving Colour Schemes
+/// @name Saving Loading Colour Schemes
 
-
-/** Sets its values from a plist file.
- *  @param file The complete path and file to read.
- *  @param err Upon return, if the loading failed, contains an NSError object
- *         that describes the problem. */
-- (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err;
 
 /** Writes the object as a plist to the given file.
  *  @param file The complete path and file to write.
@@ -103,57 +97,57 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 
 
 /** Display name of the color scheme. */
-@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong, readonly) NSString *displayName;
 
 /** Base text color. */
-@property (nonatomic, strong) NSColor *textColor;
+@property (nonatomic, strong, readonly) NSColor *textColor;
 /** Editor background color. */
-@property (nonatomic, strong) NSColor *backgroundColor;
+@property (nonatomic, strong, readonly) NSColor *backgroundColor;
 /** Syntax error background highlighting color. */
-@property (nonatomic, strong) NSColor *defaultSyntaxErrorHighlightingColour;
+@property (nonatomic, strong, readonly) NSColor *defaultSyntaxErrorHighlightingColour;
 /** Editor invisible characters color. */
-@property (nonatomic, strong) NSColor *textInvisibleCharactersColour;
+@property (nonatomic, strong, readonly) NSColor *textInvisibleCharactersColour;
 /** Editor current line highlight color. */
-@property (nonatomic, strong) NSColor *currentLineHighlightColour;
+@property (nonatomic, strong, readonly) NSColor *currentLineHighlightColour;
 /** Editor insertion point color. */
-@property (nonatomic, strong) NSColor *insertionPointColor;
+@property (nonatomic, strong, readonly) NSColor *insertionPointColor;
 /** Syntax color for attributes. */
-@property (nonatomic, strong) NSColor *colourForAttributes;
+@property (nonatomic, strong, readonly) NSColor *colourForAttributes;
 /** Syntax color for autocomplete. */
-@property (nonatomic, strong) NSColor *colourForAutocomplete;
+@property (nonatomic, strong, readonly) NSColor *colourForAutocomplete;
 /** Syntax color for commands. */
-@property (nonatomic, strong) NSColor *colourForCommands;
+@property (nonatomic, strong, readonly) NSColor *colourForCommands;
 /** Syntax color for comments. */
-@property (nonatomic, strong) NSColor *colourForComments;
+@property (nonatomic, strong, readonly) NSColor *colourForComments;
 /** Syntax color for instructions. */
-@property (nonatomic, strong) NSColor *colourForInstructions;
+@property (nonatomic, strong, readonly) NSColor *colourForInstructions;
 /** Syntax color for keywords. */
-@property (nonatomic, strong) NSColor *colourForKeywords;
+@property (nonatomic, strong, readonly) NSColor *colourForKeywords;
 /** Syntax color for numbers. */
-@property (nonatomic, strong) NSColor *colourForNumbers;
+@property (nonatomic, strong, readonly) NSColor *colourForNumbers;
 /** Syntax color for strings. */
-@property (nonatomic, strong) NSColor *colourForStrings;
+@property (nonatomic, strong, readonly) NSColor *colourForStrings;
 /** Syntax color for variables. */
-@property (nonatomic, strong) NSColor *colourForVariables;
+@property (nonatomic, strong, readonly) NSColor *colourForVariables;
 
 /** Should attributes be colored? */
-@property (nonatomic, assign) BOOL coloursAttributes;
+@property (nonatomic, assign, readonly) BOOL coloursAttributes;
 /** Should autocomplete be colored? */
-@property (nonatomic, assign) BOOL coloursAutocomplete;
+@property (nonatomic, assign, readonly) BOOL coloursAutocomplete;
 /** Should commands be colored? */
-@property (nonatomic, assign) BOOL coloursCommands;
+@property (nonatomic, assign, readonly) BOOL coloursCommands;
 /** Should comments be colored? */
-@property (nonatomic, assign) BOOL coloursComments;
+@property (nonatomic, assign, readonly) BOOL coloursComments;
 /** Should instructions be colored? */
-@property (nonatomic, assign) BOOL coloursInstructions;
+@property (nonatomic, assign, readonly) BOOL coloursInstructions;
 /** Should keywords be colored? */
-@property (nonatomic, assign) BOOL coloursKeywords;
+@property (nonatomic, assign, readonly) BOOL coloursKeywords;
 /** Should numbers be colored? */
-@property (nonatomic, assign) BOOL coloursNumbers;
+@property (nonatomic, assign, readonly) BOOL coloursNumbers;
 /** Should strings be colored? */
-@property (nonatomic, assign) BOOL coloursStrings;
+@property (nonatomic, assign, readonly) BOOL coloursStrings;
 /** Should variables be colored? */
-@property (nonatomic, assign) BOOL coloursVariables;
+@property (nonatomic, assign, readonly) BOOL coloursVariables;
 
 
 #pragma mark - Checking Equality

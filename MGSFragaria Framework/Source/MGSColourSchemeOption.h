@@ -5,11 +5,11 @@
 //  Created by Daniele Cattaneo on 20/10/17.
 //
 
-#import "MGSColourScheme.h"
+#import "MGSMutableColourScheme.h"
 
 
 /** A subclass of MGSColorScheme that stores preferences-UI-only properties. */
-@interface MGSColourSchemeOption : MGSColourScheme
+@interface MGSColourSchemeOption : MGSMutableColourScheme
 
 
 /** Indicates if this definition was loaded from a bundle. */

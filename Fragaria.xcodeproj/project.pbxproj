@@ -157,6 +157,8 @@
 		01F336901C8C962100B5F395 /* NSSet+Fragaria.h in Headers */ = {isa = PBXBuildFile; fileRef = 01F3368E1C8C962100B5F395 /* NSSet+Fragaria.h */; };
 		01F336911C8C962100B5F395 /* NSSet+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F3368F1C8C962100B5F395 /* NSSet+Fragaria.m */; };
 		01F708BB1F72AD0000000F1E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D034C8071A997FA8003D3A41 /* MainMenu.xib */; };
+		01FBB3382153D591001E590C /* MGSMutableColourScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 01FBB3362153D591001E590C /* MGSMutableColourScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01FBB3392153D591001E590C /* MGSMutableColourScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBB3372153D591001E590C /* MGSMutableColourScheme.m */; };
 		01FBC3831C1EADDF00837F04 /* MGSStringColumnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBC3821C1EADDF00837F04 /* MGSStringColumnTests.m */; };
 		01FBC7EC1B0679520008EAF8 /* MGSMutableSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBC7EA1B0679520008EAF8 /* MGSMutableSubstring.m */; };
 		01FC487F1C1C7EC600F4227E /* Fragaria.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB69B62B118B745700903D1D /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -610,6 +612,9 @@
 		01F0D7161C1269A2000A08B6 /* Fragaria-Swift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fragaria-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		01F3368E1C8C962100B5F395 /* NSSet+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+Fragaria.h"; sourceTree = "<group>"; };
 		01F3368F1C8C962100B5F395 /* NSSet+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Fragaria.m"; sourceTree = "<group>"; };
+		01FBB3362153D591001E590C /* MGSMutableColourScheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSMutableColourScheme.h; sourceTree = "<group>"; };
+		01FBB3372153D591001E590C /* MGSMutableColourScheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSMutableColourScheme.m; sourceTree = "<group>"; };
+		01FBB33A2153DCC4001E590C /* MGSColourSchemePrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSColourSchemePrivate.h; sourceTree = "<group>"; };
 		01FBC3821C1EADDF00837F04 /* MGSStringColumnTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSStringColumnTests.m; sourceTree = "<group>"; };
 		01FBC7E91B0679520008EAF8 /* MGSMutableSubstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSMutableSubstring.h; sourceTree = "<group>"; };
 		01FBC7EA1B0679520008EAF8 /* MGSMutableSubstring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSMutableSubstring.m; sourceTree = "<group>"; };
@@ -1081,6 +1086,9 @@
 		AB83887D171E94C5004408F4 /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
+				01FBB3362153D591001E590C /* MGSMutableColourScheme.h */,
+				01FBB3372153D591001E590C /* MGSMutableColourScheme.m */,
+				01FBB33A2153DCC4001E590C /* MGSColourSchemePrivate.h */,
 				D0718BA51AB70BE70073493A /* MGSColourScheme.h */,
 				D0718BA61AB70BE70073493A /* MGSColourScheme.m */,
 				ABF28AEF14C075D400ECAD48 /* NSScanner+Fragaria.h */,
@@ -1325,6 +1333,7 @@
 				E373BF131718A64700D71602 /* SMLAutoCompleteDelegate.h in Headers */,
 				D050E05B21415B100087A933 /* MGSUserDefaultsDelegate.h in Headers */,
 				01A0EC4F1E6C761400818624 /* MGSMutableSubstring.h in Headers */,
+				01FBB3382153D591001E590C /* MGSMutableColourScheme.h in Headers */,
 				AB8387AA171B4505004408F4 /* SMLSyntaxColouringDelegate.h in Headers */,
 				D071884F1AB54CCA0073493A /* MGSPrefsViewController.h in Headers */,
 				01A0EC4E1E6C755700818624 /* NSTextStorage+Fragaria.h in Headers */,
@@ -1677,6 +1686,7 @@
 				D0718B4A1AB54EA70073493A /* MGSPrefsColourPropertiesViewController.m in Sources */,
 				01B50A801B07AD8C00C9A856 /* NSString+Fragaria.m in Sources */,
 				D06653D91AC02A0400ACE8B0 /* NSColor+TransformedCompare.m in Sources */,
+				01FBB3392153D591001E590C /* MGSMutableColourScheme.m in Sources */,
 				D0C13BBC1ABD12A400E191A9 /* MGSColourSchemeSaveController.m in Sources */,
 				D0718BAC1AB71FE00073493A /* MGSColourSchemeController.m in Sources */,
 				0148656A1B19036900BE1DC4 /* NSObject+Fragaria.m in Sources */,

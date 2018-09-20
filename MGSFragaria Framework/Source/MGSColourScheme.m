@@ -11,19 +11,11 @@
 #import "MGSColourToPlainTextTransformer.h"
 #import "NSColor+TransformedCompare.h"
 #import "MGSColourSchemeController.h"
+#import "MGSMutableColourScheme.h"
+#import "MGSColourSchemePrivate.h"
 
 
 NSString * const MGSColourSchemeErrorDomain = @"MGSColourSchemeErrorDomain";
-
-
-@interface MGSColourScheme ()
-
-+ (NSSet *) propertiesAll;
-+ (NSSet *) propertiesOfTypeBool;
-+ (NSSet *) propertiesOfTypeColor;
-+ (NSSet *) propertiesOfTypeString;
-
-@end
 
 
 @implementation MGSColourScheme
@@ -281,6 +273,18 @@ wrongFormat:
         NSStringFromClass([self class]),
         self,
         self.displayName];
+}
+
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+
+- (id)mutableCopyWithZone:(NSZone *)zone
+{
+    return [[MGSMutableColourScheme alloc] initWithColourScheme:self];
 }
 
 
