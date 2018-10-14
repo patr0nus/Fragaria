@@ -26,6 +26,7 @@
 
 
 @class MGSFragariaView;
+@class MGSColourScheme;
 
 @protocol MGSDragOperationDelegate;
 @protocol SMLAutoCompleteDelegate;
@@ -245,6 +246,7 @@
 @property (assign) id<MGSFragariaTextViewDelegate, MGSDragOperationDelegate> delegate;
 /** Indicates the current insertion point color. */
 @property (nonatomic, assign) NSColor *insertionPointColor;
+
 
 
 @end

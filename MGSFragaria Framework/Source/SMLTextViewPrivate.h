@@ -13,6 +13,7 @@
 @class MGSExtraInterfaceController;
 @class SMLSyntaxColouring;
 @class SMLLayoutManager;
+@class MGSMutableColourScheme;
 
 
 @interface SMLTextView ()
@@ -31,6 +32,9 @@
 /** SMLTextView's layout manager is an SMLLayoutManager internally, but that
  * class is not exposed. */
 @property (assign, readonly) SMLLayoutManager *layoutManager;
+
+/** The shared color scheme, set by MGSFragariaView */
+@property (nonatomic, strong) MGSMutableColourScheme *colourScheme;
 
 
 @end

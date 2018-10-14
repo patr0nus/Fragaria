@@ -155,11 +155,6 @@
 /** Indicates if coloring should end at end of line.*/
 @property BOOL coloursOnlyUntilEndOfLine;
 
-/** Sets all the syntax highlighting colours to the ones specified in a
- *  colour scheme.
- *  @param scheme The colour scheme. */
-- (void)setColoursFromScheme:(nonnull MGSColourScheme *)scheme;
-
 
 #pragma mark - Configuring Autocompletion
 /// @name Configuring Autocompletion
@@ -331,19 +326,23 @@
  **/
 - (void)addSubstitute:(NSString * _Nonnull)substitute forInvisibleCharacter:(unichar)character;
 
-#pragma mark - Configuring Text Appearance
-/// @name Configuring Text Appearance
+#pragma mark - Configuring Text Appearance and Color Schemes
+/// @name Configuring Text Appearance and Color Schemes
 
 
-/** Indicates the base (non-highlighted) text color.*/
-@property (copy, nonnull) NSColor *textColor;
-/** Indicates the text view background color.*/
-@property (nonnull) NSColor *backgroundColor;
 /** Specifies the text editor font.*/
 @property (nonatomic, nonnull) NSFont *textFont;
 /** The real line height as a multiple of the natural line height for the
  *  current font. */
 @property (nonatomic) CGFloat lineHeightMultiple;
+
+/** The current color scheme applied to Fragaria */
+@property (nonatomic, copy, nonnull) MGSColourScheme *colourScheme;
+/** The base (non-highlighted) text color.*/
+@property (copy, nonnull) NSColor *textColor;
+/** The text view background color.*/
+@property (nonnull) NSColor *backgroundColor;
+
 
 
 #pragma mark - Configuring Additional Text View Behavior

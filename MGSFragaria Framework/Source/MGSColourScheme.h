@@ -111,6 +111,7 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 @property (nonatomic, strong, readonly) NSColor *currentLineHighlightColour;
 /** Editor insertion point color. */
 @property (nonatomic, strong, readonly) NSColor *insertionPointColor;
+
 /** Syntax color for attributes. */
 @property (nonatomic, strong, readonly) NSColor *colourForAttributes;
 /** Syntax color for autocomplete. */

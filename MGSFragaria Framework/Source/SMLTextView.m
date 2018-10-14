@@ -30,6 +30,7 @@
 #import "MGSExtraInterfaceController.h"
 #import "NSString+Fragaria.h"
 #import "NSTextStorage+Fragaria.h"
+#import "MGSMutableColourScheme.h"
 
 
 static BOOL CharacterIsBrace(unichar c)
@@ -99,19 +100,32 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 #pragma mark - Properties - Appearance and Behaviours
 
 
+- (void)setColourScheme:(MGSMutableColourScheme *)colourScheme
+{
+    _colourScheme = colourScheme;
+    [self colourSchemeHasChanged];
+}
+
+
+- (void)colourSchemeHasChanged
+{
+    [super setInsertionPointColor:self.colourScheme.insertionPointColor];
+    [super setTextColor:self.colourScheme.textColor];
+    [super setBackgroundColor:self.colourScheme.backgroundColor];
+    self.layoutManager.invisibleCharactersColour = self.colourScheme.textInvisibleCharactersColour;
+    currentLineRect = [self lineHighlightingRect];
+    [self setNeedsDisplayInRect:currentLineRect];
+    [self configurePageGuide];
+}
+
+
 /*
  * @property insertionPointColor
  */
 - (void)setInsertionPointColor:(NSColor *)insertionPointColor
 {
-    [super setInsertionPointColor:insertionPointColor];
-    [self configurePageGuide];
-
-}
-
-- (NSColor *)insertionPointColor
-{
-    return [super insertionPointColor];
+    [self.colourScheme setInsertionPointColor:insertionPointColor];
+    [self colourSchemeHasChanged];
 }
 
 
@@ -172,22 +186,25 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 }
 
 
+- (void)setBackgroundColor:(NSColor *)backgroundColor
+{
+    self.colourScheme.backgroundColor = backgroundColor;
+    [self colourSchemeHasChanged];
+}
+
+
 /*
  * @property textColor
  */
 - (void)setTextColor:(NSColor *)textColor
 {
-    /* setFont: also updates our typing attributes */
-    [super setTextColor:textColor];
-    [self configurePageGuide];
+    self.colourScheme.textColor = textColor;
+    [self colourSchemeHasChanged];
 }
 
 - (NSColor *)textColor
 {
-    NSColor *res;
-    
-    res = [[self typingAttributes] objectForKey:NSForegroundColorAttributeName];
-    return res ? res : [NSColor blackColor];
+    return self.colourScheme.textColor;
 }
 
 
@@ -214,8 +231,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
  */
 - (void)setTextInvisibleCharactersColour:(NSColor *)textInvisibleCharactersColour
 {
-	self.layoutManager.invisibleCharactersColour = textInvisibleCharactersColour;
-
+    self.colourScheme.textInvisibleCharactersColour = textInvisibleCharactersColour;
 }
 
 - (NSColor *)textInvisibleCharactersColour
@@ -407,7 +423,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     _lineWrap = YES;
     [self updateLineWrap];
     
-    self.currentLineHighlightColour = [NSColor colorWithCalibratedRed:0.96 green:0.96 blue:0.71 alpha:1.0];
+    _colourScheme = [[MGSMutableColourScheme alloc] init];
     self.indentWidth = 4;
     self.tabWidth = 4;
     self.pageGuideColumn = 80;
@@ -536,13 +552,16 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 
 /*
  * @property currentLineHighlightColour
- * (synthesized)
  */
 - (void)setCurrentLineHighlightColour:(NSColor *)currentLineHighlightColour
 {
-    _currentLineHighlightColour = currentLineHighlightColour;
-    currentLineRect = [self lineHighlightingRect];
-    [self setNeedsDisplayInRect:currentLineRect];
+    self.colourScheme.currentLineHighlightColour = currentLineHighlightColour;
+    [self colourSchemeHasChanged];
+}
+
+- (NSColor *)currentLineHighlightColour
+{
+    return self.colourScheme.currentLineHighlightColour;
 }
 
 

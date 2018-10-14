@@ -19,7 +19,7 @@
 #import "MGSSyntaxController.h"
 #import "NSTextStorage+Fragaria.h"
 #import "NSString+Fragaria.h"
-#import "MGSColourScheme.h"
+#import "MGSMutableColourScheme.h"
 
 #import "MGSSyntaxErrorController.h"
 #import "SMLSyntaxError.h"
@@ -32,7 +32,9 @@
 #pragma mark - IMPLEMENTATION
 
 
-@implementation MGSFragariaView
+@implementation MGSFragariaView {
+    MGSMutableColourScheme *_colourScheme;
+}
 
 /* Synthesis required in order to implement protocol declarations. */
 @synthesize gutterView = _gutterView;
@@ -535,13 +537,14 @@
  */
 - (void)setDefaultSyntaxErrorHighlightingColour:(NSColor *)defaultSyntaxErrorHighlightingColour
 {
-    self.syntaxErrorController.defaultSyntaxErrorHighlightingColour = defaultSyntaxErrorHighlightingColour;
+    _colourScheme.defaultSyntaxErrorHighlightingColour = defaultSyntaxErrorHighlightingColour;
+    [self colourSchemeHasChanged];
     [self mgs_propagateValue:defaultSyntaxErrorHighlightingColour forBinding:NSStringFromSelector(@selector(defaultSyntaxErrorHighlightingColour))];
 }
 
--(NSColor *)defaultSyntaxErrorHighlightingColour
+- (NSColor *)defaultSyntaxErrorHighlightingColour
 {
-    return self.syntaxErrorController.defaultSyntaxErrorHighlightingColour;
+    return self.colourScheme.defaultSyntaxErrorHighlightingColour;
 }
 
 
@@ -818,7 +821,58 @@
     [self.textView addSubstitute:substitute forInvisibleCharacter:character];
 }
 
-#pragma mark - Configuring Text Appearance
+#pragma mark - Configuring Text Appearance and Color Schemes
+
+
+/*
+ * @property textFont
+ */
+- (void)setTextFont:(NSFont *)textFont
+{
+    self.textView.textFont = textFont;
+    [self mgs_propagateValue:textFont forBinding:NSStringFromSelector(@selector(textFont))];
+}
+
+- (NSFont *)textFont
+{
+    return self.textView.textFont;
+}
+
+
+/*
+ * @property lineHeightMultiple
+ */
+- (void)setLineHeightMultiple:(CGFloat)lineHeightMultiple
+{
+    self.textView.lineHeightMultiple = lineHeightMultiple;
+    [self mgs_propagateValue:@(lineHeightMultiple) forBinding:NSStringFromSelector(@selector(lineHeightMultiple))];
+}
+
+- (CGFloat)lineHeightMultiple
+{
+    return self.textView.lineHeightMultiple;
+}
+
+
+- (void)setColourScheme:(MGSColourScheme *)colourScheme
+{
+    _colourScheme = [colourScheme mutableCopy];
+    [self colourSchemeHasChanged];
+    [self mgs_propagateValue:_colourScheme forBinding:NSStringFromSelector(@selector(colourScheme))];
+}
+
+- (MGSColourScheme *)colourScheme
+{
+    return _colourScheme;
+}
+
+
+- (void)colourSchemeHasChanged
+{
+    self.textView.colourScheme = _colourScheme;
+    self.textView.syntaxColouring.colourScheme = [_colourScheme copy];
+    self.syntaxErrorController.defaultSyntaxErrorHighlightingColour = _colourScheme.defaultSyntaxErrorHighlightingColour;
+}
 
 
 /*
@@ -848,36 +902,6 @@
 - (NSColor *)backgroundColor
 {
     return self.textView.backgroundColor;
-}
-
-
-/*
- * @property textFont
- */
-- (void)setTextFont:(NSFont *)textFont
-{
-	self.textView.textFont = textFont;
-	[self mgs_propagateValue:textFont forBinding:NSStringFromSelector(@selector(textFont))];
-}
-
-- (NSFont *)textFont
-{
-	return self.textView.textFont;
-}
-
-
-/*
- * @property lineHeightMultiple
- */
-- (void)setLineHeightMultiple:(CGFloat)lineHeightMultiple
-{
-    self.textView.lineHeightMultiple = lineHeightMultiple;
-    [self mgs_propagateValue:@(lineHeightMultiple) forBinding:NSStringFromSelector(@selector(lineHeightMultiple))];
-}
-
-- (CGFloat)lineHeightMultiple
-{
-    return self.textView.lineHeightMultiple;
 }
 
 
@@ -963,13 +987,14 @@
  */
 - (void)setColourForAutocomplete:(NSColor *)colourForAutocomplete
 {
-    self.textView.syntaxColouring.colourForAutocomplete = colourForAutocomplete;
+    _colourScheme.colourForAutocomplete = colourForAutocomplete;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForAutocomplete forBinding:NSStringFromSelector(@selector(colourForAutocomplete))];
 }
 
 - (NSColor *)colourForAutocomplete
 {
-    return self.textView.syntaxColouring.colourForAutocomplete;
+    return _colourScheme.colourForAutocomplete;
 }
 
 
@@ -978,13 +1003,14 @@
  */
 - (void)setColourForAttributes:(NSColor *)colourForAttributes
 {
-    self.textView.syntaxColouring.colourForAttributes = colourForAttributes;
+    _colourScheme.colourForAttributes = colourForAttributes;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForAttributes forBinding:NSStringFromSelector(@selector(colourForAttributes))];
 }
 
 - (NSColor *)colourForAttributes
 {
-    return self.textView.syntaxColouring.colourForAttributes;
+    return _colourScheme.colourForAttributes;
 }
 
 
@@ -993,13 +1019,14 @@
  */
 - (void)setColourForCommands:(NSColor *)colourForCommands
 {
-    self.textView.syntaxColouring.colourForCommands = colourForCommands;
+    _colourScheme.colourForCommands = colourForCommands;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForCommands forBinding:NSStringFromSelector(@selector(colourForCommands))];
 }
 
 - (NSColor *)colourForCommands
 {
-    return self.textView.syntaxColouring.colourForCommands;
+    return _colourScheme.colourForCommands;
 }
 
 
@@ -1008,13 +1035,14 @@
  */
 - (void)setColourForComments:(NSColor *)colourForComments
 {
-    self.textView.syntaxColouring.colourForComments = colourForComments;
+    _colourScheme.colourForComments = colourForComments;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForComments forBinding:NSStringFromSelector(@selector(colourForComments))];
 }
 
 - (NSColor *)colourForComments
 {
-    return self.textView.syntaxColouring.colourForComments;
+    return _colourScheme.colourForComments;
 }
 
 
@@ -1023,13 +1051,14 @@
  */
 - (void)setColourForInstructions:(NSColor *)colourForInstructions
 {
-    self.textView.syntaxColouring.colourForInstructions = colourForInstructions;
+    _colourScheme.colourForInstructions = colourForInstructions;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForInstructions forBinding:NSStringFromSelector(@selector(colourForInstructions))];
 }
 
 - (NSColor *)colourForInstructions
 {
-    return self.textView.syntaxColouring.colourForInstructions;
+    return _colourScheme.colourForInstructions;
 }
 
 
@@ -1038,13 +1067,14 @@
  */
 - (void)setColourForKeywords:(NSColor *)colourForKeywords
 {
-    self.textView.syntaxColouring.colourForKeywords = colourForKeywords;
+    _colourScheme.colourForKeywords = colourForKeywords;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForKeywords forBinding:NSStringFromSelector(@selector(colourForKeywords))];
 }
 
 - (NSColor *)colourForKeywords
 {
-    return self.textView.syntaxColouring.colourForKeywords;
+    return _colourScheme.colourForKeywords;
 }
 
 
@@ -1053,13 +1083,14 @@
  */
 - (void)setColourForNumbers:(NSColor *)colourForNumbers
 {
-    self.textView.syntaxColouring.colourForNumbers = colourForNumbers;
+    _colourScheme.colourForNumbers = colourForNumbers;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForNumbers forBinding:NSStringFromSelector(@selector(colourForNumbers))];
 }
 
 - (NSColor *)colourForNumbers
 {
-    return self.textView.syntaxColouring.colourForNumbers;
+    return _colourScheme.colourForNumbers;
 }
 
 
@@ -1068,13 +1099,14 @@
  */
 - (void)setColourForStrings:(NSColor *)colourForStrings
 {
-    self.textView.syntaxColouring.colourForStrings = colourForStrings;
+    _colourScheme.colourForStrings = colourForStrings;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:colourForStrings forBinding:NSStringFromSelector(@selector(colourForStrings))];
 }
 
 - (NSColor *)colourForStrings
 {
-    return self.textView.syntaxColouring.colourForStrings;
+    return _colourScheme.colourForStrings;
 }
 
 
@@ -1083,13 +1115,14 @@
  */
 - (void)setColourForVariables:(NSColor *)colourForVariables
 {
-    self.textView.syntaxColouring.colourForVariables = colourForVariables;
-	[self mgs_propagateValue:colourForVariables forBinding:NSStringFromSelector(@selector(colourForVariables))];
+    _colourScheme.colourForVariables = colourForVariables;
+	[self colourSchemeHasChanged];
+    [self mgs_propagateValue:colourForVariables forBinding:NSStringFromSelector(@selector(colourForVariables))];
 }
 
 - (NSColor *)colourForVariables
 {
-    return self.textView.syntaxColouring.colourForVariables;
+    return _colourScheme.colourForVariables;
 }
 
 
@@ -1101,13 +1134,14 @@
  */
 - (void)setColoursAttributes:(BOOL)coloursAttributes
 {
-    self.textView.syntaxColouring.coloursAttributes = coloursAttributes;
+    _colourScheme.coloursAttributes = coloursAttributes;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursAttributes) forBinding:NSStringFromSelector(@selector(coloursAttributes))];
 }
 
 - (BOOL)coloursAttributes
 {
-    return self.textView.syntaxColouring.coloursAttributes;
+    return _colourScheme.coloursAttributes;
 }
 
 /*
@@ -1115,13 +1149,14 @@
  */
 - (void)setColoursAutocomplete:(BOOL)coloursAutocomplete
 {
-    self.textView.syntaxColouring.coloursAutocomplete = coloursAutocomplete;
+    _colourScheme.coloursAutocomplete = coloursAutocomplete;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursAutocomplete) forBinding:NSStringFromSelector(@selector(coloursAutocomplete))];
 }
 
 - (BOOL)coloursAutocomplete
 {
-    return self.textView.syntaxColouring.coloursAutocomplete;
+    return _colourScheme.coloursAutocomplete;
 }
 
 
@@ -1130,13 +1165,14 @@
  */
 - (void)setColoursCommands:(BOOL)coloursCommands
 {
-    self.textView.syntaxColouring.coloursCommands = coloursCommands;
+    _colourScheme.coloursCommands = coloursCommands;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursCommands) forBinding:NSStringFromSelector(@selector(coloursCommands))];
 }
 
 - (BOOL)coloursCommands
 {
-    return self.textView.syntaxColouring.coloursCommands;
+    return _colourScheme.coloursCommands;
 }
 
 
@@ -1145,13 +1181,14 @@
  */
 - (void)setColoursComments:(BOOL)coloursComments
 {
-    self.textView.syntaxColouring.coloursComments = coloursComments;
+    _colourScheme.coloursComments = coloursComments;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursComments) forBinding:NSStringFromSelector(@selector(coloursComments))];
 }
 
 - (BOOL)coloursComments
 {
-    return self.textView.syntaxColouring.coloursComments;
+    return _colourScheme.coloursComments;
 }
 
 
@@ -1160,13 +1197,14 @@
  */
 - (void)setColoursInstructions:(BOOL)coloursInstructions
 {
-    self.textView.syntaxColouring.coloursInstructions = coloursInstructions;
+    _colourScheme.coloursInstructions = coloursInstructions;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursInstructions) forBinding:NSStringFromSelector(@selector(coloursInstructions))];
 }
 
 - (BOOL)coloursInstructions
 {
-    return self.textView.syntaxColouring.coloursInstructions;
+    return _colourScheme.coloursInstructions;
 }
 
 
@@ -1175,13 +1213,14 @@
  */
 - (void)setColoursKeywords:(BOOL)coloursKeywords
 {
-    self.textView.syntaxColouring.coloursKeywords = coloursKeywords;
+    _colourScheme.coloursKeywords = coloursKeywords;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursKeywords) forBinding:NSStringFromSelector(@selector(coloursKeywords))];
 }
 
 - (BOOL)coloursKeywords
 {
-    return self.textView.syntaxColouring.coloursKeywords;
+    return _colourScheme.coloursKeywords;
 }
 
 
@@ -1190,13 +1229,14 @@
  */
 - (void)setColoursNumbers:(BOOL)coloursNumbers
 {
-    self.textView.syntaxColouring.coloursNumbers = coloursNumbers;
+    _colourScheme.coloursNumbers = coloursNumbers;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursNumbers) forBinding:NSStringFromSelector(@selector(coloursNumbers))];
 }
 
 - (BOOL)coloursNumbers
 {
-    return self.textView.syntaxColouring.coloursNumbers;
+    return _colourScheme.coloursNumbers;
 }
 
 
@@ -1205,13 +1245,14 @@
  */
 - (void)setColoursStrings:(BOOL)coloursStrings
 {
-    self.textView.syntaxColouring.coloursStrings = coloursStrings;
+    _colourScheme.coloursStrings = coloursStrings;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursStrings) forBinding:NSStringFromSelector(@selector(coloursStrings))];
 }
 
 - (BOOL)coloursStrings
 {
-    return self.textView.syntaxColouring.coloursStrings;
+    return _colourScheme.coloursStrings;
 }
 
 
@@ -1220,13 +1261,14 @@
 */
 - (void)setColoursVariables:(BOOL)coloursVariables
 {
-    self.textView.syntaxColouring.coloursVariables = coloursVariables;
+    _colourScheme.coloursVariables = coloursVariables;
+    [self colourSchemeHasChanged];
 	[self mgs_propagateValue:@(coloursVariables) forBinding:NSStringFromSelector(@selector(coloursVariables))];
 }
 
 - (BOOL)coloursVariables
 {
-    return self.textView.syntaxColouring.coloursVariables;
+    return _colourScheme.coloursVariables;
 }
 
 
@@ -1273,6 +1315,9 @@
 	[self setShowsSyntaxErrors:YES];
 	
 	[self setAutoCompleteDelegate:nil];
+ 
+    // Default Color Scheme; needs to be set up last
+    self.colourScheme = [[MGSColourScheme alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:NSTextDidChangeNotification object:self.textView];
 }

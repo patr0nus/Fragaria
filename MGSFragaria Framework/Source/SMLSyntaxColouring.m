@@ -27,6 +27,7 @@
 #import "SMLTextView.h"
 #import "SMLSyntaxColouringDelegate.h"
 #import "NSScanner+Fragaria.h"
+#import "MGSColourScheme.h"
 
 
 // syntax colouring information dictionary keys
@@ -92,11 +93,9 @@ static char kcColoursChanged;
 
         // configure colouring
         _coloursOnlyUntilEndOfLine = YES;
-        [self setColourDefaults];
+        _colourScheme = [[MGSColourScheme alloc] init];
         [self rebuildAttributesCache];
 
-        // register for KVO -- observe our own properties.
-        [self addObserver:self forKeyPath:@"coloursChanged" options:NSKeyValueObservingOptionInitial context:&kcColoursChanged];
         [self layoutManagerDidChangeTextStorage];
 	}
     
@@ -104,77 +103,14 @@ static char kcColoursChanged;
 }
 
 
-- (void)setColourDefaults
+#pragma mark - Colour Scheme Updating
+
+
+- (void)setColourScheme:(MGSColourScheme *)colourScheme
 {
-    _colourForCommands = [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0f];
-    _colourForComments = [NSColor colorWithCalibratedRed:0.0f green:0.45f blue:0.0f alpha:1.0f];
-    _colourForInstructions = [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0f];
-    _colourForKeywords = [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0f];
-    _colourForAutocomplete = [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0f];
-    _colourForVariables = [NSColor colorWithCalibratedRed:0.73f green:0.0f blue:0.74f alpha:1.0f];
-    _colourForStrings = [NSColor colorWithCalibratedRed:0.804f green:0.071f blue:0.153f alpha:1.0f];
-    _colourForAttributes = [NSColor colorWithCalibratedRed:0.50f green:0.5f blue:0.2f alpha:1.0f];
-    _colourForNumbers = [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0f];
-    _coloursAttributes = _coloursCommands = _coloursInstructions = YES;
-    _coloursComments = _coloursKeywords = _coloursNumbers = YES;
-    _coloursStrings = _coloursVariables = YES;
-    _coloursAutocomplete = NO;
-}
-
-
-#pragma mark - KVO
-
-
-/*
- * + keyPathsForValuesAffectingColoursChanged
- *   Instead of writing 36 getters and setters, we'll just observe the coloursChanged property.
- */
-+ (NSSet *)keyPathsForValuesAffectingColoursChanged
-{
-    return [NSSet setWithArray:@[
-        NSStringFromSelector(@selector(colourForAttributes)),
-        NSStringFromSelector(@selector(colourForAutocomplete)),
-        NSStringFromSelector(@selector(colourForCommands)),
-        NSStringFromSelector(@selector(colourForComments)),
-        NSStringFromSelector(@selector(colourForInstructions)),
-        NSStringFromSelector(@selector(colourForKeywords)),
-        NSStringFromSelector(@selector(colourForNumbers)),
-        NSStringFromSelector(@selector(colourForStrings)),
-        NSStringFromSelector(@selector(colourForVariables)),
-
-        NSStringFromSelector(@selector(coloursAttributes)),
-        NSStringFromSelector(@selector(coloursAutocomplete)),
-        NSStringFromSelector(@selector(coloursCommands)),
-        NSStringFromSelector(@selector(coloursComments)),
-        NSStringFromSelector(@selector(coloursInstructions)),
-        NSStringFromSelector(@selector(coloursKeywords)),
-        NSStringFromSelector(@selector(coloursNumbers)),
-        NSStringFromSelector(@selector(coloursStrings)),
-        NSStringFromSelector(@selector(coloursVariables)),
-    ]];
-}
-
-/*
- * - observeValueForKeyPath:ofObject:change:context:
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-	if (context == &kcColoursChanged) {
-		[self rebuildAttributesCache];
-        [self invalidateAllColouring];
-	} else {
-		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-	}
-}
-
-
-/*
- * - dealloc
- */
--(void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"coloursChanged"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _colourScheme = colourScheme;
+    [self rebuildAttributesCache];
+    [self invalidateAllColouring];
 }
 
 
@@ -280,23 +216,23 @@ static char kcColoursChanged;
  */
 - (void)rebuildAttributesCache
 {
-    commandsColour = @{NSForegroundColorAttributeName: self.colourForCommands,
+    commandsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands,
                        SMLSyntaxGroup: SMLSyntaxGroupCommand};
-    commentsColour = @{NSForegroundColorAttributeName: self.colourForComments,
+    commentsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForComments,
                        SMLSyntaxGroup: @"comments"};
-    instructionsColour = @{NSForegroundColorAttributeName: self.colourForInstructions,
+    instructionsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions,
                            SMLSyntaxGroup: SMLSyntaxGroupInstruction};
-    keywordsColour = @{NSForegroundColorAttributeName: self.colourForKeywords,
+    keywordsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords,
                        SMLSyntaxGroup: SMLSyntaxGroupKeyword};
-    autocompleteWordsColour = @{NSForegroundColorAttributeName: self.colourForAutocomplete,
+    autocompleteWordsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete,
                                 SMLSyntaxGroup: SMLSyntaxGroupAutoComplete};
-    stringsColour = @{NSForegroundColorAttributeName: self.colourForStrings,
+    stringsColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings,
                       SMLSyntaxGroup: @"strings"};
-    variablesColour = @{NSForegroundColorAttributeName: self.colourForVariables,
+    variablesColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables,
                         SMLSyntaxGroup: SMLSyntaxGroupVariable};
-    attributesColour = @{NSForegroundColorAttributeName: self.colourForAttributes,
+    attributesColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes,
                          SMLSyntaxGroup: SMLSyntaxGroupAttribute};
-    numbersColour = @{NSForegroundColorAttributeName: self.colourForNumbers,
+    numbersColour = @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers,
                       SMLSyntaxGroup: SMLSyntaxGroupNumber};
     
     [self invalidateAllColouring];
@@ -513,62 +449,62 @@ static char kcColoursChanged;
     switch (group) {
         case kSMLSyntaxGroupNumber:
             groupName = SMLSyntaxGroupNumber;
-            doColouring = self.coloursNumbers;
+            doColouring = self.colourScheme.coloursNumbers;
             attributes = numbersColour;
             break;
         case kSMLSyntaxGroupCommand:
             groupName = SMLSyntaxGroupCommand;
-            doColouring = self.coloursCommands && ![self.syntaxDefinition.beginCommand isEqual:@""];
+            doColouring = self.colourScheme.coloursCommands && ![self.syntaxDefinition.beginCommand isEqual:@""];
             attributes = commandsColour;
             break;
         case kSMLSyntaxGroupInstruction:
             groupName = SMLSyntaxGroupInstruction;
-            doColouring = self.coloursInstructions && (![self.syntaxDefinition.beginInstruction isEqual:@""] || self.syntaxDefinition.instructions);
+            doColouring = self.colourScheme.coloursInstructions && (![self.syntaxDefinition.beginInstruction isEqual:@""] || self.syntaxDefinition.instructions);
             attributes = instructionsColour;
             break;
         case kSMLSyntaxGroupKeyword:
             groupName = SMLSyntaxGroupKeyword;
-            doColouring = self.coloursKeywords && [self.syntaxDefinition.keywords count] > 0;
+            doColouring = self.colourScheme.coloursKeywords && [self.syntaxDefinition.keywords count] > 0;
             attributes = keywordsColour;
             break;
         case kSMLSyntaxGroupAutoComplete:
             groupName = SMLSyntaxGroupAutoComplete;
-            doColouring = self.coloursAutocomplete && [self.syntaxDefinition.autocompleteWords count] > 0;
+            doColouring = self.colourScheme.coloursAutocomplete && [self.syntaxDefinition.autocompleteWords count] > 0;
             attributes = autocompleteWordsColour;
             break;
         case kSMLSyntaxGroupVariable:
             groupName = SMLSyntaxGroupVariable;
-            doColouring = self.coloursVariables && (self.syntaxDefinition.beginVariableCharacterSet || self.syntaxDefinition.variableRegex);
+            doColouring = self.colourScheme.coloursVariables && (self.syntaxDefinition.beginVariableCharacterSet || self.syntaxDefinition.variableRegex);
             attributes = variablesColour;
             break;
         case kSMLSyntaxGroupSecondString:
             groupName = SMLSyntaxGroupSecondString;
-            doColouring = self.coloursStrings && ![self.syntaxDefinition.secondString isEqual:@""];
+            doColouring = self.colourScheme.coloursStrings && ![self.syntaxDefinition.secondString isEqual:@""];
             attributes = stringsColour;
             break;
         case kSMLSyntaxGroupFirstString:
             groupName = SMLSyntaxGroupFirstString;
-            doColouring = self.coloursStrings && ![self.syntaxDefinition.firstString isEqual:@""];
+            doColouring = self.colourScheme.coloursStrings && ![self.syntaxDefinition.firstString isEqual:@""];
             attributes = stringsColour;
             break;
         case kSMLSyntaxGroupAttribute:
             groupName = SMLSyntaxGroupAttribute;
-            doColouring = self.coloursAttributes;
+            doColouring = self.colourScheme.coloursAttributes;
             attributes = attributesColour;
             break;
         case kSMLSyntaxGroupSingleLineComment:
             groupName = SMLSyntaxGroupSingleLineComment;
-            doColouring = self.coloursComments;
+            doColouring = self.colourScheme.coloursComments;
             attributes = commentsColour;
             break;
         case kSMLSyntaxGroupMultiLineComment:
             groupName = SMLSyntaxGroupMultiLineComment;
-            doColouring = self.coloursComments;
+            doColouring = self.colourScheme.coloursComments;
             attributes = commentsColour;
             break;
         case kSMLSyntaxGroupSecondStringPass2:
             groupName = SMLSyntaxGroupSecondStringPass2;
-            doColouring = self.coloursStrings && ![self.syntaxDefinition.secondString isEqual:@""];
+            doColouring = self.colourScheme.coloursStrings && ![self.syntaxDefinition.secondString isEqual:@""];
             attributes = stringsColour;
             break;
         default:
