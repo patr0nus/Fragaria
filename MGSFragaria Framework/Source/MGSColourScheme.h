@@ -49,12 +49,24 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *         that describes the problem. */
 - (instancetype)initWithSchemeFileURL:(NSURL *)file error:(NSError **)err;
 
+/** Initializes a new colour scheme instance from a deserialized property list.
+ *  @param plist The deserialized plist
+ *  @param err   Upon return, if the initialization failed, contains an NSError object
+ *               which describes the problem. */
+- (instancetype)initWithPropertyList:(id)plist error:(NSError **)err;
+
 /** Initializes a new colour scheme instance by copying another colour scheme.
  *  @param scheme The original colour scheme to copy. */
 - (instancetype)initWithColourScheme:(MGSColourScheme *)scheme;
 
-/** Initializes a new colour scheme instance with default properties. */
+/** Initializes a new colour scheme instance with the default properties for the current
+ * appearance. */
 - (instancetype)init;
+
+/** Returns a colour scheme instance with the default properties for
+ * the specified appearance (or the current appearance if appearance is nil)
+ * @param appearance The appearance appropriate for the returned scheme */
++ (instancetype)defaultColorSchemeForAppearance:(NSAppearance *)appearance;
 
 
 #pragma mark - Saving Colour Schemes
