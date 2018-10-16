@@ -155,13 +155,17 @@ NSString * const MGSColourSchemeKeyColoursVariables      = @"coloursVariables";
                 goto wrongFormat;
             
         } else if ([colorKeys containsObject:key]) {
-            NSString *data = [fileContents objectForKey:key];
-            if (![data isKindOfClass:[NSString class]])
+            id data = [fileContents objectForKey:key];
+            if ([data isKindOfClass:[NSData class]]) {
+                object = [NSUnarchiver unarchiveObjectWithData:data];
+            } else if ([data isKindOfClass:[NSString class]]) {
+                object = [xformer reverseTransformedValue:[fileContents objectForKey:key]];
+            } else {
                 goto wrongFormat;
-            object = [xformer reverseTransformedValue:[fileContents objectForKey:key]];
+            }
             if (![object isKindOfClass:[NSColor class]])
                 goto wrongFormat;
-            
+        
         } else if ([boolKeys containsObject:key]) {
             object = [fileContents objectForKey:key];
             if (![object isKindOfClass:[NSNumber class]])
