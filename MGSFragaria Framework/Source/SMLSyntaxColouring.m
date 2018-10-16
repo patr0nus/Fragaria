@@ -52,10 +52,6 @@ NSString *SMLSyntaxGroupMultiLineComment = @"multiLineComment";
 NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 
 
-static char kcColoursChanged;
-
-
-
 @interface SMLSyntaxColouring()
 
 @property (nonatomic, assign) BOOL coloursChanged;
