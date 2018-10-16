@@ -61,4 +61,14 @@
  **/
 @property (nonatomic,strong,readonly) NSString *groupID;
 
+
+#pragma mark - Utility Methods
+
+
++ (id)defaultsObjectFromObject:(id)obj;
+
+
++ (id)objectFromDefaultsObject:(id)obj;
+
+
 @end

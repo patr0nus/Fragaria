@@ -193,12 +193,7 @@
 - (id)objectForKey:(id)aKey
 {
     id object = [self.storage objectForKey:aKey];
-    if ([object isKindOfClass:[NSData class]])
-    {
-        object = [NSUnarchiver unarchiveObjectWithData:object];
-    }
-
-    return object;
+    return [MGSUserDefaults objectFromDefaultsObject:object];
 }
 
 
@@ -216,14 +211,7 @@
  */
 - (void)setObject:(id)anObject forKey:(id)aKey
 {
-    if ([anObject isKindOfClass:[NSFont class]] || [anObject isKindOfClass:[NSColor class]])
-    {
-        [self.storage setObject:[NSArchiver archivedDataWithRootObject:anObject] forKey:aKey];
-    }
-    else
-    {
-        [self.storage setObject:anObject forKey:aKey];
-    }
+    [self.storage setObject:[MGSUserDefaults defaultsObjectFromObject:anObject] forKey:aKey];
 }
 
 

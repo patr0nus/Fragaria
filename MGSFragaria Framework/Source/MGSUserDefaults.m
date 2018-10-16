@@ -7,6 +7,7 @@
 //
 
 #import "MGSUserDefaults.h"
+#import "MGSColourScheme.h"
 
 
 @implementation MGSUserDefaults
@@ -110,14 +111,8 @@
 	
 	if (value)
 	{
-        if ([value isKindOfClass:[NSFont class]] || [value isKindOfClass:[NSColor class]])
-        {
-            [groupDict setObject:[NSArchiver archivedDataWithRootObject:value] forKey:defaultName];
-        }
-        else
-        {
-            [groupDict setObject:value forKey:defaultName];
-        }
+        id newval = [MGSUserDefaults defaultsObjectFromObject:value];
+        [groupDict setObject:newval forKey:defaultName];
 	}
 	else
 	{
@@ -139,15 +134,93 @@
 	if ([[groupDict allKeys] containsObject:defaultName])
 	{
         id object = [groupDict valueForKey:defaultName];
-        if ([object isKindOfClass:[NSData class]])
-        {
-            object = [NSUnarchiver unarchiveObjectWithData:object];
-        }
-
-        return object;
+        return [MGSUserDefaults objectFromDefaultsObject:object];
 	}
 	
 	return nil;
+}
+
+
+#pragma mark - Utility Methods
+
+
++ (id)defaultsObjectFromObject:(id)obj
+{
+    if ([obj isKindOfClass:[NSData class]] ||
+        [obj isKindOfClass:[NSString class]] ||
+        [obj isKindOfClass:[NSDate class]] ||
+        [obj isKindOfClass:[NSNumber class]]) {
+        return obj;
+    }
+    
+    if ([obj isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *newdict = [NSMutableDictionary dictionary];
+        [obj enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            id newk = [[self class] defaultsObjectFromObject:key];
+            id newv = [[self class] defaultsObjectFromObject:obj];
+            [newdict setObject:newv forKey:newk];
+        }];
+        return [newdict copy];
+    }
+    
+    if ([obj isKindOfClass:[NSArray class]]) {
+        NSMutableArray *newarray = [NSMutableArray arrayWithCapacity:[obj length]];
+        for (id subobj in obj) {
+            id newobj = [[self class] defaultsObjectFromObject:subobj];
+            [newarray addObject:newobj];
+        }
+        return [newarray copy];
+    }
+    
+    if ([obj isKindOfClass:[MGSColourScheme class]]) {
+        NSMutableDictionary *dict = [[obj propertyListRepresentation] mutableCopy];
+        [dict setObject:@"MGSColourScheme" forKey:@"_fragaria_class"];
+        return [dict copy];
+    }
+    
+    return [NSArchiver archivedDataWithRootObject:obj];
+}
+
+
++ (id)objectFromDefaultsObject:(id)obj
+{
+    if ([obj isKindOfClass:[NSData class]]) {
+        id unpackd = [NSUnarchiver unarchiveObjectWithData:obj];
+        if (!unpackd)
+            return obj;
+        return unpackd;
+    }
+    
+    if ([obj isKindOfClass:[NSDictionary class]]) {
+        NSString *classid = [obj objectForKey:@"_fragaria_class"];
+        
+        if ([classid isEqual:@"MGSColourScheme"]) {
+            MGSColourScheme *res = [[MGSColourScheme alloc] initWithPropertyList:obj error:nil];
+            if (res)
+                return res;
+        }
+        
+        NSMutableDictionary *newdict = [NSMutableDictionary dictionary];
+        [obj enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            id newk = [[self class] objectFromDefaultsObject:key];
+            id newv = [[self class] objectFromDefaultsObject:obj];
+            [newdict setObject:newv forKey:newk];
+        }];
+        return [newdict copy];
+    }
+    
+    if ([obj isKindOfClass:[NSArray class]]) {
+        NSMutableArray *newarray = [NSMutableArray arrayWithCapacity:[obj length]];
+        for (id subobj in obj) {
+            id newobj = [[self class] objectFromDefaultsObject:subobj];
+            [newarray addObject:newobj];
+        }
+        return [newarray copy];
+    }
+    
+    /* Important: return the original object even if it could not have been found
+     * in a plist or in the user defaults. There is code that relies on this. */
+    return obj;
 }
 
 

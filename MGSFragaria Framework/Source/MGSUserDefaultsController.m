@@ -430,10 +430,7 @@ static NSCountedSet *allNonGlobalProperties;
     
     destination = [NSMutableDictionary dictionaryWithCapacity:source.count];
     for (NSString *key in source) {
-        id object = [source objectForKey:key];
-        
-        if ([object isKindOfClass:[NSData class]])
-            object = [NSUnarchiver unarchiveObjectWithData:object];
+        id object = [MGSUserDefaults objectFromDefaultsObject:[source objectForKey:key]];
         [destination setObject:object forKey:key];
     }
 
@@ -452,10 +449,7 @@ static NSCountedSet *allNonGlobalProperties;
     
     destination = [NSMutableDictionary dictionaryWithCapacity:source.count];
     for (NSString *key in source) {
-        id object = [source objectForKey:key];
-        
-        if ([object isKindOfClass:[NSFont class]] || [object isKindOfClass:[NSColor class]])
-            object = [NSArchiver archivedDataWithRootObject:object];
+        id object = [MGSUserDefaults defaultsObjectFromObject:[source objectForKey:key]];
         [destination setObject:object forKey:key];
     }
 
