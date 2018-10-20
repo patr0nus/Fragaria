@@ -386,6 +386,7 @@ plistError:
     NSDictionary *colors;
     if (!dark) {
         colors = @{
+            MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedRed:1 green:1 blue:0.7 alpha:1],
             MGSColourSchemeKeyTextInvisibleCharactersColour : [NSColor controlTextColor],
             MGSColourSchemeKeyTextColor                     : [NSColor textColor],
             MGSColourSchemeKeyBackgroundColor               : [NSColor textBackgroundColor],
@@ -403,6 +404,7 @@ plistError:
         };
     } else {
         colors = @{
+            MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedWhite:0.4 alpha:1.0],
             MGSColourSchemeKeyTextInvisibleCharactersColour : [NSColor colorWithCalibratedRed:0.905882f green:0.905882f blue:0.905882f alpha:1.0],
             MGSColourSchemeKeyTextColor                     : [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0],
             MGSColourSchemeKeyBackgroundColor               : [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0],
