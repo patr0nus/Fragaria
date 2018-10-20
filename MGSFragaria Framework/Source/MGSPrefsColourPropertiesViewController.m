@@ -36,9 +36,11 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
     
     self = [super init];
     
-    NSArray *colorKeys = [MGSMutableColourScheme propertiesOfScheme];
-    NSDictionary *initial = [[self.userDefaultsController values] dictionaryWithValuesForKeys:colorKeys];
-    _currentScheme = [[MGSMutableColourScheme alloc] initWithDictionary:initial];
+    MGSColourScheme *initial = [[self.userDefaultsController values] valueForKey:NSStringFromSelector(@selector(colourScheme))];
+    if (initial)
+        _currentScheme = [initial mutableCopy];
+    else
+        _currentScheme = [[MGSMutableColourScheme alloc] init];
     [_currentScheme addObserver:self forKeyPath:NSStringFromSelector(@selector(dictionaryRepresentation)) options:0 context:ColourSchemeChangedContext];
     
     bundle = [NSBundle bundleForClass:[MGSPrefsColourPropertiesViewController class]];
@@ -72,8 +74,8 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 
 - (void)saveColourSchemeToDefaults
 {
-    NSDictionary *new = [self.currentScheme dictionaryRepresentation];
-    [[self.userDefaultsController values] setValuesForKeysWithDictionary:new];
+    MGSColourScheme *v = [self.currentScheme copy];
+    [[self.userDefaultsController values] setValue:v forKey:NSStringFromSelector(@selector(colourScheme))];
 }
 
 
@@ -90,8 +92,8 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 {
 	return @{
 			 NSStringFromSelector(@selector(paneScheme)) : [MGSFragariaView propertyGroupTheme],
-			 NSStringFromSelector(@selector(paneEditorColours)) : [MGSFragariaView propertyGroupEditorColours],
-			 NSStringFromSelector(@selector(paneSyntaxColours)) : [MGSFragariaView propertyGroupSyntaxHighlighting],
+			 NSStringFromSelector(@selector(paneEditorColours)) : [MGSFragariaView propertyGroupTheme],
+			 NSStringFromSelector(@selector(paneSyntaxColours)) : [MGSFragariaView propertyGroupTheme],
 			 NSStringFromSelector(@selector(paneOtherSettings)) : [MGSFragariaView propertyGroupColouringExtraOptions],
 			 };
 }

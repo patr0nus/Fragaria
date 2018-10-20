@@ -8,6 +8,7 @@
 #import "MGSFragariaView.h"
 #import "MGSFragariaView+Definitions.h"
 #import "MGSSyntaxController.h"
+#import "MGSColourScheme.h"
 
 
 #pragma mark - Property User Defaults Keys
@@ -26,7 +27,6 @@ NSString * const MGSFragariaDefaultsAutoCompleteWithKeywords = @"autoCompleteWit
 NSString * const MGSFragariaDefaultsAutoCompleteDisableSpaceEnter = @"autoCompleteDisableSpaceEnter";
 
 // Highlighting the current line
-NSString * const MGSFragariaDefaultsCurrentLineHighlightColour = @"currentLineHighlightColour";
 NSString * const MGSFragariaDefaultsHighlightsCurrentLine =      @"highlightsCurrentLine";
 
 // Configuring the Gutter
@@ -40,7 +40,6 @@ NSString * const MGSFragariaDefaultsGutterTextColour =   @"gutterTextColour";
 // Showing Syntax Errors
 NSString * const MGSFragariaDefaultsShowsSyntaxErrors =             @"showsSyntaxErrors";
 NSString * const MGSFragariaDefaultsShowsIndividualErrors =         @"showsIndividualErrors";
-NSString * const MGSFragariaDefaultsDefaultErrorHighlightingColor = @"defaultSyntaxErrorHighlightingColour";
 
 // Tabulation and Indentation
 NSString * const MGSFragariaDefaultsTabWidth =                    @"tabWidth";
@@ -63,40 +62,17 @@ NSString * const MGSFragariaDefaultsLineWrapsAtPageGuide = @"lineWrapsAtPageGuid
 
 // Showing Invisible Characters
 NSString * const MGSFragariaDefaultsShowsInvisibleCharacters =      @"showsInvisibleCharacters";
-NSString * const MGSFragariaDefaultsTextInvisibleCharactersColour = @"textInvisibleCharactersColour";
 
 // Configuring Text Appearance
-NSString * const MGSFragariaDefaultsTextColor =       @"textColor";
-NSString * const MGSFragariaDefaultsBackgroundColor = @"backgroundColor";
 NSString * const MGSFragariaDefaultsTextFont =        @"textFont";
 NSString * const MGSFragariaDefaultsLineHeightMultiple = @"lineHeightMultiple";
 
 // Configuring Additional Text View Behavior
 NSString * const MGSFragariaDefaultsHasVerticalScroller =      @"hasVerticalScroller";
-NSString * const MGSFragariaDefaultsInsertionPointColor =      @"insertionPointColor";
 NSString * const MGSFragariaDefaultsScrollElasticityDisabled = @"scrollElasticityDisabled";
 
-// Syntax Highlighting Colours
-NSString * const MGSFragariaDefaultsColourForAutocomplete = @"colourForAutocomplete";
-NSString * const MGSFragariaDefaultsColourForAttributes =   @"colourForAttributes";
-NSString * const MGSFragariaDefaultsColourForCommands =     @"colourForCommands";
-NSString * const MGSFragariaDefaultsColourForComments =     @"colourForComments";
-NSString * const MGSFragariaDefaultsColourForInstructions = @"colourForInstructions";
-NSString * const MGSFragariaDefaultsColourForKeywords =     @"colourForKeywords";
-NSString * const MGSFragariaDefaultsColourForNumbers =      @"colourForNumbers";
-NSString * const MGSFragariaDefaultsColourForStrings =      @"colourForStrings";
-NSString * const MGSFragariaDefaultsColourForVariables =    @"colourForVariables";
-
-// Syntax Highlighter Colouring Options
-NSString * const MGSFragariaDefaultsColoursAttributes =   @"coloursAttributes";
-NSString * const MGSFragariaDefaultsColoursAutocomplete = @"coloursAutocomplete";
-NSString * const MGSFragariaDefaultsColoursCommands =     @"coloursCommands";
-NSString * const MGSFragariaDefaultsColoursComments =     @"coloursComments";
-NSString * const MGSFragariaDefaultsColoursInstructions = @"coloursInstructions";
-NSString * const MGSFragariaDefaultsColoursKeywords =     @"coloursKeywords";
-NSString * const MGSFragariaDefaultsColoursNumbers =      @"coloursNumbers";
-NSString * const MGSFragariaDefaultsColoursStrings =      @"coloursStrings";
-NSString * const MGSFragariaDefaultsColoursVariables =    @"coloursVariables";
+// Colour Scheme
+NSString * const MGSFragariaDefaultsColourScheme = @"colourScheme";
 
 
 #pragma mark - Implementation
@@ -108,8 +84,6 @@ NSString * const MGSFragariaDefaultsColoursVariables =    @"coloursVariables";
 #pragma mark - Defaults Dictionaries
 
 
-#define ARCHIVED_COLOR(rd, gr, bl) [NSArchiver archivedDataWithRootObject:\
-[NSColor colorWithCalibratedRed:rd green:gr blue:bl alpha:1.0f]]
 #define ARCHIVED_OBJECT(obj) [NSArchiver archivedDataWithRootObject:obj]
 
 /*
@@ -118,76 +92,55 @@ NSString * const MGSFragariaDefaultsColoursVariables =    @"coloursVariables";
 + (NSDictionary *)defaultsDictionary
 {
 	return @{
-		 MGSFragariaDefaultsIsSyntaxColoured : @YES,
-		 MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
-		 MGSFragariaDefaultsColoursMultiLineStrings : @NO,
-		 MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
+		MGSFragariaDefaultsIsSyntaxColoured : @YES,
+		MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
+		MGSFragariaDefaultsColoursMultiLineStrings : @NO,
+		MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
 
- 		 MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
-		 MGSFragariaDefaultsAutoCompleteEnabled : @NO,
-		 MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
-         MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
+ 		MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
+		MGSFragariaDefaultsAutoCompleteEnabled : @NO,
+		MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
+        MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
 
-		 MGSFragariaDefaultsCurrentLineHighlightColour : ARCHIVED_COLOR(0.96f,0.96f,0.71f),
-		 MGSFragariaDefaultsHighlightsCurrentLine : @NO,
+		MGSFragariaDefaultsHighlightsCurrentLine : @NO,
 
-		 MGSFragariaDefaultsShowsGutter : @YES,
-		 MGSFragariaDefaultsMinimumGutterWidth : @40,
-		 MGSFragariaDefaultsShowsLineNumbers : @YES,
-		 MGSFragariaDefaultsStartingLineNumber : @1,
-		 MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-		 MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
+		MGSFragariaDefaultsShowsGutter : @YES,
+		MGSFragariaDefaultsMinimumGutterWidth : @40,
+		MGSFragariaDefaultsShowsLineNumbers : @YES,
+		MGSFragariaDefaultsStartingLineNumber : @1,
+		MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
+		MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
 
-		 MGSFragariaDefaultsShowsSyntaxErrors : @YES,
-		 MGSFragariaDefaultsShowsIndividualErrors : @NO,
-         MGSFragariaDefaultsDefaultErrorHighlightingColor : ARCHIVED_COLOR(1.0f, 1.0f, 0.7f),
+		MGSFragariaDefaultsShowsSyntaxErrors : @YES,
+		MGSFragariaDefaultsShowsIndividualErrors : @NO,
 
-		 MGSFragariaDefaultsTabWidth : @4,
-		 MGSFragariaDefaultsIndentWidth : @4,
-		 MGSFragariaDefaultsUseTabStops : @YES,
-		 MGSFragariaDefaultsIndentWithSpaces : @NO,
-		 MGSFragariaDefaultsIndentBracesAutomatically : @YES,
-		 MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
-         MGSFragariaDefaultsLineHeightMultiple : @(0.0),
-		 
-		 MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
-		 MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
-		 MGSFragariaDefaultsShowsMatchingBraces : @YES,
-		 
-		 MGSFragariaDefaultsPageGuideColumn : @80,
-		 MGSFragariaDefaultsShowsPageGuide : @NO,
-		 MGSFragariaDefaultsLineWrap : @YES,
-         MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
-		 MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
-		 MGSFragariaDefaultsTextInvisibleCharactersColour : ARCHIVED_OBJECT([NSColor controlTextColor]),
+		MGSFragariaDefaultsTabWidth : @4,
+		MGSFragariaDefaultsIndentWidth : @4,
+		MGSFragariaDefaultsUseTabStops : @YES,
+		MGSFragariaDefaultsIndentWithSpaces : @NO,
+		MGSFragariaDefaultsIndentBracesAutomatically : @YES,
+		MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
+        MGSFragariaDefaultsLineHeightMultiple : @(0.0),
+		
+		MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
+		MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
+		MGSFragariaDefaultsShowsMatchingBraces : @YES,
+		
+		MGSFragariaDefaultsPageGuideColumn : @80,
+		MGSFragariaDefaultsShowsPageGuide : @NO,
+		MGSFragariaDefaultsLineWrap : @YES,
+        MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
+		MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
 
-		 MGSFragariaDefaultsTextColor : ARCHIVED_OBJECT([NSColor textColor]),
-		 MGSFragariaDefaultsBackgroundColor : ARCHIVED_OBJECT([NSColor textBackgroundColor]),
-		 MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
+		MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
 
-		 MGSFragariaDefaultsHasVerticalScroller : @YES,
-		 MGSFragariaDefaultsInsertionPointColor : ARCHIVED_OBJECT([NSColor textColor]),
-		 MGSFragariaDefaultsScrollElasticityDisabled : @NO,
+		MGSFragariaDefaultsHasVerticalScroller : @YES,
+		MGSFragariaDefaultsScrollElasticityDisabled : @NO,
 	
-		 MGSFragariaDefaultsColourForAutocomplete : ARCHIVED_COLOR(0.84f,0.41f,0.006f),
-		 MGSFragariaDefaultsColourForAttributes : ARCHIVED_COLOR(0.50f,0.5f,0.2f),
-		 MGSFragariaDefaultsColourForCommands : ARCHIVED_COLOR(0.031f,0.0f,0.855f),
-		 MGSFragariaDefaultsColourForComments : ARCHIVED_COLOR(0.0f,0.45f,0.0f),
-		 MGSFragariaDefaultsColourForInstructions : ARCHIVED_COLOR(0.737f,0.0f,0.647f),
-		 MGSFragariaDefaultsColourForKeywords : ARCHIVED_COLOR(0.737f,0.0f,0.647f),
-		 MGSFragariaDefaultsColourForNumbers : ARCHIVED_COLOR(0.031f,0.0f,0.855f),
-		 MGSFragariaDefaultsColourForStrings : ARCHIVED_COLOR(0.804f,0.071f,0.153f),
-		 MGSFragariaDefaultsColourForVariables : ARCHIVED_COLOR(0.73f,0.0f,0.74f),
-		 
-		 MGSFragariaDefaultsColoursAttributes : @YES,
-		 MGSFragariaDefaultsColoursAutocomplete : @NO,
-		 MGSFragariaDefaultsColoursCommands : @YES,
-		 MGSFragariaDefaultsColoursComments : @YES,
-		 MGSFragariaDefaultsColoursInstructions : @YES,
-		 MGSFragariaDefaultsColoursKeywords : @YES,
-		 MGSFragariaDefaultsColoursNumbers : @YES,
-		 MGSFragariaDefaultsColoursStrings : @YES,
-		 MGSFragariaDefaultsColoursVariables : @YES,
+        MGSFragariaDefaultsColourScheme :
+            [[MGSColourScheme defaultColorSchemeForAppearance:
+                [NSAppearance appearanceNamed:NSAppearanceNameAqua]]
+            propertyListRepresentation],
     };
 }
 
@@ -197,78 +150,61 @@ NSString * const MGSFragariaDefaultsColoursVariables =    @"coloursVariables";
  */
 + (NSDictionary *)defaultsDarkDictionary
 {
-    return @{
-             MGSFragariaDefaultsIsSyntaxColoured : @YES,
-             MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
-             MGSFragariaDefaultsColoursMultiLineStrings : @NO,
-             MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
-             
-             MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
-             MGSFragariaDefaultsAutoCompleteEnabled : @NO,
-             MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
-             MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
-             
-             MGSFragariaDefaultsCurrentLineHighlightColour : ARCHIVED_COLOR(0.0f,0.0f,0.0f),
-             MGSFragariaDefaultsHighlightsCurrentLine : @NO,
-             
-             MGSFragariaDefaultsShowsGutter : @YES,
-             MGSFragariaDefaultsMinimumGutterWidth : @40,
-             MGSFragariaDefaultsShowsLineNumbers : @YES,
-             MGSFragariaDefaultsStartingLineNumber : @1,
-             MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-             MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
-             
-             MGSFragariaDefaultsShowsSyntaxErrors : @YES,
-             MGSFragariaDefaultsShowsIndividualErrors : @NO,
-             MGSFragariaDefaultsDefaultErrorHighlightingColor : ARCHIVED_COLOR(0.4f, 0.4f, 0.4f),
-             
-             MGSFragariaDefaultsTabWidth : @4,
-             MGSFragariaDefaultsIndentWidth : @4,
-             MGSFragariaDefaultsUseTabStops : @YES,
-             MGSFragariaDefaultsIndentWithSpaces : @NO,
-             MGSFragariaDefaultsIndentBracesAutomatically : @YES,
-             MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
-             MGSFragariaDefaultsLineHeightMultiple : @(0.0),
-             
-             MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
-             MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
-             MGSFragariaDefaultsShowsMatchingBraces : @YES,
-             
-             MGSFragariaDefaultsPageGuideColumn : @80,
-             MGSFragariaDefaultsShowsPageGuide : @NO,
-             MGSFragariaDefaultsLineWrap : @YES,
-             MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
-             MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
-             MGSFragariaDefaultsTextInvisibleCharactersColour : ARCHIVED_COLOR(0.905882f,0.905882f,0.905882f),
-             
-             MGSFragariaDefaultsTextColor : ARCHIVED_COLOR(1.0f,1.0f,1.0f),
-             MGSFragariaDefaultsBackgroundColor : ARCHIVED_COLOR(0.0f,0.0f,0.0f),
-             MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-             
-             MGSFragariaDefaultsHasVerticalScroller : @YES,
-             MGSFragariaDefaultsInsertionPointColor : ARCHIVED_COLOR(1.0f,1.0f,1.0f),
-             MGSFragariaDefaultsScrollElasticityDisabled : @NO,
-             
-             MGSFragariaDefaultsColourForAutocomplete : ARCHIVED_COLOR(0.84f,0.41f,0.006f),
-             MGSFragariaDefaultsColourForAttributes : ARCHIVED_COLOR(0.5f,0.5f,0.2f),
-             MGSFragariaDefaultsColourForCommands : ARCHIVED_COLOR(0.031f,0.0f,0.855f),
-             MGSFragariaDefaultsColourForComments : ARCHIVED_COLOR(0.254902f,0.8f,0.270588f),
-             MGSFragariaDefaultsColourForInstructions : ARCHIVED_COLOR(0.737f,0.0f,0.647f),
-             MGSFragariaDefaultsColourForKeywords : ARCHIVED_COLOR(0.827451f,0.094118f,0.580392f),
-             MGSFragariaDefaultsColourForNumbers : ARCHIVED_COLOR(0.466667f,0.427451f,1.0f),
-             MGSFragariaDefaultsColourForStrings : ARCHIVED_COLOR(1.0f,0.172549f,0.219608f),
-             MGSFragariaDefaultsColourForVariables : ARCHIVED_COLOR(0.73f,0.0f,0.74f),
-             
-             MGSFragariaDefaultsColoursAttributes : @YES,
-             MGSFragariaDefaultsColoursAutocomplete : @NO,
-             MGSFragariaDefaultsColoursCommands : @YES,
-             MGSFragariaDefaultsColoursComments : @YES,
-             MGSFragariaDefaultsColoursInstructions : @YES,
-             MGSFragariaDefaultsColoursKeywords : @YES,
-             MGSFragariaDefaultsColoursNumbers : @YES,
-             MGSFragariaDefaultsColoursStrings : @YES,
-             MGSFragariaDefaultsColoursVariables : @YES,
-             };
+    if (@available(macOS 10.14.0, *)) {
+        return @{
+            MGSFragariaDefaultsIsSyntaxColoured : @YES,
+            MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
+            MGSFragariaDefaultsColoursMultiLineStrings : @NO,
+            MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
+            
+            MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
+            MGSFragariaDefaultsAutoCompleteEnabled : @NO,
+            MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
+            MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
+            
+            MGSFragariaDefaultsHighlightsCurrentLine : @NO,
+            
+            MGSFragariaDefaultsShowsGutter : @YES,
+            MGSFragariaDefaultsMinimumGutterWidth : @40,
+            MGSFragariaDefaultsShowsLineNumbers : @YES,
+            MGSFragariaDefaultsStartingLineNumber : @1,
+            MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
+            MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
+            
+            MGSFragariaDefaultsShowsSyntaxErrors : @YES,
+            MGSFragariaDefaultsShowsIndividualErrors : @NO,
+            
+            MGSFragariaDefaultsTabWidth : @4,
+            MGSFragariaDefaultsIndentWidth : @4,
+            MGSFragariaDefaultsUseTabStops : @YES,
+            MGSFragariaDefaultsIndentWithSpaces : @NO,
+            MGSFragariaDefaultsIndentBracesAutomatically : @YES,
+            MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
+            MGSFragariaDefaultsLineHeightMultiple : @(0.0),
+            
+            MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
+            MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
+            MGSFragariaDefaultsShowsMatchingBraces : @YES,
+            
+            MGSFragariaDefaultsPageGuideColumn : @80,
+            MGSFragariaDefaultsShowsPageGuide : @NO,
+            MGSFragariaDefaultsLineWrap : @YES,
+            MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
+            MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
+            
+            MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
+            
+            MGSFragariaDefaultsHasVerticalScroller : @YES,
+            MGSFragariaDefaultsScrollElasticityDisabled : @NO,
+            
+            MGSFragariaDefaultsColourScheme :
+                [[MGSColourScheme defaultColorSchemeForAppearance:
+                    [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua]]
+                propertyListRepresentation]
+        };
+    } else {
+        return [self defaultsDictionary];
+    }
 }
 
 
@@ -385,64 +321,11 @@ NSString * const MGSFragariaDefaultsColoursVariables =    @"coloursVariables";
 
 
 /*
- * + propertyGroupEditorColours
- */
-+ (NSSet *)propertyGroupEditorColours
-{
-	return [NSSet setWithArray:@[MGSFragariaDefaultsInsertionPointColor,
-        MGSFragariaDefaultsCurrentLineHighlightColour,
-        MGSFragariaDefaultsDefaultErrorHighlightingColor,
-        MGSFragariaDefaultsTextColor, MGSFragariaDefaultsBackgroundColor,
-		MGSFragariaDefaultsTextInvisibleCharactersColour,
-	]];
-}
-
-
-/*
- * + propertyGroupSyntaxHighlightingColours
- */
-+ (NSSet *)propertyGroupSyntaxHighlightingColours
-{
-	return [NSSet setWithArray:@[MGSFragariaDefaultsColourForAutocomplete,
-        MGSFragariaDefaultsColourForAttributes, MGSFragariaDefaultsColourForCommands,
-		MGSFragariaDefaultsColourForComments, MGSFragariaDefaultsColourForInstructions,
-		MGSFragariaDefaultsColourForKeywords, MGSFragariaDefaultsColourForNumbers,
-		MGSFragariaDefaultsColourForStrings, MGSFragariaDefaultsColourForVariables,
-	]];
-}
-
-
-/*
- * + propertyGroupSyntaxHighlightingBools
- */
-+ (NSSet *)propertyGroupSyntaxHighlightingBools
-{
-	return [NSSet setWithArray:@[MGSFragariaDefaultsColoursAttributes,
-        MGSFragariaDefaultsColoursAutocomplete, MGSFragariaDefaultsColoursCommands,
-		MGSFragariaDefaultsColoursComments, MGSFragariaDefaultsColoursInstructions,
-		MGSFragariaDefaultsColoursKeywords, MGSFragariaDefaultsColoursNumbers,
-		MGSFragariaDefaultsColoursStrings, MGSFragariaDefaultsColoursVariables,
-	]];
-}
-
-
-/*
- * - propertyGroupSyntaxHighlighting
- */
-+ (NSSet *)propertyGroupSyntaxHighlighting
-{
-	return [[[self class] propertyGroupSyntaxHighlightingColours]
-			setByAddingObjectsFromSet:[[self class] propertyGroupSyntaxHighlightingBools]];
-}
-
-
-/*
  * + propertyGroupTheme
  */
 + (NSSet *)propertyGroupTheme
 {
-	return [[[self class] propertyGroupEditorColours]
-			setByAddingObjectsFromSet:[[self class] propertyGroupSyntaxHighlighting]];
+	return [NSSet setWithObject:MGSFragariaDefaultsColourScheme];
 }
 
 

@@ -43,7 +43,6 @@ extern NSString * const MGSFragariaDefaultsAutoCompleteWithKeywords;            
 extern NSString * const MGSFragariaDefaultsAutoCompleteDisableSpaceEnter;         // BOOL       autoCompleteDisableSpaceEnter
 
 // Highlighting the current line
-extern NSString * const MGSFragariaDefaultsCurrentLineHighlightColour;            // NSColor    currentLineHighlightColour
 extern NSString * const MGSFragariaDefaultsHighlightsCurrentLine;                 // BOOL       highlightsCurrentLine
 
 // Configuring the Gutter
@@ -57,7 +56,6 @@ extern NSString * const MGSFragariaDefaultsGutterTextColour;                    
 // Showing Syntax Errors
 extern NSString * const MGSFragariaDefaultsShowsSyntaxErrors;                     // BOOL       showsSyntaxErrors
 extern NSString * const MGSFragariaDefaultsShowsIndividualErrors;                 // BOOL       showsIndividualErrors
-extern NSString * const MGSFragariaDefaultsDefaultErrorHighlightingColor;         // NSColor    defaultSyntaxErrorHighlightingColour
 
 // Tabulation and Indentation
 extern NSString * const MGSFragariaDefaultsTabWidth;                              // NSInteger  tabWidth
@@ -80,39 +78,16 @@ extern NSString * const MGSFragariaDefaultsLineWrapsAtPageGuide;                
 
 // Showing Invisible Characters
 extern NSString * const MGSFragariaDefaultsShowsInvisibleCharacters;              // BOOL    showsInvisibleCharacters
-extern NSString * const MGSFragariaDefaultsTextInvisibleCharactersColour;         // NSColor textInvisibleCharactersColour
 
 // Configuring Text Appearance
-extern NSString * const MGSFragariaDefaultsTextColor;                             // NSColor textColor
-extern NSString * const MGSFragariaDefaultsBackgroundColor;                       // NSColor backgroundColor
 extern NSString * const MGSFragariaDefaultsTextFont;                              // NSFont  textFont
 
 // Configuring Additional Text View Behavior
 extern NSString * const MGSFragariaDefaultsHasVerticalScroller;                   // BOOL    hasVerticalScroller
-extern NSString * const MGSFragariaDefaultsInsertionPointColor;                   // NSColor insertionPointColor
 extern NSString * const MGSFragariaDefaultsScrollElasticityDisabled;              // BOOL    scrollElasticityDisabled
 
-// Syntax Highlighting Colours
-extern NSString * const MGSFragariaDefaultsColourForAutocomplete;                 // NSColor colourForAutocomplete
-extern NSString * const MGSFragariaDefaultsColourForAttributes;                   // NSColor colourForAttributes
-extern NSString * const MGSFragariaDefaultsColourForCommands;                     // NSColor colourForCommands
-extern NSString * const MGSFragariaDefaultsColourForComments;                     // NSColor colourForComments
-extern NSString * const MGSFragariaDefaultsColourForInstructions;                 // NSColor colourForInstructions
-extern NSString * const MGSFragariaDefaultsColourForKeywords;                     // NSColor colourForKeywords
-extern NSString * const MGSFragariaDefaultsColourForNumbers;                      // NSColor colourForNumbers
-extern NSString * const MGSFragariaDefaultsColourForStrings;                      // NSColor colourForStrings
-extern NSString * const MGSFragariaDefaultsColourForVariables;                    // NSColor colourForVariables
-
-// Syntax Highlighter Colouring Options
-extern NSString * const MGSFragariaDefaultsColoursAttributes;                     // BOOL coloursAttributes
-extern NSString * const MGSFragariaDefaultsColoursAutocomplete;                   // BOOL coloursAutocomplete
-extern NSString * const MGSFragariaDefaultsColoursCommands;                       // BOOL coloursCommands
-extern NSString * const MGSFragariaDefaultsColoursComments;                       // BOOL coloursComments
-extern NSString * const MGSFragariaDefaultsColoursInstructions;                   // BOOL coloursInstructions
-extern NSString * const MGSFragariaDefaultsColoursKeywords;                       // BOOL coloursKeywords
-extern NSString * const MGSFragariaDefaultsColoursNumbers;                        // BOOL coloursNumbers
-extern NSString * const MGSFragariaDefaultsColoursStrings;                        // BOOL coloursStrings
-extern NSString * const MGSFragariaDefaultsColoursVariables;                      // BOOL coloursVariables
+// Colour Scheme
+extern NSString * const MGSFragariaDefaultsColourScheme;  // MGSColourScheme  colourScheme
 
 
 /**
@@ -181,14 +156,6 @@ extern NSString * const MGSFragariaDefaultsColoursVariables;                    
 
 /** A convenience NSSet of all of the text font group property strings. */
 + (NSSet<NSString *> *)propertyGroupTextFont;
-/** A convenience NSSet of all of the editor colours group property strings. */
-+ (NSSet<NSString *> *)propertyGroupEditorColours;
-/** A convenience NSSet of all of the syntax colours group property strings. */
-+ (NSSet<NSString *> *)propertyGroupSyntaxHighlightingColours;
-/** A convenience NSSet of all of the syntax colours bools group property strings. */
-+ (NSSet<NSString *> *)propertyGroupSyntaxHighlightingBools;
-/** A convenience NSSet of all of the syntax colours group property strings. */
-+ (NSSet<NSString *> *)propertyGroupSyntaxHighlighting;
 
 /** A convenience NSSet of all of the colours property strings. */
 + (NSSet<NSString *> *)propertyGroupTheme;

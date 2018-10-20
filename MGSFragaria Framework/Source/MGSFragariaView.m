@@ -856,7 +856,10 @@
 
 - (void)setColourScheme:(MGSColourScheme *)colourScheme
 {
-    _colourScheme = [colourScheme mutableCopy];
+    if (colourScheme)
+        _colourScheme = [colourScheme mutableCopy];
+    else
+        _colourScheme = [[MGSMutableColourScheme alloc] init];
     [self colourSchemeHasChanged];
     [self mgs_propagateValue:_colourScheme forBinding:NSStringFromSelector(@selector(colourScheme))];
 }
