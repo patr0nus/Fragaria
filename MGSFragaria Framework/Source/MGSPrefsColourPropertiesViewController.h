@@ -8,6 +8,8 @@
 
 #import "MGSPrefsViewController.h"
 
+@class MGSMutableColourScheme;
+
 
 /**
  *  MGSPrefsColourPropertiesViewController provides a basic class for managing
@@ -15,5 +17,12 @@
  **/
 
 @interface MGSPrefsColourPropertiesViewController : MGSPrefsViewController
+
+
+@property (nonatomic, weak) IBOutlet NSObjectController *currentSchemeObjectController;
+
+
+@property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
+
 
 @end

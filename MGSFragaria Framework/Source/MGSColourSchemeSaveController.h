@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- *  Provides a scheme naming service for MGSColourSchemeController, as well
+ *  Provides a scheme naming service for MGSColourSchemeListController, as well
  *  as a file deletion confirmation service.
  **/
 @interface MGSColourSchemeSaveController : NSWindowController

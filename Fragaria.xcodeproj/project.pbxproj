@@ -227,7 +227,7 @@
 		D0718B941AB5566F0073493A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718B931AB5566F0073493A /* main.m */; };
 		D0718B971AB556990073493A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718B961AB556990073493A /* AppDelegate.m */; };
 		D0718BA81AB70BE70073493A /* MGSColourScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718BA61AB70BE70073493A /* MGSColourScheme.m */; };
-		D0718BAC1AB71FE00073493A /* MGSColourSchemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718BAA1AB71FE00073493A /* MGSColourSchemeController.m */; };
+		D0718BAC1AB71FE00073493A /* MGSColourSchemeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */; };
 		D0718BAE1AB721280073493A /* MGSColourSchemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718BAD1AB721280073493A /* MGSColourSchemeTests.m */; };
 		D07717B11AC25A8800B23867 /* MGSBoolToGlobalHintTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07717AF1AC25A8800B23867 /* MGSBoolToGlobalHintTransformer.m */; };
 		D07717B41AC2670500B23867 /* MGSSampleBreakpointDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D07717B31AC2670500B23867 /* MGSSampleBreakpointDelegate.m */; };
@@ -702,8 +702,8 @@
 		D0718B961AB556990073493A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D0718BA51AB70BE70073493A /* MGSColourScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSColourScheme.h; sourceTree = "<group>"; };
 		D0718BA61AB70BE70073493A /* MGSColourScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSColourScheme.m; sourceTree = "<group>"; };
-		D0718BA91AB71FE00073493A /* MGSColourSchemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSColourSchemeController.h; sourceTree = "<group>"; };
-		D0718BAA1AB71FE00073493A /* MGSColourSchemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSColourSchemeController.m; sourceTree = "<group>"; };
+		D0718BA91AB71FE00073493A /* MGSColourSchemeListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSColourSchemeListController.h; sourceTree = "<group>"; };
+		D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSColourSchemeListController.m; sourceTree = "<group>"; };
 		D0718BAD1AB721280073493A /* MGSColourSchemeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSColourSchemeTests.m; sourceTree = "<group>"; };
 		D07717AE1AC25A8800B23867 /* MGSBoolToGlobalHintTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSBoolToGlobalHintTransformer.h; sourceTree = "<group>"; };
 		D07717AF1AC25A8800B23867 /* MGSBoolToGlobalHintTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSBoolToGlobalHintTransformer.m; sourceTree = "<group>"; };
@@ -1296,8 +1296,8 @@
 		D0F64EC51AC148C800693C52 /* Scheme Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D0718BA91AB71FE00073493A /* MGSColourSchemeController.h */,
-				D0718BAA1AB71FE00073493A /* MGSColourSchemeController.m */,
+				D0718BA91AB71FE00073493A /* MGSColourSchemeListController.h */,
+				D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */,
 				0193C1D21F9A861000638B38 /* MGSColourSchemeOption.h */,
 				0193C1D31F9A861000638B38 /* MGSColourSchemeOption.m */,
 				D0C13BB91ABD12A400E191A9 /* MGSColourSchemeSaveController.h */,
@@ -1688,7 +1688,7 @@
 				D06653D91AC02A0400ACE8B0 /* NSColor+TransformedCompare.m in Sources */,
 				01FBB3392153D591001E590C /* MGSMutableColourScheme.m in Sources */,
 				D0C13BBC1ABD12A400E191A9 /* MGSColourSchemeSaveController.m in Sources */,
-				D0718BAC1AB71FE00073493A /* MGSColourSchemeController.m in Sources */,
+				D0718BAC1AB71FE00073493A /* MGSColourSchemeListController.m in Sources */,
 				0148656A1B19036900BE1DC4 /* NSObject+Fragaria.m in Sources */,
 				D0718BA81AB70BE70073493A /* MGSColourScheme.m in Sources */,
 				D0E521061A90DC02005CB80B /* MGSSyntaxErrorController.m in Sources */,

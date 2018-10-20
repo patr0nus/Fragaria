@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MGSPrefsColourPropertiesViewController">
@@ -16,14 +17,19 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <objectController id="x5m-Ak-VJo" userLabel="MGSUserDefaults">
+        <objectController id="x5m-Ak-VJo" userLabel="Defaults Controller">
             <connections>
-                <binding destination="-2" name="contentObject" keyPath="self.userDefaultsController.values" id="7UG-DO-WiD"/>
+                <binding destination="-2" name="contentObject" keyPath="userDefaultsController.values" id="ppr-RK-Fh3"/>
             </connections>
         </objectController>
-        <arrayController objectClassName="MGSColourScheme" automaticallyRearrangesObjects="YES" id="z8u-bs-3l4" customClass="MGSColourSchemeController">
+        <objectController id="POX-Qr-aHg" userLabel="Color Scheme Controller">
             <connections>
-                <outlet property="objectController" destination="x5m-Ak-VJo" id="Fox-4l-Iys"/>
+                <binding destination="-2" name="contentObject" keyPath="currentScheme" id="Xg8-He-b05"/>
+            </connections>
+        </objectController>
+        <arrayController objectClassName="MGSColourScheme" automaticallyRearrangesObjects="YES" id="z8u-bs-3l4" userLabel="Colour Scheme List Controller" customClass="MGSColourSchemeListController">
+            <connections>
+                <outlet property="colourSchemeController" destination="POX-Qr-aHg" id="zcU-rl-v3o"/>
                 <outlet property="schemeMenu" destination="cfm-EI-KQe" id="i0a-jy-Jsv"/>
                 <outlet property="schemeSaveDeleteButton" destination="soo-KG-LXb" id="OuI-uw-TkN"/>
             </connections>
@@ -53,7 +59,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cfm-EI-KQe">
-                    <rect key="frame" x="115" y="40" width="239" height="26"/>
+                    <rect key="frame" x="115" y="41" width="239" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7AC-M6-c5F" id="xgZ-Ts-CTp">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
@@ -94,6 +100,7 @@
                 <constraint firstItem="wpy-Xl-NUw" firstAttribute="leading" secondItem="xfo-Mv-vNh" secondAttribute="leading" constant="50" id="s7X-Zt-eRF"/>
                 <constraint firstItem="eKe-mh-aBb" firstAttribute="top" secondItem="xfo-Mv-vNh" secondAttribute="top" constant="10" id="y7c-3N-LuQ"/>
             </constraints>
+            <point key="canvasLocation" x="153" y="-68"/>
         </customView>
         <customView id="RcN-cf-clt" userLabel="Editor Colors View">
             <rect key="frame" x="0.0" y="0.0" width="500" height="175"/>
@@ -128,7 +135,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.backgroundColor" id="VY6-GL-SF9">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.backgroundColor" id="VY6-GL-SF9">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -144,7 +151,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.defaultSyntaxErrorHighlightingColour" id="L58-qc-pVV">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.defaultSyntaxErrorHighlightingColour" id="L58-qc-pVV">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -202,7 +209,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.insertionPointColor" id="lup-eO-bsU">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.insertionPointColor" id="lup-eO-bsU">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -239,7 +246,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.currentLineHighlightColour" id="pkh-t9-FVy">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.currentLineHighlightColour" id="pkh-t9-FVy">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -271,7 +278,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.textColor" id="dZe-GI-hq3"/>
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.textColor" id="dZe-GI-hq3"/>
                         <binding destination="-2" name="enabled" keyPath="self.managedProperties.textColor" id="pO4-BQ-Met"/>
                     </connections>
                 </colorWell>
@@ -283,7 +290,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.textInvisibleCharactersColour" id="ufP-3x-Cju">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.textInvisibleCharactersColour" id="ufP-3x-Cju">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -373,6 +380,7 @@
                 <constraint firstItem="RVW-uf-4pJ" firstAttribute="leading" secondItem="RcN-cf-clt" secondAttribute="leading" priority="900" constant="20" symbolic="YES" id="vsU-RV-l9l"/>
                 <constraint firstItem="nw5-L7-LzE" firstAttribute="leading" secondItem="0ws-Xa-iLK" secondAttribute="trailing" priority="900" constant="8" symbolic="YES" id="xoa-3e-g9O"/>
             </constraints>
+            <point key="canvasLocation" x="133" y="384"/>
         </customView>
         <customView id="DgW-LA-ddL" userLabel="Syntax Colors View">
             <rect key="frame" x="0.0" y="0.0" width="500" height="243"/>
@@ -405,12 +413,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForKeywords" id="54r-q9-ccl">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForKeywords" id="54r-q9-ccl">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursKeywords" previousBinding="7eS-bh-Ghk" id="Ofk-RR-AGl">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursKeywords" previousBinding="7eS-bh-Ghk" id="Ofk-RR-AGl">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -429,12 +437,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForComments" id="IHN-2Z-DAm">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForComments" id="IHN-2Z-DAm">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursComments" previousBinding="M8T-CD-GGi" id="XBA-U3-Z90">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursComments" previousBinding="M8T-CD-GGi" id="XBA-U3-Z90">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -453,12 +461,7 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForVariables" id="JyA-m8-6gu">
-                            <dictionary key="options">
-                                <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                            </dictionary>
-                        </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursVariables" previousBinding="hc4-PZ-Pkd" id="58o-Ty-jYq">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursVariables" previousBinding="hc4-PZ-Pkd" id="58o-Ty-jYq">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -467,6 +470,11 @@
                             </dictionary>
                         </binding>
                         <binding destination="-2" name="enabled" keyPath="self.managedProperties.colourForVariables" id="hc4-PZ-Pkd"/>
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForVariables" id="R1s-Oa-raW">
+                            <dictionary key="options">
+                                <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TOc-jO-4sb">
@@ -519,12 +527,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForAutocomplete" id="QlK-ol-H3Q">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForAutocomplete" id="QlK-ol-H3Q">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursAutocomplete" previousBinding="S20-M1-z6h" id="73Z-wz-qG3">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursAutocomplete" previousBinding="S20-M1-z6h" id="73Z-wz-qG3">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -545,7 +553,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursKeywords" id="qeu-hs-Kqb">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursKeywords" id="qeu-hs-Kqb">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -563,7 +571,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursComments" id="cR6-s4-syJ">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursComments" id="cR6-s4-syJ">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -579,12 +587,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForNumbers" id="LEA-MV-HYs">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForNumbers" id="LEA-MV-HYs">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursNumbers" previousBinding="vSo-Yj-NJc" id="DGf-kp-rP4">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursNumbers" previousBinding="vSo-Yj-NJc" id="DGf-kp-rP4">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -645,12 +653,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForInstructions" id="l06-3m-7pN">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForInstructions" id="l06-3m-7pN">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursInstructions" previousBinding="MAb-KK-V8f" id="CpO-ZX-69j">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursInstructions" previousBinding="MAb-KK-V8f" id="CpO-ZX-69j">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -669,12 +677,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForStrings" id="93F-lE-o2G">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForStrings" id="93F-lE-o2G">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursStrings" previousBinding="OOz-QO-Dhb" id="9sj-zR-oJe">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursStrings" previousBinding="OOz-QO-Dhb" id="9sj-zR-oJe">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -707,7 +715,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ydh-pU-Nug">
-                    <rect key="frame" x="328" y="49" width="48" height="17"/>
+                    <rect key="frame" x="328" y="49" width="47" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Strings" id="L7L-kL-fXS">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -735,12 +743,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForCommands" id="k4d-A5-Pg9">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForCommands" id="k4d-A5-Pg9">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursCommands" previousBinding="pf2-a7-jxy" id="FJS-pV-KLk">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursCommands" previousBinding="pf2-a7-jxy" id="FJS-pV-KLk">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -761,7 +769,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursStrings" id="aCE-Y3-HL8">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursStrings" id="aCE-Y3-HL8">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -779,7 +787,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursCommands" id="rP7-sl-qAC">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursCommands" id="rP7-sl-qAC">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -797,7 +805,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursInstructions" id="pvP-4b-IFo">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursInstructions" id="pvP-4b-IFo">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -836,7 +844,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursAttributes" id="r0m-n8-gLu">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursAttributes" id="r0m-n8-gLu">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -854,7 +862,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursNumbers" id="0o2-70-kpk">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursNumbers" id="0o2-70-kpk">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -872,7 +880,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursAutocomplete" id="dZe-GZ-FS7">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursAutocomplete" id="dZe-GZ-FS7">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -890,7 +898,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.coloursVariables" id="rQC-3F-Yh5">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.coloursVariables" id="rQC-3F-Yh5">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
@@ -948,12 +956,12 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="x5m-Ak-VJo" name="value" keyPath="selection.colourForAttributes" id="IsF-Oa-hFu">
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForAttributes" id="IsF-Oa-hFu">
                             <dictionary key="options">
                                 <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                             </dictionary>
                         </binding>
-                        <binding destination="x5m-Ak-VJo" name="enabled2" keyPath="selection.coloursAttributes" previousBinding="q0E-pZ-6ra" id="ff2-kU-eq8">
+                        <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursAttributes" previousBinding="q0E-pZ-6ra" id="ff2-kU-eq8">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                 <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -1087,6 +1095,7 @@
                 <constraint firstItem="5oR-v8-2jt" firstAttribute="leading" secondItem="tEB-mt-DKY" secondAttribute="leading" priority="900" id="W0Q-Ea-LZZ"/>
                 <constraint firstAttribute="bottom" secondItem="5oR-v8-2jt" secondAttribute="bottom" priority="900" constant="20" symbolic="YES" id="s12-Y1-WeF"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="476"/>
         </customView>
     </objects>
 </document>

@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 
 
 /**
- *  MGSColourScheme defines a colour scheme for MGSColourSchemeController.
+ *  MGSColourScheme defines a colour scheme for MGSColourSchemeListController.
  *  @discussion Property names (except for displayName) are identical
  *      to the MGSFragariaView property names.
  */
@@ -97,6 +97,9 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *  Intended for use with KVO. Note that the names of the properties in this
  *  class and in MGSFragariaView are intentionally the same. */
 + (NSArray *)propertiesOfScheme;
+
+/** Same as +propertiesOfScheme. */
+- (NSArray <NSString *> *)allKeys;
 
 /** An array of colour schemes included with Fragaria.
  *  @discussion A new copy of the schemes is generated for every invocation

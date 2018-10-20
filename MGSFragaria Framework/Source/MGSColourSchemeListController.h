@@ -1,5 +1,5 @@
 //
-//  MGSColourSchemeController.h
+//  MGSColourSchemeListController.h
 //  Fragaria
 //
 //  Created by Jim Derry on 3/16/15.
@@ -16,12 +16,12 @@ extern NSString * const KMGSColourSchemeExt;
 
 
 /**
- *  MGSColourSchemeController manages MGSColourScheme instances for use in
+ *  MGSColourSchemeListController manages MGSColourScheme instances for use in
  *  UI applications. Although it's designed for use with the MGSFragariaView
  *  settings panel(s), it should be suitable for use in other classes, too.
  *  As an NSArrayController descendant, it can be instantiated by IB.
  *
- *  MGSColourSchemeController doesn't pretend to know anything about your
+ *  MGSColourSchemeListController doesn't pretend to know anything about your
  *  views or make assumptions about property names. All observing and setting
  *  is performed via the view's objectController instance (which is the
  *  controller for the model object instance MGSUserDefaults controller). Make
@@ -51,18 +51,18 @@ extern NSString * const KMGSColourSchemeExt;
  *  The previous version can then be selected and deleted. This is consistent
  *  with the behaviour of many other text editors.
  **/
-@interface MGSColourSchemeController : NSArrayController
+@interface MGSColourSchemeListController : NSArrayController
 
 
 #pragma mark - IBOutlet Properties - Controls
 /// @name IBOutlet Properties - Controls
 
-/** A reference to the MGSUserDefaultsController for the view.
- *  @discussion This controller needs to know where the model controller for
- *      your view is. Your view should access MGSFragariaView properties with
- *      an NSObjectController. This property is a reference to that
+/** A reference to the colour scheme controller of the view.
+ *  @discussion MGSColourSchemeListController needs to know where the model controller for
+ *      the current color scheme is. The preferences view should access MGSColourSchemeListController
+ *      properties with an NSObjectController. This property is a reference to that
  *      controller. */
-@property (nonatomic, assign) IBOutlet NSObjectController *objectController;
+@property (nonatomic, assign) IBOutlet NSObjectController *colourSchemeController;
 
 /** A popup list that provides the current list of available schemes. */
 @property (nonatomic, assign) IBOutlet NSPopUpButton *schemeMenu;

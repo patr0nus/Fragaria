@@ -10,7 +10,7 @@
 #import "MGSFragariaView+Definitions.h"
 #import "MGSColourToPlainTextTransformer.h"
 #import "NSColor+TransformedCompare.h"
-#import "MGSColourSchemeController.h"
+#import "MGSColourSchemeListController.h"
 #import "MGSMutableColourScheme.h"
 #import "MGSColourSchemePrivate.h"
 
@@ -190,6 +190,12 @@ wrongFormat:
 }
 
 
++ (NSSet *)keyPathsForValuesAffectingDictionaryRepresentation
+{
+    return [[self class] propertiesAll];
+}
+
+
 - (NSDictionary *)dictionaryRepresentation
 {
     return [self dictionaryWithValuesForKeys:[[[self class] propertiesAll] allObjects]];
@@ -218,6 +224,12 @@ wrongFormat:
     }
     
     return dictionary;
+}
+
+
+- (NSArray <NSString *> *)allKeys
+{
+    return [[[self class] propertiesAll] allObjects];
 }
 
 

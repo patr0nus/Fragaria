@@ -1,12 +1,12 @@
 //
-//  MGSColourSchemeController.m
+//  MGSColourSchemeListController.m
 //  Fragaria
 //
 //  Created by Jim Derry on 3/16/15.
 //
 //
 
-#import "MGSColourSchemeController.h"
+#import "MGSColourSchemeListController.h"
 #import "MGSColourSchemeOption.h"
 #import "MGSColourSchemeSaveController.h"
 
@@ -19,7 +19,7 @@ NSString * const KMGSColourSchemeExt = @"plist";
 #pragma mark - Category
 
 
-@interface MGSColourSchemeController ()
+@interface MGSColourSchemeListController ()
 
 @property (nonatomic, strong, readwrite) NSMutableArray *colourSchemes;
 
@@ -36,7 +36,7 @@ NSString * const KMGSColourSchemeExt = @"plist";
 #pragma mark - Implementation
 
 
-@implementation MGSColourSchemeController
+@implementation MGSColourSchemeListController
 
 
 #pragma mark - Initialization and Startup
@@ -79,7 +79,7 @@ NSString * const KMGSColourSchemeExt = @"plist";
     [self setContent:self.colourSchemes];
     
     /* Listen for the objectController to connect, if it didn't already */
-    if (!self.objectController.content)
+    if (!self.colourSchemeController.content)
         [self addObserver:self forKeyPath:@"objectController.content" options:NSKeyValueObservingOptionNew context:@"objectController"];
     else
         [self setupLate];
@@ -216,10 +216,10 @@ NSString * const KMGSColourSchemeExt = @"plist";
 {
     for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
     {
-        if ([[self.objectController.content allKeys] containsObject:key])
+        if ([[self.colourSchemeController.content allKeys] containsObject:key])
         {
             NSString *keyPath = [NSString stringWithFormat:@"selection.%@", key];
-            [self.objectController addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:(__bridge void *)(key)];
+            [self.colourSchemeController addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:(__bridge void *)(key)];
         }
     }
 
@@ -234,10 +234,10 @@ NSString * const KMGSColourSchemeExt = @"plist";
 {
     for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
     {
-        if ([[self.objectController.content allKeys] containsObject:key])
+        if ([[self.colourSchemeController.content allKeys] containsObject:key])
         {
             NSString *keyPath = [NSString stringWithFormat:@"selection.%@", key];
-            [self.objectController removeObserver:self forKeyPath:keyPath context:(__bridge void *)(key)];
+            [self.colourSchemeController removeObserver:self forKeyPath:keyPath context:(__bridge void *)(key)];
         }
     }
 
@@ -332,9 +332,9 @@ NSString * const KMGSColourSchemeExt = @"plist";
 
     for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
     {
-        if ([[self.objectController.content allKeys] containsObject:key])
+        if ([[self.colourSchemeController.content allKeys] containsObject:key])
         {
-            [currentViewScheme setValue:[self.objectController.selection valueForKey:key] forKey:key];
+            [currentViewScheme setValue:[self.colourSchemeController.selection valueForKey:key] forKey:key];
         }
     }
 
@@ -351,13 +351,13 @@ NSString * const KMGSColourSchemeExt = @"plist";
     self.ignoreObservations = YES;
     for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
     {
-        if ([[self.objectController.content allKeys] containsObject:key])
+        if ([[self.colourSchemeController.content allKeys] containsObject:key])
         {
-            id remote = [self.objectController.selection valueForKey:key];
+            id remote = [self.colourSchemeController.selection valueForKey:key];
             id local = [self.currentScheme valueForKey:key];
             if (![remote isEqual:local])
             {
-                [self.objectController.selection setValue:[self.currentScheme valueForKey:key] forKey:key];
+                [self.colourSchemeController.selection setValue:[self.currentScheme valueForKey:key] forKey:key];
             }
         }
     }
