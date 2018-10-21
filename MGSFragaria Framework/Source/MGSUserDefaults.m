@@ -136,8 +136,42 @@
         id object = [groupDict valueForKey:defaultName];
         return [MGSUserDefaults objectFromDefaultsObject:object];
 	}
+ 
+    if ([defaultName isEqual:MGSFragariaDefaultsColourScheme]) {
+        return [self migrateToColorSchemes];
+    }
 	
 	return nil;
+}
+
+
+#pragma mark - Migration
+
+
+- (MGSColourScheme *)migrateToColorSchemes
+{
+    NSDictionary *groupDict = [super objectForKey:self.groupID];
+    
+    /* these keys are intentionally hardcoded because old versions of Fragaria
+     * can't change but the properties of MGSColourScheme in future versions
+     * can */
+    NSArray *oldKeys = @[
+        @"currentLineHighlightColour",      @"defaultSyntaxErrorHighlightingColour",
+        @"textInvisibleCharactersColour",   @"textColor",
+        @"backgroundColor",                 @"insertionPointColor",
+        @"colourForAutocomplete",           @"colourForAttributes",
+        @"colourForCommands",               @"colourForComments",
+        @"colourForInstructions",           @"colourForKeywords",
+        @"colourForNumbers",                @"colourForStrings",
+        @"colourForVariables",
+        @"coloursAttributes",               @"coloursAutocomplete",
+        @"coloursCommands",                 @"coloursComments",
+        @"coloursInstructions",             @"coloursKeywords",
+        @"coloursNumbers",                  @"coloursStrings",
+        @"coloursVariables"
+    ];
+    NSDictionary *values = [groupDict dictionaryWithValuesForKeys:oldKeys];
+    return [[MGSColourScheme alloc] initWithPropertyList:values error:nil];
 }
 
 
@@ -195,7 +229,9 @@
         NSString *classid = [obj objectForKey:@"_fragaria_class"];
         
         if ([classid isEqual:@"MGSColourScheme"]) {
-            MGSColourScheme *res = [[MGSColourScheme alloc] initWithPropertyList:obj error:nil];
+            NSMutableDictionary *fixedObj = [obj mutableCopy];
+            [fixedObj removeObjectForKey:@"_fragaria_class"];
+            MGSColourScheme *res = [[MGSColourScheme alloc] initWithPropertyList:fixedObj error:nil];
             if (res)
                 return res;
         }
