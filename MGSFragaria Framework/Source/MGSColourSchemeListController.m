@@ -267,20 +267,22 @@ NSString * const KMGSColourSchemeExt = @"plist";
     }
     else if ([object isEqualTo:self] && !self.ignoreObservations && [localContext isEqualToString:@"schemeMenu"])
     {
-        [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
-        [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
-        MGSColourSchemeOption *newScheme = [self.arrangedObjects objectAtIndex:self.selectionIndex];
-        if (self.currentSchemeIsCustom)
-        {
-            self.ignoreObservations = YES;
-            [self removeObject:self.currentScheme];
-            self.currentSchemeIsCustom = NO;
-            self.ignoreObservations = NO;
-        }
-        self.currentScheme = newScheme;
-        [self applyColourSchemeToView];
-        [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
-        [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
+            [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
+            MGSColourSchemeOption *newScheme = [self.arrangedObjects objectAtIndex:self.selectionIndex];
+            if (self.currentSchemeIsCustom)
+            {
+                self.ignoreObservations = YES;
+                [self removeObject:self.currentScheme];
+                self.currentSchemeIsCustom = NO;
+                self.ignoreObservations = NO;
+            }
+            self.currentScheme = newScheme;
+            [self applyColourSchemeToView];
+            [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
+            [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
+        });
     }
 }
 
