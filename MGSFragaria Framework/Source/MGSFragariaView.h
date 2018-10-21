@@ -184,8 +184,6 @@
 /// @name Highlighting the Current Line
 
 
-/** Specifies the color to use when highlighting the current line.*/
-@property (nonatomic, assign, nonnull) NSColor *currentLineHighlightColour;
 /** Specifies whether or not the line with the cursor should be highlighted.*/
 @property (nonatomic, assign) BOOL highlightsCurrentLine;
 
@@ -229,9 +227,6 @@
 /** If showing syntax errors, highlights individual errors instead of
  * highlighting the full line. */
 @property (nonatomic, assign) BOOL showsIndividualErrors;
-
-/** The default syntax error line highlighting colour. */
-@property (nonatomic, assign, nonnull) NSColor *defaultSyntaxErrorHighlightingColour;
 
 
 #pragma mark - Showing Breakpoints
@@ -308,8 +303,6 @@
 
 /** Indicates whether or not invisible characters in the editor are revealed.*/
 @property (nonatomic, assign) BOOL showsInvisibleCharacters;
-/** Specifies the colour to render invisible characters in the text view.*/
-@property (nonatomic, assign, nonnull) NSColor *textInvisibleCharactersColour;
 
 /**
  *  Clears the current substitutes for invisible characters
@@ -338,10 +331,6 @@
 
 /** The current color scheme applied to Fragaria */
 @property (nonatomic, copy, nonnull) MGSColourScheme *colourScheme;
-/** The base (non-highlighted) text color.*/
-@property (copy, nonnull) NSColor *textColor;
-/** The text view background color.*/
-@property (nonnull) NSColor *backgroundColor;
 
 
 
@@ -355,8 +344,6 @@
 
 /** Indicates whether or not the vertical scroller should be displayed.*/
 @property (nonatomic, assign) BOOL hasVerticalScroller;
-/** Indicates the color of the insertion point.*/
-@property (nonatomic, assign, nonnull) NSColor *insertionPointColor;
 /** Indicates whether or not the "rubber band" effect is disabled.*/
 @property (nonatomic, assign) BOOL scrollElasticityDisabled;
 
@@ -367,68 +354,36 @@
 - (void)goToLine:(NSInteger)lineToGoTo centered:(BOOL)centered highlight:(BOOL)highlight;
 
 
-#pragma mark - Syntax Highlighting Colours
-/// @name Syntax Highlighting Colours
+@end
 
 
-/** Specifies the autocomplete color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForAutocomplete;
-
-/** Specifies the attributes color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForAttributes;
-
-/** Specifies the commands color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForCommands;
-
-/** Specifies the comments color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForComments;
-
-/** Specifies the instructions color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForInstructions;
-
-/** Specifies the keywords color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForKeywords;
-
-/** Specifies the numbers color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForNumbers;
-
-/** Specifies the strings color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForStrings;
-
-/** Specifies the variables color **/
-@property (nonatomic, assign, nonnull) NSColor *colourForVariables;
+@interface MGSFragariaView (MGSDeprecated)
 
 
-#pragma mark - Syntax Highlighter Colouring Options
-/// @name Syntax Highlighter Colouring Options
-
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursAttributes;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursAutocomplete;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursCommands;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursComments;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursInstructions;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursKeywords;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursNumbers;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursStrings;
-
-/** Specifies whether or not attributes should be syntax coloured. */
-@property (nonatomic, assign) BOOL coloursVariables;
+@property (copy, nonnull) NSColor *textColor DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonnull) NSColor *backgroundColor DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *defaultSyntaxErrorHighlightingColour DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *textInvisibleCharactersColour DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *currentLineHighlightColour DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *insertionPointColor DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForAutocomplete DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForAttributes DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForCommands DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForComments DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForInstructions DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForKeywords DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForNumbers DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForStrings DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign, nonnull) NSColor *colourForVariables DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursAttributes DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursAutocomplete DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursCommands DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursComments DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursInstructions DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursKeywords DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursNumbers DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursStrings DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
+@property (nonatomic, assign) BOOL coloursVariables DEPRECATED_MSG_ATTRIBUTE("use colourScheme instead");
 
 
 @end
