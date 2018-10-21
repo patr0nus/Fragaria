@@ -9,6 +9,7 @@
 #import "MGSFragariaView+Definitions.h"
 #import "MGSSyntaxController.h"
 #import "MGSColourScheme.h"
+#import "MGSUserDefaults.h"
 
 
 #pragma mark - Property User Defaults Keys
@@ -91,89 +92,33 @@ NSString * const MGSFragariaDefaultsColourScheme = @"colourScheme";
  */
 + (NSDictionary *)defaultsDictionary
 {
-	return @{
-		MGSFragariaDefaultsIsSyntaxColoured : @YES,
-		MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
-		MGSFragariaDefaultsColoursMultiLineStrings : @NO,
-		MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
-
- 		MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
-		MGSFragariaDefaultsAutoCompleteEnabled : @NO,
-		MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
-        MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
-
-		MGSFragariaDefaultsHighlightsCurrentLine : @NO,
-
-		MGSFragariaDefaultsShowsGutter : @YES,
-		MGSFragariaDefaultsMinimumGutterWidth : @40,
-		MGSFragariaDefaultsShowsLineNumbers : @YES,
-		MGSFragariaDefaultsStartingLineNumber : @1,
-		MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-		MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
-
-		MGSFragariaDefaultsShowsSyntaxErrors : @YES,
-		MGSFragariaDefaultsShowsIndividualErrors : @NO,
-
-		MGSFragariaDefaultsTabWidth : @4,
-		MGSFragariaDefaultsIndentWidth : @4,
-		MGSFragariaDefaultsUseTabStops : @YES,
-		MGSFragariaDefaultsIndentWithSpaces : @NO,
-		MGSFragariaDefaultsIndentBracesAutomatically : @YES,
-		MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
-        MGSFragariaDefaultsLineHeightMultiple : @(0.0),
-		
-		MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
-		MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
-		MGSFragariaDefaultsShowsMatchingBraces : @YES,
-		
-		MGSFragariaDefaultsPageGuideColumn : @80,
-		MGSFragariaDefaultsShowsPageGuide : @NO,
-		MGSFragariaDefaultsLineWrap : @YES,
-        MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
-		MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
-
-		MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-
-		MGSFragariaDefaultsHasVerticalScroller : @YES,
-		MGSFragariaDefaultsScrollElasticityDisabled : @NO,
-	
-        MGSFragariaDefaultsColourScheme :
-            [[MGSColourScheme defaultColorSchemeForAppearance:
-                [NSAppearance appearanceNamed:NSAppearanceNameAqua]]
-            propertyListRepresentation],
-    };
-}
-
-
-/*
- *  + defaultsDictionary
- */
-+ (NSDictionary *)defaultsDarkDictionary
-{
-    if (@available(macOS 10.14.0, *)) {
-        return @{
+    static NSDictionary *cache;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        cache = [MGSUserDefaults defaultsObjectFromObject:@{
             MGSFragariaDefaultsIsSyntaxColoured : @YES,
             MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
             MGSFragariaDefaultsColoursMultiLineStrings : @NO,
             MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
-            
+
             MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
             MGSFragariaDefaultsAutoCompleteEnabled : @NO,
             MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
             MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
-            
+
             MGSFragariaDefaultsHighlightsCurrentLine : @NO,
-            
+
             MGSFragariaDefaultsShowsGutter : @YES,
             MGSFragariaDefaultsMinimumGutterWidth : @40,
             MGSFragariaDefaultsShowsLineNumbers : @YES,
             MGSFragariaDefaultsStartingLineNumber : @1,
-            MGSFragariaDefaultsGutterFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-            MGSFragariaDefaultsGutterTextColour : ARCHIVED_OBJECT([NSColor disabledControlTextColor]),
-            
+            MGSFragariaDefaultsGutterFont : [NSFont userFixedPitchFontOfSize:11],
+            MGSFragariaDefaultsGutterTextColour : [NSColor disabledControlTextColor],
+
             MGSFragariaDefaultsShowsSyntaxErrors : @YES,
             MGSFragariaDefaultsShowsIndividualErrors : @NO,
-            
+
             MGSFragariaDefaultsTabWidth : @4,
             MGSFragariaDefaultsIndentWidth : @4,
             MGSFragariaDefaultsUseTabStops : @YES,
@@ -191,17 +136,84 @@ NSString * const MGSFragariaDefaultsColourScheme = @"colourScheme";
             MGSFragariaDefaultsLineWrap : @YES,
             MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
             MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
-            
-            MGSFragariaDefaultsTextFont : ARCHIVED_OBJECT([NSFont userFixedPitchFontOfSize:11]),
-            
+
+            MGSFragariaDefaultsTextFont : [NSFont userFixedPitchFontOfSize:11],
+
             MGSFragariaDefaultsHasVerticalScroller : @YES,
             MGSFragariaDefaultsScrollElasticityDisabled : @NO,
-            
+        
             MGSFragariaDefaultsColourScheme :
-                [[MGSColourScheme defaultColorSchemeForAppearance:
-                    [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua]]
-                propertyListRepresentation]
-        };
+                [MGSColourScheme defaultColorSchemeForAppearance:
+                    [NSAppearance appearanceNamed:NSAppearanceNameAqua]],
+        }];
+    });
+    
+    return cache;
+}
+
+
+/*
+ *  + defaultsDictionary
+ */
++ (NSDictionary *)defaultsDarkDictionary
+{
+    static NSDictionary *cache;
+    static dispatch_once_t onceToken;
+    
+    if (@available(macOS 10.14.0, *)) {
+        dispatch_once(&onceToken, ^{
+            cache = [MGSUserDefaults defaultsObjectFromObject:@{
+                MGSFragariaDefaultsIsSyntaxColoured : @YES,
+                MGSFragariaDefaultsSyntaxDefinitionName : [[MGSSyntaxController class] standardSyntaxDefinitionName],
+                MGSFragariaDefaultsColoursMultiLineStrings : @NO,
+                MGSFragariaDefaultsColoursOnlyUntilEndOfLine : @YES,
+                
+                MGSFragariaDefaultsAutoCompleteDelay : @1.0f,
+                MGSFragariaDefaultsAutoCompleteEnabled : @NO,
+                MGSFragariaDefaultsAutoCompleteWithKeywords : @YES,
+                MGSFragariaDefaultsAutoCompleteDisableSpaceEnter : @NO,
+                
+                MGSFragariaDefaultsHighlightsCurrentLine : @NO,
+                
+                MGSFragariaDefaultsShowsGutter : @YES,
+                MGSFragariaDefaultsMinimumGutterWidth : @40,
+                MGSFragariaDefaultsShowsLineNumbers : @YES,
+                MGSFragariaDefaultsStartingLineNumber : @1,
+                MGSFragariaDefaultsGutterFont : [NSFont userFixedPitchFontOfSize:11],
+                MGSFragariaDefaultsGutterTextColour : [NSColor disabledControlTextColor],
+                
+                MGSFragariaDefaultsShowsSyntaxErrors : @YES,
+                MGSFragariaDefaultsShowsIndividualErrors : @NO,
+                
+                MGSFragariaDefaultsTabWidth : @4,
+                MGSFragariaDefaultsIndentWidth : @4,
+                MGSFragariaDefaultsUseTabStops : @YES,
+                MGSFragariaDefaultsIndentWithSpaces : @NO,
+                MGSFragariaDefaultsIndentBracesAutomatically : @YES,
+                MGSFragariaDefaultsIndentNewLinesAutomatically : @YES,
+                MGSFragariaDefaultsLineHeightMultiple : @(0.0),
+                
+                MGSFragariaDefaultsInsertClosingBraceAutomatically : @NO,
+                MGSFragariaDefaultsInsertClosingParenthesisAutomatically : @NO,
+                MGSFragariaDefaultsShowsMatchingBraces : @YES,
+                
+                MGSFragariaDefaultsPageGuideColumn : @80,
+                MGSFragariaDefaultsShowsPageGuide : @NO,
+                MGSFragariaDefaultsLineWrap : @YES,
+                MGSFragariaDefaultsLineWrapsAtPageGuide : @NO,
+                MGSFragariaDefaultsShowsInvisibleCharacters : @NO,
+                
+                MGSFragariaDefaultsTextFont : [NSFont userFixedPitchFontOfSize:11],
+                
+                MGSFragariaDefaultsHasVerticalScroller : @YES,
+                MGSFragariaDefaultsScrollElasticityDisabled : @NO,
+                
+                MGSFragariaDefaultsColourScheme :
+                    [MGSColourScheme defaultColorSchemeForAppearance:
+                        [NSAppearance appearanceNamed:NSAppearanceNameDarkAqua]]
+            }];
+        });
+        return cache;
     } else {
         return [self defaultsDictionary];
     }
