@@ -25,7 +25,10 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 @end
 
 
-@implementation MGSPrefsColourPropertiesViewController
+@implementation MGSPrefsColourPropertiesViewController {
+    BOOL updatingFromDefaults;
+    BOOL savingToDefaults;
+}
 
 /*
  *  - init
@@ -36,15 +39,18 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
     
     self = [super init];
     
-    MGSColourScheme *initial = [[self.userDefaultsController values] valueForKey:NSStringFromSelector(@selector(colourScheme))];
+    MGSColourScheme *initial = [[self.userDefaultsController values] valueForKey:MGSFragariaDefaultsColourScheme];
     if (initial)
         _currentScheme = [initial mutableCopy];
     else
         _currentScheme = [[MGSMutableColourScheme alloc] init];
+    
     [_currentScheme addObserver:self forKeyPath:NSStringFromSelector(@selector(dictionaryRepresentation)) options:0 context:ColourSchemeChangedContext];
     
     bundle = [NSBundle bundleForClass:[MGSPrefsColourPropertiesViewController class]];
     [bundle loadNibNamed:@"MGSPrefsColourProperties" owner:self topLevelObjects:nil];
+    
+    [self.objectController addObserver:self forKeyPath:@"selection.colourScheme" options:0 context:DefaultsChangedContext];
     
     return self;
 }
@@ -53,6 +59,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 - (void)dealloc
 {
     [_currentScheme removeObserver:self forKeyPath:NSStringFromSelector(@selector(dictionaryRepresentation))];
+    [self.objectController removeObserver:self forKeyPath:@"selection.colourScheme"];
 }
 
 
@@ -60,6 +67,8 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 {
     if (context == ColourSchemeChangedContext) {
         [self saveColourSchemeToDefaults];
+    } else if (context == DefaultsChangedContext) {
+        [self updateColourSchemeFromDefaults];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -68,14 +77,31 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 
 - (void)setCurrentScheme:(MGSMutableColourScheme *)currentScheme
 {
-    [self saveColourSchemeToDefaults];
+    [_currentScheme removeObserver:self forKeyPath:NSStringFromSelector(@selector(dictionaryRepresentation))];
+    _currentScheme = currentScheme;
+    [_currentScheme addObserver:self forKeyPath:NSStringFromSelector(@selector(dictionaryRepresentation)) options:NSKeyValueObservingOptionInitial context:ColourSchemeChangedContext];
 }
 
 
 - (void)saveColourSchemeToDefaults
 {
+    if (updatingFromDefaults)
+        return;
+    savingToDefaults = YES;
     MGSColourScheme *v = [self.currentScheme copy];
     [[self.userDefaultsController values] setValue:v forKey:NSStringFromSelector(@selector(colourScheme))];
+    savingToDefaults = NO;
+}
+
+
+- (void)updateColourSchemeFromDefaults
+{
+    if (savingToDefaults)
+        return;
+    updatingFromDefaults = YES;
+    MGSColourScheme *initial = [[self.userDefaultsController values] valueForKey:MGSFragariaDefaultsColourScheme];
+    self.currentScheme = [initial mutableCopy];
+    updatingFromDefaults = NO;
 }
 
 
