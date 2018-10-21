@@ -6,13 +6,9 @@
 //
 /// @cond PRIVATE
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @class MGSPreferencesController;
-
-
-extern NSString * const KMGSColourSchemesFolder;
-extern NSString * const KMGSColourSchemeExt;
 
 
 /**

@@ -12,8 +12,8 @@
 
 #pragma mark - Constants
 
-NSString * const KMGSColourSchemesFolder = @"Colour Schemes";
-NSString * const KMGSColourSchemeExt = @"plist";
+static NSString * const KMGSColourSchemesFolder = @"Colour Schemes";
+static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 #pragma mark - Category

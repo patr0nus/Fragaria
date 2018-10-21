@@ -15,7 +15,6 @@
 #import "SMLSyntaxDefinition.h"
 
 #import "MGSFragariaView.h"
-#import "MGSFragariaView+Definitions.h"
 #import "SMLSyntaxError.h"
 #import "SMLTextView.h"
 #import "SMLTextView+MGSTextActions.h"
@@ -26,11 +25,3 @@
 
 #import "NSTextStorage+Fragaria.h"
 #import "MGSMutableSubstring.h"
-
-#import "MGSUserDefaultsDelegate.h"
-#import "MGSUserDefaultsControllerProtocol.h"
-#import "MGSUserDefaultsController.h"
-#import "MGSHybridUserDefaultsController.h"
-#import "MGSPrefsViewController.h"
-#import "MGSPrefsColourPropertiesViewController.h"
-#import "MGSPrefsEditorPropertiesViewController.h"

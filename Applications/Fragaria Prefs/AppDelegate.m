@@ -11,6 +11,7 @@
 
 #import "AppDelegate.h"
 #import <Fragaria/Fragaria.h>
+#import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
 #import "MGSSampleBreakpointDelegate.h"
 #import "MASPreferencesWindowController.h"
 

@@ -10,7 +10,6 @@
 #import "MGSFragariaView+Definitions.h"
 #import "MGSColourToPlainTextTransformer.h"
 #import "NSColor+TransformedCompare.h"
-#import "MGSColourSchemeListController.h"
 #import "MGSMutableColourScheme.h"
 #import "MGSColourSchemePrivate.h"
 
@@ -43,6 +42,9 @@ NSString * const MGSColourSchemeKeyColoursKeywords       = @"coloursKeywords";
 NSString * const MGSColourSchemeKeyColoursNumbers        = @"coloursNumbers";
 NSString * const MGSColourSchemeKeyColoursStrings        = @"coloursStrings";
 NSString * const MGSColourSchemeKeyColoursVariables      = @"coloursVariables";
+
+static NSString * const KMGSColourSchemesFolder = @"Colour Schemes";
+static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 

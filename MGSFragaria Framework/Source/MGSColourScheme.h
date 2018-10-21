@@ -6,7 +6,7 @@
 //
 /// @cond PRIVATE
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 
 extern NSString * const MGSColourSchemeErrorDomain;

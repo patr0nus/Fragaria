@@ -6,7 +6,7 @@
 //
 /// @cond PRIVATE
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 /**
  *  Given a @(YES) or @(NO) input, returns a colour suitable for enabled @(YES)

@@ -6,7 +6,7 @@
 //
 /// @cond PRIVATE
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 /**
  *  Provides a scheme naming service for MGSColourSchemeListController, as well
