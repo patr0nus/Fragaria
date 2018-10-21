@@ -454,8 +454,14 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 {
     self.colourSchemes = [[NSMutableArray alloc] init];
     
+    NSArray<MGSColourScheme *> *builtinSchemes = [MGSColourScheme builtinColourSchemes];
+    for (MGSColourScheme *scheme in builtinSchemes) {
+        MGSColourSchemeOption *option = [[MGSColourSchemeOption alloc] initWithColourScheme:scheme];
+        [option setLoadedFromBundle:YES];
+        [self.colourSchemes addObject:option];
+    }
+    
     NSDictionary <NSURL *, NSNumber *> *searchPaths = @{
-        [[NSBundle bundleForClass:[self class]] resourceURL]: @(YES),
         [[NSBundle mainBundle] resourceURL]: @(YES),
         [self applicationSupportDirectory]: @(NO)
     };
