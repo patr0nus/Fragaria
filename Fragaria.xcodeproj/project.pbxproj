@@ -604,10 +604,10 @@
 		010870A31C99E24F00C335DA /* Solarized Dark.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Dark.plist"; sourceTree = "<group>"; };
 		010870A41C99E24F00C335DA /* Solarized Light.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Light.plist"; sourceTree = "<group>"; };
 		011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberCacheTests.m; sourceTree = "<group>"; };
-		0121BA752152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/MGSContextMenu.xib; sourceTree = "<group>"; };
-		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
-		0121BA772152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLEntab.xib; sourceTree = "<group>"; };
-		0121BA782152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLGoToLine.xib; sourceTree = "<group>"; };
+		0121BA752152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSContextMenu.xib; sourceTree = "<group>"; };
+		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
+		0121BA772152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLEntab.xib; sourceTree = "<group>"; };
+		0121BA782152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLGoToLine.xib; sourceTree = "<group>"; };
 		0121BA792152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsCommonViews.xib; sourceTree = "<group>"; };
 		0121BA7A2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsColourProperties.xib; sourceTree = "<group>"; };
 		0121BA7B2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsEditorProperties.xib; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 		AB648E3E11FB38E700AEF7BD /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
 		AB648E3F11FB38E700AEF7BD /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		AB69B62B118B745700903D1D /* Fragaria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB69B62C118B745700903D1D /* MGSFragaria-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MGSFragaria-Info.plist"; sourceTree = "<group>"; };
+		AB69B62C118B745700903D1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB69B65A118B75FB00903D1D /* SMLSyntaxColouring.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SMLSyntaxColouring.m; sourceTree = "<group>"; tabWidth = 4; };
 		AB69B664118B766300903D1D /* SMLSyntaxColouring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLSyntaxColouring.h; sourceTree = "<group>"; };
 		AB69B666118B768000903D1D /* SMLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLTextView.h; sourceTree = "<group>"; };
@@ -699,10 +699,10 @@
 		ABCA4DAF16137FC000E4849B /* Fragaria Simple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fragaria Simple.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABF28AEE14C075D400ECAD48 /* NSScanner+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSScanner+Fragaria.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		ABF28AEF14C075D400ECAD48 /* NSScanner+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+Fragaria.h"; sourceTree = "<group>"; };
-		D00BB057213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "MGSFragaria Framework/Resources/en-GB.lproj/MGSContextMenu.xib"; sourceTree = SOURCE_ROOT; };
-		D00BB058213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "MGSFragaria Framework/Resources/en-GB.lproj/SMLGoToLine.xib"; sourceTree = SOURCE_ROOT; };
-		D00BB059213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "MGSFragaria Framework/Resources/en-GB.lproj/SMLDetab.xib"; sourceTree = SOURCE_ROOT; };
-		D00BB05A213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "MGSFragaria Framework/Resources/en-GB.lproj/SMLEntab.xib"; sourceTree = SOURCE_ROOT; };
+		D00BB057213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "Fragaria/en-GB.lproj/MGSContextMenu.xib"; sourceTree = SOURCE_ROOT; };
+		D00BB058213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "Fragaria/en-GB.lproj/SMLGoToLine.xib"; sourceTree = SOURCE_ROOT; };
+		D00BB059213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "Fragaria/en-GB.lproj/SMLDetab.xib"; sourceTree = SOURCE_ROOT; };
+		D00BB05A213876AE007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "en-GB"; path = "Fragaria/en-GB.lproj/SMLEntab.xib"; sourceTree = SOURCE_ROOT; };
 		D00BB068213876F3007E5FA6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D00BB06A213876FC007E5FA6 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D00BB06D213878AF007E5FA6 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -1194,19 +1194,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AB3972FC118C2A5D00AEF388 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D00BB067213876F3007E5FA6 /* Localizable.strings */,
-				01AC7E711AA341AA00DF7620 /* Images.xcassets */,
-				ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */,
-				AB3971E6118C27E700AEF388 /* SyntaxDefinitions.plist */,
-				010870A01C99E24F00C335DA /* Colour Schemes */,
-				01086F991C99E16D00C335DA /* Syntax Definitions */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		AB648E2211FB37AF00AEF7BD /* Fragaria Simple */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,7 +1265,7 @@
 			path = Applications;
 			sourceTree = SOURCE_ROOT;
 		};
-		ABDED9B6128AB144002EE039 /* Source */ = {
+		D05533632138522B00199788 /* Fragaria */ = {
 			isa = PBXGroup;
 			children = (
 				AB69B753118B830700903D1D /* Fragaria.h */,
@@ -1295,19 +1282,15 @@
 				D0E521021A90BAC1005CB80B /* Syntax Error Components */,
 				01BB1BEC1A7962C7006C0056 /* Text View Components */,
 				01BB1BEB1A79620E006C0056 /* Text Editing UI */,
+				D00BB067213876F3007E5FA6 /* Localizable.strings */,
+				01AC7E711AA341AA00DF7620 /* Images.xcassets */,
+				AB3971E6118C27E700AEF388 /* SyntaxDefinitions.plist */,
+				01086F991C99E16D00C335DA /* Syntax Definitions */,
+				010870A01C99E24F00C335DA /* Colour Schemes */,
+				ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */,
+				AB69B62C118B745700903D1D /* Info.plist */,
 			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		D05533632138522B00199788 /* Fragaria */ = {
-			isa = PBXGroup;
-			children = (
-				ABDED9B6128AB144002EE039 /* Source */,
-				AB3972FC118C2A5D00AEF388 /* Resources */,
-				AB69B62C118B745700903D1D /* MGSFragaria-Info.plist */,
-			);
-			name = Fragaria;
-			path = "MGSFragaria Framework";
+			path = Fragaria;
 			sourceTree = "<group>";
 		};
 		D0718B511AB551460073493A /* Fragaria Prefs */ = {
@@ -1377,8 +1360,7 @@
 				D0AB50EF1A91CDC200A6DF58 /* SMLSyntaxErrorTests.m */,
 				D0E5210F1A90E34F005CB80B /* Supporting Files */,
 			);
-			name = FragariaTests;
-			path = "MGSFragaria Tests";
+			path = FragariaTests;
 			sourceTree = "<group>";
 		};
 		D0E5210F1A90E34F005CB80B /* Supporting Files */ = {
@@ -2524,7 +2506,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "$(SRCROOT)/MGSFragaria Framework/MGSFragaria-Info.plist";
+				INFOPLIST_FILE = Fragaria/Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2602,7 +2584,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "$(SRCROOT)/MGSFragaria Framework/MGSFragaria-Info.plist";
+				INFOPLIST_FILE = Fragaria/Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_DYLIB_INSTALL_NAME = "@rpath/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)/$(PRODUCT_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -2635,7 +2617,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "$(SRCROOT)/MGSFragaria Framework/MGSFragaria-Info.plist";
+				INFOPLIST_FILE = Fragaria/Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_DYLIB_INSTALL_NAME = "@rpath/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)/$(PRODUCT_NAME)";
 				ONLY_ACTIVE_ARCH = NO;
@@ -3033,7 +3015,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "MGSFragaria Tests/Info.plist";
+				INFOPLIST_FILE = FragariaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -3069,7 +3051,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "MGSFragaria Tests/Info.plist";
+				INFOPLIST_FILE = FragariaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -3104,7 +3086,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "MGSFragaria Tests/Info.plist";
+				INFOPLIST_FILE = FragariaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
