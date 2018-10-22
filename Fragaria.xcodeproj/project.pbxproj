@@ -122,7 +122,6 @@
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
 		018CFA101AE46BA100334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0E1AE46B9800334011 /* main.m */; };
 		01919E2C217D20A900E26B9D /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
-		01919E33217D20A900E26B9D /* FragariaDefaultsCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01919E32217D20A900E26B9D /* FragariaDefaultsCoordinatorTests.m */; };
 		01919E35217D20A900E26B9D /* FragariaDefaultsCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 01919E25217D20A800E26B9D /* FragariaDefaultsCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01919E38217D20A900E26B9D /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
 		01919E39217D20A900E26B9D /* FragariaDefaultsCoordinator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -155,6 +154,12 @@
 		01919E62217D24EC00E26B9D /* MGSPrefsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D071884D1AB54CCA0073493A /* MGSPrefsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01919E63217D332900E26B9D /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
 		01919E64217D332900E26B9D /* FragariaDefaultsCoordinator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01919E67217D4AF400E26B9D /* MGSPrefsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D01A8CEB1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m */; };
+		01919E68217D4B0300E26B9D /* MGSUserDefaultsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882B1AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m */; };
+		01919E69217D4B1400E26B9D /* MGSUserDefaultsDefinitionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882C1AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m */; };
+		01919E6A217D4B2E00E26B9D /* MGSUserDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882D1AB3CDDC0073493A /* MGSUserDefaultsTests.m */; };
+		01919E6B217D4BBB00E26B9D /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB69B62B118B745700903D1D /* Fragaria.framework */; };
+		01919E6E217D4CDE00E26B9D /* MGSUserDefaultsUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882F1AB3CDDC0073493A /* MGSUserDefaultsUtilities.m */; };
 		0191FA7D1A881F6E0099B50D /* MGSDragOperationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0191FA7C1A881F280099B50D /* MGSDragOperationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0191FA811A8829930099B50D /* SMLTextView+MGSTextActions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0191FA7F1A8829930099B50D /* SMLTextView+MGSTextActions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0191FA821A8829930099B50D /* SMLTextView+MGSTextActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0191FA801A8829930099B50D /* SMLTextView+MGSTextActions.m */; };
@@ -220,17 +225,12 @@
 		D00BB069213876F3007E5FA6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00BB067213876F3007E5FA6 /* Localizable.strings */; };
 		D00BB06F213878AF007E5FA6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D00BB06D213878AF007E5FA6 /* MainMenu.xib */; };
 		D00BB070213878AF007E5FA6 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D00BB06E213878AF007E5FA6 /* Document.xib */; };
-		D01A8CEC1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D01A8CEB1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m */; };
 		D01F51721AAF1D35006A3A90 /* MGSFragariaViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D01F51701AAF1D35006A3A90 /* MGSFragariaViewTests.m */; };
 		D034C80B1A99807F003D3A41 /* MainMenu-Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D034C8091A99807F003D3A41 /* MainMenu-Document.xib */; };
 		D034C80C1A99807F003D3A41 /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = D034C80A1A99807F003D3A41 /* MyDocument.xib */; };
 		D06653D31AC00D3D00ACE8B0 /* MGSColourToPlainTextTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D06653D11AC00D3D00ACE8B0 /* MGSColourToPlainTextTransformer.m */; };
 		D06653D51AC0159800ACE8B0 /* MGSColourToPlainTextTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D06653D41AC0159800ACE8B0 /* MGSColourToPlainTextTransformerTests.m */; };
 		D06653D91AC02A0400ACE8B0 /* NSColor+TransformedCompare.m in Sources */ = {isa = PBXBuildFile; fileRef = D06653D71AC02A0400ACE8B0 /* NSColor+TransformedCompare.m */; };
-		D07188301AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882B1AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m */; };
-		D07188311AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882C1AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m */; };
-		D07188321AB3CDDC0073493A /* MGSUserDefaultsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882D1AB3CDDC0073493A /* MGSUserDefaultsTests.m */; };
-		D07188331AB3CDDC0073493A /* MGSUserDefaultsUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D071882F1AB3CDDC0073493A /* MGSUserDefaultsUtilities.m */; };
 		D0718B781AB552710073493A /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB69B62B118B745700903D1D /* Fragaria.framework */; };
 		D0718B791AB552710073493A /* Fragaria.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB69B62B118B745700903D1D /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0718B851AB553A20073493A /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0718B801AB553A20073493A /* MASPreferencesWindow.xib */; };
@@ -268,13 +268,6 @@
 			remoteGlobalIDString = 01919E22217D20A800E26B9D;
 			remoteInfo = FragariaDefaultsCoordinator;
 		};
-		01919E2F217D20A900E26B9D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AB648E2911FB385700AEF7BD;
-			remoteInfo = "Fragaria Doc";
-		};
 		01919E36217D20A900E26B9D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -295,6 +288,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 01919E22217D20A800E26B9D;
 			remoteInfo = FragariaDefaultsCoordinator;
+		};
+		01919E6C217D4CA000E26B9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB69B62A118B745700903D1D;
+			remoteInfo = Fragaria;
 		};
 		01F0D7121C120FC1000A08B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -608,10 +608,10 @@
 		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
 		0121BA772152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLEntab.xib; sourceTree = "<group>"; };
 		0121BA782152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/SMLGoToLine.xib; sourceTree = "<group>"; };
-		0121BA792152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/MGSPrefsCommonViews.xib; sourceTree = "<group>"; };
-		0121BA7A2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/MGSPrefsColourProperties.xib; sourceTree = "<group>"; };
-		0121BA7B2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/MGSPrefsEditorProperties.xib; sourceTree = "<group>"; };
-		0121BA7C2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = ../Resources/Base.lproj/MGSColourSchemeSave.xib; sourceTree = "<group>"; };
+		0121BA792152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsCommonViews.xib; sourceTree = "<group>"; };
+		0121BA7A2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsColourProperties.xib; sourceTree = "<group>"; };
+		0121BA7B2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSPrefsEditorProperties.xib; sourceTree = "<group>"; };
+		0121BA7C2152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSColourSchemeSave.xib; sourceTree = "<group>"; };
 		01281838206FD3E5004D2C3B /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
 		013278661A81614500D2DCA5 /* MGSSyntaxDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxDefinition.h; sourceTree = "<group>"; };
 		013278671A81614600D2DCA5 /* MGSSyntaxDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSSyntaxDefinition.m; sourceTree = "<group>"; };
@@ -632,7 +632,6 @@
 		01919E25217D20A800E26B9D /* FragariaDefaultsCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragariaDefaultsCoordinator.h; sourceTree = "<group>"; };
 		01919E26217D20A800E26B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01919E2B217D20A800E26B9D /* FragariaDefaultsCoordinatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FragariaDefaultsCoordinatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		01919E32217D20A900E26B9D /* FragariaDefaultsCoordinatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FragariaDefaultsCoordinatorTests.m; sourceTree = "<group>"; };
 		01919E34217D20A900E26B9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0191FA7C1A881F280099B50D /* MGSDragOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSDragOperationDelegate.h; sourceTree = "<group>"; };
 		0191FA7F1A8829930099B50D /* SMLTextView+MGSTextActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMLTextView+MGSTextActions.h"; sourceTree = "<group>"; };
@@ -803,6 +802,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01919E6B217D4BBB00E26B9D /* Fragaria.framework in Frameworks */,
 				01919E2C217D20A900E26B9D /* FragariaDefaultsCoordinator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1010,7 +1010,12 @@
 		01919E31217D20A900E26B9D /* FragariaDefaultsCoordinatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				01919E32217D20A900E26B9D /* FragariaDefaultsCoordinatorTests.m */,
+				D01A8CEB1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m */,
+				D071882B1AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m */,
+				D071882C1AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m */,
+				D071882D1AB3CDDC0073493A /* MGSUserDefaultsTests.m */,
+				D071882E1AB3CDDC0073493A /* MGSUserDefaultsUtilities.h */,
+				D071882F1AB3CDDC0073493A /* MGSUserDefaultsUtilities.m */,
 				01919E34217D20A900E26B9D /* Info.plist */,
 			);
 			path = FragariaDefaultsCoordinatorTests;
@@ -1368,14 +1373,8 @@
 				D0718BAD1AB721280073493A /* MGSColourSchemeTests.m */,
 				D06653D41AC0159800ACE8B0 /* MGSColourToPlainTextTransformerTests.m */,
 				D01F51701AAF1D35006A3A90 /* MGSFragariaViewTests.m */,
-				D01A8CEB1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m */,
 				D0E521071A90E307005CB80B /* MGSSyntaxErrorControllerTests.m */,
-				D071882B1AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m */,
-				D071882C1AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m */,
-				D071882D1AB3CDDC0073493A /* MGSUserDefaultsTests.m */,
 				D0AB50EF1A91CDC200A6DF58 /* SMLSyntaxErrorTests.m */,
-				D071882E1AB3CDDC0073493A /* MGSUserDefaultsUtilities.h */,
-				D071882F1AB3CDDC0073493A /* MGSUserDefaultsUtilities.m */,
 				D0E5210F1A90E34F005CB80B /* Supporting Files */,
 			);
 			name = FragariaTests;
@@ -1468,8 +1467,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				01919E6D217D4CA000E26B9D /* PBXTargetDependency */,
 				01919E2E217D20A900E26B9D /* PBXTargetDependency */,
-				01919E30217D20A900E26B9D /* PBXTargetDependency */,
 			);
 			name = FragariaDefaultsCoordinatorTests;
 			productName = FragariaDefaultsCoordinatorTests;
@@ -1630,7 +1629,6 @@
 					01919E2A217D20A800E26B9D = {
 						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Automatic;
-						TestTargetID = AB648E2911FB385700AEF7BD;
 					};
 					01F0D6FB1C120F7D000A08B6 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1831,7 +1829,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01919E33217D20A900E26B9D /* FragariaDefaultsCoordinatorTests.m in Sources */,
+				01919E6E217D4CDE00E26B9D /* MGSUserDefaultsUtilities.m in Sources */,
+				01919E69217D4B1400E26B9D /* MGSUserDefaultsDefinitionsTests.m in Sources */,
+				01919E68217D4B0300E26B9D /* MGSUserDefaultsControllerTests.m in Sources */,
+				01919E6A217D4B2E00E26B9D /* MGSUserDefaultsTests.m in Sources */,
+				01919E67217D4AF400E26B9D /* MGSPrefsViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,17 +1922,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D07188301AB3CDDC0073493A /* MGSUserDefaultsControllerTests.m in Sources */,
 				018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */,
-				D01A8CEC1ABE75E0003B2719 /* MGSPrefsViewControllerTests.m in Sources */,
 				D0AB50F01A91CDC200A6DF58 /* SMLSyntaxErrorTests.m in Sources */,
 				01FBC3831C1EADDF00837F04 /* MGSStringColumnTests.m in Sources */,
 				D0E5211A1A90E399005CB80B /* MGSSyntaxErrorControllerTests.m in Sources */,
-				D07188311AB3CDDC0073493A /* MGSUserDefaultsDefinitionsTests.m in Sources */,
 				D0718BAE1AB721280073493A /* MGSColourSchemeTests.m in Sources */,
-				D07188331AB3CDDC0073493A /* MGSUserDefaultsUtilities.m in Sources */,
 				019B02EF1C1F4FE20026548F /* MGSFragariaRowColumnFunctionsTests.m in Sources */,
-				D07188321AB3CDDC0073493A /* MGSUserDefaultsTests.m in Sources */,
 				D06653D51AC0159800ACE8B0 /* MGSColourToPlainTextTransformerTests.m in Sources */,
 				011B56D71C1DC7AB00540669 /* MGSLineNumberCacheTests.m in Sources */,
 				D01F51721AAF1D35006A3A90 /* MGSFragariaViewTests.m in Sources */,
@@ -1944,11 +1941,6 @@
 			isa = PBXTargetDependency;
 			target = 01919E22217D20A800E26B9D /* FragariaDefaultsCoordinator */;
 			targetProxy = 01919E2D217D20A900E26B9D /* PBXContainerItemProxy */;
-		};
-		01919E30217D20A900E26B9D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AB648E2911FB385700AEF7BD /* Fragaria Doc */;
-			targetProxy = 01919E2F217D20A900E26B9D /* PBXContainerItemProxy */;
 		};
 		01919E37217D20A900E26B9D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1964,6 +1956,11 @@
 			isa = PBXTargetDependency;
 			target = 01919E22217D20A800E26B9D /* FragariaDefaultsCoordinator */;
 			targetProxy = 01919E65217D332900E26B9D /* PBXContainerItemProxy */;
+		};
+		01919E6D217D4CA000E26B9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB69B62A118B745700903D1D /* Fragaria */;
+			targetProxy = 01919E6C217D4CA000E26B9D /* PBXContainerItemProxy */;
 		};
 		01F0D7131C120FC1000A08B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2245,7 +2242,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fragaria.FragariaDefaultsCoordinatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fragaria Doc.app/Contents/MacOS/Fragaria Doc";
 			};
 			name = Debug;
 		};
@@ -2279,7 +2275,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fragaria.FragariaDefaultsCoordinatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fragaria Doc.app/Contents/MacOS/Fragaria Doc";
 			};
 			name = Testing;
 		};
@@ -2313,7 +2308,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fragaria.FragariaDefaultsCoordinatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fragaria Doc.app/Contents/MacOS/Fragaria Doc";
 			};
 			name = Release;
 		};

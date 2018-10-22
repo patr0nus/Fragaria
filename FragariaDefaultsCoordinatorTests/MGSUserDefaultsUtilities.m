@@ -10,15 +10,6 @@
 #import <objc/objc-runtime.h>
 
 
-NSColor *MGSTestRandomColor(void)
-{
-    float r = arc4random_uniform(256) / 256.0;
-    float g = arc4random_uniform(256) / 256.0;
-    float b = arc4random_uniform(256) / 256.0;
-    return [NSColor colorWithRed:r green:g blue:b alpha:1.0];
-}
-
-
 @implementation MGSUserDefaultsUtilities
 
 
