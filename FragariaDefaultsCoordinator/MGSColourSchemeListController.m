@@ -9,6 +9,8 @@
 #import "MGSColourSchemeListController.h"
 #import "MGSColourSchemeOption.h"
 #import "MGSColourSchemeSaveController.h"
+#import "MGSPrefsColourPropertiesViewController.h"
+
 
 #pragma mark - Constants
 
@@ -80,7 +82,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     
     /* Listen for the objectController to connect, if it didn't already */
     if (!self.colourSchemeController.content)
-        [self addObserver:self forKeyPath:@"objectController.content" options:NSKeyValueObservingOptionNew context:@"objectController"];
+        [self addObserver:self forKeyPath:@"colourSchemeController.content" options:NSKeyValueObservingOptionNew context:@"objectController"];
     else
         [self setupLate];
 }
@@ -95,7 +97,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     [self setupObservers];
 
     /* Set our current scheme based on the view settings. */
-    self.currentScheme = [self makeColourSchemeFromViewForScheme:nil];
+    self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:self.parentViewController.currentScheme];
 
     /* If the current scheme matches an existing theme, then set it. */
     [self findAndSetCurrentScheme];
@@ -111,6 +113,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 {
     return [NSSet setWithArray:@[ @"self.selectionIndex", @"self.currentScheme", @"self.schemeMenu.selectedObject", @"self.currentScheme.loadedFromBundle" ]];
 }
+
 - (BOOL)buttonSaveDeleteEnabled
 {
     BOOL result;
@@ -128,6 +131,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 {
     return [NSSet setWithArray:@[ @"self.selectionIndex", @"self.currentScheme", @"self.schemeMenu.selectedObject", @"self.currentScheme.loadedFromBundle" ]];
 }
+
 - (NSString *)buttonSaveDeleteTitle
 {
     // Rules:
@@ -254,7 +258,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
     if ([localContext isEqualToString:@"objectController"])
     {
-        [self removeObserver:self forKeyPath:@"objectController.content" context:@"objectController"];
+        [self removeObserver:self forKeyPath:@"colourSchemeController.content" context:@"objectController"];
         [self setupLate];
     }
     else if ( !self.ignoreObservations && [[[MGSColourSchemeOption class] propertiesOfScheme] containsObject:localContext] )
@@ -295,19 +299,16 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  *   We're not forcing applications to store the name of a scheme, so try
  *   to determine what the current theme is based on the properties.
  */
-- (MGSColourSchemeOption *)findMatchingSchemeForScheme:(MGSColourSchemeOption *)scheme
+- (MGSColourSchemeOption *)findMatchingSchemeForScheme:(MGSColourScheme *)scheme
 {
-	// arrangedObjects may not exist yet, so lets sort things ourselves...
-    NSArray *sortedArray = [self.colourSchemes sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-        return [[a valueForKey:@"displayName"] localizedCaseInsensitiveCompare:[b valueForKey:@"displayName"]];
-    }];
+    NSArray *list = self.colourSchemes;
 
     // ignore the custom theme if it's in the list. Convoluted, but avoids string checking.
-    sortedArray = [sortedArray objectsAtIndexes:[sortedArray indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+    list = [list objectsAtIndexes:[list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         return !( self.currentSchemeIsCustom && [self.currentScheme isEqual:obj] );
     }]];
 
-    for (MGSColourSchemeOption *item in sortedArray)
+    for (MGSColourSchemeOption *item in list)
 	{
 		if ([scheme isEqualToScheme:item])
 		{
@@ -320,49 +321,13 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 /*
- * - makeColourSchemeFromView
- *   The defaultsObjectController contains all of the current colour settings 
- *   for the instance of FragariaView, so return an instance of MGSColourScheme
- *   with these settings.
- */
-- (MGSColourSchemeOption *)makeColourSchemeFromViewForScheme:(MGSColourSchemeOption *)currentViewScheme
-{
-    if (!currentViewScheme)
-    {
-        currentViewScheme = [[MGSColourSchemeOption alloc] init];
-    }
-
-    for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
-    {
-        if ([[self.colourSchemeController.content allKeys] containsObject:key])
-        {
-            [currentViewScheme setValue:[self.colourSchemeController.selection valueForKey:key] forKey:key];
-        }
-    }
-
-	return currentViewScheme;
-}
-
-
-/*
  * - applyColourSchemeToView
  *   apply the current colour scheme directly to the defaultsObjectController.
  */
 - (void)applyColourSchemeToView
 {
     self.ignoreObservations = YES;
-    for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
-    {
-        if ([[self.colourSchemeController.content allKeys] containsObject:key])
-        {
-            id remote = [self.colourSchemeController.selection valueForKey:key];
-            id local = [self.currentScheme valueForKey:key];
-            if (![remote isEqual:local])
-            {
-                [self.colourSchemeController.selection setValue:[self.currentScheme valueForKey:key] forKey:key];
-            }
-        }
-    }
+    self.parentViewController.currentScheme = [self.currentScheme mutableCopy];
     self.ignoreObservations = NO;
 }
 
@@ -374,7 +339,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 - (void)findAndSetCurrentScheme
 {
-	MGSColourSchemeOption *currentViewScheme = [self makeColourSchemeFromViewForScheme:nil];
+	MGSColourScheme *currentViewScheme = self.parentViewController.currentScheme;
     MGSColourSchemeOption *matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
 
 	if (matchingScheme)
@@ -389,20 +354,20 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     }
     else
     {
+        // Take the current controller values.
+        self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:currentViewScheme];
+        
         if (!self.currentSchemeIsCustom)
         {
             // Create and activate a custom scheme.
-			self.currentScheme = currentViewScheme;
+            self.currentScheme.displayName = NSLocalizedStringFromTableInBundle(
+                @"Custom Settings", nil, [NSBundle bundleForClass:[MGSColourScheme class]],
+                @"Name for Custom Settings scheme.");
             self.currentSchemeIsCustom = YES;
             self.ignoreObservations = YES;
             [self addObject:self.currentScheme];
             self.ignoreObservations = NO;
 		}
-        else
-        {
-            // Take the current controller values.
-            self.currentScheme = [self makeColourSchemeFromViewForScheme:self.currentScheme];
-        }
     }
 }
 

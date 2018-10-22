@@ -29,7 +29,8 @@
         </objectController>
         <arrayController objectClassName="MGSColourScheme" automaticallyRearrangesObjects="YES" id="z8u-bs-3l4" userLabel="Colour Scheme List Controller" customClass="MGSColourSchemeListController">
             <connections>
-                <outlet property="colourSchemeController" destination="POX-Qr-aHg" id="zcU-rl-v3o"/>
+                <outlet property="colourSchemeController" destination="POX-Qr-aHg" id="vYq-ac-0g6"/>
+                <outlet property="parentViewController" destination="-2" id="Bjc-Sk-D41"/>
                 <outlet property="schemeMenu" destination="cfm-EI-KQe" id="i0a-jy-Jsv"/>
                 <outlet property="schemeSaveDeleteButton" destination="soo-KG-LXb" id="OuI-uw-TkN"/>
             </connections>
@@ -278,8 +279,8 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="-2" name="enabled" keyPath="self.managedProperties.colourScheme" id="SgL-B8-W72"/>
                         <binding destination="POX-Qr-aHg" name="value" keyPath="selection.textColor" id="dZe-GI-hq3"/>
+                        <binding destination="-2" name="enabled" keyPath="self.managedProperties.colourScheme" id="SgL-B8-W72"/>
                     </connections>
                 </colorWell>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="V8C-Iz-4On">
@@ -461,6 +462,11 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForVariables" id="R1s-Oa-raW">
+                            <dictionary key="options">
+                                <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                            </dictionary>
+                        </binding>
                         <binding destination="POX-Qr-aHg" name="enabled2" keyPath="selection.coloursVariables" previousBinding="hc4-PZ-Pkd" id="58o-Ty-jYq">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -470,11 +476,6 @@
                             </dictionary>
                         </binding>
                         <binding destination="-2" name="enabled" keyPath="self.managedProperties.colourScheme" id="hc4-PZ-Pkd"/>
-                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.colourForVariables" id="R1s-Oa-raW">
-                            <dictionary key="options">
-                                <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </colorWell>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TOc-jO-4sb">

@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class MGSPreferencesController;
+@class MGSPrefsColourPropertiesViewController;
 
 
 /**
@@ -69,9 +70,8 @@
  *  and buttonSaveDeleteEnabled respectively. */
 @property (nonatomic, assign) IBOutlet NSButton *schemeSaveDeleteButton;
 
-/** A reference to the parent view. You must set this in IB otherwise
- *  save and delete dialogues will not attach as sheet to the window. */
-@property (nonatomic, assign) IBOutlet NSView *parentView;
+/** A reference to the parent view controller. */
+@property (nonatomic, assign) IBOutlet MGSPrefsColourPropertiesViewController *parentViewController;
 
 
 #pragma mark - Properties - Bindable for UI Use
