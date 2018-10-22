@@ -1172,6 +1172,7 @@
 			children = (
 				ABA1C12116144D3F00C8723F /* README.md */,
 				AB8387CC171D7F1D004408F4 /* TODO.md */,
+				ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */,
 				AB92A4151192B66A0055A3E7 /* Applications */,
 				D05533632138522B00199788 /* Fragaria */,
 				D0E5210E1A90E34F005CB80B /* FragariaTests */,
@@ -1287,7 +1288,6 @@
 				AB3971E6118C27E700AEF388 /* SyntaxDefinitions.plist */,
 				01086F991C99E16D00C335DA /* Syntax Definitions */,
 				010870A01C99E24F00C335DA /* Colour Schemes */,
-				ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */,
 				AB69B62C118B745700903D1D /* Info.plist */,
 			);
 			path = Fragaria;
