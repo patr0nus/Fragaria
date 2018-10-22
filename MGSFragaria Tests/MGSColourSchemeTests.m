@@ -8,10 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "MGSColourScheme.h"
+#import "MGSMutableColourScheme.h"
 #import "NSColor+TransformedCompare.h"
 #import "MGSFragariaView.h"
-#import "MGSUserDefaultsUtilities.h"
+
+
+NSColor *MGSTestRandomColor(void);
+
+
+NSColor *MGSTestRandomColor(void)
+{
+    float r = arc4random_uniform(256) / 256.0;
+    float g = arc4random_uniform(256) / 256.0;
+    float b = arc4random_uniform(256) / 256.0;
+    return [NSColor colorWithRed:r green:g blue:b alpha:1.0];
+}
 
 
 /**
@@ -55,13 +66,13 @@
     NSColor *expects2 = [NSColor purpleColor];
 
     outputPath = [tmpdir URLByAppendingPathComponent:@"test_propertiesToFile.plist"];
-	MGSColourScheme *scheme = [[MGSColourScheme alloc] init];
+	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
     scheme.colourForComments = expects2;
 	
 	XCTAssert([scheme writeToSchemeFileURL:outputPath error:nil]);
 	
-	scheme = [[MGSColourScheme alloc] init];
+	scheme = [[MGSMutableColourScheme alloc] init];
 
 	XCTAssert([scheme loadFromSchemeFileURL:outputPath error:nil]);
  
@@ -85,7 +96,7 @@
     
     for (NSURL *url in testCases) {
         NSError *err;
-        MGSColourScheme *test = [[MGSColourScheme alloc] initWithSchemeFileURL:url error:&err];
+        MGSMutableColourScheme *test = [[MGSMutableColourScheme alloc] initWithSchemeFileURL:url error:&err];
         XCTAssert(err && !test, @"invalid color scheme %@ did not fail to parse", url);
         NSLog(@"invalid file: %@; error: %@", url, err);
     }
@@ -101,7 +112,7 @@
 
     NSDictionary *testDict = @{ @"displayName" : expects };
 
-    MGSColourScheme *testInstance = [[MGSColourScheme alloc] initWithDictionary:testDict];
+    MGSMutableColourScheme *testInstance = [[MGSMutableColourScheme alloc] initWithDictionary:testDict];
 
     NSString *result = testInstance.displayName;
 
@@ -118,7 +129,7 @@
     };
     [fragaria setValuesForKeysWithDictionary:keys];
     
-    MGSColourScheme *s1 = [[MGSColourScheme alloc] initWithFragaria:fragaria displayName:@"test"];
+    MGSMutableColourScheme *s1 = [[MGSMutableColourScheme alloc] initWithFragaria:fragaria displayName:@"test"];
     
     for (NSString *key in keys) {
         id val = [s1 valueForKey:key];
@@ -133,9 +144,9 @@
         NSStringFromSelector(@selector(coloursComments)): @(NO),
         NSStringFromSelector(@selector(colourForComments)): MGSTestRandomColor()
     };
-    MGSColourScheme *s1 = [[MGSColourScheme alloc] initWithDictionary:keys];
+    MGSMutableColourScheme *s1 = [[MGSMutableColourScheme alloc] initWithDictionary:keys];
     MGSFragariaView *fragaria = [[MGSFragariaView alloc] init];
-    [fragaria setColoursFromScheme:s1];
+    fragaria.colourScheme = s1;
     
     for (NSString *key in keys) {
         id val = [fragaria valueForKey:key];
@@ -151,8 +162,8 @@
 {
     NSColor *expects1 = [NSColor purpleColor];
 
-    MGSColourScheme *scheme1 = [[MGSColourScheme alloc] init];
-    MGSColourScheme *scheme2 = [[MGSColourScheme alloc] init];
+    MGSMutableColourScheme *scheme1 = [[MGSMutableColourScheme alloc] init];
+    MGSMutableColourScheme *scheme2 = [[MGSMutableColourScheme alloc] init];
 
     // Assert that they are equal.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
@@ -168,8 +179,8 @@
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
 
     // Reset
-    scheme1 = [[MGSColourScheme alloc] init];
-    scheme2 = [[MGSColourScheme alloc] init];
+    scheme1 = [[MGSMutableColourScheme alloc] init];
+    scheme2 = [[MGSMutableColourScheme alloc] init];
 
     scheme1.coloursStrings = !scheme1.coloursStrings;
 
@@ -195,7 +206,7 @@
 	
     outputPath = [tmpdir URLByAppendingPathComponent:@"test_isEqualToScheme_file.plist"];
     
-	MGSColourScheme *scheme = [[MGSColourScheme alloc] init];
+	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
 	scheme.colourForKeywords = expects2;
 	
@@ -203,12 +214,12 @@
 	[scheme writeToSchemeFileURL:outputPath error:&err];
     NSLog(@"%@", err);
 	
-	scheme = [[MGSColourScheme alloc] init];
+	scheme = [[MGSMutableColourScheme alloc] init];
     err = nil;
 	[scheme loadFromSchemeFileURL:outputPath error:&err];
     NSLog(@"%@", err);
 	
-	MGSColourScheme *scheme2 = [[MGSColourScheme alloc] initWithSchemeFileURL:outputPath error:nil];
+	MGSMutableColourScheme *scheme2 = [[MGSMutableColourScheme alloc] initWithSchemeFileURL:outputPath error:nil];
  
     [[NSFileManager defaultManager] removeItemAtURL:outputPath error:nil];
 	
@@ -226,7 +237,7 @@
 	
     outputPath = [tmpdir URLByAppendingPathComponent:@"Classic Fragaria.plist"];
     
-	MGSColourScheme *scheme = [[MGSColourScheme alloc] init];
+	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = @"Classic Fragaria";
 
 	[scheme writeToSchemeFileURL:outputPath error:nil];
@@ -237,7 +248,7 @@
 
 - (void)test_builtinColorSchemes
 {
-    NSArray <MGSColourScheme *> *schemes = [MGSColourScheme builtinColourSchemes];
+    NSArray <MGSColourScheme *> *schemes = [MGSMutableColourScheme builtinColourSchemes];
     NSLog(@"builtins loaded are %@", schemes);
     XCTAssert(schemes);
 }
