@@ -8,6 +8,7 @@
 
 import Cocoa
 import Fragaria
+import FragariaDefaultsCoordinator
 
 
 class Document: NSDocument {

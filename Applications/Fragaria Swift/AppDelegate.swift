@@ -8,6 +8,7 @@
 
 import Cocoa
 import Fragaria
+import FragariaDefaultsCoordinator
 
 
 @NSApplicationMain class AppDelegate: NSObject, NSApplicationDelegate {
