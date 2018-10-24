@@ -401,10 +401,10 @@ plistError:
     if (!dark) {
         colors = @{
             MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedRed:1 green:1 blue:0.7 alpha:1],
-            MGSColourSchemeKeyTextInvisibleCharactersColour : [NSColor controlTextColor],
-            MGSColourSchemeKeyTextColor                     : [NSColor textColor],
-            MGSColourSchemeKeyBackgroundColor               : [NSColor textBackgroundColor],
-            MGSColourSchemeKeyInsertionPointColor           : [NSColor textColor],
+            MGSColourSchemeKeyTextInvisibleCharactersColour : [NSColor blackColor],
+            MGSColourSchemeKeyTextColor                     : [NSColor blackColor],
+            MGSColourSchemeKeyBackgroundColor               : [NSColor whiteColor],
+            MGSColourSchemeKeyInsertionPointColor           : [NSColor blackColor],
             MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor colorWithCalibratedRed:0.96f green:0.96f blue:0.71f alpha:1.0],
             MGSColourSchemeKeyColourForAutocomplete         : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
             MGSColourSchemeKeyColourForAttributes           : [NSColor colorWithCalibratedRed:0.50f green:0.5f blue:0.2f alpha:1.0],
@@ -420,9 +420,10 @@ plistError:
         colors = @{
             MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedWhite:0.4 alpha:1.0],
             MGSColourSchemeKeyTextInvisibleCharactersColour : [NSColor colorWithCalibratedRed:0.905882f green:0.905882f blue:0.905882f alpha:1.0],
-            MGSColourSchemeKeyTextColor                     : [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0],
-            MGSColourSchemeKeyBackgroundColor               : [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0],
-            MGSColourSchemeKeyInsertionPointColor           : [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0],
+            MGSColourSchemeKeyTextColor                     : [NSColor whiteColor],
+            MGSColourSchemeKeyBackgroundColor               : [NSColor blackColor],
+            MGSColourSchemeKeyInsertionPointColor           : [NSColor whiteColor],
+            MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor blackColor],
             MGSColourSchemeKeyColourForAutocomplete         : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
             MGSColourSchemeKeyColourForAttributes           : [NSColor colorWithCalibratedRed:0.5f green:0.5f blue:0.2f alpha:1.0],
             MGSColourSchemeKeyColourForCommands             : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
