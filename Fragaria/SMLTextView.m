@@ -380,10 +380,6 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
         _syntaxColouring = [[SMLSyntaxColouring alloc] initWithLayoutManager:layoutManager];
         _syntaxColoured = YES;
 
-        // We *always* want to keep the appearance static, so that we can
-        // manage the colors ourselves.
-        self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameAqua];
-        
         [self setDefaults];
         
         isDragging = NO;
