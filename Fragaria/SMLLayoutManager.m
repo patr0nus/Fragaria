@@ -160,7 +160,7 @@ static CGFloat SquiggleFunction(CGFloat x) {
 
 
 /*
- * - attributedStringWithTemporaryAttributesApplied
+ * - attributedStringWithSyntaxColouring
  */
 - (NSAttributedString *)attributedStringWithTemporaryAttributesApplied
 {

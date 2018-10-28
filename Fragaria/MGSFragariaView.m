@@ -127,11 +127,11 @@
 
 
 /*
- * @property attributedStringWithTemporaryAttributesApplied
+ * @property attributedStringWithSyntaxColouring
  */
-- (NSAttributedString *)attributedStringWithTemporaryAttributesApplied
+- (NSAttributedString *)attributedStringWithSyntaxColouring
 {
-    return self.textView.attributedStringWithTemporaryAttributesApplied;
+    return self.textView.attributedStringWithSyntaxColouring;
 }
 
 

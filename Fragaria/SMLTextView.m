@@ -274,9 +274,9 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 
 
 /*
- * - attributedStringWithTemporaryAttributesApplied
+ * - attributedStringWithSyntaxColouring
  */
-- (NSAttributedString *)attributedStringWithTemporaryAttributesApplied
+- (NSAttributedString *)attributedStringWithSyntaxColouring
 {
 	// recolour the entire textview content
 	NSRange wholeRange;

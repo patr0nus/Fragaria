@@ -646,7 +646,7 @@
 
 - (IBAction)copyWithHighlighting:(id)sender
 {
-    NSAttributedString *tmp = [self attributedStringWithTemporaryAttributesApplied];
+    NSAttributedString *tmp = [self attributedStringWithSyntaxColouring];
     NSAttributedString *sel = [tmp attributedSubstringFromRange:self.selectedRange];
     NSData *data = [sel RTFFromRange:NSMakeRange(0, sel.length) documentAttributes:@{}];
     

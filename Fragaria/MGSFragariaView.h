@@ -58,9 +58,9 @@ IB_DESIGNABLE
 /** The plain text string of the text editor.*/
 @property (nonatomic, assign, nonnull) NSString *string;
 
-/** The text editor string, including temporary attributes which
- *  have been applied by the syntax highlighter. */
-- (nonnull NSAttributedString *)attributedStringWithTemporaryAttributesApplied;
+/** The text editor string, including the style changes applied by
+ *  the syntax highlighter. */
+- (nonnull NSAttributedString *)attributedStringWithSyntaxColouring;
 
 /** The text storage associated with this instance of Fragaria.
  *  @warning Do not use textView.textStorage instead! */

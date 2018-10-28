@@ -43,9 +43,9 @@
 /// @name Accessing Text Content
 
 
-/** The text editor string, including temporary attributes which have been
-*  applied by the syntax colourer. */
-- (NSAttributedString *)attributedStringWithTemporaryAttributesApplied;
+/** The text editor string, including the style changes applied by
+ *  the syntax highlighter. */
+- (NSAttributedString *)attributedStringWithSyntaxColouring;
 
 
 #pragma mark - Getting Line and Column Information
