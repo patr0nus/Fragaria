@@ -6,6 +6,7 @@
 //
 //
 
+#define FRAGARIA_PRIVATE
 #import "MGSSyntaxErrorController.h"
 #import "SMLLayoutManager.h"
 #import "SMLSyntaxError.h"

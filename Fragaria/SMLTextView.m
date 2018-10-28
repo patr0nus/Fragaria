@@ -21,6 +21,7 @@
  specific language governing permissions and limitations under the License.
  */
 
+#define FRAGARIA_PRIVATE
 #import "SMLTextView.h"
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
@@ -91,7 +92,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 
 
 /* Properties implemented by superclass */
-@dynamic delegate, layoutManager;
+@dynamic delegate, layoutManager, textStorage;
 
 @synthesize lineWrap = _lineWrap;
 @synthesize showsPageGuide = _showsPageGuide;

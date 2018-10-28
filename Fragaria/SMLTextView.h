@@ -22,6 +22,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "FragariaMacros.h"
 #import "MGSFragariaTextViewDelegate.h"
 
 
@@ -247,6 +248,12 @@
 /** Indicates the current insertion point color. */
 @property (nonatomic, assign) NSColor *insertionPointColor;
 
+
+#pragma mark - Deprecated Methods
+
+
+/** An internal object used by Fragaria. Do not access. */
+@property (readonly, assign) NSTextStorage *textStorage FRAGARIA_PUB_UNAVAIL_MSG("do not use -textStorage on SMLTextView");
 
 
 @end

@@ -34,6 +34,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#define FRAGARIA_PRIVATE
 #import <tgmath.h>
 #import "MGSFragariaView.h"
 #import "MGSLineNumberView.h"

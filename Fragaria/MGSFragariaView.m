@@ -9,6 +9,7 @@
 //  Also provides property abstractions for Fragaria's settings and methods.
 //
 
+#define FRAGARIA_PRIVATE
 #import "NSObject+Fragaria.h"
 #import "MGSFragariaView.h"
 #import "MGSFragariaViewPrivate.h"
@@ -28,12 +29,16 @@
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
 
+#import "MGSAttributeOverlayTextStorage.h"
+
 
 #pragma mark - IMPLEMENTATION
 
 
-@implementation MGSFragariaView {
+@implementation MGSFragariaView
+{
     MGSMutableColourScheme *_colourScheme;
+    NSTextStorage *_backingTextStorage;
 }
 
 /* Synthesis required in order to implement protocol declarations. */
@@ -115,6 +120,12 @@
 }
 
 
+- (NSTextStorage *)textStorage
+{
+    return _backingTextStorage;
+}
+
+
 /*
  * @property attributedStringWithTemporaryAttributesApplied
  */
@@ -138,11 +149,12 @@
     [self.syntaxErrorController layoutManagerWillChangeTextStorage];
     [self.textView.syntaxColouring layoutManagerWillChangeTextStorage];
     
-    [self.textView.layoutManager replaceTextStorage:textStorage];
-    if ([textStorage length]) {
-        attr = [textStorage attributesAtIndex:0 effectiveRange:NULL];
-        [self.textView setTypingAttributes:attr];
-    }
+    attr = [self.textView typingAttributes];
+    
+    _backingTextStorage = textStorage;
+    MGSAttributeOverlayTextStorage *realTS = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:_backingTextStorage];
+    [realTS setAttributes:attr range:NSMakeRange(0, realTS.length)];
+    [self.textView.layoutManager replaceTextStorage:realTS];
     
     [self.gutterView layoutManagerDidChangeTextStorage];
     [self.syntaxErrorController layoutManagerDidChangeTextStorage];
@@ -908,9 +920,13 @@
 	[[self.scrollView contentView] setAutoresizesSubviews:YES];
 	[self.scrollView setPostsFrameChangedNotifications:YES];
 	self.hasVerticalScroller = YES;
+ 
+     _backingTextStorage = [[NSTextStorage alloc] init];
+    MGSAttributeOverlayTextStorage *realTextStorage = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:_backingTextStorage];
 	
 	// create textview
 	_textView = [[SMLTextView alloc] initWithFrame:NSMakeRect(0, 0, contentSize.width, contentSize.height)];
+    [self.textView.layoutManager replaceTextStorage:realTextStorage];
 	[self.scrollView setDocumentView:self.textView];
 	
 	// create line numbers

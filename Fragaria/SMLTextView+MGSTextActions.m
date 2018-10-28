@@ -6,6 +6,7 @@
 //
 //
 
+#define FRAGARIA_PRIVATE
 #import "SMLTextView.h"
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"

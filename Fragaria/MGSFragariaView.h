@@ -62,6 +62,10 @@ IB_DESIGNABLE
  *  have been applied by the syntax highlighter. */
 - (nonnull NSAttributedString *)attributedStringWithTemporaryAttributesApplied;
 
+/** The text storage associated with this instance of Fragaria.
+ *  @warning Do not use textView.textStorage instead! */
+- (nonnull NSTextStorage *)textStorage;
+
 
 #pragma mark - Getting Line and Column Information
 /// @name Getting Line and Column Information
@@ -127,12 +131,6 @@ IB_DESIGNABLE
  *       split view, for example. Replacing the text storage directly on the
  *       text view's layout manager is not supported, and will not work
  *       properly.
- *
- *       The two Fragaria instances will not share their syntax definition or
- *       syntax errors. Also, if the two instances use different coloring
- *       settings, the resulting colors will be undefined. The typing
- *       attributes for this instance of Fragaria's text view will be set to
- *       the attributes of the first character in this text storage.
  *
  *  @param textStorage The new text storage for this instance of Fragaria. */
 - (void)replaceTextStorage:(nonnull NSTextStorage *)textStorage;
