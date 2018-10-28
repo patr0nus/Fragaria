@@ -35,7 +35,6 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     editInProgress = NO;
     parentEditInProgress = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parentTextStorageDidProcessEdit:) name:NSTextStorageDidProcessEditingNotification object:ts];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parentTextStorageWillProcessEdit:) name:NSTextStorageWillProcessEditingNotification object:ts];
     
     return self;
 }
@@ -60,28 +59,6 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 }
 
 
-- (void)parentTextStorageWillProcessEdit:(NSNotification *)notif
-{
-    if (editInProgress)
-        return;
-    
-    parentEditInProgress = YES;
-    
-    NSNotification *mynotif = [NSNotification notificationWithName:NSTextStorageWillProcessEditingNotification object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:mynotif];
-    /* The textStorageWillProcessEditing: old-style delegate method is already handled by
-     * NSTextStorage by registering the delegate for the NSTextStorageWillProcessEditingNotification
-     * notification on assignment of the delegate property */
-    
-    if (self.delegate &&
-        [self.delegate respondsToSelector:@selector(textStorage:willProcessEditing:range:changeInLength:)]) {
-        [self.delegate textStorage:self willProcessEditing:self.editedMask range:self.editedRange changeInLength:self.changeInLength];
-    }
-    
-    parentEditInProgress = NO;
-}
-
-
 - (void)parentTextStorageDidProcessEdit:(NSNotification *)notif
 {
     if (editInProgress)
@@ -89,42 +66,11 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     
     parentEditInProgress = YES;
     
-    NSNotification *mynotif = [NSNotification notificationWithName:NSTextStorageDidProcessEditingNotification object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:mynotif];
-    /* The textStorageDidProcessEditing: old-style delegate method is already handled by
-     * NSTextStorage by registering the delegate for the NSTextStorageDidProcessEditingNotification
-     * notification on assignment of the delegate property */
-    
-    if (self.delegate &&
-        [self.delegate respondsToSelector:@selector(textStorage:didProcessEditing:range:changeInLength:)]) {
-        [self.delegate textStorage:self didProcessEditing:self.editedMask range:self.editedRange changeInLength:self.changeInLength];
-    }
+    NSRange range = self.parentTextStorage.editedRange;
+    range.length -= self.parentTextStorage.changeInLength;
+    [self edited:self.parentTextStorage.editedMask range:range changeInLength:self.parentTextStorage.changeInLength];
     
     parentEditInProgress = NO;
-}
-
-
-- (NSTextStorageEditActions)editedMask
-{
-    if (parentEditInProgress)
-        return self.parentTextStorage.editedMask;
-    return super.editedMask;
-}
-
-
-- (NSRange)editedRange
-{
-    if (parentEditInProgress)
-        return self.parentTextStorage.editedRange;
-    return super.editedRange;
-}
-
-
-- (NSInteger)changeInLength
-{
-    if (parentEditInProgress)
-        return self.parentTextStorage.changeInLength;
-    return super.changeInLength;
 }
 
 
@@ -133,16 +79,21 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     NSDictionary *attrib = [self.parentTextStorage attributesAtIndex:location effectiveRange:range];
     NSMutableDictionary *base = [NSMutableDictionary dictionary];
     NSMutableDictionary *ovl = [NSMutableDictionary dictionary];
+    NSMutableArray *remove = [NSMutableArray array];
     
     [attrib enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if (![key hasPrefix:MGSAttributeOverlayPrefixBase]) {
             [base setObject:obj forKey:key];
         } else if ([key hasPrefix:self.overlayAttributePrefix]) {
             NSString *realKey = [key substringFromIndex:self.overlayAttributePrefix.length];
-            [ovl setObject:obj forKey:realKey];
+            if (![obj isKindOfClass:[NSNull class]])
+                [ovl setObject:obj forKey:realKey];
+            else
+                [remove addObject:realKey];
         }
     }];
     
+    [base removeObjectsForKeys:remove];
     [base addEntriesFromDictionary:ovl];
     return base;
 }
@@ -169,7 +120,28 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
         [fixeddict setObject:obj forKey:newkey];
     }];
     
-    [self.parentTextStorage setAttributes:fixeddict range:range];
+    [self.parentTextStorage
+        enumerateAttributesInRange:range
+        options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired
+        usingBlock:^(NSDictionary<NSAttributedStringKey, id> * _Nonnull attrs, NSRange subrange, BOOL * _Nonnull stop)
+    {
+        NSMutableDictionary *newAttributes = [NSMutableDictionary dictionary];
+        for (NSString *key in attrs) {
+            if ([key hasPrefix:MGSAttributeOverlayPrefixBase]) {
+                if (![key hasPrefix:self.overlayAttributePrefix]) {
+                    [newAttributes setObject:attrs[key] forKey:key];
+                }
+            } else {
+                NSString *myid = [self.overlayAttributePrefix stringByAppendingString:key];
+                [newAttributes setObject:[NSNull null] forKey:myid];
+            }
+        }
+        [newAttributes addEntriesFromDictionary:fixeddict];
+        
+        NSRange realrange = NSIntersectionRange(range, subrange);
+        [self.parentTextStorage setAttributes:newAttributes range:realrange];
+    }];
+    
     [self edited:NSTextStorageEditedAttributes range:range changeInLength:0];
     
     editInProgress = NO;

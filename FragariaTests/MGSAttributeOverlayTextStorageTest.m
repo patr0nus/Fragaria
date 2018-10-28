@@ -204,26 +204,25 @@
     NSDictionary *attr2 = @{NSForegroundColorAttributeName: [NSColor redColor]};
     NSDictionary *attr0u2 = @{NSFontAttributeName: [NSFont userFontOfSize:12.0], NSForegroundColorAttributeName: [NSColor redColor]};
     
-    NSTextStorage *test = [[NSTextStorage alloc] initWithString:@"[no attributes][attr1][attr2]" attributes:attr0];
-    MGSAttributeOverlayTextStorage *aots = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:test];
-    MGSAttributeOverlayTextStorage *aots2 = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:test];
+    NSTextStorage *parent = [[NSTextStorage alloc] initWithString:@"0123456789" attributes:attr0];
+    MGSAttributeOverlayTextStorage *child1 = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:parent];
+    MGSAttributeOverlayTextStorage *child2 = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:parent];
     
-    [aots setAttributes:attr1 range:NSMakeRange(15, 7)];
-    XCTAssertFalse([[test attributeKeys] containsObject:NSFontAttributeName]);
-    [self checkAttributes:attr0 inRange:NSMakeRange(0, 15) inTextStorage:aots];
-    [self checkAttributes:attr1 inRange:NSMakeRange(15, 7) inTextStorage:aots];
-    [self checkAttributes:attr0 inRange:NSMakeRange(22, 7) inTextStorage:aots];
-    [self checkAttributes:attr0 inRange:NSMakeRange(0, 29) inTextStorage:aots2];
+    [child1 setAttributes:attr1 range:NSMakeRange(3, 4)];
+    XCTAssertFalse([[parent attributeKeys] containsObject:NSFontAttributeName]);
+    [self checkAttributes:attr0 inRange:NSMakeRange(0, 3) inTextStorage:child1];
+    [self checkAttributes:attr1 inRange:NSMakeRange(3, 4) inTextStorage:child1];
+    [self checkAttributes:attr0 inRange:NSMakeRange(7, 3) inTextStorage:child1];
+    [self checkAttributes:attr0 inRange:NSMakeRange(0, 10) inTextStorage:child2];
     
-    NSAttributedString *tmp = [[NSAttributedString alloc] initWithString:@"[ATTR2]" attributes:attr2];
-    [aots2 replaceCharactersInRange:NSMakeRange(22, 7) withAttributedString:tmp];
-    XCTAssertFalse([[test attributeKeys] containsObject:NSFontAttributeName]);
-    XCTAssertFalse([[test attributeKeys] containsObject:NSForegroundColorAttributeName]);
-    [self checkAttributes:attr0 inRange:NSMakeRange(0, 15) inTextStorage:aots];
-    [self checkAttributes:attr1 inRange:NSMakeRange(15, 7) inTextStorage:aots];
-    [self checkAttributes:attr0 inRange:NSMakeRange(22, 7) inTextStorage:aots];
-    [self checkAttributes:attr0 inRange:NSMakeRange(0, 22) inTextStorage:aots2];
-    [self checkAttributes:attr0u2 inRange:NSMakeRange(22, 7) inTextStorage:aots2];
+    [child2 setAttributes:attr2 range:NSMakeRange(5, 5)];
+    XCTAssertFalse([[parent attributeKeys] containsObject:NSFontAttributeName]);
+    XCTAssertFalse([[parent attributeKeys] containsObject:NSForegroundColorAttributeName]);
+    [self checkAttributes:attr0 inRange:NSMakeRange(0, 3) inTextStorage:child1];
+    [self checkAttributes:attr1 inRange:NSMakeRange(3, 4) inTextStorage:child1];
+    [self checkAttributes:attr0 inRange:NSMakeRange(7, 3) inTextStorage:child1];
+    [self checkAttributes:attr0 inRange:NSMakeRange(0, 5) inTextStorage:child2];
+    [self checkAttributes:attr0u2 inRange:NSMakeRange(5, 5) inTextStorage:child2];
 }
 
 
