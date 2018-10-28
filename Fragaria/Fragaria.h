@@ -7,6 +7,8 @@
  *
  */
 
+#import "FragariaMacros.h"
+
 #import "MGSBreakpointDelegate.h"           
 #import "MGSDragOperationDelegate.h"        
 #import "MGSFragariaTextViewDelegate.h"     
