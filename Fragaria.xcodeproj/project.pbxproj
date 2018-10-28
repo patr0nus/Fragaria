@@ -119,6 +119,9 @@
 		014E5847217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
 		014E5848217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		014E7DAA1C1C8D430093ACA6 /* NSTextStorage+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 014E7DA81C1C8D430093ACA6 /* NSTextStorage+Fragaria.m */; };
+		0150B3812186051600CBA228 /* MGSAttributeOverlayTextStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150B37F2186051600CBA228 /* MGSAttributeOverlayTextStorage.h */; };
+		0150B3822186051600CBA228 /* MGSAttributeOverlayTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */; };
+		0150B38421861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
 		018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */; };
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
@@ -630,6 +633,9 @@
 		014865681B19036900BE1DC4 /* NSObject+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Fragaria.m"; sourceTree = "<group>"; };
 		014E7DA71C1C8D430093ACA6 /* NSTextStorage+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextStorage+Fragaria.h"; sourceTree = "<group>"; };
 		014E7DA81C1C8D430093ACA6 /* NSTextStorage+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextStorage+Fragaria.m"; sourceTree = "<group>"; };
+		0150B37F2186051600CBA228 /* MGSAttributeOverlayTextStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSAttributeOverlayTextStorage.h; sourceTree = "<group>"; };
+		0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSAttributeOverlayTextStorage.m; sourceTree = "<group>"; };
+		0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSAttributeOverlayTextStorageTest.m; sourceTree = "<group>"; };
 		0166D9971A9FC3B20099AB81 /* SMLTextViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMLTextViewPrivate.h; sourceTree = "<group>"; };
 		01684A851B15FBD9008A900D /* MGSFontWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSFontWell.h; sourceTree = "<group>"; };
 		01684A861B15FBD9008A900D /* MGSFontWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSFontWell.m; sourceTree = "<group>"; };
@@ -1260,6 +1266,8 @@
 				01FBC7EA1B0679520008EAF8 /* MGSMutableSubstring.m */,
 				01F3368E1C8C962100B5F395 /* NSSet+Fragaria.h */,
 				01F3368F1C8C962100B5F395 /* NSSet+Fragaria.m */,
+				0150B37F2186051600CBA228 /* MGSAttributeOverlayTextStorage.h */,
+				0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */,
 			);
 			name = Miscellaneous;
 			sourceTree = "<group>";
@@ -1369,6 +1377,7 @@
 				D01F51701AAF1D35006A3A90 /* MGSFragariaViewTests.m */,
 				D0E521071A90E307005CB80B /* MGSSyntaxErrorControllerTests.m */,
 				D0AB50EF1A91CDC200A6DF58 /* SMLSyntaxErrorTests.m */,
+				0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */,
 				D0E5210F1A90E34F005CB80B /* Supporting Files */,
 			);
 			path = FragariaTests;
@@ -1409,6 +1418,7 @@
 				01F336901C8C962100B5F395 /* NSSet+Fragaria.h in Headers */,
 				019F56D51A9D3511009F9DCD /* SMLTextView+MGSDragging.h in Headers */,
 				019B80191A9E77330007D234 /* MGSFragariaTextViewDelegate.h in Headers */,
+				0150B3812186051600CBA228 /* MGSAttributeOverlayTextStorage.h in Headers */,
 				AB69B754118B830700903D1D /* Fragaria.h in Headers */,
 				E3CF4B7916E6927300C27B5C /* MGSBreakpointDelegate.h in Headers */,
 				0191FA7D1A881F6E0099B50D /* MGSDragOperationDelegate.h in Headers */,
@@ -1862,6 +1872,7 @@
 				01F336911C8C962100B5F395 /* NSSet+Fragaria.m in Sources */,
 				D06653D31AC00D3D00ACE8B0 /* MGSColourToPlainTextTransformer.m in Sources */,
 				AB69B6DA118B7F2A00903D1D /* SMLLayoutManager.m in Sources */,
+				0150B3822186051600CBA228 /* MGSAttributeOverlayTextStorage.m in Sources */,
 				AB3971CB118C1F8A00AEF388 /* MGSSyntaxController.m in Sources */,
 				D0C145C71A85F2C900DDE90A /* SMLTextView+MGSDragging.m in Sources */,
 				01B50A801B07AD8C00C9A856 /* NSString+Fragaria.m in Sources */,
@@ -1918,6 +1929,7 @@
 			files = (
 				018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */,
 				D0AB50F01A91CDC200A6DF58 /* SMLSyntaxErrorTests.m in Sources */,
+				0150B38421861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m in Sources */,
 				01FBC3831C1EADDF00837F04 /* MGSStringColumnTests.m in Sources */,
 				D0E5211A1A90E399005CB80B /* MGSSyntaxErrorControllerTests.m in Sources */,
 				D0718BAE1AB721280073493A /* MGSColourSchemeTests.m in Sources */,
