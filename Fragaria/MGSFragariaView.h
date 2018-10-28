@@ -36,6 +36,7 @@
  *  order to use MGSFragariaView.
  */
 
+IB_DESIGNABLE
 @interface MGSFragariaView : NSView
 
 
@@ -203,11 +204,11 @@
 @property (nonatomic, assign) NSUInteger startingLineNumber;
 
 /** Specifies the standard font for the line numbers in the gutter.*/
-@property (nonatomic, assign, nonnull) NSFont *gutterFont;
+@property (nonatomic, assign, nonnull) IBInspectable NSFont *gutterFont;
 /** Specifies the standard color of the line numbers in the gutter.*/
-@property (nonatomic, assign, nonnull) NSColor *gutterTextColour;
+@property (nonatomic, assign, nonnull) IBInspectable NSColor *gutterTextColour;
 /** Specifies the background colour of the gutter view */
-@property (nonatomic, assign, nonnull) NSColor *gutterBackgroundColour;
+@property (nonatomic, assign, nonnull) IBInspectable NSColor *gutterBackgroundColour;
 
 
 #pragma mark - Showing Syntax Errors
@@ -302,7 +303,7 @@
 
 
 /** Indicates whether or not invisible characters in the editor are revealed.*/
-@property (nonatomic, assign) BOOL showsInvisibleCharacters;
+@property (nonatomic, assign) IBInspectable BOOL showsInvisibleCharacters;
 
 /**
  *  Clears the current substitutes for invisible characters
@@ -324,7 +325,7 @@
 
 
 /** Specifies the text editor font.*/
-@property (nonatomic, nonnull) NSFont *textFont;
+@property (nonatomic, nonnull) IBInspectable NSFont *textFont;
 /** The real line height as a multiple of the natural line height for the
  *  current font. */
 @property (nonatomic) CGFloat lineHeightMultiple;
