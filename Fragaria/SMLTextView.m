@@ -88,6 +88,8 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     NSTimer *autocompleteWordsTimer;
     NSArray *cachedKeywords;
     id __weak syntaxDefOfCachedKeywords;
+    
+    BOOL insertionPointMovementIsPending;
 }
 
 
@@ -505,6 +507,15 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
         }
     }
     
+    if (insertionPointMovementIsPending) {
+        /* -recolourRange: changes the text storage, which triggers an update to the
+         * layout which resets the insertion point to the wrong state after an insertion.
+         * To work around this, we track if a cursor movement has happened since the last
+         * redraw, and if it did, we reset the cursor again to the right state. */
+        [self updateInsertionPointStateAndRestartTimer:YES];
+        insertionPointMovementIsPending = NO;
+    }
+    
     [super drawRect:rect];
     
     if (self.showsPageGuide == YES) {
@@ -645,6 +656,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [super setSelectedRanges:selectedRanges];
     currentLineRect = [self lineHighlightingRect];
     [self setNeedsDisplayInRect:currentLineRect];
+    insertionPointMovementIsPending = YES;
 }
 
 
@@ -657,6 +669,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [super setSelectedRange:selectedRange];
     currentLineRect = [self lineHighlightingRect];
     [self setNeedsDisplayInRect:currentLineRect];
+    insertionPointMovementIsPending = YES;
 }
 
 
@@ -669,6 +682,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [super setSelectedRange:charRange affinity:affinity stillSelecting:stillSelectingFlag];
     currentLineRect = [self lineHighlightingRect];
     [self setNeedsDisplayInRect:currentLineRect];
+    insertionPointMovementIsPending = YES;
 }
 
 
@@ -681,6 +695,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [super setSelectedRanges:ranges affinity:affinity stillSelecting:stillSelectingFlag];
     currentLineRect = [self lineHighlightingRect];
     [self setNeedsDisplayInRect:currentLineRect];
+    insertionPointMovementIsPending = YES;
 }
 
 
