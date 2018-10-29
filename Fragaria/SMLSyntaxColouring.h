@@ -48,7 +48,7 @@ Copyright 2004-2009 Peter Borg
  * as the fragaria document parameter. */
 @property (weak) MGSFragariaView *fragaria;
 
-/** The layout manager to be used for setting temporary attributes. */
+/** The layout manager of the text view */
 @property (readonly, weak) NSLayoutManager *layoutManager;
 
 /** Specifies the current syntax definition name.*/

@@ -284,8 +284,8 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 	wholeRange = NSMakeRange(0, self.string.length);
 	[self.syntaxColouring recolourRange:wholeRange];
 	
-	// get content with layout manager temporary attributes persisted
-	return [self.layoutManager attributedStringWithTemporaryAttributesApplied];
+	// clone our private text storage which has the attributes set
+	return [[NSAttributedString alloc] initWithAttributedString:self.textStorage];
 }
 
 

@@ -116,6 +116,10 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 - (void)textStorageDidProcessEditing:(NSNotification*)notification
 {
     NSTextStorage *ts = [notification object];
+    
+    if (!(ts.editedMask & NSTextStorageEditedCharacters))
+        return;
+    
     NSRange newRange = [ts editedRange];
     NSRange oldRange = newRange;
     NSInteger changeInLength = [ts changeInLength];
@@ -204,6 +208,12 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 }
 
 
+- (NSTextStorage *)textStorage
+{
+    return layoutManager.textStorage;
+}
+
+
 #pragma mark - Colouring
 
 
@@ -260,8 +270,8 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     string = self.layoutManager.textStorage.string;
 	NSRange wholeRange = NSMakeRange(0, [string length]);
     
-	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:wholeRange];
-    [layoutManager removeTemporaryAttribute:SMLSyntaxGroup forCharacterRange:wholeRange];
+	[self.textStorage removeAttribute:NSForegroundColorAttributeName range:wholeRange];
+    [self.textStorage removeAttribute:SMLSyntaxGroup range:wholeRange];
     [self.inspectedCharacterIndexes removeAllIndexes];
 }
 
@@ -288,6 +298,8 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     NSMutableIndexSet *invalidRanges;
     
 	if (!self.isSyntaxColouringRequired) return;
+ 
+    [self.textStorage beginEditing];
 
     invalidRanges = [NSMutableIndexSet indexSetWithIndexesInRange:range];
     [invalidRanges removeIndexes:self.inspectedCharacterIndexes];
@@ -297,6 +309,8 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
             [self.inspectedCharacterIndexes addIndexesInRange:nowValid];
         }
     }];
+    
+    [self.textStorage endEditing];
 }
 
 
@@ -305,6 +319,7 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
  */
 - (NSRange)recolourChangedRange:(NSRange)rangeToRecolour
 {
+    NSLog(@"recolouring %@", NSStringFromRange(rangeToRecolour));
     // setup
     NSString *documentString = self.layoutManager.textStorage.string;
 	NSRange effectiveRange = [documentString lineRangeForRange:rangeToRecolour];
@@ -348,10 +363,10 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     NSRange longRange;
     NSRange wholeRange = NSMakeRange(0, [documentString length]);
     
-    if ([layoutManager temporaryAttribute:SMLSyntaxGroup atCharacterIndex:effectiveRange.location longestEffectiveRange:&longRange inRange:wholeRange]) {
+    if ([self.textStorage attribute:SMLSyntaxGroup atIndex:effectiveRange.location longestEffectiveRange:&longRange inRange:wholeRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
-    if ([layoutManager temporaryAttribute:SMLSyntaxGroup atCharacterIndex:NSMaxRange(effectiveRange) longestEffectiveRange:&longRange inRange:wholeRange]) {
+    if (NSMaxRange(effectiveRange) < self.textStorage.length && [self.textStorage attribute:SMLSyntaxGroup atIndex:NSMaxRange(effectiveRange) longestEffectiveRange:&longRange inRange:wholeRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
     
@@ -371,8 +386,8 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 	[documentScanner setCharactersToBeSkipped:nil];
 	
     // uncolour the range
-	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:effectiveRange];
-    [layoutManager removeTemporaryAttribute:SMLSyntaxGroup forCharacterRange:effectiveRange];
+	[self.textStorage removeAttribute:NSForegroundColorAttributeName range:effectiveRange];
+    [self.textStorage removeAttribute:SMLSyntaxGroup range:effectiveRange];
 	
     // colouring delegate
     NSDictionary *delegateInfo =  nil;
@@ -1164,17 +1179,17 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
                          SMLSyntaxGroupInstruction, nil];
     
     while (NSLocationInRange(i, range)) {
-        attr = [layoutManager temporaryAttribute:SMLSyntaxGroup atCharacterIndex:i
+        attr = [self.textStorage attribute:SMLSyntaxGroup atIndex:i
           longestEffectiveRange:&effectiveRange inRange:bounds];
         if (![overlapSet containsObject:attr]) {
-            [layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName
-              forCharacterRange:effectiveRange];
-            [layoutManager removeTemporaryAttribute:SMLSyntaxGroup
-              forCharacterRange:effectiveRange];
+            [self.textStorage removeAttribute:NSForegroundColorAttributeName
+              range:effectiveRange];
+            [self.textStorage removeAttribute:SMLSyntaxGroup
+              range:effectiveRange];
         }
         i = NSMaxRange(effectiveRange);
     }
-	[layoutManager addTemporaryAttributes:colourDictionary forCharacterRange:range];
+	[self.textStorage addAttributes:colourDictionary range:range];
 }
 
 
@@ -1183,7 +1198,7 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
  */
 - (NSString*)syntaxColouringGroupOfCharacterAtIndex:(NSUInteger)index
 {
-    return [layoutManager temporaryAttribute:SMLSyntaxGroup atCharacterIndex:index effectiveRange:NULL];
+    return [self.textStorage attribute:SMLSyntaxGroup atIndex:index effectiveRange:NULL];
 }
 
 
