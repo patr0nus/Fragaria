@@ -8,6 +8,7 @@
 
 #import "NSTextStorage+Fragaria.h"
 #import "NSString+Fragaria.h"
+#import "MGSAttributeOverlayTextStorage.h"
 #import <objc/runtime.h>
 
 
@@ -187,8 +188,8 @@ const static void *MGSLineNumberData = &MGSLineNumberData;
 
 /* Getting the line count by querying the line number cache means that we
  * have to rebuild it until the end if it is outdated, and this is expensive.
- *   So we keep track of the last edit, and we just update a line number cache
- * by examining the range which was changed to determine how many lines were
+ *   So we have a cache for just the line count, we keep track of the last edit,
+ * and by examining the range which was changed we determine how many lines were
  * added or deleted without iterating over the whole string.
  *   If more than one edit was made since the last call to mgs_lineCount, or if
  * we encounter an edit we can't get reliable information about, we give up and
@@ -197,6 +198,9 @@ const static void *MGSLineNumberData = &MGSLineNumberData;
  * because we can't just assume people are nice... */
 - (NSUInteger)mgs_lineCount
 {
+    if ([self isKindOfClass:[MGSAttributeOverlayTextStorage class]])
+        return [[(MGSAttributeOverlayTextStorage*)self parentTextStorage] mgs_lineCount];
+    
     MGSTextStorageLineNumberData *lnd = [self mgs_lineNumberData];
     NSRange er = lnd->lastEditedRange;
     NSInteger lc = lnd->lastChangeInLength;
@@ -279,6 +283,9 @@ fallback:
 
 - (NSUInteger)mgs_rowOfCharacter:(NSUInteger)c
 {
+    if ([self isKindOfClass:[MGSAttributeOverlayTextStorage class]])
+        return [[(MGSAttributeOverlayTextStorage*)self parentTextStorage] mgs_rowOfCharacter:c];
+    
     NSUInteger len = self.length;
     
     if (c > len)
@@ -291,6 +298,9 @@ fallback:
 
 - (NSUInteger)mgs_firstCharacterInRow:(NSUInteger)l
 {
+    if ([self isKindOfClass:[MGSAttributeOverlayTextStorage class]])
+        return [[(MGSAttributeOverlayTextStorage*)self parentTextStorage] mgs_firstCharacterInRow:l];
+    
     MGSTextStorageLineNumberData *lnd = [self mgs_lineNumberData];
     NSMutableArray *fcla;
     NSUInteger c, maxl;
@@ -311,6 +321,9 @@ fallback:
 
 - (NSUInteger)mgs_characterAtIndex:(NSUInteger)i withinRow:(NSUInteger)l
 {
+    if ([self isKindOfClass:[MGSAttributeOverlayTextStorage class]])
+        return [[(MGSAttributeOverlayTextStorage*)self parentTextStorage] mgs_characterAtIndex:i withinRow:l];
+    
     NSUInteger c, e;
     
     c = [self mgs_firstCharacterInRow:l];
