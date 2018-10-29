@@ -109,9 +109,9 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 
 - (void)endEditing
 {
-    editingBlockLevel = MAX(0, editingBlockLevel - 1);
     [self.parentTextStorage endEditing];
     [super endEditing];
+    editingBlockLevel = MAX(0, editingBlockLevel - 1);
 }
 
 
