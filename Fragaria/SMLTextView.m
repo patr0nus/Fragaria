@@ -533,23 +533,24 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 - (void)prefetchLayoutUnderRect:(NSRect)rect
 {
     /* Workaround for crappy scrolling on 10.12+ */
-    NSUInteger topchar = [self.layoutManager
+    NSInteger topchar = [self.layoutManager
         characterIndexForPoint:rect.origin
         inTextContainer:self.textContainer
         fractionOfDistanceBetweenInsertionPoints:NULL];
     
     NSPoint bottom = rect.origin;
     bottom.y += rect.size.height;
-    NSUInteger btmchar = [self.layoutManager
+    NSInteger btmchar = [self.layoutManager
         characterIndexForPoint:bottom
         inTextContainer:self.textContainer
         fractionOfDistanceBetweenInsertionPoints:NULL];
     
-    NSInteger size = MIN(
-        MAX((NSUInteger)100, (btmchar - topchar) * 4),
-        self.string.length - btmchar);
-    if (size > 0) {
-        [self.layoutManager ensureLayoutForCharacterRange:NSMakeRange(btmchar, size)];
+    NSInteger prefetchAmount = MAX((NSInteger)100, (btmchar - topchar) * 4);
+    
+    NSInteger top = MAX(0, topchar - prefetchAmount);
+    NSInteger btm = MIN(btmchar + prefetchAmount, (NSInteger)self.string.length);
+    if (top < btm) {
+        [self.layoutManager ensureLayoutForCharacterRange:NSMakeRange(top, btm - top)];
     }
 }
 
