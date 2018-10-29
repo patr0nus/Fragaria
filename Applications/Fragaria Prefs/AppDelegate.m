@@ -81,7 +81,7 @@
     self.viewTop.syntaxDefinitionName = @"HTML";
 
     /* Make the lower view interesting. */
-    [self.viewBottom replaceTextStorage:self.viewTop.textView.textStorage];
+    [self.viewBottom replaceTextStorage:self.viewTop.textStorage];
     self.viewBottom.syntaxDefinitionName = @"HTML";
 	
 	/* Use an external breakpoint delegate for the bottom view. */

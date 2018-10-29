@@ -70,7 +70,7 @@
 	self.viewTop.showsLineNumbers = YES;
 
     /* Make the lower view interesting. */
-    [self.viewBottom replaceTextStorage:self.viewTop.textView.textStorage];
+    [self.viewBottom replaceTextStorage:self.viewTop.textStorage];
 	self.viewBottom.showsLineNumbers = YES;
 
 
