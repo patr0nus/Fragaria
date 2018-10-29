@@ -920,13 +920,10 @@
 	[[self.scrollView contentView] setAutoresizesSubviews:YES];
 	[self.scrollView setPostsFrameChangedNotifications:YES];
 	self.hasVerticalScroller = YES;
- 
-     _backingTextStorage = [[NSTextStorage alloc] init];
-    MGSAttributeOverlayTextStorage *realTextStorage = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:_backingTextStorage];
 	
 	// create textview
 	_textView = [[SMLTextView alloc] initWithFrame:NSMakeRect(0, 0, contentSize.width, contentSize.height)];
-    [self replaceTextStorage:realTextStorage];
+    [self replaceTextStorage:[[NSTextStorage alloc] init]];
 	[self.scrollView setDocumentView:self.textView];
 	
 	// create line numbers
