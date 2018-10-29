@@ -20,7 +20,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 
 @implementation MGSAttributeOverlayTextStorage
 {
-    BOOL editInProgress;
+    NSInteger editingBlockLevel;
     BOOL parentEditInProgress;
 }
 
@@ -32,7 +32,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     _parentTextStorage = ts;
     _overlayAttributePrefix = [NSString stringWithFormat:@"%@%p_", MGSAttributeOverlayPrefixBase, self];
     
-    editInProgress = NO;
+    editingBlockLevel = 0;
     parentEditInProgress = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parentTextStorageDidProcessEdit:) name:NSTextStorageDidProcessEditingNotification object:ts];
     
@@ -61,7 +61,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 
 - (void)parentTextStorageDidProcessEdit:(NSNotification *)notif
 {
-    if (editInProgress)
+    if (editingBlockLevel > 0)
         return;
     
     parentEditInProgress = YES;
@@ -99,20 +99,34 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 }
 
 
+- (void)beginEditing
+{
+    editingBlockLevel++;
+    [self.parentTextStorage beginEditing];
+    [super beginEditing];
+}
+
+
+- (void)endEditing
+{
+    editingBlockLevel = MAX(0, editingBlockLevel - 1);
+    [self.parentTextStorage endEditing];
+    [super endEditing];
+}
+
+
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str
 {
-    editInProgress = YES;
-    
+    [self beginEditing];
     [self.parentTextStorage replaceCharactersInRange:range withString:str];
     [self edited:NSTextStorageEditedCharacters range:range changeInLength:str.length-range.length];
-    
-    editInProgress = NO;
+    [self endEditing];
 }
 
 
 - (void)setAttributes:(NSDictionary *)attrs range:(NSRange)range
 {
-    editInProgress = YES;
+    [self beginEditing];
     
     NSMutableDictionary *fixeddict = [NSMutableDictionary dictionary];
     [attrs enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -143,8 +157,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     }];
     
     [self edited:NSTextStorageEditedAttributes range:range changeInLength:0];
-    
-    editInProgress = NO;
+    [self endEditing];
 }
 
 
