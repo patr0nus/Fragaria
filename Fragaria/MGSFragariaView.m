@@ -926,7 +926,7 @@
 	
 	// create textview
 	_textView = [[SMLTextView alloc] initWithFrame:NSMakeRect(0, 0, contentSize.width, contentSize.height)];
-    [self.textView.layoutManager replaceTextStorage:realTextStorage];
+    [self replaceTextStorage:realTextStorage];
 	[self.scrollView setDocumentView:self.textView];
 	
 	// create line numbers
