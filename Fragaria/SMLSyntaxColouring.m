@@ -270,8 +270,7 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     string = self.layoutManager.textStorage.string;
 	NSRange wholeRange = NSMakeRange(0, [string length]);
     
-	[self.textStorage removeAttribute:NSForegroundColorAttributeName range:wholeRange];
-    [self.textStorage removeAttribute:SMLSyntaxGroup range:wholeRange];
+	[self resetColourInRange:wholeRange];
     [self.inspectedCharacterIndexes removeAllIndexes];
 }
 
@@ -319,7 +318,6 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
  */
 - (NSRange)recolourChangedRange:(NSRange)rangeToRecolour
 {
-    NSLog(@"recolouring %@", NSStringFromRange(rangeToRecolour));
     // setup
     NSString *documentString = self.layoutManager.textStorage.string;
 	NSRange effectiveRange = [documentString lineRangeForRange:rangeToRecolour];
@@ -386,8 +384,7 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 	[documentScanner setCharactersToBeSkipped:nil];
 	
     // uncolour the range
-	[self.textStorage removeAttribute:NSForegroundColorAttributeName range:effectiveRange];
-    [self.textStorage removeAttribute:SMLSyntaxGroup range:effectiveRange];
+	[self resetColourInRange:effectiveRange];
 	
     // colouring delegate
     NSDictionary *delegateInfo =  nil;
@@ -1166,6 +1163,13 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 #pragma mark - Coloring primitives
 
 
+- (void)resetColourInRange:(NSRange)range
+{
+    [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.colourScheme.textColor range:range];
+    [self.textStorage removeAttribute:SMLSyntaxGroup range:range];
+}
+
+
 /*
  * - setColour:range:
  */
@@ -1182,10 +1186,7 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
         attr = [self.textStorage attribute:SMLSyntaxGroup atIndex:i
           longestEffectiveRange:&effectiveRange inRange:bounds];
         if (![overlapSet containsObject:attr]) {
-            [self.textStorage removeAttribute:NSForegroundColorAttributeName
-              range:effectiveRange];
-            [self.textStorage removeAttribute:SMLSyntaxGroup
-              range:effectiveRange];
+            [self resetColourInRange:effectiveRange];
         }
         i = NSMaxRange(effectiveRange);
     }
