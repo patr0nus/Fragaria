@@ -13,7 +13,6 @@
 @class SMLTextView;
 @class MGSColourScheme;
 
-@protocol SMLSyntaxColouringDelegate;
 @protocol SMLAutoCompleteDelegate;
 @protocol MGSBreakpointDelegate;
 @protocol MGSFragariaTextViewDelegate;
@@ -145,10 +144,6 @@ IB_DESIGNABLE
 
 /** Specifies the current syntax definition name.*/
 @property (nonatomic, assign, nonnull) NSString *syntaxDefinitionName;
-/** The syntax colouring delegate for this instance of Fragaria. The syntax
- * colouring delegate gets notified of the start and end of each colouring pass
- * so that it can modify the default syntax colouring provided by Fragaria. */
-@property (nonatomic, weak, nullable) IBOutlet id<SMLSyntaxColouringDelegate> syntaxColouringDelegate;
 
 /** Indicates if multiline strings should be coloured.*/
 @property BOOL coloursMultiLineStrings;

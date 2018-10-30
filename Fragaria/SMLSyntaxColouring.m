@@ -25,7 +25,6 @@
 #import "SMLLayoutManager.h"
 #import "MGSSyntaxController.h"
 #import "SMLTextView.h"
-#import "SMLSyntaxColouringDelegate.h"
 #import "NSScanner+Fragaria.h"
 #import "MGSColourScheme.h"
 
@@ -50,6 +49,24 @@ NSString *SMLSyntaxGroupAttribute = @"attribute";
 NSString *SMLSyntaxGroupSingleLineComment = @"singleLineComment";
 NSString *SMLSyntaxGroupMultiLineComment = @"multiLineComment";
 NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
+
+// syntax colouring group IDs
+enum {
+    kSMLSyntaxGroupNumber = 0,
+    kSMLSyntaxGroupCommand = 1,
+    kSMLSyntaxGroupInstruction = 2,
+    kSMLSyntaxGroupKeyword = 3,
+    kSMLSyntaxGroupAutoComplete = 4,
+    kSMLSyntaxGroupVariable = 5,
+    kSMLSyntaxGroupSecondString = 6,
+    kSMLSyntaxGroupFirstString = 7,
+    kSMLSyntaxGroupAttribute = 8,
+    kSMLSyntaxGroupSingleLineComment = 9,
+    kSMLSyntaxGroupMultiLineComment = 10,
+    kSMLSyntaxGroupSecondStringPass2 = 11,
+    kSMLCountOfSyntaxGroups = 12
+};
+typedef NSInteger SMLSyntaxGroupInteger;
 
 
 @interface SMLSyntaxColouring()
@@ -386,9 +403,6 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     // uncolour the range
 	[self resetColourInRange:effectiveRange];
 	
-    // colouring delegate
-    NSDictionary *delegateInfo =  nil;
-	
     // define a block that the colour delegate can use to affect colouring
     BOOL (^colourRangeBlock)(NSDictionary *, NSRange) = ^(NSDictionary *colourInfo, NSRange range) {
         [self setColour:colourInfo range:range];
@@ -398,44 +412,11 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
     };
     
     @try {
-		
-        BOOL doColouring = YES;
-        
-        //
-        // query delegate about colouring the document
-        //
-        if ([self.syntaxColouringDelegate respondsToSelector:@selector(fragariaDocument:shouldColourWithBlock:string:range:info:)]) {
-            
-            // build minimal delegate info dictionary
-            delegateInfo = @{SMLSyntaxInfo : self.syntaxDefinition.syntaxDictionary, SMLSyntaxWillColour : @(self.isSyntaxColouringRequired)};
-            
-            // query delegate about colouring
-            doColouring = [self.syntaxColouringDelegate fragariaDocument:self.fragaria shouldColourWithBlock:colourRangeBlock string:documentString range:rangeToRecolour info:delegateInfo ];
-            
+        for (NSInteger i = 0; i < kSMLCountOfSyntaxGroups; i++) {
+            /* Colour all syntax groups */
+            [self colourGroupWithIdentifier:i inRange:effectiveRange withRangeScanner:rangeScanner documentScanner:documentScanner colouringBlock:colourRangeBlock];
         }
-        
-        if (doColouring) {
-            
-            for (NSInteger i = 0; i < kSMLCountOfSyntaxGroups; i++) {
-                /* Colour all syntax groups */
-                [self colourGroupWithIdentifier:i inRange:effectiveRange withRangeScanner:rangeScanner documentScanner:documentScanner queryingDelegate:self.syntaxColouringDelegate colouringBlock:colourRangeBlock];
-            }
-
-            //
-            // tell delegate we are did colour the document
-            //
-            if ([self.syntaxColouringDelegate respondsToSelector:@selector(fragariaDocument:didColourWithBlock:string:range:info:)]) {
-                
-                // build minimal delegate info dictionary
-                delegateInfo = @{@"syntaxInfo" : self.syntaxDefinition.syntaxDictionary};
-                
-                [self.syntaxColouringDelegate fragariaDocument:self.fragaria didColourWithBlock:colourRangeBlock string:documentString range:rangeToRecolour info:delegateInfo ];
-            }
-
-        }
-
-    }
-	@catch (NSException *exception) {
+    } @catch (NSException *exception) {
 		NSLog(@"Syntax colouring exception: %@", exception);
 	}
 
@@ -446,12 +427,10 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
 #pragma mark - Coloring passes
 
 
-- (void)colourGroupWithIdentifier:(NSInteger)group inRange:(NSRange)effectiveRange withRangeScanner:(NSScanner*)rangeScanner documentScanner:(NSScanner*)documentScanner queryingDelegate:(id)colouringDelegate colouringBlock:(BOOL(^)(NSDictionary *, NSRange))colourRangeBlock
+- (void)colourGroupWithIdentifier:(NSInteger)group inRange:(NSRange)effectiveRange withRangeScanner:(NSScanner*)rangeScanner documentScanner:(NSScanner*)documentScanner colouringBlock:(BOOL(^)(NSDictionary *, NSRange))colourRangeBlock
 {
     NSString *groupName;
     BOOL doColouring = YES;
-    NSDictionary *delegateInfo;
-    NSString *documentString = [documentScanner string];
     NSDictionary *attributes;
     
     switch (group) {
@@ -519,14 +498,6 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
             [NSException raise:@"Bug" format:@"Unrecognized syntax group identifier %ld", (long)group];
     }
     
-    if ([colouringDelegate respondsToSelector:@selector(fragariaDocument:shouldColourGroupWithBlock:string:range:info:)]) {
-        // build delegate info dictionary
-        delegateInfo = @{SMLSyntaxGroup : groupName, SMLSyntaxGroupID : @(group), SMLSyntaxWillColour : @(doColouring), SMLSyntaxAttributes : attributes, SMLSyntaxInfo : self.syntaxDefinition.syntaxDictionary};
-        
-        // call the delegate
-        doColouring = [colouringDelegate fragariaDocument:self.fragaria shouldColourGroupWithBlock:colourRangeBlock string:documentString range:effectiveRange info:delegateInfo];
-    }
-    
     if (!doColouring) return;
         
     // reset scanner
@@ -569,11 +540,6 @@ NSString *SMLSyntaxGroupSecondStringPass2 = @"secondStringPass2";
             break;
         case kSMLSyntaxGroupSecondStringPass2:
             [self colourSecondStrings2InRange:effectiveRange withRangeScanner:rangeScanner documentScanner:documentScanner];
-    }
-    
-    // inform delegate that colouring is done
-    if ([colouringDelegate respondsToSelector:@selector(fragariaDocument:didColourGroupWithBlock:string:range:info:)]) {
-        [colouringDelegate fragariaDocument:self.fragaria didColourGroupWithBlock:colourRangeBlock string:documentString range:effectiveRange info:delegateInfo];
     }
 }
 

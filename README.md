@@ -173,42 +173,7 @@ This feature is very new and still needs improvements, so it may change in poten
 
 ### Custom colouring
 
-The `SMLSyntaxColouringDelegate` protocol allows a delegate to influence the syntax colouring for each of a number of
-syntactical groups such as numbers, attributes, comments or keywords. 
-
-Pseudo code for the protocol method flow looks something like:
-
-````
-// query delegate if should colour this document
-doColouring = fragariaDocument:shouldColourWithBlock:string:range:info
-if !doColouring quit colouring
-
-// send *ColourGroupWithBlock methods for each group defined by SMLSyntaxGroupInteger
-foreach group
-
-// query delegate if should colour this group
-doColouring = fragariaDocument:shouldColourGroupWithBlock:string:range:info
-
-if doColouring
-
-colour the group
-
-// inform delegate group was coloured
-fragariaDocument:didColourGroupWithBlock:string:range:info
-
-end if
-end
-
-// inform delegate document was coloured
-fragariaDocument:willDidWithBlock:string:range:info
-````
-
-The delegate can completely override the colouring for a given group or provide additional colouring support (you will have
-to provide you own scanning logic). Document level delegate messages provide an opportunity to provide colouring for
-custom group configurations. 
-
-For more details see [SMLSyntaxColouringDelegate.h](SMLSyntaxColouringDelegate.h) and the example code in
-[FragariaAppDelegate.m](FragariaAppDelegate.m).
+UPDATE ME
 
 
 ### Supported languages

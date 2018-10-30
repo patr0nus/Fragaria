@@ -32,7 +32,6 @@ Copyright 2004-2009 Peter Borg
 @class MGSSyntaxDefinition;
 @class MGSColourScheme;
 
-@protocol SMLSyntaxColouringDelegate;
 @protocol SMLAutoCompleteDelegate;
 
 
@@ -56,9 +55,6 @@ Copyright 2004-2009 Peter Borg
 
 /** The syntax definition that determines how to color the text. */
 @property (nonatomic, strong) MGSSyntaxDefinition *syntaxDefinition;
-
-/** The syntax colouring delegate */
-@property (weak) id<SMLSyntaxColouringDelegate> syntaxColouringDelegate;
 
 /** Indicates the character ranges where colouring is valid. */
 @property (strong, readonly) NSMutableIndexSet *inspectedCharacterIndexes;

@@ -12,7 +12,7 @@
 @class SMLTextView;
 @class MGSSimpleBreakpointDelegate;
 
-@interface FragariaAppDelegate : NSObject <NSApplicationDelegate, MGSFragariaTextViewDelegate, SMLSyntaxColouringDelegate, MGSDragOperationDelegate>
+@interface FragariaAppDelegate : NSObject <NSApplicationDelegate, MGSFragariaTextViewDelegate, MGSDragOperationDelegate>
 
 - (IBAction)copyToPasteBoard:(id)sender;
 - (IBAction)reloadString:(id)sender;

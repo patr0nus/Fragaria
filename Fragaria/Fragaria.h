@@ -12,7 +12,6 @@
 #import "MGSBreakpointDelegate.h"           
 #import "MGSDragOperationDelegate.h"        
 #import "MGSFragariaTextViewDelegate.h"     
-#import "SMLSyntaxColouringDelegate.h"      
 #import "SMLAutoCompleteDelegate.h"   
 #import "SMLSyntaxDefinition.h"
 

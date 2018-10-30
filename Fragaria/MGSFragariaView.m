@@ -223,20 +223,6 @@
 
 
 /*
- * @property syntaxColouringDelegate
- */
-- (void)setSyntaxColouringDelegate:(id<SMLSyntaxColouringDelegate>)syntaxColouringDelegate
-{
-    self.textView.syntaxColouring.syntaxColouringDelegate = syntaxColouringDelegate;
-}
-
-- (id<SMLSyntaxColouringDelegate>)syntaxColoringDelegate
-{
-    return self.textView.syntaxColouring.syntaxColouringDelegate;
-}
-
-
-/*
  * @property BOOL coloursMultiLineStrings
  */
 - (void)setColoursMultiLineStrings:(BOOL)coloursMultiLineStrings

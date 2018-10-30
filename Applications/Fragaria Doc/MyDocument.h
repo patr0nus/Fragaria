@@ -13,7 +13,7 @@
 
 @class MGSFragariaView;
 
-@interface MyDocument : NSDocument <MGSFragariaTextViewDelegate, SMLSyntaxColouringDelegate, MGSDragOperationDelegate>
+@interface MyDocument : NSDocument <MGSFragariaTextViewDelegate, MGSDragOperationDelegate>
 
 @property (nonatomic,assign) NSString *syntaxDefinition;
 @property NSTextStorage *contents;
