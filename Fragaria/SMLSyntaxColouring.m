@@ -272,7 +272,7 @@ NSString *SMLSyntaxGroupComment = @"comments";
     string = self.layoutManager.textStorage.string;
 	NSRange wholeRange = NSMakeRange(0, [string length]);
     
-	[self resetColourInRange:wholeRange];
+	[self resetTokenGroupsInRange:wholeRange];
     [self.inspectedCharacterIndexes removeAllIndexes];
 }
 
@@ -325,7 +325,7 @@ NSString *SMLSyntaxGroupComment = @"comments";
 #pragma mark - Coloring primitives
 
 
-- (void)resetColourInRange:(NSRange)range
+- (void)resetTokenGroupsInRange:(NSRange)range
 {
     [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.colourScheme.textColor range:range];
     [self.textStorage removeAttribute:SMLSyntaxGroup range:range];
@@ -345,7 +345,7 @@ NSString *SMLSyntaxGroupComment = @"comments";
         attr = [self.textStorage attribute:SMLSyntaxGroup atIndex:i
           longestEffectiveRange:&effectiveRange inRange:bounds];
         if (![overlapSet containsObject:attr]) {
-            [self resetColourInRange:effectiveRange];
+            [self resetTokenGroupsInRange:effectiveRange];
         }
         i = NSMaxRange(effectiveRange);
     }
@@ -358,7 +358,7 @@ NSString *SMLSyntaxGroupComment = @"comments";
 /*
  * - syntaxColouringGroupOfCharacterAtIndex:
  */
-- (NSString*)syntaxColouringGroupOfCharacterAtIndex:(NSUInteger)index
+- (NSString*)groupOfTokenAtCharacterIndex:(NSUInteger)index
 {
     return [self.textStorage attribute:SMLSyntaxGroup atIndex:index effectiveRange:NULL];
 }
