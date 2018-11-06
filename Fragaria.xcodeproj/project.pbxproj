@@ -115,6 +115,7 @@
 		011B56D71C1DC7AB00540669 /* MGSLineNumberCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */; };
 		01281839206FD3E6004D2C3B /* example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01281838206FD3E5004D2C3B /* example.txt */; };
 		0132786A1A81650300D2DCA5 /* MGSSyntaxDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 013278671A81614600D2DCA5 /* MGSSyntaxDefinition.m */; };
+		013645082187E7A70088B324 /* MGSSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 013645062187E7A70088B324 /* MGSSyntaxParser.m */; };
 		0148656A1B19036900BE1DC4 /* NSObject+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 014865681B19036900BE1DC4 /* NSObject+Fragaria.m */; };
 		014E5847217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
 		014E5848217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -628,6 +629,9 @@
 		01281838206FD3E5004D2C3B /* example.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.txt; sourceTree = "<group>"; };
 		013278661A81614500D2DCA5 /* MGSSyntaxDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxDefinition.h; sourceTree = "<group>"; };
 		013278671A81614600D2DCA5 /* MGSSyntaxDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSSyntaxDefinition.m; sourceTree = "<group>"; };
+		013645062187E7A70088B324 /* MGSSyntaxParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSSyntaxParser.m; sourceTree = "<group>"; };
+		013645072187E7A70088B324 /* MGSSyntaxParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxParser.h; sourceTree = "<group>"; };
+		0136450A2187E7AF0088B324 /* MGSSyntaxParserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxParserClient.h; sourceTree = "<group>"; };
 		0144942C1C908A88008DFDC9 /* MGSLineNumberViewDecoration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSLineNumberViewDecoration.h; sourceTree = "<group>"; };
 		014865671B19036900BE1DC4 /* NSObject+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Fragaria.h"; sourceTree = "<group>"; };
 		014865681B19036900BE1DC4 /* NSObject+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Fragaria.m"; sourceTree = "<group>"; };
@@ -1002,6 +1006,16 @@
 			name = "Syntax Definition Manager";
 			sourceTree = "<group>";
 		};
+		013645052187E79F0088B324 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				0136450A2187E7AF0088B324 /* MGSSyntaxParserClient.h */,
+				013645072187E7A70088B324 /* MGSSyntaxParser.h */,
+				013645062187E7A70088B324 /* MGSSyntaxParser.m */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
 		01919E24217D20A800E26B9D /* FragariaDefaultsCoordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1110,6 +1124,7 @@
 				AB69B65A118B75FB00903D1D /* SMLSyntaxColouring.m */,
 				AB69B678118B76E700903D1D /* SMLLayoutManager.h */,
 				AB69B6D9118B7F2A00903D1D /* SMLLayoutManager.m */,
+				013645052187E79F0088B324 /* Parser */,
 				013278651A81610E00D2DCA5 /* Syntax Definition Manager */,
 				01BB1BEE1A7964DC006C0056 /* Gutter View */,
 			);
@@ -1881,6 +1896,7 @@
 				0148656A1B19036900BE1DC4 /* NSObject+Fragaria.m in Sources */,
 				D0718BA81AB70BE70073493A /* MGSColourScheme.m in Sources */,
 				D0E521061A90DC02005CB80B /* MGSSyntaxErrorController.m in Sources */,
+				013645082187E7A70088B324 /* MGSSyntaxParser.m in Sources */,
 				AB472BF41299BBB100202CB5 /* MGSExtraInterfaceController.m in Sources */,
 				ABF28AF014C075D400ECAD48 /* NSScanner+Fragaria.m in Sources */,
 				D0C146761A871A0B00DDE90A /* MGSFragariaView.m in Sources */,

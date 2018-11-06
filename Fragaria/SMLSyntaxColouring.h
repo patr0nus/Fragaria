@@ -24,6 +24,7 @@ Copyright 2004-2009 Peter Borg
 /// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
+#import "MGSSyntaxParserClient.h"
 
 
 @class SMLLayoutManager;
@@ -38,7 +39,7 @@ Copyright 2004-2009 Peter Borg
 /**
  *  Performs syntax colouring on the text editor document.
  **/
-@interface SMLSyntaxColouring : NSObject
+@interface SMLSyntaxColouring : NSObject <MGSSyntaxParserClient>
 
 
 /// @name Properties - Internal
