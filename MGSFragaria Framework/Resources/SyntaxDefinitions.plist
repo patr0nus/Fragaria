@@ -44,6 +44,14 @@
 	</dict>
 	<dict>
 		<key>name</key>
+		<string>Apex</string>
+		<key>file</key>
+		<string>apex</string>
+		<key>extensions</key>
+		<string>apex cls tgr</string>
+	</dict>
+	<dict>
+		<key>name</key>
 		<string>Apache</string>
 		<key>file</key>
 		<string>apache</string>

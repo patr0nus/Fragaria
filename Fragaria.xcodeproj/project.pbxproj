@@ -248,6 +248,8 @@
 		E3CF4B7916E6927300C27B5C /* MGSBreakpointDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E3CF4B7816E6927300C27B5C /* MGSBreakpointDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3D4B2771714D89700BB2CC6 /* SMLSyntaxError.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D4B2751714D89700BB2CC6 /* SMLSyntaxError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3D4B2781714D89700BB2CC6 /* SMLSyntaxError.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D4B2761714D89700BB2CC6 /* SMLSyntaxError.m */; };
+		F4592CC221AB89100042F2AD /* apex.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		F4592CCB21AB8B370042F2AD /* apex.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -302,6 +304,7 @@
 			dstPath = "Syntax Definitions";
 			dstSubfolderSpec = 7;
 			files = (
+				F4592CCB21AB8B370042F2AD /* apex.plist in Copy Syntax Definitions */,
 				010870491C99E1C100C335DA /* actionscript.plist in Copy Syntax Definitions */,
 				0108704A1C99E1C100C335DA /* actionscript3.plist in Copy Syntax Definitions */,
 				0108704B1C99E1C100C335DA /* active4d.plist in Copy Syntax Definitions */,
@@ -732,6 +735,7 @@
 		E3CF4B7816E6927300C27B5C /* MGSBreakpointDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSBreakpointDelegate.h; sourceTree = "<group>"; };
 		E3D4B2751714D89700BB2CC6 /* SMLSyntaxError.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = SMLSyntaxError.h; sourceTree = "<group>"; tabWidth = 4; };
 		E3D4B2761714D89700BB2CC6 /* SMLSyntaxError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLSyntaxError.m; sourceTree = "<group>"; };
+		F4592CC121AB89100042F2AD /* apex.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apex.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +808,7 @@
 				01086F9D1C99E16E00C335DA /* ada.plist */,
 				01086F9E1C99E16E00C335DA /* ampl.plist */,
 				01086F9F1C99E16E00C335DA /* apache.plist */,
+				F4592CC121AB89100042F2AD /* apex.plist */,
 				01086FA01C99E16E00C335DA /* applescript.plist */,
 				01086FA11C99E16E00C335DA /* asm-m68k.plist */,
 				01086FA21C99E16E00C335DA /* asm-mips.plist */,
@@ -1589,6 +1594,7 @@
 			files = (
 				01D81AD21AA7E37E006DF8B8 /* Features.xib in Resources */,
 				01D81AD31AA7E37E006DF8B8 /* Lorem.html in Resources */,
+				F4592CC221AB89100042F2AD /* apex.plist in Resources */,
 				01D81AD41AA7E37E006DF8B8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
