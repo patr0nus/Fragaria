@@ -30,8 +30,8 @@ Copyright 2004-2009 Peter Borg
 @class SMLLayoutManager;
 @class MGSFragariaView;
 @class SMLTextView;
-@class MGSSyntaxDefinition;
 @class MGSColourScheme;
+@class MGSSyntaxParser;
 
 @protocol SMLAutoCompleteDelegate;
 
@@ -51,11 +51,8 @@ Copyright 2004-2009 Peter Borg
 /** The layout manager of the text view */
 @property (readonly, weak) NSLayoutManager *layoutManager;
 
-/** Specifies the current syntax definition name.*/
-@property (nonatomic) NSString *syntaxDefinitionName;
-
-/** The syntax definition that determines how to color the text. */
-@property (nonatomic, strong) MGSSyntaxDefinition *syntaxDefinition;
+/** The parser currently used for colouring the text. */
+@property (nonatomic, strong /*, nonnull */) MGSSyntaxParser *parser;
 
 /** Indicates the character ranges where colouring is valid. */
 @property (strong, readonly) NSMutableIndexSet *inspectedCharacterIndexes;

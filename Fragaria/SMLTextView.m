@@ -32,6 +32,7 @@
 #import "NSString+Fragaria.h"
 #import "NSTextStorage+Fragaria.h"
 #import "MGSMutableColourScheme.h"
+#import "MGSSyntaxParser.h"
 
 
 static BOOL CharacterIsBrace(unichar c)
@@ -1325,7 +1326,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     id <SMLAutoCompleteDelegate> delegate;
     
     if (!self.autoCompleteDelegate)
-        delegate = self.syntaxColouring.syntaxDefinition;
+        delegate = self.syntaxColouring.parser;
     else
         delegate = self.autoCompleteDelegate;
     if (!delegate) return @[];
@@ -1334,16 +1335,15 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 
     // get all completions
     NSMutableArray* allCompletions = [[delegate completions] mutableCopy];
-    
     if (!allCompletions)
         allCompletions = [NSMutableArray array];
     
     /* Add the keywords, if the option to add keywords is on. */
     if (self.autoCompleteWithKeywords) {
-        if (syntaxDefOfCachedKeywords != self.syntaxColouring.syntaxDefinition || !cachedKeywords) {
-            NSArray *tmp = [self.syntaxColouring.syntaxDefinition.keywords allObjects];
+        if (syntaxDefOfCachedKeywords != self.syntaxColouring.parser || !cachedKeywords) {
+            NSArray *tmp = self.syntaxColouring.parser.autocompletionKeywords;
             cachedKeywords = [tmp sortedArrayUsingSelector:@selector(compare:)];
-            syntaxDefOfCachedKeywords = self.syntaxColouring.syntaxDefinition;
+            syntaxDefOfCachedKeywords = self.syntaxColouring.parser;
         }
         [allCompletions addObjectsFromArray:cachedKeywords];
     }

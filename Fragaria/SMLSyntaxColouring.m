@@ -53,8 +53,6 @@ NSString *SMLSyntaxGroupComment = @"comments";
 
 @property (nonatomic, assign) BOOL coloursChanged;
 
-@property (nonatomic, strong /*, nonnull */) MGSSyntaxParser *parser;
-
 @end
 
 
@@ -149,52 +147,18 @@ NSString *SMLSyntaxGroupComment = @"comments";
 }
 
 
-- (void)setSyntaxDefinition:(MGSSyntaxDefinition *)syntaxDefinition
-{
-    BOOL colorsMultiline = self.coloursMultiLineStrings;
-    BOOL colorsOnlyTillEnd = self.coloursOnlyUntilEndOfLine;
-    _parser = [[MGSSyntaxParser alloc] initWithSyntaxDefinition:syntaxDefinition];
-    _parser.coloursMultiLineStrings = colorsMultiline;
-    _parser.coloursOnlyUntilEndOfLine = colorsOnlyTillEnd;
-    [self invalidateAllColouring];
-}
-
-
-- (MGSSyntaxDefinition *)syntaxDefinition
-{
-    return _parser.syntaxDefinition;
-}
-
-
-- (void)setSyntaxDefinitionName:(NSString *)syntaxDefinitionName
-{
-	NSDictionary *syntaxDict;
-	MGSSyntaxDefinition *syntaxDef;
-	
-	syntaxDict = [[MGSSyntaxController sharedInstance] syntaxDictionaryWithName:syntaxDefinitionName];
-    syntaxDef = [[MGSSyntaxDefinition alloc] initFromSyntaxDictionary:syntaxDict name:syntaxDefinitionName];
-	[self setSyntaxDefinition:syntaxDef];
-}
-
-
-- (NSString*)syntaxDefinitionName
-{
-    return self.syntaxDefinition.name;
-}
-
-
 /*
  *  @property colourMultiLineStrings
  */
 - (void)setColoursMultiLineStrings:(BOOL)coloursMultiLineStrings
 {
-    _parser.coloursMultiLineStrings = coloursMultiLineStrings;
+    self.parser.coloursMultiLineStrings = coloursMultiLineStrings;
     [self invalidateAllColouring];
 }
 
 - (BOOL)coloursMultiLineStrings
 {
-    return _parser.coloursMultiLineStrings;
+    return self.parser.coloursMultiLineStrings;
 }
 
 
@@ -203,28 +167,26 @@ NSString *SMLSyntaxGroupComment = @"comments";
  */
 - (void)setColoursOnlyUntilEndOfLine:(BOOL)coloursOnlyUntilEndOfLine
 {
-    _parser.coloursOnlyUntilEndOfLine = coloursOnlyUntilEndOfLine;
+    self.parser.coloursOnlyUntilEndOfLine = coloursOnlyUntilEndOfLine;
     [self invalidateAllColouring];
 }
 
 - (BOOL)coloursOnlyUntilEndOfLine
 {
-    return _parser.coloursOnlyUntilEndOfLine;
-}
-
-
-/*
- * - isSyntaxColouringRequired
- */
-- (BOOL)isSyntaxColouringRequired
-{
-    return self.syntaxDefinition && self.syntaxDefinition.syntaxDefinitionAllowsColouring;
+    return self.parser.coloursOnlyUntilEndOfLine;
 }
 
 
 - (NSTextStorage *)textStorage
 {
     return layoutManager.textStorage;
+}
+
+
+- (void)setParser:(MGSSyntaxParser *)parser
+{
+    [self invalidateAllColouring];
+    _parser = parser;
 }
 
 
@@ -297,8 +259,6 @@ NSString *SMLSyntaxGroupComment = @"comments";
 - (void)recolourRange:(NSRange)range
 {
     NSMutableIndexSet *invalidRanges;
-    
-	if (!self.isSyntaxColouringRequired) return;
  
     [self.textStorage beginEditing];
 

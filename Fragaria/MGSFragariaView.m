@@ -21,14 +21,13 @@
 #import "NSTextStorage+Fragaria.h"
 #import "NSString+Fragaria.h"
 #import "MGSMutableColourScheme.h"
-
+#import "MGSSyntaxDefinition.h"
+#import "MGSSyntaxParser.h"
 #import "MGSSyntaxErrorController.h"
 #import "SMLSyntaxError.h"
-
 #import "SMLTextView.h"
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
-
 #import "MGSAttributeOverlayTextStorage.h"
 
 
@@ -212,13 +211,20 @@
  */
 - (void)setSyntaxDefinitionName:(NSString *)syntaxDefinitionName
 {
-	self.textView.syntaxColouring.syntaxDefinitionName = syntaxDefinitionName;
-	[self mgs_propagateValue:syntaxDefinitionName forBinding:NSStringFromSelector(@selector(syntaxDefinitionName))];
-}
+    NSDictionary *syntaxDict;
+    MGSSyntaxDefinition *syntaxDef;
+    BOOL colorsMultiline = self.coloursMultiLineStrings;
+    BOOL colorsOnlyTillEnd = self.coloursOnlyUntilEndOfLine;
+    
+    syntaxDict = [[MGSSyntaxController sharedInstance] syntaxDictionaryWithName:syntaxDefinitionName];
+    syntaxDef = [[MGSSyntaxDefinition alloc] initFromSyntaxDictionary:syntaxDict name:syntaxDefinitionName];
+    MGSSyntaxParser *parser = [[MGSSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];
+    parser.coloursMultiLineStrings = colorsMultiline;
+    parser.coloursOnlyUntilEndOfLine = colorsOnlyTillEnd;
+    self.syntaxColouring.parser = parser;
 
-- (NSString *)syntaxDefinitionName
-{
-	return self.textView.syntaxColouring.syntaxDefinitionName;
+	_syntaxDefinitionName = syntaxDefinitionName;
+	[self mgs_propagateValue:syntaxDefinitionName forBinding:NSStringFromSelector(@selector(syntaxDefinitionName))];
 }
 
 
@@ -919,7 +925,7 @@
 	[self.scrollView setHasHorizontalRuler:NO];
 	
 	// syntaxColouring defaults
-	self.textView.syntaxColouring.syntaxDefinitionName = [MGSSyntaxController standardSyntaxDefinitionName];
+	self.syntaxDefinitionName = [MGSSyntaxController standardSyntaxDefinitionName];
 	self.textView.syntaxColouring.fragaria = self;
 	
 	// add scroll view to content view

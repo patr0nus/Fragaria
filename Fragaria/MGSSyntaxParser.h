@@ -7,6 +7,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MGSSyntaxParserClient.h"
+#import "MGSSyntaxAwareEditor.h"
+#import "SMLAutoCompleteDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class MGSSyntaxDefinition;
 
 
-@interface MGSSyntaxParser : NSObject
+@interface MGSSyntaxParser : NSObject <MGSSyntaxAwareEditor, SMLAutoCompleteDelegate>
 
 
 - (instancetype)initWithSyntaxDefinition:(MGSSyntaxDefinition *)sdef;
@@ -27,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL coloursOnlyUntilEndOfLine;
 
 - (NSRange)parseString:(NSString *)string inRange:(NSRange)range forParserClient:(id<MGSSyntaxParserClient>)client;
+
+/** The list of keywords used by autocompletion when the autoCompleteWithKeywords option
+ *  is enabled. */
+@property (nonatomic, readonly) NSArray <NSString *> *autocompletionKeywords;
 
 
 @end

@@ -16,6 +16,7 @@
 #import "MGSMutableSubstring.h"
 #import "NSString+Fragaria.h"
 #import "NSTextStorage+Fragaria.h"
+#import "MGSSyntaxParser.h"
 
 
 @implementation SMLTextView (MGSTextActions)
@@ -51,7 +52,7 @@
             enableItem = NO;
     } else if (action == @selector(commentOrUncomment:) ) {
         // Comment Or Uncomment
-        if (([self.syntaxColouring.syntaxDefinition.singleLineComments count] == 0) || (!self.editable)) {
+        if ((![self.syntaxColouring.parser providesCommentOrUncomment]) || (!self.editable)) {
             enableItem = NO;
         }
     } else {
@@ -578,39 +579,14 @@
  */
 - (IBAction)commentOrUncomment:(id)sender
 {
-    NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
-    NSString *comment = self.syntaxColouring.syntaxDefinition.singleLineComments[0];
-    NSInteger lchg;
+    if (![self.syntaxColouring.parser respondsToSelector:@selector(commentOrUncomment:)]) {
+        NSBeep();
+        return;
+    }
     
     [self alignSelectionToLineBonduaries];
-    lchg = [self editSelectionArrayWithBlock:^(NSMutableString *string) {
-        NSRange commentRange = NSMakeRange(0, [comment length]);
-        BOOL __block allCommented = YES;
-        void (^workblock)(MGSMutableSubstring *, BOOL *);
-        
-        [string enumerateMutableSubstringsOfLinesUsingBlock:^(MGSMutableSubstring *line, BOOL *stop) {
-            MGSMutableSubstring *tmp;
-        
-            tmp = [line mutableSubstringByLeftTrimmingCharactersFromSet:whitespace];
-            if (![tmp hasPrefix:comment]) {
-                allCommented = NO;
-                *stop = YES;
-            }
-        }];
-        
-        if (allCommented) {
-            workblock = ^void(MGSMutableSubstring *line, BOOL *stop) {
-                MGSMutableSubstring *tmp;
-                
-                tmp = [line mutableSubstringByLeftTrimmingCharactersFromSet:whitespace];
-                [tmp deleteCharactersInRange:commentRange];
-            };
-        } else {
-            workblock = ^void(MGSMutableSubstring *line, BOOL *stop) {
-                [line insertString:comment atIndex:0];
-            };
-        }
-        [string enumerateMutableSubstringsOfLinesUsingBlock:workblock];
+    NSInteger lchg = [self editSelectionArrayWithBlock:^(NSMutableString *string) {
+        [self.syntaxColouring.parser commentOrUncomment:string];
     }];
     
     if (!lchg) NSBeep();

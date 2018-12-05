@@ -14,11 +14,9 @@
 
 
 /** An MGSSyntaxDefinition is a model object that describes how
- *  SMLSyntaxColouring should behave. Also, it provides information on the
- *  current syntax definition to allow editing functions such as commenting
- *  and un-commenting. */
+ *  SMLSyntaxColouring should behave. */
 
-@interface MGSSyntaxDefinition : NSObject <SMLAutoCompleteDelegate>
+@interface MGSSyntaxDefinition : NSObject
 
 
 /**  Determines if colouring for this syntax definition is allowed. */

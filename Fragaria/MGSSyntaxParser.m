@@ -8,6 +8,8 @@
 #import "MGSSyntaxParser.h"
 #import "MGSSyntaxDefinition.h"
 #import "NSScanner+Fragaria.h"
+#import "MGSSyntaxAwareEditor.h"
+#import "MGSMutableSubstring.h"
 
 
 // syntax colouring group IDs
@@ -126,6 +128,9 @@ typedef NSInteger SMLSyntaxGroupInteger;
 
 - (NSRange)parseString:(NSString *)documentString inRange:(NSRange)rangeToRecolour forParserClient:(id<MGSSyntaxParserClient>)client
 {
+    if (!self.syntaxDefinition.syntaxDefinitionAllowsColouring)
+        return NSMakeRange(0, documentString.length);
+    
     // setup
     self.client = client;
     NSRange effectiveRange = [documentString lineRangeForRange:rangeToRecolour];
@@ -832,6 +837,65 @@ typedef NSInteger SMLSyntaxGroupInteger;
         if ([[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation] isEqual:@"strings"] || [[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation] isEqual:@"comments"]) return;
         [self.client setGroup:SMLSyntaxGroupString forTokenInRange:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1)];
     }];
+}
+
+
+#pragma mark - Editor
+
+
+- (BOOL)providesCommentOrUncomment
+{
+    return [self.syntaxDefinition.singleLineComments count] > 0;
+}
+
+
+- (void)commentOrUncomment:(NSMutableString *)string
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
+    NSString *comment = self.syntaxDefinition.singleLineComments[0];
+    
+    NSRange commentRange = NSMakeRange(0, [comment length]);
+    BOOL __block allCommented = YES;
+    void (^workblock)(MGSMutableSubstring *, BOOL *);
+
+    [string enumerateMutableSubstringsOfLinesUsingBlock:^(MGSMutableSubstring *line, BOOL *stop) {
+        MGSMutableSubstring *tmp;
+    
+        tmp = [line mutableSubstringByLeftTrimmingCharactersFromSet:whitespace];
+        if (![tmp hasPrefix:comment]) {
+            allCommented = NO;
+            *stop = YES;
+        }
+    }];
+
+    if (allCommented) {
+        workblock = ^void(MGSMutableSubstring *line, BOOL *stop) {
+            MGSMutableSubstring *tmp;
+            
+            tmp = [line mutableSubstringByLeftTrimmingCharactersFromSet:whitespace];
+            [tmp deleteCharactersInRange:commentRange];
+        };
+    } else {
+        workblock = ^void(MGSMutableSubstring *line, BOOL *stop) {
+            [line insertString:comment atIndex:0];
+        };
+    }
+    [string enumerateMutableSubstringsOfLinesUsingBlock:workblock];
+}
+
+
+#pragma mark - Autocompletion
+
+
+- (NSArray <NSString *> *)completions
+{
+    return self.syntaxDefinition.completions;
+}
+
+
+- (NSArray <NSString *> *)autocompletionKeywords
+{
+    return [self.syntaxDefinition.keywords allObjects];
 }
 
 
