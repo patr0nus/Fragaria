@@ -216,52 +216,39 @@ typedef NSInteger SMLSyntaxGroupInteger;
 
 - (void)colourGroupWithIdentifier:(NSInteger)group inRange:(NSRange)effectiveRange withRangeScanner:(NSScanner*)rangeScanner documentScanner:(NSScanner*)documentScanner
 {
-    NSString *groupName;
     BOOL doColouring = YES;
     
     switch (group) {
         case kSMLSyntaxGroupNumber:
-            groupName = SMLSyntaxGroupNumber;
             break;
         case kSMLSyntaxGroupCommand:
-            groupName = SMLSyntaxGroupCommand;
             doColouring = ![self.syntaxDefinition.beginCommand isEqual:@""];
             break;
         case kSMLSyntaxGroupInstruction:
-            groupName = SMLSyntaxGroupInstruction;
             doColouring = (![self.syntaxDefinition.beginInstruction isEqual:@""] || self.syntaxDefinition.instructions);
             break;
         case kSMLSyntaxGroupKeyword:
-            groupName = SMLSyntaxGroupKeyword;
             doColouring = [self.syntaxDefinition.keywords count] > 0;
             break;
         case kSMLSyntaxGroupAutoComplete:
-            groupName = SMLSyntaxGroupAutoComplete;
             doColouring = [self.syntaxDefinition.autocompleteWords count] > 0;
             break;
         case kSMLSyntaxGroupVariable:
-            groupName = SMLSyntaxGroupVariable;
             doColouring = (self.syntaxDefinition.beginVariableCharacterSet || self.syntaxDefinition.variableRegex);
             break;
         case kSMLSyntaxGroupSecondString:
-            groupName = SMLSyntaxGroupString;
             doColouring = ![self.syntaxDefinition.secondString isEqual:@""];
             break;
         case kSMLSyntaxGroupFirstString:
-            groupName = SMLSyntaxGroupString;
             doColouring = ![self.syntaxDefinition.firstString isEqual:@""];
             break;
         case kSMLSyntaxGroupAttribute:
-            groupName = SMLSyntaxGroupAttribute;
             break;
         case kSMLSyntaxGroupSingleLineComment:
-            groupName = SMLSyntaxGroupComment;
             break;
         case kSMLSyntaxGroupMultiLineComment:
-            groupName = SMLSyntaxGroupComment;
             break;
         case kSMLSyntaxGroupSecondStringPass2:
-            groupName = SMLSyntaxGroupComment;
             doColouring = ![self.syntaxDefinition.secondString isEqual:@""];
             break;
         default:
