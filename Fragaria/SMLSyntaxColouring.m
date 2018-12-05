@@ -102,7 +102,6 @@ NSString *SMLSyntaxGroupComment = @"comments";
 {
     _colourScheme = colourScheme;
     [self rebuildAttributesCache];
-    [self invalidateAllColouring];
 }
 
 
@@ -200,24 +199,50 @@ NSString *SMLSyntaxGroupComment = @"comments";
 {
     attributeCache = @{
         SMLSyntaxGroupCommand:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands, SMLSyntaxGroup: SMLSyntaxGroupCommand},
+            self.colourScheme.coloursCommands ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands,
+                    SMLSyntaxGroup: SMLSyntaxGroupCommand} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupCommand},
         SMLSyntaxGroupComment:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForComments, SMLSyntaxGroup: SMLSyntaxGroupComment},
+            self.colourScheme.coloursComments ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForComments,
+                    SMLSyntaxGroup: SMLSyntaxGroupComment} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupComment},
         SMLSyntaxGroupInstruction:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions, SMLSyntaxGroup: SMLSyntaxGroupInstruction},
+            self.colourScheme.coloursInstructions ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions,
+                    SMLSyntaxGroup: SMLSyntaxGroupInstruction} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupInstruction},
         SMLSyntaxGroupKeyword:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords, SMLSyntaxGroup: SMLSyntaxGroupKeyword},
+            self.colourScheme.coloursKeywords ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords,
+                    SMLSyntaxGroup: SMLSyntaxGroupKeyword} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupKeyword},
         SMLSyntaxGroupAutoComplete:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete, SMLSyntaxGroup: SMLSyntaxGroupAutoComplete},
+            self.colourScheme.coloursAutocomplete ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete,
+                    SMLSyntaxGroup: SMLSyntaxGroupAutoComplete} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupAutoComplete},
         SMLSyntaxGroupString:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings, SMLSyntaxGroup: SMLSyntaxGroupString},
+            self.colourScheme.coloursStrings ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings,
+                    SMLSyntaxGroup: SMLSyntaxGroupString} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupString},
         SMLSyntaxGroupVariable:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables, SMLSyntaxGroup: SMLSyntaxGroupVariable},
+            self.colourScheme.coloursVariables ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables,
+                    SMLSyntaxGroup: SMLSyntaxGroupVariable} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupVariable},
         SMLSyntaxGroupAttribute:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes, SMLSyntaxGroup: SMLSyntaxGroupAttribute},
+            self.colourScheme.coloursAttributes ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes,
+                    SMLSyntaxGroup: SMLSyntaxGroupAttribute} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupAttribute},
         SMLSyntaxGroupNumber:
-            @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers,
-                      SMLSyntaxGroup: SMLSyntaxGroupNumber}
+            self.colourScheme.coloursNumbers ?
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers,
+                    SMLSyntaxGroup: SMLSyntaxGroupNumber} :
+                @{SMLSyntaxGroup: SMLSyntaxGroupNumber}
     };
     
     [self invalidateAllColouring];
