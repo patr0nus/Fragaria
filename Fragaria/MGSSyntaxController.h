@@ -49,33 +49,10 @@
 /// @name Instance Methods
 
 /**
- *  Constructs the array of all syntax definitions.
- **/
-- (void)insertSyntaxDefinitions;
-
-/**
- *  Returns a syntax dictionary for definition `name`.
- *  @param name The syntax definition name for which to return a dictionary.
- **/
-- (NSDictionary *)syntaxDictionaryWithName:(NSString *)name;
-
-/**
- *  Returns a syntax definition based on common file extensions.
- *  @param extension The file extension for which to return a dictionary.
- **/
-- (NSDictionary *)syntaxDefinitionWithExtension:(NSString *)extension;
-
-/**
  *  Return the name of a syntax definition for the given extension.
  *  @param extension The extension for which to return a syntax definition name.
  **/
 - (NSString *)syntaxDefinitionNameWithExtension:(NSString *)extension;
-
-/**
- *  Return the name of a syntax definition for the given UTI type.
- *  @param uti The UTI type for which to return a syntax definition name.
- **/
-- (NSDictionary *)syntaxDefinitionWithUTI:(NSString *)uti;
 
 /**
  *  Return the name of a syntax definition for the given UTI type.

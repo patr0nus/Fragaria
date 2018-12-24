@@ -24,6 +24,7 @@
 #import "MGSSyntaxDefinition.h"
 #import "SMLLayoutManager.h"
 #import "MGSSyntaxController.h"
+#import "MGSSyntaxControllerPrivate.h"
 #import "SMLTextView.h"
 #import "NSScanner+Fragaria.h"
 #import "MGSColourScheme.h"
@@ -79,9 +80,7 @@ NSString *SMLSyntaxGroupComment = @"comments";
         _inspectedCharacterIndexes = [[NSMutableIndexSet alloc] init];
         
         NSString *sdname = [MGSSyntaxController standardSyntaxDefinitionName];
-        NSDictionary *syndict = [[MGSSyntaxController sharedInstance] syntaxDictionaryWithName:sdname];
-        MGSSyntaxDefinition *syndef = [[MGSSyntaxDefinition alloc] initFromSyntaxDictionary:syndict name:sdname];
-        _parser = [[MGSSyntaxParser alloc] initWithSyntaxDefinition:syndef];
+        _parser = [[MGSSyntaxController sharedInstance] parserForSyntaxDefinitionName:sdname];
 
         // configure colouring
         self.coloursOnlyUntilEndOfLine = YES;

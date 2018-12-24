@@ -22,6 +22,9 @@
  */
 
 #import "MGSSyntaxController.h"
+#import "MGSSyntaxControllerPrivate.h"
+#import "MGSSyntaxDefinition.h"
+#import "MGSSyntaxParser.h"
 
 
 NSString * const KMGSSyntaxDefinitions =  @"SyntaxDefinitions";
@@ -349,6 +352,17 @@ static id sharedInstance = nil;
 		[definitions addObjectsFromArray:[[NSArray alloc] initWithContentsOfFile:path]];
 	}
 	
+}
+
+
+- (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef
+{
+    NSDictionary *syntaxDict;
+    MGSSyntaxDefinition *syntaxDef;
+    
+    syntaxDict = [self syntaxDictionaryWithName:syndef];
+    syntaxDef = [[MGSSyntaxDefinition alloc] initFromSyntaxDictionary:syntaxDict name:syndef];
+    return [[MGSSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];
 }
 
 

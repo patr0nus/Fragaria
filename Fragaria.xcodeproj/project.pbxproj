@@ -178,7 +178,6 @@
 		01AC7E721AA341AA00DF7620 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7E711AA341AA00DF7620 /* Images.xcassets */; };
 		01B50A801B07AD8C00C9A856 /* NSString+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B50A7E1B07AD8C00C9A856 /* NSString+Fragaria.m */; };
 		01BB1BF41A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BB1BF21A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m */; };
-		01C35C1621B2FDA2009A12AB /* MGSSyntaxAwareEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C35C1521B2FDA2009A12AB /* MGSSyntaxAwareEditor.h */; };
 		01D39A431B19DA690072F43F /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D39A421B19DA690072F43F /* ApplicationDelegate.m */; };
 		01D39A441B19DDD20072F43F /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718B821AB553A20073493A /* MASPreferencesWindowController.m */; };
 		01D39A451B19DFAF0072F43F /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0718B801AB553A20073493A /* MASPreferencesWindow.xib */; };
@@ -527,6 +526,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0101EBFA21D15EF9000E7A94 /* MGSSyntaxControllerPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxControllerPrivate.h; sourceTree = "<group>"; };
 		01086F9A1C99E16E00C335DA /* actionscript.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actionscript.plist; sourceTree = "<group>"; };
 		01086F9B1C99E16E00C335DA /* actionscript3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actionscript3.plist; sourceTree = "<group>"; };
 		01086F9C1C99E16E00C335DA /* active4d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = active4d.plist; sourceTree = "<group>"; };
@@ -1001,9 +1001,8 @@
 			isa = PBXGroup;
 			children = (
 				AB3971C8118C1F8A00AEF388 /* MGSSyntaxController.h */,
+				0101EBFA21D15EF9000E7A94 /* MGSSyntaxControllerPrivate.h */,
 				AB3971C9118C1F8A00AEF388 /* MGSSyntaxController.m */,
-				013278661A81614500D2DCA5 /* MGSSyntaxDefinition.h */,
-				013278671A81614600D2DCA5 /* MGSSyntaxDefinition.m */,
 			);
 			name = "Syntax Definition Manager";
 			sourceTree = "<group>";
@@ -1013,6 +1012,8 @@
 			children = (
 				0136450A2187E7AF0088B324 /* MGSSyntaxParserClient.h */,
 				01C35C1521B2FDA2009A12AB /* MGSSyntaxAwareEditor.h */,
+				013278661A81614500D2DCA5 /* MGSSyntaxDefinition.h */,
+				013278671A81614600D2DCA5 /* MGSSyntaxDefinition.m */,
 				013645072187E7A70088B324 /* MGSSyntaxParser.h */,
 				013645062187E7A70088B324 /* MGSSyntaxParser.m */,
 			);
@@ -1450,7 +1451,6 @@
 				01FBB3382153D591001E590C /* MGSMutableColourScheme.h in Headers */,
 				01A0EC4E1E6C755700818624 /* NSTextStorage+Fragaria.h in Headers */,
 				AB8387C5171D6115004408F4 /* SMLSyntaxDefinition.h in Headers */,
-				01C35C1621B2FDA2009A12AB /* MGSSyntaxAwareEditor.h in Headers */,
 				0191FA811A8829930099B50D /* SMLTextView+MGSTextActions.h in Headers */,
 				0150B3862186610300CBA228 /* FragariaMacros.h in Headers */,
 			);

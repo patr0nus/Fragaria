@@ -29,6 +29,7 @@
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
 #import "MGSAttributeOverlayTextStorage.h"
+#import "MGSSyntaxControllerPrivate.h"
 
 
 #pragma mark - IMPLEMENTATION
@@ -211,14 +212,10 @@
  */
 - (void)setSyntaxDefinitionName:(NSString *)syntaxDefinitionName
 {
-    NSDictionary *syntaxDict;
-    MGSSyntaxDefinition *syntaxDef;
     BOOL colorsMultiline = self.coloursMultiLineStrings;
     BOOL colorsOnlyTillEnd = self.coloursOnlyUntilEndOfLine;
-    
-    syntaxDict = [[MGSSyntaxController sharedInstance] syntaxDictionaryWithName:syntaxDefinitionName];
-    syntaxDef = [[MGSSyntaxDefinition alloc] initFromSyntaxDictionary:syntaxDict name:syntaxDefinitionName];
-    MGSSyntaxParser *parser = [[MGSSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];
+
+    MGSSyntaxParser *parser = [[MGSSyntaxController sharedInstance] parserForSyntaxDefinitionName:syntaxDefinitionName];
     parser.coloursMultiLineStrings = colorsMultiline;
     parser.coloursOnlyUntilEndOfLine = colorsOnlyTillEnd;
     self.syntaxColouring.parser = parser;
