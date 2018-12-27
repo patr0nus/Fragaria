@@ -52,19 +52,19 @@
  *  Return the name of a syntax definition for the given extension.
  *  @param extension The extension for which to return a syntax definition name.
  **/
-- (NSString *)syntaxDefinitionNameWithExtension:(NSString *)extension;
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithExtension:(NSString *)extension;
 
 /**
  *  Return the name of a syntax definition for the given UTI type.
  *  @param uti The UTI type for which to return a syntax definition name.
  **/
-- (NSString *)syntaxDefinitionNameWithUTI:(NSString *)uti;
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithUTI:(NSString *)uti;
 
 /**
  *  Attempts to guess the syntax definition from the first line of text.
  *  @param firstLine The sample text to use in order to guess the syntax definition.
  **/
-- (NSString *)guessSyntaxDefinitionExtensionFromFirstLine:(NSString *)firstLine;
+- (NSArray<NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine;
 
 
 /// @name Properties

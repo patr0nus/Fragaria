@@ -61,7 +61,7 @@ static id sharedInstance = nil;
     });
 	
 	return sharedInstance;
-} 
+}
 
 
 /*
@@ -124,7 +124,7 @@ static id sharedInstance = nil;
 /*
  * - syntaxDefinitionNameWithExtension
  */
-- (NSString *)syntaxDefinitionNameWithExtension:(NSString *)extension
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithExtension:(NSString *)extension
 {
 	NSString *name = nil;
 	NSDictionary *definition = [self syntaxDefinitionWithExtension:extension];
@@ -132,7 +132,7 @@ static id sharedInstance = nil;
 		name = [definition objectForKey:@"name"];
 	}
 	
-	return name;
+	return name ? @[name] : @[];
 }
 
 
@@ -178,7 +178,7 @@ static id sharedInstance = nil;
 }
 
 
-- (NSString *)syntaxDefinitionNameWithUTI:(NSString *)uti
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithUTI:(NSString *)uti
 {
     NSString *name = nil;
     NSDictionary *definition = [self syntaxDefinitionWithUTI:uti];
@@ -186,14 +186,14 @@ static id sharedInstance = nil;
         name = [definition objectForKey:@"name"];
     }
     
-    return name;
+    return name ? @[name] : @[];
 }
 
 
 /*
  * - guessSyntaxDefinitionExtensionFromFirstLine:
  */
-- (NSString *)guessSyntaxDefinitionExtensionFromFirstLine:(NSString *)firstLine
+- (NSArray<NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine
 {
     NSString *returnString = nil;
     NSRange firstLineRange = NSMakeRange(0, [firstLine length]);
@@ -219,7 +219,9 @@ static id sharedInstance = nil;
         returnString = @"pdf";
     }
     
-    return returnString;
+    if (returnString)
+        return [self syntaxDefinitionNamesWithExtension:returnString];
+    return @[];
 }
 
 
