@@ -13,15 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-@class MGSSyntaxDefinition;
-
-
 @interface MGSSyntaxParser : NSObject <MGSSyntaxAwareEditor, SMLAutoCompleteDelegate>
 
-
-- (instancetype)initWithSyntaxDefinition:(MGSSyntaxDefinition *)sdef;
-
-@property (nonatomic, readonly) MGSSyntaxDefinition *syntaxDefinition;
 
 /** If multiline strings should be coloured. */
 @property (nonatomic, assign) BOOL coloursMultiLineStrings;

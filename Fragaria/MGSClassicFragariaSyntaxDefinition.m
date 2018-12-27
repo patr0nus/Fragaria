@@ -1,12 +1,12 @@
 //
-//  MGSSyntaxDefinition.m
+//  MGSClassicFragariaSyntaxDefinition.m
 //  Fragaria
 //
 //  Created by Daniele Cattaneo on 03/02/15.
 //
 //
 
-#import "MGSSyntaxDefinition.h"
+#import "MGSClassicFragariaSyntaxDefinition.h"
 
 
 // syntax definition dictionary keys
@@ -49,7 +49,7 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
 
 
 
-@implementation MGSSyntaxDefinition {
+@implementation MGSClassicFragariaSyntaxDefinition {
     NSArray *sortedAutocompleteWords;
 }
 

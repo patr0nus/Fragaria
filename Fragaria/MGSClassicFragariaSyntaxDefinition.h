@@ -1,5 +1,5 @@
 //
-//  MGSSyntaxDefinition.h
+//  MGSClassicFragariaSyntaxDefinition.h
 //  Fragaria
 //
 //  Created by Daniele Cattaneo on 03/02/15.
@@ -13,10 +13,10 @@
 @class MGSFragariaView;
 
 
-/** An MGSSyntaxDefinition is a model object that describes how
+/** An MGSClassicFragariaSyntaxDefinition is a model object that describes how
  *  SMLSyntaxColouring should behave. */
 
-@interface MGSSyntaxDefinition : NSObject
+@interface MGSClassicFragariaSyntaxDefinition : NSObject
 
 
 /**  Determines if colouring for this syntax definition is allowed. */

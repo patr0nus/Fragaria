@@ -26,7 +26,6 @@
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
 #import "SMLLayoutManager.h"
-#import "MGSSyntaxDefinition.h"
 #import "SMLSyntaxColouring.h"
 #import "MGSExtraInterfaceController.h"
 #import "NSString+Fragaria.h"

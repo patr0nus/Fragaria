@@ -24,6 +24,9 @@
 #import <Cocoa/Cocoa.h>
 
 
+@protocol MGSParserFactory;
+
+
 /**
  *  Manages syntax definitions for Fragaria.
  *  @discussion Syntax definitions are found in the framework bundle by default,
@@ -47,6 +50,9 @@
 
 
 /// @name Instance Methods
+
+
+- (void)registerParserFactory:(id <MGSParserFactory>)parserFactory;
 
 /**
  *  Return the name of a syntax definition for the given extension.
@@ -72,6 +78,6 @@
 /**
  *  Returns an array of all of the syntax definition names that are known.
  **/
-@property (strong,nonatomic,readonly) NSArray *syntaxDefinitionNames;
+@property (strong,nonatomic,readonly) NSArray<NSString *> *syntaxDefinitionNames;
 
 @end

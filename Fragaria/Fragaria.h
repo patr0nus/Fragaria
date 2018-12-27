@@ -12,15 +12,21 @@
 #import "MGSBreakpointDelegate.h"           
 #import "MGSDragOperationDelegate.h"        
 #import "MGSFragariaTextViewDelegate.h"     
-#import "SMLAutoCompleteDelegate.h"   
-#import "SMLSyntaxDefinition.h"
+#import "SMLAutoCompleteDelegate.h"
 
 #import "MGSFragariaView.h"
 #import "SMLSyntaxError.h"
 #import "SMLTextView.h"
 #import "SMLTextView+MGSTextActions.h"
 #import "SMLTextView+MGSDragging.h"
+
 #import "MGSSyntaxController.h"
+#import "SMLSyntaxDefinition.h"
+#import "MGSParserFactory.h"
+#import "MGSSyntaxParserClient.h"
+#import "MGSSyntaxAwareEditor.h"
+#import "MGSSyntaxParser.h"
+
 #import "MGSColourScheme.h"
 #import "MGSMutableColourScheme.h"
 

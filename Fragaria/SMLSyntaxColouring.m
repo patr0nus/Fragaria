@@ -21,7 +21,6 @@
 */
 
 #import "SMLSyntaxColouring.h"
-#import "MGSSyntaxDefinition.h"
 #import "SMLLayoutManager.h"
 #import "MGSSyntaxController.h"
 #import "MGSSyntaxControllerPrivate.h"

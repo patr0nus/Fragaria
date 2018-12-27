@@ -21,7 +21,6 @@
 #import "NSTextStorage+Fragaria.h"
 #import "NSString+Fragaria.h"
 #import "MGSMutableColourScheme.h"
-#import "MGSSyntaxDefinition.h"
 #import "MGSSyntaxParser.h"
 #import "MGSSyntaxErrorController.h"
 #import "SMLSyntaxError.h"
