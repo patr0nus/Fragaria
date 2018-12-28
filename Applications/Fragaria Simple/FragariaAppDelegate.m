@@ -10,6 +10,7 @@
 #import <Fragaria/Fragaria.h>
 #import "MGSSimpleBreakpointDelegate.h"
 #import "ExampleCustomParser.h"
+#import "ExampleCustomParserWithComposition.h"
 
 
 @implementation FragariaAppDelegate {
@@ -27,10 +28,11 @@
  */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
 {
-    /* Register a custom parser factory.
-     * The parser will appear in the list of languages, toghether with the
+    /* Register our custom parser factories.
+     * The custom parsers will appear in the list of languages, toghether with the
      * other standard ones. */
     [[MGSSyntaxController sharedInstance] registerParserFactory:[[ExampleCustomParser alloc] init]];
+    [[MGSSyntaxController sharedInstance] registerParserFactory:[[ExampleCustomParserWithComposition alloc] init]];
     
 	// define initial object configuration
 	//

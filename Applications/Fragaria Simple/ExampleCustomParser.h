@@ -19,16 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
  * depending on the language, and a single parser factory which
  * initializes each parser according to the language.
  * See the implementation of MGSClassicFragariaParserFactory for an
- * example of this use case.
- *
- * The most complex use-case for Fragaria parsers is when you want to modify
- * the output of an existing parser.
- * This case can be implemented through composition of a custom parser with the
- * new parser. */
+ * example of this use case. */
 
 @interface ExampleCustomParser : MGSSyntaxParser <MGSParserFactory>
 
 @end
-
 
 NS_ASSUME_NONNULL_END
