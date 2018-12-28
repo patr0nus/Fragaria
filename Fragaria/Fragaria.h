@@ -21,7 +21,6 @@
 #import "SMLTextView+MGSDragging.h"
 
 #import "MGSSyntaxController.h"
-#import "SMLSyntaxDefinition.h"
 #import "MGSParserFactory.h"
 #import "MGSSyntaxParserClient.h"
 #import "MGSSyntaxAwareEditor.h"
