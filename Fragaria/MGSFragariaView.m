@@ -28,7 +28,6 @@
 #import "SMLTextViewPrivate.h"
 #import "SMLTextView+MGSTextActions.h"
 #import "MGSAttributeOverlayTextStorage.h"
-#import "MGSSyntaxControllerPrivate.h"
 
 
 #pragma mark - IMPLEMENTATION

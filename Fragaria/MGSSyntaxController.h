@@ -22,9 +22,10 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "MGSParserFactory.h"
 
 
-@protocol MGSParserFactory;
+@class MGSSyntaxParser;
 
 
 /**
@@ -53,6 +54,9 @@
 
 
 - (void)registerParserFactory:(id <MGSParserFactory>)parserFactory;
+
+- (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef;
+
 
 /**
  *  Return the name of a syntax definition for the given extension.

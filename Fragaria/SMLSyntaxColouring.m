@@ -23,7 +23,6 @@
 #import "SMLSyntaxColouring.h"
 #import "SMLLayoutManager.h"
 #import "MGSSyntaxController.h"
-#import "MGSSyntaxControllerPrivate.h"
 #import "SMLTextView.h"
 #import "NSScanner+Fragaria.h"
 #import "MGSColourScheme.h"

@@ -22,7 +22,6 @@
  */
 
 #import "MGSSyntaxController.h"
-#import "MGSSyntaxControllerPrivate.h"
 #import "MGSSyntaxParser.h"
 #import "MGSParserFactory.h"
 #import "MGSClassicFragariaParserFactory.h"
