@@ -30,22 +30,18 @@
 
 
 // syntax colouring information dictionary keys
-NSString *SMLSyntaxGroup = @"group";
-NSString *SMLSyntaxGroupID = @"groupID";
-NSString *SMLSyntaxWillColour = @"willColour";
-NSString *SMLSyntaxAttributes = @"attributes";
-NSString *SMLSyntaxInfo = @"syntaxInfo";
+NSAttributedStringKey SMLSyntaxGroupAttributeName = @"group";
 
 // syntax colouring group names
-NSString *SMLSyntaxGroupNumber = @"number";
-NSString *SMLSyntaxGroupCommand = @"command";
-NSString *SMLSyntaxGroupInstruction = @"instruction";
-NSString *SMLSyntaxGroupKeyword = @"keyword";
-NSString *SMLSyntaxGroupAutoComplete = @"autocomplete";
-NSString *SMLSyntaxGroupVariable = @"variable";
-NSString *SMLSyntaxGroupString = @"strings";
-NSString *SMLSyntaxGroupAttribute = @"attribute";
-NSString *SMLSyntaxGroupComment = @"comments";
+NSString * const SMLSyntaxGroupNumber = @"number";
+NSString * const SMLSyntaxGroupCommand = @"command";
+NSString * const SMLSyntaxGroupInstruction = @"instruction";
+NSString * const SMLSyntaxGroupKeyword = @"keyword";
+NSString * const SMLSyntaxGroupAutoComplete = @"autocomplete";
+NSString * const SMLSyntaxGroupVariable = @"variable";
+NSString * const SMLSyntaxGroupString = @"strings";
+NSString * const SMLSyntaxGroupAttribute = @"attribute";
+NSString * const SMLSyntaxGroupComment = @"comments";
 
 
 @interface SMLSyntaxColouring()
@@ -197,49 +193,40 @@ NSString *SMLSyntaxGroupComment = @"comments";
     attributeCache = @{
         SMLSyntaxGroupCommand:
             self.colourScheme.coloursCommands ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands,
-                    SMLSyntaxGroup: SMLSyntaxGroupCommand} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupCommand},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands} :
+                @{},
         SMLSyntaxGroupComment:
             self.colourScheme.coloursComments ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForComments,
-                    SMLSyntaxGroup: SMLSyntaxGroupComment} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupComment},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForComments} :
+                @{},
         SMLSyntaxGroupInstruction:
             self.colourScheme.coloursInstructions ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions,
-                    SMLSyntaxGroup: SMLSyntaxGroupInstruction} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupInstruction},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions} :
+                @{},
         SMLSyntaxGroupKeyword:
             self.colourScheme.coloursKeywords ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords,
-                    SMLSyntaxGroup: SMLSyntaxGroupKeyword} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupKeyword},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords} :
+                @{},
         SMLSyntaxGroupAutoComplete:
             self.colourScheme.coloursAutocomplete ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete,
-                    SMLSyntaxGroup: SMLSyntaxGroupAutoComplete} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupAutoComplete},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete} :
+                @{},
         SMLSyntaxGroupString:
             self.colourScheme.coloursStrings ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings,
-                    SMLSyntaxGroup: SMLSyntaxGroupString} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupString},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings} :
+                @{},
         SMLSyntaxGroupVariable:
             self.colourScheme.coloursVariables ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables,
-                    SMLSyntaxGroup: SMLSyntaxGroupVariable} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupVariable},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables} :
+                @{},
         SMLSyntaxGroupAttribute:
             self.colourScheme.coloursAttributes ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes,
-                    SMLSyntaxGroup: SMLSyntaxGroupAttribute} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupAttribute},
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes} :
+                @{},
         SMLSyntaxGroupNumber:
             self.colourScheme.coloursNumbers ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers,
-                    SMLSyntaxGroup: SMLSyntaxGroupNumber} :
-                @{SMLSyntaxGroup: SMLSyntaxGroupNumber}
+                @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers} :
+                @{}
     };
     
     [self invalidateAllColouring];
@@ -307,26 +294,45 @@ NSString *SMLSyntaxGroupComment = @"comments";
 #pragma mark - Coloring primitives
 
 
-- (void)resetTokenGroupsInRange:(NSRange)range
+- (NSRange)rangeOfAtomicTokenAtCharacterIndex:(NSUInteger)i
 {
-    [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.colourScheme.textColor range:range];
-    [self.textStorage removeAttribute:SMLSyntaxGroup range:range];
+    NSRange bounds = NSMakeRange(0, [[layoutManager textStorage] length]);
+    if (i >= NSMaxRange(bounds))
+        return NSMakeRange(i, 0);
+    
+    NSRange effectiveRange = NSMakeRange(0,0);
+    NSString *attr = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:i longestEffectiveRange:&effectiveRange inRange:bounds];
+    
+    if (attr && [attr hasPrefix:@"A_"])
+        return effectiveRange;
+    return NSMakeRange(i, 0);
 }
 
 
-- (void)setGroup:(nonnull NSString *)group forTokenInRange:(NSRange)range
+- (NSRange)resetTokenGroupsInRange:(NSRange)range
+{
+    NSRange lexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location];
+    NSRange rexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location + range.length];
+    NSRange realrange = NSUnionRange(lexpand, NSUnionRange(range, rexpand));
+    
+    [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.colourScheme.textColor range:realrange];
+    [self.textStorage removeAttribute:SMLSyntaxGroupAttributeName range:realrange];
+    
+    return realrange;
+}
+
+
+- (void)setGroup:(nonnull NSString *)group forTokenInRange:(NSRange)range atomic:(BOOL)atomic
 {
     NSRange effectiveRange = NSMakeRange(0,0);
     NSRange bounds = NSMakeRange(0, [[layoutManager textStorage] length]);
     NSUInteger i = range.location;
     NSString *attr;
-    NSSet *overlapSet = [NSSet setWithObjects:SMLSyntaxGroupCommand,
-                         SMLSyntaxGroupInstruction, nil];
     
     while (NSLocationInRange(i, range)) {
-        attr = [self.textStorage attribute:SMLSyntaxGroup atIndex:i
+        attr = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:i
           longestEffectiveRange:&effectiveRange inRange:bounds];
-        if (![overlapSet containsObject:attr]) {
+        if (attr && [attr hasPrefix:@"A_"]) {
             [self resetTokenGroupsInRange:effectiveRange];
         }
         i = NSMaxRange(effectiveRange);
@@ -334,22 +340,36 @@ NSString *SMLSyntaxGroupComment = @"comments";
     
     NSDictionary *colourDictionary = [attributeCache objectForKey:group];
 	[self.textStorage addAttributes:colourDictionary range:range];
+ 
+    NSString *realgroup;
+    if (atomic) {
+        realgroup = [@"A_" stringByAppendingString:group];
+    } else {
+        realgroup = [@"a_" stringByAppendingString:group];
+    }
+    [self.textStorage addAttribute:SMLSyntaxGroupAttributeName value:realgroup range:range];
 }
 
 
 /*
  * - syntaxColouringGroupOfCharacterAtIndex:
  */
-- (NSString*)groupOfTokenAtCharacterIndex:(NSUInteger)index
+- (nullable NSString *)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic
 {
-    return [self.textStorage attribute:SMLSyntaxGroup atIndex:index effectiveRange:NULL];
+    NSString *raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+    if (!raw)
+        return nil;
+    if (atomic) {
+        *atomic = [raw hasPrefix:@"A_"];
+    }
+    return [raw substringFromIndex:2];
 }
 
 
 - (BOOL)existsTokenAtIndex:(NSUInteger)index range:(NSRangePointer)res
 {
     NSRange wholeRange = NSMakeRange(0, self.textStorage.length);
-    return !![self.textStorage attribute:SMLSyntaxGroup atIndex:index longestEffectiveRange:res inRange:wholeRange];
+    return !![self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index longestEffectiveRange:res inRange:wholeRange];
 }
 
 

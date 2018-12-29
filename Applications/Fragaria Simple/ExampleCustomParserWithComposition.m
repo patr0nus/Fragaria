@@ -50,12 +50,12 @@
     [string enumerateSubstringsInRange:realRange options:NSStringEnumerationByWords usingBlock:
     ^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         /* Ignore whatever is inside a string */
-        NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location];
+        NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location isAtomic:NULL];
         if ([SMLSyntaxGroupString isEqual:g])
             return;
         
         if ([substring length] > 0 && [substring hasPrefix:@"NS"]) {
-            [client setGroup:SMLSyntaxGroupCommand forTokenInRange:substringRange];
+            [client setGroup:SMLSyntaxGroupCommand forTokenInRange:substringRange atomic:YES];
         }
     }];
     

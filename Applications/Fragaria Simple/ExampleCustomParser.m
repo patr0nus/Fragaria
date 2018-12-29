@@ -33,7 +33,7 @@
     [string enumerateSubstringsInRange:realRange options:NSStringEnumerationByWords usingBlock:
     ^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         if ([substring length] > 0 && [uppercase characterIsMember:[substring characterAtIndex:0]]) {
-            [client setGroup:SMLSyntaxGroupInstruction forTokenInRange:substringRange];
+            [client setGroup:SMLSyntaxGroupInstruction forTokenInRange:substringRange atomic:YES];
         }
     }];
     

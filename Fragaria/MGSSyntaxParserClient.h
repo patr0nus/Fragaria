@@ -25,11 +25,11 @@ extern NSString *SMLSyntaxGroupComment;
 @protocol MGSSyntaxParserClient <NSObject>
 
 
-- (void)resetTokenGroupsInRange:(NSRange)range;
+- (NSRange)resetTokenGroupsInRange:(NSRange)range;
 
-- (void)setGroup:(NSString *)group forTokenInRange:(NSRange)range;
+- (void)setGroup:(SMLSyntaxGroup)group forTokenInRange:(NSRange)range atomic:(BOOL)atomic;
 
-- (NSString*)groupOfTokenAtCharacterIndex:(NSUInteger)index;
+- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic;
 
 - (BOOL)existsTokenAtIndex:(NSUInteger)index range:(NSRangePointer)res;
 
