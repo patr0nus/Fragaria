@@ -24,64 +24,90 @@
 #import <Cocoa/Cocoa.h>
 #import "MGSParserFactory.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 @class MGSSyntaxParser;
 
 
-/**
- *  Manages syntax definitions for Fragaria.
- *  @discussion Syntax definitions are found in the framework bundle by default,
- *  but can also be loaded automatically from your app bundle and from
- *  /Users/{user}/Library/Application Support/{appname}/.
- **/
+/** MGSSyntaxController manages syntax definitions for Fragaria.
+ *
+ *  A syntax definition describes a programming language supported by
+ *  Fragaria. It consists by a parser for a language, and by
+ *  metadata about associated file extensions and UTIs. Each
+ *  syntax definition is associated to a human-readable name, which
+ *  uniquely identifies it. This name is also denoted as the
+ *  Language Identifier.
+ *
+ *  Each syntax definition is handled by a MGSParserFactory.
+ *  The default Fragaria parser factory uses syntax definition files
+ *  located in the framework bundle, in your app bundle and from
+ *  /Users/{user}/Library/Application Support/{appname}/. */
 @interface MGSSyntaxController : NSObject
 
 
-/// @name Class Methods
+#pragma mark - Retrieving the Shared Instance
+/// @name Retrieving the Shared Instance
 
-/**
- *  Returns a shared instance of the MGSSyntaxController.
- **/
+
+/** Returns a shared instance of the MGSSyntaxController. */
 + (instancetype)sharedInstance;
 
-/**
- *  Returns the definition name for syntax "standard."
- **/
+
+#pragma mark - Finding Syntax Definitions
+/// @name Finding Syntax Definitions
+
+
+/** Returns the definition name for syntax "standard". */
 + (NSString *)standardSyntaxDefinitionName;
 
-
-/// @name Instance Methods
-
-
-- (void)registerParserFactory:(id <MGSParserFactory>)parserFactory;
-
-- (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef;
-
-
-/**
- *  Return the name of a syntax definition for the given extension.
- *  @param extension The extension for which to return a syntax definition name.
- **/
-- (NSArray<NSString *> *)syntaxDefinitionNamesWithExtension:(NSString *)extension;
-
-/**
- *  Return the name of a syntax definition for the given UTI type.
- *  @param uti The UTI type for which to return a syntax definition name.
- **/
-- (NSArray<NSString *> *)syntaxDefinitionNamesWithUTI:(NSString *)uti;
-
-/**
- *  Attempts to guess the syntax definition from the first line of text.
- *  @param firstLine The sample text to use in order to guess the syntax definition.
- **/
-- (NSArray<NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine;
-
-
-/// @name Properties
-
-/**
- *  Returns an array of all of the syntax definition names that are known.
- **/
+/** Array of all known syntax definition names. */
 @property (strong,nonatomic,readonly) NSArray<NSString *> *syntaxDefinitionNames;
 
+/** Returns a list of language identifiers corresponding to the given
+ *  filename extension.
+ *  @param extension The extension for which to search matching languages.
+ *  @returns A list of language identifiers, subset of syntaxDefinitionNames.
+ *  @note Language identifiers returned by this method are always included in
+ *        syntaxDefinitionNames. */
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithExtension:(NSString *)extension;
+
+/** Returns a list of language identifiers corresponding to the given
+ *  Universal Type Identifier (UTI).
+ *  @param uti The UTI for which to search matching languages.
+ *  @returns A list of language identifiers, subset of syntaxDefinitionNames.
+ *  @note Language identifiers returned by this method are always included in
+ *        syntaxDefinitionNames. */
+- (NSArray<NSString *> *)syntaxDefinitionNamesWithUTI:(NSString *)uti;
+
+/** Returns a list of language identifiers guessed based on the first line of
+ *  a text file.
+ *  @param firstLine The first line of a text file.
+ *  @returns A list of language identifiers, subset of syntaxDefinitionNames.
+ *  @note Language identifiers returned by this method are always included in
+ *        syntaxDefinitionNames. */
+- (NSArray<NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine;
+
+/** Instantiates a parser for the given language identifier.
+ *  @param syndef The language identifier.
+ *  @returns An instance of MGSSyntaxParser, or nil if the language identifier
+ *    does not match any supported syntax definition. */
+- (nullable MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef;
+
+
+#pragma mark - Adding Syntax Definitions
+/// @name Adding Syntax Definitions
+
+
+/** Registers a new parser factory instance.
+ *  @param parserFactory The new parser factory.
+ *  @note If multiple different parser factories expose syntax definitions with
+ *    the same name, the names are altered in order to maintain the
+ *    uniqueness of the elements of syntaxDefinitionNames. */
+- (void)registerParserFactory:(id <MGSParserFactory>)parserFactory;
+
+
 @end
+
+
+NS_ASSUME_NONNULL_END
