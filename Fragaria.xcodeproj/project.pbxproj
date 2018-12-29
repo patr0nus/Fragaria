@@ -116,6 +116,7 @@
 		01281839206FD3E6004D2C3B /* example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01281838206FD3E5004D2C3B /* example.txt */; };
 		0132786A1A81650300D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 013278671A81614600D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m */; };
 		013645082187E7A70088B324 /* MGSSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 013645062187E7A70088B324 /* MGSSyntaxParser.m */; };
+		0146372921D67368004B3B51 /* ExampleCustomParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0146372821D67368004B3B51 /* ExampleCustomParser.m */; };
 		0148656A1B19036900BE1DC4 /* NSObject+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 014865681B19036900BE1DC4 /* NSObject+Fragaria.m */; };
 		014E5847217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
 		014E5848217E574D00112F08 /* FragariaDefaultsCoordinator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -124,6 +125,7 @@
 		0150B3822186051600CBA228 /* MGSAttributeOverlayTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */; };
 		0150B38421861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */; };
 		0150B3862186610300CBA228 /* FragariaMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150B3852186610300CBA228 /* FragariaMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		016B52A221D6861A00504081 /* ExampleCustomParserWithComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
 		018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */; };
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
@@ -184,9 +186,7 @@
 		01D81AD21AA7E37E006DF8B8 /* Features.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81ACF1AA7E37E006DF8B8 /* Features.xib */; };
 		01D81AD31AA7E37E006DF8B8 /* Lorem.html in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD01AA7E37E006DF8B8 /* Lorem.html */; };
 		01D81AD41AA7E37E006DF8B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD11AA7E37E006DF8B8 /* MainMenu.xib */; };
-		01E4D55221D51CE5005AC122 /* MGSClassicFragariaParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */; };
 		01E4D55321D51CE5005AC122 /* MGSClassicFragariaParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55121D51CE5005AC122 /* MGSClassicFragariaParserFactory.m */; };
-		01E4D55621D5723D005AC122 /* MGSClassicFragariaSyntaxParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E4D55421D5723D005AC122 /* MGSClassicFragariaSyntaxParser.h */; };
 		01E4D55721D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55521D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m */; };
 		01E4D55921D57409005AC122 /* MGSSyntaxParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 013645072187E7A70088B324 /* MGSSyntaxParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01E4D55A21D5740D005AC122 /* MGSSyntaxAwareEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C35C1521B2FDA2009A12AB /* MGSSyntaxAwareEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -224,7 +224,6 @@
 		AB69B6CA118B7D2100903D1D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		AB69B6DA118B7F2A00903D1D /* SMLLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB69B6D9118B7F2A00903D1D /* SMLLayoutManager.m */; };
 		AB69B754118B830700903D1D /* Fragaria.h in Headers */ = {isa = PBXBuildFile; fileRef = AB69B753118B830700903D1D /* Fragaria.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB8387C5171D6115004408F4 /* SMLSyntaxDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = AB8387C4171D6115004408F4 /* SMLSyntaxDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABA1C12316144EFD00C8723F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ABA1C12116144D3F00C8723F /* README.md */; };
 		ABA812DC11B6855200A29990 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */; };
 		ABCA4DA416137FC000E4849B /* FragariaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* FragariaAppDelegate.m */; };
@@ -537,7 +536,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0101EBFA21D15EF9000E7A94 /* MGSSyntaxControllerPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxControllerPrivate.h; sourceTree = "<group>"; };
 		01086F9A1C99E16E00C335DA /* actionscript.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actionscript.plist; sourceTree = "<group>"; };
 		01086F9B1C99E16E00C335DA /* actionscript3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actionscript3.plist; sourceTree = "<group>"; };
 		01086F9C1C99E16E00C335DA /* active4d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = active4d.plist; sourceTree = "<group>"; };
@@ -645,6 +643,8 @@
 		013645072187E7A70088B324 /* MGSSyntaxParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxParser.h; sourceTree = "<group>"; };
 		0136450A2187E7AF0088B324 /* MGSSyntaxParserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxParserClient.h; sourceTree = "<group>"; };
 		0144942C1C908A88008DFDC9 /* MGSLineNumberViewDecoration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSLineNumberViewDecoration.h; sourceTree = "<group>"; };
+		0146372721D67368004B3B51 /* ExampleCustomParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleCustomParser.h; sourceTree = "<group>"; };
+		0146372821D67368004B3B51 /* ExampleCustomParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleCustomParser.m; sourceTree = "<group>"; };
 		014865671B19036900BE1DC4 /* NSObject+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Fragaria.h"; sourceTree = "<group>"; };
 		014865681B19036900BE1DC4 /* NSObject+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Fragaria.m"; sourceTree = "<group>"; };
 		014E7DA71C1C8D430093ACA6 /* NSTextStorage+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextStorage+Fragaria.h"; sourceTree = "<group>"; };
@@ -656,6 +656,8 @@
 		0166D9971A9FC3B20099AB81 /* SMLTextViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMLTextViewPrivate.h; sourceTree = "<group>"; };
 		01684A851B15FBD9008A900D /* MGSFontWell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSFontWell.h; sourceTree = "<group>"; };
 		01684A861B15FBD9008A900D /* MGSFontWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSFontWell.m; sourceTree = "<group>"; };
+		016B52A021D6861A00504081 /* ExampleCustomParserWithComposition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleCustomParserWithComposition.h; sourceTree = "<group>"; };
+		016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleCustomParserWithComposition.m; sourceTree = "<group>"; };
 		017FD5861A7A992700B305FB /* MGSLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSLineNumberView.h; sourceTree = "<group>"; };
 		017FD5871A7A992700B305FB /* MGSLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberView.m; sourceTree = "<group>"; };
 		018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineRangeForCharacterTests.m; sourceTree = "<group>"; };
@@ -730,7 +732,6 @@
 		AB69B68E118B78D400903D1D /* SMLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SMLTextView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AB69B6D9118B7F2A00903D1D /* SMLLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SMLLayoutManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AB69B753118B830700903D1D /* Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Fragaria.h; sourceTree = "<group>"; tabWidth = 4; };
-		AB8387C4171D6115004408F4 /* SMLSyntaxDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLSyntaxDefinition.h; sourceTree = "<group>"; };
 		AB8387CC171D7F1D004408F4 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
 		ABA1C12116144D3F00C8723F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE-2.0.txt"; sourceTree = "<group>"; };
@@ -1019,7 +1020,6 @@
 			isa = PBXGroup;
 			children = (
 				AB3971C8118C1F8A00AEF388 /* MGSSyntaxController.h */,
-				0101EBFA21D15EF9000E7A94 /* MGSSyntaxControllerPrivate.h */,
 				AB3971C9118C1F8A00AEF388 /* MGSSyntaxController.m */,
 			);
 			name = "Syntax Definition Manager";
@@ -1269,6 +1269,10 @@
 				256AC3D90F4B6AC300CF3369 /* FragariaAppDelegate.m */,
 				01BB1BF11A79AA15006C0056 /* MGSSimpleBreakpointDelegate.h */,
 				01BB1BF21A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m */,
+				0146372721D67368004B3B51 /* ExampleCustomParser.h */,
+				0146372821D67368004B3B51 /* ExampleCustomParser.m */,
+				016B52A021D6861A00504081 /* ExampleCustomParserWithComposition.h */,
+				016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */,
 				D034C8071A997FA8003D3A41 /* MainMenu.xib */,
 				018CFA0E1AE46B9800334011 /* main.m */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -1341,7 +1345,6 @@
 				AB69B753118B830700903D1D /* Fragaria.h */,
 				0150B3852186610300CBA228 /* FragariaMacros.h */,
 				E3CF4B7816E6927300C27B5C /* MGSBreakpointDelegate.h */,
-				AB8387C4171D6115004408F4 /* SMLSyntaxDefinition.h */,
 				E373BF121718A64700D71602 /* SMLAutoCompleteDelegate.h */,
 				0191FA7C1A881F280099B50D /* MGSDragOperationDelegate.h */,
 				019B80181A9E77330007D234 /* MGSFragariaTextViewDelegate.h */,
@@ -1471,7 +1474,6 @@
 				0150B3812186051600CBA228 /* MGSAttributeOverlayTextStorage.h in Headers */,
 				01FC685B21D3FBCC001E0124 /* MGSParserFactory.h in Headers */,
 				AB69B754118B830700903D1D /* Fragaria.h in Headers */,
-				01E4D55221D51CE5005AC122 /* MGSClassicFragariaParserFactory.h in Headers */,
 				E3CF4B7916E6927300C27B5C /* MGSBreakpointDelegate.h in Headers */,
 				0191FA7D1A881F6E0099B50D /* MGSDragOperationDelegate.h in Headers */,
 				AB257FE0129B1CE300A3FF76 /* MGSSyntaxController.h in Headers */,
@@ -1482,12 +1484,10 @@
 				E373BF131718A64700D71602 /* SMLAutoCompleteDelegate.h in Headers */,
 				01E4D55B21D57410005AC122 /* MGSSyntaxParserClient.h in Headers */,
 				01A0EC4F1E6C761400818624 /* MGSMutableSubstring.h in Headers */,
-				01E4D55621D5723D005AC122 /* MGSClassicFragariaSyntaxParser.h in Headers */,
 				01E4D55A21D5740D005AC122 /* MGSSyntaxAwareEditor.h in Headers */,
 				01E4D55921D57409005AC122 /* MGSSyntaxParser.h in Headers */,
 				01FBB3382153D591001E590C /* MGSMutableColourScheme.h in Headers */,
 				01A0EC4E1E6C755700818624 /* NSTextStorage+Fragaria.h in Headers */,
-				AB8387C5171D6115004408F4 /* SMLSyntaxDefinition.h in Headers */,
 				0191FA811A8829930099B50D /* SMLTextView+MGSTextActions.h in Headers */,
 				0150B3862186610300CBA228 /* FragariaMacros.h in Headers */,
 			);
@@ -1860,7 +1860,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc \\\n--project-name MGSFragaria \\\n--project-company \"Jonathan Mitchell and significant other contributors\" \\\n--company-id com.mugginsoft \\\n--no-repeat-first-par \\\n--logformat xcode \\\n--no-install-docset \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--ignore \"Pods\" \\\n--ignore \".md\" \\\n--ignore \".m\" \\\n--ignore \"Applications\" \\\n--ignore \"MGSPreferencesProxyDictionary.h\" \\\n--ignore \"MGSBoolToColourTransformer.h\" \\\n--ignore \"MGSBoolToGlobalHintTransformer.h\" \\\n--ignore \"MGSColourScheme.h\" \\\n--ignore \"MGSColourSchemeController.h\" \\\n--ignore \"MGSColourSchemeSaveController.h\" \\\n--ignore \"MGSColourToPlainTextTransformer.h\" \\\n--ignore \"MGSFontWell.h\" \\\n--ignore \"MGSUserDefaults.h\" \\\n--ignore \"NSColor+TransformedCompare.h\" \\\n--ignore \"MGSFragariaViewPrivate.h\" \\\n--ignore \"MGSLineNumberView.h\" \\\n--ignore \"MGSMutableSubstring.h\" \\\n--ignore \"MGSSyntaxDefinition.h\" \\\n--ignore \"MGSSyntaxErrorController.h\" \\\n--ignore \"NSObject+Fragaria.h\" \\\n--ignore \"NSScanner+Fragaria.h\" \\\n--ignore \"NSString+Fragaria.h\" \\\n--ignore \"NSTextStorage+Fragaria.h\" \\\n--ignore \"SMLLayoutManager.h\" \\\n--ignore \"SMLSyntaxColouring.h\" \\\n--ignore \"SMLTextViewPrivate.h\" \\\n--ignore \"MGSExtraInterfaceController.h\" \\\n--ignore \"MGSLineNumberViewDecoration.h\" \\\n--ignore \"NSSet+Fragaria.h\" \\\n--output \"AppleDoc\" \\\n--exit-threshold \"2\" \\\n.";
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name MGSFragaria \\\n--project-company \"Jonathan Mitchell and significant other contributors\" \\\n--company-id com.mugginsoft \\\n--no-repeat-first-par \\\n--logformat xcode \\\n--no-install-docset \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--ignore \"Pods\" \\\n--ignore \".md\" \\\n--ignore \".m\" \\\n--ignore \"Applications\" \\\n--ignore \"MGSPreferencesProxyDictionary.h\" \\\n--ignore \"MGSBoolToColourTransformer.h\" \\\n--ignore \"MGSBoolToGlobalHintTransformer.h\" \\\n--ignore \"MGSColourScheme.h\" \\\n--ignore \"MGSColourSchemeController.h\" \\\n--ignore \"MGSColourSchemeSaveController.h\" \\\n--ignore \"MGSColourToPlainTextTransformer.h\" \\\n--ignore \"MGSFontWell.h\" \\\n--ignore \"MGSUserDefaults.h\" \\\n--ignore \"NSColor+TransformedCompare.h\" \\\n--ignore \"MGSFragariaViewPrivate.h\" \\\n--ignore \"MGSLineNumberView.h\" \\\n--ignore \"MGSMutableSubstring.h\" \\\n--ignore \"MGSSyntaxDefinition.h\" \\\n--ignore \"MGSSyntaxErrorController.h\" \\\n--ignore \"NSObject+Fragaria.h\" \\\n--ignore \"NSScanner+Fragaria.h\" \\\n--ignore \"NSString+Fragaria.h\" \\\n--ignore \"NSTextStorage+Fragaria.h\" \\\n--ignore \"SMLLayoutManager.h\" \\\n--ignore \"SMLSyntaxColouring.h\" \\\n--ignore \"SMLTextViewPrivate.h\" \\\n--ignore \"MGSExtraInterfaceController.h\" \\\n--ignore \"MGSLineNumberViewDecoration.h\" \\\n--ignore \"NSSet+Fragaria.h\" \\\n--output \"AppleDoc\" \\\n--exit-threshold \"2\" \\\n.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1956,6 +1956,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016B52A221D6861A00504081 /* ExampleCustomParserWithComposition.m in Sources */,
+				0146372921D67368004B3B51 /* ExampleCustomParser.m in Sources */,
 				01BB1BF41A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m in Sources */,
 				018CFA101AE46BA100334011 /* main.m in Sources */,
 				ABCA4DA416137FC000E4849B /* FragariaAppDelegate.m in Sources */,
