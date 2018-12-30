@@ -34,6 +34,17 @@ extern SMLSyntaxGroup SMLSyntaxGroupComment;
 @protocol MGSSyntaxParserClient <NSObject>
 
 
+#pragma mark - Retrieving the String to Parse
+/// @name Retrieving the String to Parse
+
+
+/** The string currently being parsed */
+@property (nonatomic, readonly) NSString *stringToParse;
+
+/** The string range to parse */
+@property (nonatomic, readonly) NSRange rangeToParse;
+
+
 #pragma mark - Creating Tokens
 /// @name Creating Tokens
 

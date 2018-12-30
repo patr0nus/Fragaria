@@ -42,12 +42,12 @@
 }
 
 
-- (NSRange)parseString:(NSString *)string inRange:(NSRange)range forParserClient:(id<MGSSyntaxParserClient>)client
+- (NSRange)parseForClient:(id<MGSSyntaxParserClient>)client
 {
     /* Color as a command every word starting with NS */
-    NSRange realRange = [objcParser parseString:string inRange:range forParserClient:client];
+    NSRange realRange = [objcParser parseForClient:client];
     
-    [string enumerateSubstringsInRange:realRange options:NSStringEnumerationByWords usingBlock:
+    [client.stringToParse enumerateSubstringsInRange:realRange options:NSStringEnumerationByWords usingBlock:
     ^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         /* Ignore whatever is inside a string */
         NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location];

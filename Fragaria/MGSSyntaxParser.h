@@ -64,11 +64,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Entry Point for Parsing
 
 
-/** Parse the specified string range and set appropriate syntax group tokens.
- *  @param string The entire text string.
- *  @param range The range of string to be parsed.
- *  @param client The parser client to use for creating tokens.
- *  @returns The actual string range affected. May be larger or smaller than range.
+/** Parse a string range and set appropriate syntax group tokens for the specified
+ *  parser client.
+ *  @param client The parser client to use for retrieving the string and to
+ *    create tokens.
+ *  @returns The actual string range affected. May be larger or smaller than the
+ *    initial range.
  *  @note Any pre-existing tokens created by previous invocations of this methods
  *    are always retained, whether the range overlapped or not. Your parser can
  *    take advantage of this if needed.
@@ -78,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @warning Returning a new range smaller than the passed range can easily cause
  *     infinite loops if there is no way for Fragaria to completely cover the whole
  *     string. Avoid doing so as much as possible. */
-- (NSRange)parseString:(NSString *)string inRange:(NSRange)range forParserClient:(id<MGSSyntaxParserClient>)client;
+- (NSRange)parseForClient:(id<MGSSyntaxParserClient>)client;
 
 
 #pragma mark - Parser Configuration

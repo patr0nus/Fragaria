@@ -48,10 +48,15 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 
 @property (nonatomic, assign) BOOL coloursChanged;
 
+@property (nonatomic) NSString *stringToParse;
+
+@property (nonatomic) NSRange rangeToParse;
+
 @end
 
 
-@implementation SMLSyntaxColouring {
+@implementation SMLSyntaxColouring
+{
     SMLLayoutManager __weak *layoutManager;
     NSDictionary<NSString *, NSDictionary *> *attributeCache;
 }
@@ -286,8 +291,9 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 
 - (NSRange)recolourChangedRange:(NSRange)rangeToRecolour
 {
-    NSString *string = self.layoutManager.textStorage.string;
-    return [self.parser parseString:string inRange:rangeToRecolour forParserClient:self];
+    self.stringToParse = self.layoutManager.textStorage.string;
+    self.rangeToParse = rangeToRecolour;
+    return [self.parser parseForClient:self];
 }
 
 

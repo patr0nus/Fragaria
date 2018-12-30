@@ -127,8 +127,11 @@ typedef NSInteger SMLSyntaxGroupInteger;
 #pragma mark - Parser Entry Point
 
 
-- (NSRange)parseString:(NSString *)documentString inRange:(NSRange)rangeToRecolour forParserClient:(id<MGSSyntaxParserClient>)client
+- (NSRange)parseForClient:(id<MGSSyntaxParserClient>)client
 {
+    NSString *documentString = client.stringToParse;
+    NSRange rangeToRecolour = client.rangeToParse;
+    
     if (!self.syntaxDefinition.syntaxDefinitionAllowsColouring)
         return NSMakeRange(0, documentString.length);
     

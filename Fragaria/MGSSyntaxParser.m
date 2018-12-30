@@ -14,9 +14,9 @@
 @implementation MGSSyntaxParser
 
 
-- (NSRange)parseString:(NSString *)string inRange:(NSRange)range forParserClient:(id<MGSSyntaxParserClient>)client
+- (NSRange)parseForClient:(id<MGSSyntaxParserClient>)client
 {
-    return NSMakeRange(0, string.length);
+    return NSMakeRange(0, client.stringToParse.length);
 }
 
 
