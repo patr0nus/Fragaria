@@ -103,7 +103,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         }
         if ([keywords containsObject:keywordTestString]) {
             if (!self.syntaxDefinition.recolourKeywordIfAlreadyColoured) {
-                if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation + rangeLocation isAtomic:NULL] isEqual:SMLSyntaxGroupCommand]) {
+                if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation + rangeLocation] isEqual:SMLSyntaxGroupCommand]) {
                     continue;
                 }
             }
@@ -151,7 +151,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     if (self.coloursMultiLineStrings) {
         NSInteger beginFirstStringInMultiLine = [documentString rangeOfString:self.syntaxDefinition.firstString options:NSBackwardsSearch range:NSMakeRange(0, effectiveRange.location)].location;
         if (beginFirstStringInMultiLine != NSNotFound) {
-            if ([[client groupOfTokenAtCharacterIndex:beginFirstStringInMultiLine isAtomic:NULL] isEqual:@"strings"]) {
+            if ([[client groupOfTokenAtCharacterIndex:beginFirstStringInMultiLine] isEqual:@"strings"]) {
                 NSInteger startOfLine = [documentString lineRangeForRange:NSMakeRange(beginFirstStringInMultiLine, 0)].location;
                 effectiveRange = NSMakeRange(startOfLine, rangeToRecolour.length + (rangeToRecolour.location - startOfLine));
             }
@@ -174,10 +174,10 @@ typedef NSInteger SMLSyntaxGroupInteger;
      * block. */
     NSRange longRange;
     
-    if ([client existsTokenAtIndex:effectiveRange.location range:&longRange]) {
+    if ([client groupOfTokenAtCharacterIndex:effectiveRange.location isAtomic:NULL range:&longRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
-    if (NSMaxRange(effectiveRange) < documentString.length && [client existsTokenAtIndex:NSMaxRange(effectiveRange) range:&longRange]) {
+    if (NSMaxRange(effectiveRange) < documentString.length && [client groupOfTokenAtCharacterIndex:NSMaxRange(effectiveRange) isAtomic:NULL range:&longRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
     
@@ -565,7 +565,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     
     [regex enumerateMatchesInString:rangeString options:0 range:NSMakeRange(0, [rangeString length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
         NSRange foundRange = [match range];
-        if ([[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation isAtomic:NULL] isEqual:@"strings"])
+        if ([[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation] isEqual:@"strings"])
             return;
         [self.client setGroup:SMLSyntaxGroupString forTokenInRange:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
     }];
@@ -589,7 +589,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         } else {
             break;
         }
-        if (![[self.client groupOfTokenAtCharacterIndex:(colourStartLocation + rangeLocation) isAtomic:NULL] isEqual:SMLSyntaxGroupCommand]) {
+        if (![[self.client groupOfTokenAtCharacterIndex:(colourStartLocation + rangeLocation)] isEqual:SMLSyntaxGroupCommand]) {
             continue;
         }
         
@@ -668,7 +668,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
                 
                 // If the comment is within an already coloured string then disregard it
                 if (colourStartLocation + rangeLocation + searchSyntaxLength < documentStringLength) {
-                    if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation + rangeLocation isAtomic:NULL] isEqual:@"strings"]) {
+                    if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation + rangeLocation] isEqual:@"strings"]) {
                         [rangeScanner mgs_setScanLocation:colourStartLocation + 1];
                         continue;
                     }
@@ -747,7 +747,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
                     [documentScanner mgs_setScanLocation:colourStartLocation + 1];
                     
                     // If the comment is within a string disregard it
-                    if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation isAtomic:NULL] isEqual:@"strings"]) {
+                    if ([[self.client groupOfTokenAtCharacterIndex:colourStartLocation] isEqual:@"strings"]) {
                         beginLocationInMultiLine++;
                         continue;
                     }
@@ -822,7 +822,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     
     [regex enumerateMatchesInString:rangeString options:0 range:NSMakeRange(0, [rangeString length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
         NSRange foundRange = [match range];
-        if ([[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation isAtomic:NULL] isEqual:@"strings"] || [[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation isAtomic:NULL] isEqual:@"comments"]) return;
+        if ([[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation] isEqual:@"strings"] || [[self.client groupOfTokenAtCharacterIndex:foundRange.location + rangeLocation] isEqual:@"comments"]) return;
         [self.client setGroup:SMLSyntaxGroupString forTokenInRange:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
     }];
 }

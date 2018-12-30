@@ -34,6 +34,10 @@ extern SMLSyntaxGroup SMLSyntaxGroupComment;
 @protocol MGSSyntaxParserClient <NSObject>
 
 
+#pragma mark - Creating Tokens
+/// @name Creating Tokens
+
+
 /** Removes any group assigned to the tokens in the specified range.
  *  @note Non-atomic tokens that cross the range boundary survive only outside the
  *    range specified. Atomic tokens crossing the range boundary are completely
@@ -56,20 +60,32 @@ extern SMLSyntaxGroup SMLSyntaxGroupComment;
  *  @param atomic If the new token will be atomic. */
 - (void)setGroup:(SMLSyntaxGroup)group forTokenInRange:(NSRange)range atomic:(BOOL)atomic;
 
-/** Searches for the token containing the character at the specified index and
- *  fetches its group.
- *  @param index The index of a character in the token to search.
- *  @param atomic Optional pointer to a BOOL which will be assigned YES if an atomic
- *     token is found, or NO if a non-atomic token is found.
- *  @returns The group of the token, or nil if no token was found. */
-- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic;
+
+#pragma mark - Inspecting Existing Tokens
+/// @name Inspecting Existing Tokens
+
 
 /** Searches if a token containing the character at the specified index exists.
+ *  @note This method is faster than `-groupOfTokenAtCharacterIndex:`.
  *  @param index The index of a character in the token to search.
- *  @param res Optional pointer to an NSRange which will be assigned the boundary of
- *     the token if it is found.
  *  @returns YES if a token is found, NO otherwise.  */
-- (BOOL)existsTokenAtIndex:(NSUInteger)index range:(NSRangePointer)res;
+- (BOOL)existsTokenAtIndex:(NSUInteger)index;
+
+/** Searches for the token containing the character at the specified index, then
+ *  return its group.
+ *  @param index The index of a character in the token to search.
+ *  @returns The group of the token, or nil if no token was found. */
+- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index;
+
+/** Searches for the token containing the character at the specified index, then
+ *  return its group and range in the string.
+ *  @param index The index of a character in the token to search.
+ *  @param atomic Optional pointer to a BOOL which will be assigned YES if an atomic
+ *    token is found, or NO if a non-atomic token is found.
+ *  @param range Optional pointer to an NSRange which will be assigned the range of
+ *    the token in the text, if it is found.
+ *  @returns The group of the token, or nil if no token was found. */
+- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range;
 
 
 @end

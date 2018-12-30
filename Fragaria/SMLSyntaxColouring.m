@@ -351,12 +351,27 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 }
 
 
-/*
- * - syntaxColouringGroupOfCharacterAtIndex:
- */
-- (nullable NSString *)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic
+- (BOOL)existsTokenAtIndex:(NSUInteger)index
 {
-    NSString *raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+    return !![self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+}
+
+
+- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index
+{
+    return [self groupOfTokenAtCharacterIndex:index isAtomic:NULL range:NULL];
+}
+
+
+- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range
+{
+    NSString *raw;
+    if (!range) {
+        raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+    } else {
+        NSRange wholeRange = NSMakeRange(0, self.textStorage.length);
+        raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index longestEffectiveRange:range inRange:wholeRange];
+    }
     if (!raw)
         return nil;
     if (atomic) {
@@ -364,14 +379,6 @@ NSString * const SMLSyntaxGroupComment = @"comments";
     }
     return [raw substringFromIndex:2];
 }
-
-
-- (BOOL)existsTokenAtIndex:(NSUInteger)index range:(NSRangePointer)res
-{
-    NSRange wholeRange = NSMakeRange(0, self.textStorage.length);
-    return !![self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index longestEffectiveRange:res inRange:wholeRange];
-}
-
 
 
 @end

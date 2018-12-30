@@ -50,7 +50,7 @@
     [string enumerateSubstringsInRange:realRange options:NSStringEnumerationByWords usingBlock:
     ^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         /* Ignore whatever is inside a string */
-        NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location isAtomic:NULL];
+        NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location];
         if ([SMLSyntaxGroupString isEqual:g])
             return;
         
