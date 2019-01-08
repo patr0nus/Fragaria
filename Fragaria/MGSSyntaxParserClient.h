@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Syntax groups are tags for identifying tokens in the text that must be
  *  coloured. */
-typedef NSString * const SMLSyntaxGroup NS_STRING_ENUM;
+typedef NSString * const SMLSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
 extern SMLSyntaxGroup SMLSyntaxGroupNumber;
 extern SMLSyntaxGroup SMLSyntaxGroupCommand;
 extern SMLSyntaxGroup SMLSyntaxGroupInstruction;
