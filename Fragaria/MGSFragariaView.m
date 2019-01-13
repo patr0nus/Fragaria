@@ -253,14 +253,6 @@
 }
 
 
-- (void)setColoursFromScheme:(MGSColourScheme *)scheme
-{
-    NSArray *keys = [MGSColourScheme propertiesOfScheme];
-    NSDictionary *colors = [scheme dictionaryWithValuesForKeys:keys];
-    [self setValuesForKeysWithDictionary:colors];
-}
-
-
 #pragma mark - Configuring Autocompletion
 
 
