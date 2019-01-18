@@ -7,6 +7,7 @@
 //
 
 #import "MGSPrefsViewController.h"
+#import "MGSSyntaxParserClient.h"
 
 @class MGSMutableColourScheme;
 
@@ -16,7 +17,7 @@
  *  instances of the MGSPrefsColourProperties nib.
  **/
 
-@interface MGSPrefsColourPropertiesViewController : MGSPrefsViewController
+@interface MGSPrefsColourPropertiesViewController : MGSPrefsViewController <NSTableViewDelegate, NSTableViewDataSource>
 
 
 @property (nonatomic, weak) IBOutlet NSObjectController *currentSchemeObjectController;
@@ -24,5 +25,20 @@
 
 @property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
 
+
+@end
+
+
+@interface MGSColourSchemeTableCellView: NSView
+
+@property (nonatomic) IBOutlet NSButton *enabled;
+@property (nonatomic) IBOutlet NSTextField *label;
+@property (nonatomic) IBOutlet NSColorWell *colorWell;
+
+@property (nonatomic, weak) MGSPrefsColourPropertiesViewController *parentVc;
+@property (nonatomic) SMLSyntaxGroup syntaxGroup;
+
+- (void)updateView;
+- (IBAction)updateScheme:(id)sender;
 
 @end
