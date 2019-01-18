@@ -6,6 +6,7 @@
 //
 //
 
+#import <objc/message.h>
 #import "MGSColourScheme.h"
 #import "MGSFragariaView+Definitions.h"
 #import "MGSColourToPlainTextTransformer.h"
@@ -127,9 +128,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
-#pragma mark - General Properties
-
-
 - (void)setPropertiesFromDictionary:(NSDictionary *)dictionaryRepresentation
 {
     [self setValuesForKeysWithDictionary:dictionaryRepresentation];
@@ -233,9 +231,6 @@ wrongFormat:
 {
     return [[[self class] propertiesAll] allObjects];
 }
-
-
-#pragma mark - Instance Methods
 
 
 /*
@@ -356,9 +351,6 @@ plistError:
 {
     return [[MGSMutableColourScheme alloc] initWithColourScheme:self];
 }
-
-
-#pragma mark - Category and Private
 
 
 /*
@@ -535,6 +527,55 @@ plistError:
     }
     
     return res;
+}
+
+
+- (NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        groupMap = @{
+            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(colourForNumbers)),
+            SMLSyntaxGroupString: NSStringFromSelector(@selector(colourForStrings)),
+            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(colourForCommands)),
+            SMLSyntaxGroupComment: NSStringFromSelector(@selector(colourForComments)),
+            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(colourForKeywords)),
+            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(colourForVariables)),
+            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(colourForAttributes)),
+            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(colourForInstructions)),
+            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(colourForAutocomplete))
+        };
+    });
+    NSString *key = [groupMap objectForKey:syntaxGroup];
+    if (!key)
+        return nil;
+    return [self valueForKey:key];
+}
+
+
+- (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        groupMap = @{
+            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(coloursNumbers)),
+            SMLSyntaxGroupString: NSStringFromSelector(@selector(coloursStrings)),
+            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(coloursCommands)),
+            SMLSyntaxGroupComment: NSStringFromSelector(@selector(coloursComments)),
+            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(coloursKeywords)),
+            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(coloursVariables)),
+            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(coloursAttributes)),
+            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(coloursInstructions)),
+            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(coloursAutocomplete))
+        };
+    });
+    NSString *key = [groupMap objectForKey:syntaxGroup];
+    if (!key)
+        return YES;
+    SEL selector = NSSelectorFromString(key);
+    return ((BOOL (*)(id _Nonnull, SEL _Nonnull))objc_msgSend)(self, selector);
 }
 
 

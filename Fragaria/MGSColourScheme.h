@@ -4,9 +4,9 @@
 //
 //  Created by Jim Derry on 3/16/15.
 //
-/// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
+#import "MGSSyntaxParserClient.h"
 
 
 extern NSString * const MGSColourSchemeErrorDomain;
@@ -127,6 +127,29 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 /** Editor insertion point color. */
 @property (nonatomic, strong, readonly) NSColor *insertionPointColor;
 
+/** Returns the highlighting colour of specified syntax group.
+ *  @param syntaxGroup The syntax group identifier. */
+- (NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+/** Returns if the specified syntax group will be highlighted.
+ *  @param syntaxGroup The syntax group identifier. */
+- (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+
+#pragma mark - Checking Equality
+/// @name Checking Equality
+
+
+/** Indicates if two schemes have the same colour settings.
+ *  @param scheme The scheme that you want to compare to the receiver. */
+- (BOOL)isEqualToScheme:(MGSColourScheme *)scheme;
+
+
+@end
+
+
+@interface MGSColourScheme (MGSDeprecated)
+
 /** Syntax color for attributes. */
 @property (nonatomic, strong, readonly) NSColor *colourForAttributes;
 /** Syntax color for autocomplete. */
@@ -164,15 +187,5 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 @property (nonatomic, assign, readonly) BOOL coloursStrings;
 /** Should variables be colored? */
 @property (nonatomic, assign, readonly) BOOL coloursVariables;
-
-
-#pragma mark - Checking Equality
-/// @name Checking Equality
-
-
-/** Indicates if two schemes have the same colour settings.
- *  @param scheme The scheme that you want to compare to the receiver. */
-- (BOOL)isEqualToScheme:(MGSColourScheme *)scheme;
-
 
 @end

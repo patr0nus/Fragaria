@@ -44,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSColor *currentLineHighlightColour;
 /** Editor insertion point color. */
 @property (nonatomic, strong) NSColor *insertionPointColor;
+
+- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
+
+
 /** Syntax color for attributes. */
 @property (nonatomic, strong) NSColor *colourForAttributes;
 /** Syntax color for autocomplete. */
