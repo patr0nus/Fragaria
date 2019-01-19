@@ -579,4 +579,13 @@ plistError:
 }
 
 
+- (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font
+{
+    if (![self coloursSyntaxGroup:group])
+        return @{};
+    NSColor *color = [self colourForSyntaxGroup:group];
+    return @{NSForegroundColorAttributeName: color};
+}
+
+
 @end

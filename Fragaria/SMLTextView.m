@@ -219,6 +219,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     /* setFont: also updates our typing attributes */
     [self setFont:textFont];
     [self.layoutManager setInvisibleCharactersFont:textFont];
+    [self.syntaxColouring setTextFont:textFont];
     [self configurePageGuide];
     [self setTabWidth:_tabWidth];
 }

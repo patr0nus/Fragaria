@@ -913,7 +913,6 @@
 	
 	// syntaxColouring defaults
 	self.syntaxDefinitionName = [MGSSyntaxController standardSyntaxDefinitionName];
-	self.textView.syntaxColouring.fragaria = self;
 	
 	// add scroll view to content view
 	[self addSubview:self.scrollView];

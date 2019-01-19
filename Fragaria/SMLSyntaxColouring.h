@@ -44,10 +44,6 @@ Copyright 2004-2009 Peter Borg
 
 /// @name Properties - Internal
 
-/** The MGSFragaria instance to be passed to the syntax colouring delegate
- * as the fragaria document parameter. */
-@property (weak) MGSFragariaView *fragaria;
-
 /** The layout manager of the text view */
 @property (readonly, weak) NSLayoutManager *layoutManager;
 
@@ -63,6 +59,8 @@ Copyright 2004-2009 Peter Borg
 
 /** The colour scheme */
 @property (nonatomic, strong) MGSColourScheme *colourScheme;
+/** The base font to use for highlighting */
+@property (nonatomic, strong) NSFont *textFont;
 
 /** If multiline strings should be coloured. */
 @property (nonatomic, assign) BOOL coloursMultiLineStrings;

@@ -135,6 +135,12 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *  @param syntaxGroup The syntax group identifier. */
 - (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
+/** Returns the dictionary of attributes to use for colouring a
+ *  token of a given syntax group.
+ *  @param group The syntax group of the token.
+ *  @param font The font used for non-highlighted text. */
+- (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font;
+
 
 #pragma mark - Checking Equality
 /// @name Checking Equality

@@ -58,7 +58,6 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 @implementation SMLSyntaxColouring
 {
     SMLLayoutManager __weak *layoutManager;
-    NSDictionary<NSString *, NSDictionary *> *attributeCache;
 }
 
 
@@ -82,9 +81,10 @@ NSString * const SMLSyntaxGroupComment = @"comments";
         _parser = [[MGSSyntaxController sharedInstance] parserForSyntaxDefinitionName:sdname];
 
         // configure colouring
-        self.coloursOnlyUntilEndOfLine = YES;
         _colourScheme = [[MGSColourScheme alloc] init];
-        [self rebuildAttributesCache];
+        _textFont = [NSFont userFontOfSize:0];
+        self.parser.coloursOnlyUntilEndOfLine = YES;
+        [self invalidateAllColouring];
 
         [self layoutManagerDidChangeTextStorage];
 	}
@@ -93,13 +93,20 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 }
 
 
-#pragma mark - Colour Scheme Updating
+#pragma mark - Colour Scheme & Font Updating
 
 
 - (void)setColourScheme:(MGSColourScheme *)colourScheme
 {
     _colourScheme = colourScheme;
-    [self rebuildAttributesCache];
+    [self invalidateAllColouring];
+}
+
+
+- (void)setTextFont:(NSFont *)textFont
+{
+    _textFont = textFont;
+    [self invalidateAllColouring];
 }
 
 
@@ -191,54 +198,6 @@ NSString * const SMLSyntaxGroupComment = @"comments";
 
 
 /*
- * - rebuildAttributesCache
- */
-- (void)rebuildAttributesCache
-{
-    attributeCache = @{
-        SMLSyntaxGroupCommand:
-            self.colourScheme.coloursCommands ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForCommands} :
-                @{},
-        SMLSyntaxGroupComment:
-            self.colourScheme.coloursComments ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForComments} :
-                @{},
-        SMLSyntaxGroupInstruction:
-            self.colourScheme.coloursInstructions ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForInstructions} :
-                @{},
-        SMLSyntaxGroupKeyword:
-            self.colourScheme.coloursKeywords ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForKeywords} :
-                @{},
-        SMLSyntaxGroupAutoComplete:
-            self.colourScheme.coloursAutocomplete ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForAutocomplete} :
-                @{},
-        SMLSyntaxGroupString:
-            self.colourScheme.coloursStrings ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForStrings} :
-                @{},
-        SMLSyntaxGroupVariable:
-            self.colourScheme.coloursVariables ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForVariables} :
-                @{},
-        SMLSyntaxGroupAttribute:
-            self.colourScheme.coloursAttributes ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForAttributes} :
-                @{},
-        SMLSyntaxGroupNumber:
-            self.colourScheme.coloursNumbers ?
-                @{NSForegroundColorAttributeName: self.colourScheme.colourForNumbers} :
-                @{}
-    };
-    
-    [self invalidateAllColouring];
-}
-
-
-/*
  * - invalidateAllColouring
  */
 - (void)invalidateAllColouring
@@ -321,7 +280,10 @@ NSString * const SMLSyntaxGroupComment = @"comments";
     NSRange rexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location + range.length];
     NSRange realrange = NSUnionRange(lexpand, NSUnionRange(range, rexpand));
     
-    [self.textStorage addAttribute:NSForegroundColorAttributeName value:self.colourScheme.textColor range:realrange];
+    NSDictionary *attributes = @{
+        NSForegroundColorAttributeName: self.colourScheme.textColor,
+        NSFontAttributeName: self.textFont};
+    [self.textStorage addAttributes:attributes range:realrange];
     [self.textStorage removeAttribute:SMLSyntaxGroupAttributeName range:realrange];
     
     return realrange;
@@ -344,7 +306,7 @@ NSString * const SMLSyntaxGroupComment = @"comments";
         i = NSMaxRange(effectiveRange);
     }
     
-    NSDictionary *colourDictionary = [attributeCache objectForKey:group];
+    NSDictionary *colourDictionary = [self.colourScheme attributesForSyntaxGroup:group textFont:self.textFont];
 	[self.textStorage addAttributes:colourDictionary range:range];
  
     NSString *realgroup;
