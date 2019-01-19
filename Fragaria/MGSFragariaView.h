@@ -361,24 +361,6 @@ IB_DESIGNABLE
 @property (nonatomic, assign, nonnull) NSColor *textInvisibleCharactersColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
 @property (nonatomic, assign, nonnull) NSColor *currentLineHighlightColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
 @property (nonatomic, assign, nonnull) NSColor *insertionPointColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForAutocomplete FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForAttributes FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForCommands FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForComments FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForInstructions FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForKeywords FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForNumbers FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForStrings FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *colourForVariables FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursAttributes FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursAutocomplete FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursCommands FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursComments FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursInstructions FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursKeywords FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursNumbers FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursStrings FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign) BOOL coloursVariables FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
 
 
 @end

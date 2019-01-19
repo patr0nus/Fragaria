@@ -37,12 +37,6 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *      (no unarchiving will be attempted). */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
 
-/** Initialize a new colour scheme with the currently selected color options
- *  on the specified instance of MGSFragariaView.
- *  @param fragaria The MGSFragariaView instance from which to copy the
- *         initial settings. */
-- (instancetype)initWithFragaria:(MGSFragariaView *)fragaria displayName:(NSString *)name;
-
 /** Initializes a new colour scheme instance from a file.
  *  @param file The URL of the plist file which contains the colour scheme values.
  *  @param err Upon return, if the initialization failed, contains an NSError object
@@ -153,45 +147,3 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 
 @end
 
-
-@interface MGSColourScheme (MGSDeprecated)
-
-/** Syntax color for attributes. */
-@property (nonatomic, strong, readonly) NSColor *colourForAttributes;
-/** Syntax color for autocomplete. */
-@property (nonatomic, strong, readonly) NSColor *colourForAutocomplete;
-/** Syntax color for commands. */
-@property (nonatomic, strong, readonly) NSColor *colourForCommands;
-/** Syntax color for comments. */
-@property (nonatomic, strong, readonly) NSColor *colourForComments;
-/** Syntax color for instructions. */
-@property (nonatomic, strong, readonly) NSColor *colourForInstructions;
-/** Syntax color for keywords. */
-@property (nonatomic, strong, readonly) NSColor *colourForKeywords;
-/** Syntax color for numbers. */
-@property (nonatomic, strong, readonly) NSColor *colourForNumbers;
-/** Syntax color for strings. */
-@property (nonatomic, strong, readonly) NSColor *colourForStrings;
-/** Syntax color for variables. */
-@property (nonatomic, strong, readonly) NSColor *colourForVariables;
-
-/** Should attributes be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursAttributes;
-/** Should autocomplete be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursAutocomplete;
-/** Should commands be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursCommands;
-/** Should comments be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursComments;
-/** Should instructions be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursInstructions;
-/** Should keywords be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursKeywords;
-/** Should numbers be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursNumbers;
-/** Should strings be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursStrings;
-/** Should variables be colored? */
-@property (nonatomic, assign, readonly) BOOL coloursVariables;
-
-@end

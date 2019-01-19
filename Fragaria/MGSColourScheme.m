@@ -72,19 +72,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
-- (instancetype)initWithFragaria:(MGSFragariaView *)fragaria displayName:(NSString *)name
-{
-    NSArray *keys = [[self class] propertiesOfScheme];
-    NSDictionary *dict = [fragaria dictionaryWithValuesForKeys:keys];
-    self = [self initWithDictionary:dict];
-    _displayName = name;
-    return self;
-}
-
-
-/*
- * - initWithFile:
- */
 - (instancetype)initWithSchemeFileURL:(NSURL *)file error:(NSError **)err
 {
     self = [self init];

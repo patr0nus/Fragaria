@@ -49,45 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
 
-/** Syntax color for attributes. */
-@property (nonatomic, strong) NSColor *colourForAttributes;
-/** Syntax color for autocomplete. */
-@property (nonatomic, strong) NSColor *colourForAutocomplete;
-/** Syntax color for commands. */
-@property (nonatomic, strong) NSColor *colourForCommands;
-/** Syntax color for comments. */
-@property (nonatomic, strong) NSColor *colourForComments;
-/** Syntax color for instructions. */
-@property (nonatomic, strong) NSColor *colourForInstructions;
-/** Syntax color for keywords. */
-@property (nonatomic, strong) NSColor *colourForKeywords;
-/** Syntax color for numbers. */
-@property (nonatomic, strong) NSColor *colourForNumbers;
-/** Syntax color for strings. */
-@property (nonatomic, strong) NSColor *colourForStrings;
-/** Syntax color for variables. */
-@property (nonatomic, strong) NSColor *colourForVariables;
-
-/** Should attributes be colored? */
-@property (nonatomic, assign) BOOL coloursAttributes;
-/** Should autocomplete be colored? */
-@property (nonatomic, assign) BOOL coloursAutocomplete;
-/** Should commands be colored? */
-@property (nonatomic, assign) BOOL coloursCommands;
-/** Should comments be colored? */
-@property (nonatomic, assign) BOOL coloursComments;
-/** Should instructions be colored? */
-@property (nonatomic, assign) BOOL coloursInstructions;
-/** Should keywords be colored? */
-@property (nonatomic, assign) BOOL coloursKeywords;
-/** Should numbers be colored? */
-@property (nonatomic, assign) BOOL coloursNumbers;
-/** Should strings be colored? */
-@property (nonatomic, assign) BOOL coloursStrings;
-/** Should variables be colored? */
-@property (nonatomic, assign) BOOL coloursVariables;
-
-
 @end
 
 
