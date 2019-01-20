@@ -218,15 +218,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 - (void)setupObservers
 {
-    for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
-    {
-        if ([[self.colourSchemeController.content allKeys] containsObject:key])
-        {
-            NSString *keyPath = [NSString stringWithFormat:@"selection.%@", key];
-            [self.colourSchemeController addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:(__bridge void *)(key)];
-        }
-    }
-
+    [self.colourSchemeController addObserver:self forKeyPath:@"selection.dictionaryRepresentation" options:NSKeyValueObservingOptionNew context:@"colourSchemeChanged"];
     [self addObserver:self forKeyPath:@"selectionIndex" options:NSKeyValueObservingOptionNew context:@"schemeMenu"];
 }
 
@@ -236,15 +228,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 - (void)teardownObservers
 {
-    for (NSString *key in [[MGSColourSchemeOption class] propertiesOfScheme])
-    {
-        if ([[self.colourSchemeController.content allKeys] containsObject:key])
-        {
-            NSString *keyPath = [NSString stringWithFormat:@"selection.%@", key];
-            [self.colourSchemeController removeObserver:self forKeyPath:keyPath context:(__bridge void *)(key)];
-        }
-    }
-
+    [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation" context:@"colourSchemeChanged"];
     [self removeObserver:self forKeyPath:@"selectionIndex" context:@"schemeMenu"];
 }
 
@@ -261,7 +245,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         [self removeObserver:self forKeyPath:@"colourSchemeController.content" context:@"objectController"];
         [self setupLate];
     }
-    else if ( !self.ignoreObservations && [[[MGSColourSchemeOption class] propertiesOfScheme] containsObject:localContext] )
+    else if (!self.ignoreObservations && [@"colourSchemeChanged" isEqual:localContext])
     {
         [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
         [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
