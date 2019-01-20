@@ -20,25 +20,6 @@
 @dynamic textInvisibleCharactersColour;
 @dynamic currentLineHighlightColour;
 @dynamic insertionPointColor;
-@dynamic colourForAttributes;
-@dynamic colourForAutocomplete;
-@dynamic colourForCommands;
-@dynamic colourForComments;
-@dynamic colourForInstructions;
-@dynamic colourForKeywords;
-@dynamic colourForNumbers;
-@dynamic colourForStrings;
-@dynamic colourForVariables;
-
-@dynamic coloursAttributes;
-@dynamic coloursAutocomplete;
-@dynamic coloursCommands;
-@dynamic coloursComments;
-@dynamic coloursInstructions;
-@dynamic coloursKeywords;
-@dynamic coloursNumbers;
-@dynamic coloursStrings;
-@dynamic coloursVariables;
 
 
 - (id)copyWithZone:(NSZone *)zone
