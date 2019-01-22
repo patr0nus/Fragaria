@@ -55,9 +55,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 #pragma mark - Initializers
 
 
-/*
- * - initWithDictionary:
- */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 {
     self = [super init];
@@ -100,13 +97,13 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
-/*
- * - init
- */
 - (instancetype)init
 {
 	return [self initWithDictionary:@{}];
 }
+
+
+#pragma mark - Default Color Schemes
 
 
 + (instancetype)defaultColorSchemeForAppearance:(NSAppearance *)appearance
@@ -115,240 +112,33 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
-- (void)setPropertiesFromDictionary:(NSDictionary *)dictionaryRepresentation
++ (NSArray <MGSColourScheme *> *)builtinColourSchemes
 {
-    [self setValuesForKeysWithDictionary:dictionaryRepresentation];
-}
-
-
-- (BOOL)setPropertiesFromPropertyList:(id)fileContents error:(NSError **)err
-{
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
+    NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
+    NSArray <NSURL *> *paths = [myBundle URLsForResourcesWithExtension:KMGSColourSchemeExt subdirectory:KMGSColourSchemesFolder];
     
-    NSSet *stringKeys = [[self class] propertiesOfTypeString];
-    NSSet *colorKeys = [[self class] propertiesOfTypeColor];
-    NSSet *boolKeys = [[self class] propertiesOfTypeBool];
-    
-    if (![fileContents isKindOfClass:[NSDictionary class]])
-        goto wrongFormat;
-    
-    for (NSString *key in fileContents) {
-        id object;
-    
-        if ([stringKeys containsObject:key]) {
-            object = [fileContents objectForKey:key];
-            if (![object isKindOfClass:[NSString class]])
-                goto wrongFormat;
-            
-        } else if ([colorKeys containsObject:key]) {
-            id data = [fileContents objectForKey:key];
-            if ([data isKindOfClass:[NSData class]]) {
-                object = [NSUnarchiver unarchiveObjectWithData:data];
-            } else if ([data isKindOfClass:[NSString class]]) {
-                object = [xformer reverseTransformedValue:[fileContents objectForKey:key]];
-            } else {
-                goto wrongFormat;
-            }
-            if (![object isKindOfClass:[NSColor class]])
-                goto wrongFormat;
-        
-        } else if ([boolKeys containsObject:key]) {
-            object = [fileContents objectForKey:key];
-            if (![object isKindOfClass:[NSNumber class]])
-                goto wrongFormat;
-            
-        } else {
-            NSLog(@"unrecognized key %@ when loading colour scheme from deserialized plist", key);
+    NSMutableArray <MGSColourScheme *> *res = [NSMutableArray array];
+    for (NSURL *path in paths) {
+        MGSColourScheme *sch = [[MGSColourScheme alloc] initWithSchemeFileURL:path error:nil];
+        if (!sch) {
+            NSLog(@"loading of scheme %@ failed", path);
             continue;
         }
-    
-        [dictionary setObject:object forKey:key];
+        [res addObject:sch];
     }
-    
-    [self setPropertiesFromDictionary:dictionary];
-    return YES;
-    
-    
-wrongFormat:
-    if (err)
-        *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
-    return NO;
-}
-
-
-+ (NSSet *)keyPathsForValuesAffectingDictionaryRepresentation
-{
-    return [[self class] propertiesAll];
-}
-
-
-- (NSDictionary *)dictionaryRepresentation
-{
-    return [self dictionaryWithValuesForKeys:[[[self class] propertiesAll] allObjects]];
-}
-
-
-- (NSDictionary *)propertyListRepresentation
-{
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-	NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
-
-    for (NSString *key in [self.dictionaryRepresentation allKeys])
-    {
-        if ([[[self class] propertiesOfTypeString] containsObject:key])
-        {
-            [dictionary setObject:[self valueForKey:key] forKey:key];
-        }
-        if ([[[self class] propertiesOfTypeColor] containsObject:key])
-        {
-			[dictionary setObject:[xformer transformedValue:[self valueForKey:key]] forKey:key];
-        }
-        if ([[[self class] propertiesOfTypeBool] containsObject:key])
-        {
-            [dictionary setObject:[self valueForKey:key] forKey:key];
-        }
-    }
-    
-    return dictionary;
-}
-
-
-- (NSArray <NSString *> *)allKeys
-{
-    return [[[self class] propertiesAll] allObjects];
-}
-
-
-/*
- * - isEqualToScheme:
- */
-- (BOOL)isEqualToScheme:(MGSColourScheme *)scheme
-{
-    for (NSString *key in [[self class] propertiesOfScheme])
-    {
-        if ([[self valueForKey:key] isKindOfClass:[NSColor class]])
-        {
-            NSColor *color1 = [self valueForKey:key];
-            NSColor *color2 = [scheme valueForKey:key];
-            BOOL result = [color1 mgs_isEqualToColor:color2 transformedThrough:@"MGSColourToPlainTextTransformer"];
-            if (!result)
-            {
-//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, color1, color2);
-                return result;
-            }
-        }
-        else
-        {
-            BOOL result = [[self valueForKey:key] isEqual:[scheme valueForKey:key]];
-            if (!result)
-            {
-//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, [self valueForKey:key], [scheme valueForKey:key] );
-                return result;
-            }
-        }
-    }
-
-    return YES;
-}
-
-
-- (BOOL)isEqual:(id)other
-{
-    if ([super isEqual:other])
-        return YES;
-    if ([other isKindOfClass:[self class]] && [self class] != [other class])
-        return [other isEqual:self];
-    if (![self isKindOfClass:[other class]])
-        return NO;
-    return [self isEqualToScheme:other];
-}
-
-
-/*
- * - propertiesLoadFromFile:
- */
-- (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err
-{
-    NSInputStream *fp = [NSInputStream inputStreamWithURL:file];
-    [fp open];
-    if (!fp) {
-        if (err)
-            *err = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
-        return NO;
-    }
-    
-    id fileContents = [NSPropertyListSerialization propertyListWithStream:fp options:NSPropertyListImmutable format:nil error:err];
-    if (!fileContents)
-        goto plistError;
-    [fp close];
-
-    return [self setPropertiesFromPropertyList:fileContents error:err];
-    
-plistError:
-    if (err) {
-        if ([[*err domain] isEqual:NSCocoaErrorDomain]) {
-            if ([*err code] != NSPropertyListReadStreamError)
-                *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{NSUnderlyingErrorKey: *err}];
-            else if ([[*err userInfo] objectForKey:NSUnderlyingErrorKey])
-                *err = [[*err userInfo] objectForKey:NSUnderlyingErrorKey];
-        }
-    }
-    return NO;
-}
-
-
-/*
- * - propertiesSaveToFile:
- */
-- (BOOL)writeToSchemeFileURL:(NSURL *)file error:(NSError **)err
-{
-	NSDictionary *props = [self propertyListRepresentation];
-    
-    NSOutputStream *fp = [NSOutputStream outputStreamWithURL:file append:NO];
-    if (!fp) {
-        if (err)
-            *err = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:nil];
-    }
-    
-    [fp open];
-    BOOL res = [NSPropertyListSerialization writePropertyList:props toStream:fp format:NSPropertyListXMLFormat_v1_0 options:0 error:err];
-    [fp close];
     
     return res;
 }
 
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<(%@ *)%p displayName=\"%@\">",
-        NSStringFromClass([self class]),
-        self,
-        self.displayName];
-}
-
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    return self;
-}
-
-
-- (id)mutableCopyWithZone:(NSZone *)zone
-{
-    return [[MGSMutableColourScheme alloc] initWithColourScheme:self];
-}
-
-
-/*
- * - defaultValues
- */
+// private
 + (NSDictionary *)defaultValues
 {
     return [[self class] defaultValuesForAppearance:nil];
 }
 
 
+// private
 + (NSDictionary *)defaultValuesForAppearance:(NSAppearance *)appearance
 {
     if (!appearance)
@@ -420,9 +210,234 @@ plistError:
 }
 
 
+#pragma mark - Bulk Property Accessors
+
+
+// private
+- (void)setPropertiesFromDictionary:(NSDictionary *)dictionaryRepresentation
+{
+    [self setValuesForKeysWithDictionary:dictionaryRepresentation];
+}
+
+
+// private
+- (BOOL)setPropertiesFromPropertyList:(id)fileContents error:(NSError **)err
+{
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
+    
+    NSSet *stringKeys = [[self class] propertiesOfTypeString];
+    NSSet *colorKeys = [[self class] propertiesOfTypeColor];
+    NSSet *boolKeys = [[self class] propertiesOfTypeBool];
+    
+    if (![fileContents isKindOfClass:[NSDictionary class]])
+        goto wrongFormat;
+    
+    for (NSString *key in fileContents) {
+        id object;
+    
+        if ([stringKeys containsObject:key]) {
+            object = [fileContents objectForKey:key];
+            if (![object isKindOfClass:[NSString class]])
+                goto wrongFormat;
+            
+        } else if ([colorKeys containsObject:key]) {
+            id data = [fileContents objectForKey:key];
+            if ([data isKindOfClass:[NSData class]]) {
+                object = [NSUnarchiver unarchiveObjectWithData:data];
+            } else if ([data isKindOfClass:[NSString class]]) {
+                object = [xformer reverseTransformedValue:[fileContents objectForKey:key]];
+            } else {
+                goto wrongFormat;
+            }
+            if (![object isKindOfClass:[NSColor class]])
+                goto wrongFormat;
+        
+        } else if ([boolKeys containsObject:key]) {
+            object = [fileContents objectForKey:key];
+            if (![object isKindOfClass:[NSNumber class]])
+                goto wrongFormat;
+            
+        } else {
+            NSLog(@"unrecognized key %@ when loading colour scheme from deserialized plist", key);
+            continue;
+        }
+    
+        [dictionary setObject:object forKey:key];
+    }
+    
+    [self setPropertiesFromDictionary:dictionary];
+    return YES;
+    
+    
+wrongFormat:
+    if (err)
+        *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
+    return NO;
+}
+
+
++ (NSSet *)keyPathsForValuesAffectingDictionaryRepresentation
+{
+    return [[self class] propertiesAll];
+}
+
+
+- (NSDictionary *)dictionaryRepresentation
+{
+    return [self dictionaryWithValuesForKeys:[[[self class] propertiesAll] allObjects]];
+}
+
+
+- (NSDictionary *)propertyListRepresentation
+{
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
+
+    for (NSString *key in [self.dictionaryRepresentation allKeys])
+    {
+        if ([[[self class] propertiesOfTypeString] containsObject:key])
+        {
+            [dictionary setObject:[self valueForKey:key] forKey:key];
+        }
+        if ([[[self class] propertiesOfTypeColor] containsObject:key])
+        {
+            [dictionary setObject:[xformer transformedValue:[self valueForKey:key]] forKey:key];
+        }
+        if ([[[self class] propertiesOfTypeBool] containsObject:key])
+        {
+            [dictionary setObject:[self valueForKey:key] forKey:key];
+        }
+    }
+    
+    return dictionary;
+}
+
+
+#pragma mark - Colour Scheme File I/O
+
+
+- (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err
+{
+    NSInputStream *fp = [NSInputStream inputStreamWithURL:file];
+    [fp open];
+    if (!fp) {
+        if (err)
+            *err = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
+        return NO;
+    }
+    
+    id fileContents = [NSPropertyListSerialization propertyListWithStream:fp options:NSPropertyListImmutable format:nil error:err];
+    if (!fileContents)
+        goto plistError;
+    [fp close];
+
+    return [self setPropertiesFromPropertyList:fileContents error:err];
+    
+plistError:
+    if (err) {
+        if ([[*err domain] isEqual:NSCocoaErrorDomain]) {
+            if ([*err code] != NSPropertyListReadStreamError)
+                *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{NSUnderlyingErrorKey: *err}];
+            else if ([[*err userInfo] objectForKey:NSUnderlyingErrorKey])
+                *err = [[*err userInfo] objectForKey:NSUnderlyingErrorKey];
+        }
+    }
+    return NO;
+}
+
+
+- (BOOL)writeToSchemeFileURL:(NSURL *)file error:(NSError **)err
+{
+    NSDictionary *props = [self propertyListRepresentation];
+    
+    NSOutputStream *fp = [NSOutputStream outputStreamWithURL:file append:NO];
+    if (!fp) {
+        if (err)
+            *err = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:nil];
+    }
+    
+    [fp open];
+    BOOL res = [NSPropertyListSerialization writePropertyList:props toStream:fp format:NSPropertyListXMLFormat_v1_0 options:0 error:err];
+    [fp close];
+    
+    return res;
+}
+
+
+#pragma mark - NSObject / NSCopying
+
+
 /*
- * + propertiesOfTypeBool
+ * - isEqualToScheme:
  */
+- (BOOL)isEqualToScheme:(MGSColourScheme *)scheme
+{
+    for (NSString *key in [[self class] propertiesOfScheme])
+    {
+        if ([[self valueForKey:key] isKindOfClass:[NSColor class]])
+        {
+            NSColor *color1 = [self valueForKey:key];
+            NSColor *color2 = [scheme valueForKey:key];
+            BOOL result = [color1 mgs_isEqualToColor:color2 transformedThrough:@"MGSColourToPlainTextTransformer"];
+            if (!result)
+            {
+//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, color1, color2);
+                return result;
+            }
+        }
+        else
+        {
+            BOOL result = [[self valueForKey:key] isEqual:[scheme valueForKey:key]];
+            if (!result)
+            {
+//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, [self valueForKey:key], [scheme valueForKey:key] );
+                return result;
+            }
+        }
+    }
+
+    return YES;
+}
+
+
+- (BOOL)isEqual:(id)other
+{
+    if ([super isEqual:other])
+        return YES;
+    if ([other isKindOfClass:[self class]] && [self class] != [other class])
+        return [other isEqual:self];
+    if (![self isKindOfClass:[other class]])
+        return NO;
+    return [self isEqualToScheme:other];
+}
+
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<(%@ *)%p displayName=\"%@\">",
+        NSStringFromClass([self class]),
+        self,
+        self.displayName];
+}
+
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
+
+- (id)mutableCopyWithZone:(NSZone *)zone
+{
+    return [[MGSMutableColourScheme alloc] initWithColourScheme:self];
+}
+
+
+#pragma mark - Property Enumerations
+
+
+// private
 + (NSSet *)propertiesOfTypeBool
 {
 	return [NSSet setWithArray:@[
@@ -439,9 +454,7 @@ plistError:
 }
 
 
-/*
- * + propertiesOfTypeColor
- */
+// private
 + (NSSet *)propertiesOfTypeColor
 {
     NSSet *editorColours = [NSSet setWithArray:@[
@@ -467,18 +480,14 @@ plistError:
 }
 
 
-/*
- * + propertiesOfTypeString
- */
+// private
 + (NSSet *)propertiesOfTypeString
 {
 	return [NSSet setWithArray:@[@"displayName"]];
 }
 
 
-/*
- * + colourProperties
- */
+// private
 + (NSArray *)propertiesOfScheme
 {
 	return [[[[self class] propertiesOfTypeColor] setByAddingObjectsFromSet:
@@ -487,9 +496,7 @@ plistError:
 }
 
 
-/*
- * + propertiesAll
- */
+// private
 + (NSSet *)propertiesAll
 {
     return [[[[self class] propertiesOfTypeColor] setByAddingObjectsFromSet:
@@ -498,23 +505,7 @@ plistError:
 }
 
 
-+ (NSArray <MGSColourScheme *> *)builtinColourSchemes
-{
-    NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSArray <NSURL *> *paths = [myBundle URLsForResourcesWithExtension:KMGSColourSchemeExt subdirectory:KMGSColourSchemesFolder];
-    
-    NSMutableArray <MGSColourScheme *> *res = [NSMutableArray array];
-    for (NSURL *path in paths) {
-        MGSColourScheme *sch = [[MGSColourScheme alloc] initWithSchemeFileURL:path error:nil];
-        if (!sch) {
-            NSLog(@"loading of scheme %@ failed", path);
-            continue;
-        }
-        [res addObject:sch];
-    }
-    
-    return res;
-}
+#pragma mark - Colour Scheme Properties
 
 
 - (NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup

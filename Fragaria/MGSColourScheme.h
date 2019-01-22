@@ -70,16 +70,23 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 /** Writes the object as a plist to the given file.
  *  @param file The complete path and file to write.
  *  @param err Upon return, if the operation failed, contains an NSError object
- *         that describes the problem. */
+ *         that describes the problem.
+ *  @returns YES if the operation succeeded, otherwise NO. */
 - (BOOL)writeToSchemeFileURL:(NSURL *)file error:(NSError **)err;
 
 
-/** An NSDictionary representation of the Colour Scheme Properties */
+/** An NSDictionary representation of the Colour Scheme.
+ *  @warning The structure used by the returned dictionary is private. To access
+ *     the contents of a dictionary representation of an MGSColourScheme, always
+ *     initialize a new MGSColourScheme instead of accessing the contents of the
+ *     dictionary directly. */
 @property (nonatomic, assign, readonly) NSDictionary *dictionaryRepresentation;
 
-/** An valid property list NSDictionary representation of the Colour Scheme
- *  properties.
- *  @discussion These are NSData objects already archived for disk. */
+/** A serializable NSDictionary representation of the Colour Scheme.
+ *  @discussion Like for dictionaryRepresentation, the structure of the dictionary
+ *     is private as well. However, the dictionary returned by this property is
+ *     forwards and backwards compatible with other versions of Fragaria when
+ *     used to initialize a new MGSColourScheme via -initWithPropertyList:error:. */
 @property (nonatomic, assign, readonly) NSDictionary *propertyListRepresentation;
 
 
