@@ -9,6 +9,13 @@
 #import "MGSColourScheme.h"
 
 
+extern NSString * const MGSColourSchemeKeySyntaxGroupOptions;
+
+typedef NSString * const MGSColourSchemeGroupOptionKey NS_EXTENSIBLE_STRING_ENUM;
+extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled;
+extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
+
+
 @interface MGSColourScheme ()
 
 - (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err;
@@ -21,6 +28,9 @@
 @property (nonatomic, strong) NSColor *textInvisibleCharactersColour;
 @property (nonatomic, strong) NSColor *currentLineHighlightColour;
 @property (nonatomic, strong) NSColor *insertionPointColor;
+
+@property (nonatomic, strong) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+
 @property (nonatomic, strong) NSColor *colourForAttributes;
 @property (nonatomic, strong) NSColor *colourForAutocomplete;
 @property (nonatomic, strong) NSColor *colourForCommands;
@@ -41,10 +51,8 @@
 @property (nonatomic, assign) BOOL coloursStrings;
 @property (nonatomic, assign) BOOL coloursVariables;
 
-+ (NSSet *) propertiesAll;
-+ (NSSet *) propertiesOfTypeBool;
-+ (NSSet *) propertiesOfTypeColor;
-+ (NSSet *) propertiesOfTypeString;
+- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
 @end
 

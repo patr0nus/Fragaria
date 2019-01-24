@@ -83,11 +83,11 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 @property (nonatomic, assign, readonly) NSDictionary *dictionaryRepresentation;
 
 /** A serializable NSDictionary representation of the Colour Scheme.
- *  @discussion Like for dictionaryRepresentation, the structure of the dictionary
- *     is private as well. However, the dictionary returned by this property is
+ *  @discussion Like for dictionaryRepresentation, the structure of the returned
+ *     object is private as well. However, the dictionary returned by this property is
  *     forwards and backwards compatible with other versions of Fragaria when
  *     used to initialize a new MGSColourScheme via -initWithPropertyList:error:. */
-@property (nonatomic, assign, readonly) NSDictionary *propertyListRepresentation;
+@property (nonatomic, assign, readonly) id propertyListRepresentation;
 
 
 #pragma mark - Getting Information on Properties

@@ -68,7 +68,7 @@ NSColor *MGSTestRandomColor(void)
     outputPath = [tmpdir URLByAppendingPathComponent:@"test_propertiesToFile.plist"];
 	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
-    scheme.colourForComments = expects2;
+    [scheme setColour:expects2 forSyntaxGroup:SMLSyntaxGroupComment];
 	
 	XCTAssert([scheme writeToSchemeFileURL:outputPath error:nil]);
 	
@@ -79,7 +79,7 @@ NSColor *MGSTestRandomColor(void)
     [[NSFileManager defaultManager] removeItemAtURL:outputPath error:nil];
 	
 	XCTAssert([scheme.displayName isEqualToString:expects1]);
-    XCTAssert([scheme.colourForComments mgs_isEqualToColor:expects2 transformedThrough:@"MGSColourToPlainTextTransformer"]);
+    XCTAssert([[scheme colourForSyntaxGroup:SMLSyntaxGroupComment] mgs_isEqualToColor:expects2 transformedThrough:@"MGSColourToPlainTextTransformer"]);
 }
 
 
@@ -120,41 +120,6 @@ NSColor *MGSTestRandomColor(void)
 }
 
 
-- (void)test_initWithFragaria
-{
-    MGSFragariaView *fragaria = [[MGSFragariaView alloc] init];
-    NSDictionary *keys = @{
-        NSStringFromSelector(@selector(coloursComments)): @(NO),
-        NSStringFromSelector(@selector(colourForComments)): MGSTestRandomColor()
-    };
-    [fragaria setValuesForKeysWithDictionary:keys];
-    
-    MGSMutableColourScheme *s1 = [[MGSMutableColourScheme alloc] initWithFragaria:fragaria displayName:@"test"];
-    
-    for (NSString *key in keys) {
-        id val = [s1 valueForKey:key];
-        XCTAssert([val isEqual:[keys objectForKey:key]]);
-    }
-}
-
-
-- (void)test_setColorsFromScheme
-{
-    NSDictionary *keys = @{
-        NSStringFromSelector(@selector(coloursComments)): @(NO),
-        NSStringFromSelector(@selector(colourForComments)): MGSTestRandomColor()
-    };
-    MGSMutableColourScheme *s1 = [[MGSMutableColourScheme alloc] initWithDictionary:keys];
-    MGSFragariaView *fragaria = [[MGSFragariaView alloc] init];
-    fragaria.colourScheme = s1;
-    
-    for (NSString *key in keys) {
-        id val = [fragaria valueForKey:key];
-        XCTAssert([val isEqual:[keys objectForKey:key]]);
-    }
-}
-
-
 /*
  * - test_isEqualToScheme
  */
@@ -168,12 +133,12 @@ NSColor *MGSTestRandomColor(void)
     // Assert that they are equal.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
 
-    scheme1.colourForNumbers = expects1;
+    [scheme1 setColour:expects1 forSyntaxGroup:SMLSyntaxGroupNumber];
 
     // Changing a color is detectable as a difference.
     XCTAssert(![scheme1 isEqualToScheme:scheme2]);
 
-    scheme2.colourForNumbers = expects1;
+    [scheme2 setColour:expects1 forSyntaxGroup:SMLSyntaxGroupNumber];
 
     // Now equal again.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
@@ -182,12 +147,13 @@ NSColor *MGSTestRandomColor(void)
     scheme1 = [[MGSMutableColourScheme alloc] init];
     scheme2 = [[MGSMutableColourScheme alloc] init];
 
-    scheme1.coloursStrings = !scheme1.coloursStrings;
+    BOOL coloursStrings = [scheme1 coloursSyntaxGroup:SMLSyntaxGroupString];
+    [scheme1 setColours:!coloursStrings syntaxGroup:SMLSyntaxGroupString];
 
     // Should be not the same.
     XCTAssert(![scheme1 isEqualToScheme:scheme2]);
 
-    scheme2.coloursStrings = !scheme2.coloursStrings;
+    [scheme2 setColours:!coloursStrings syntaxGroup:SMLSyntaxGroupString];
 
     // Should be the same.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
@@ -208,7 +174,7 @@ NSColor *MGSTestRandomColor(void)
     
 	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
-	scheme.colourForKeywords = expects2;
+    [scheme setColour:expects2 forSyntaxGroup:SMLSyntaxGroupKeyword];
 	
     NSError *err;
 	[scheme writeToSchemeFileURL:outputPath error:&err];

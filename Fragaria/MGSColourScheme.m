@@ -17,12 +17,33 @@
 
 NSString * const MGSColourSchemeErrorDomain = @"MGSColourSchemeErrorDomain";
 
+
+/*
+ * NSDictionary keys used for propertyList/dictionaryRepresentation
+ * Do not change!
+ */
+
 NSString * const MGSColourSchemeKeyCurrentLineHighlightColour    = @"currentLineHighlightColour";
 NSString * const MGSColourSchemeKeyDefaultErrorHighlightingColor = @"defaultSyntaxErrorHighlightingColour";
 NSString * const MGSColourSchemeKeyTextInvisibleCharactersColour = @"textInvisibleCharactersColour";
 NSString * const MGSColourSchemeKeyTextColor                     = @"textColor";
 NSString * const MGSColourSchemeKeyBackgroundColor               = @"backgroundColor";
 NSString * const MGSColourSchemeKeyInsertionPointColor           = @"insertionPointColor";
+NSString * const MGSColourSchemeKeyDisplayName                   = @"displayName";
+
+
+/* New color options keys used in version 3+
+ * The format was changed in order to represent extensible syntax
+ * groups and additional properties other than color (like bold or
+ * underline) */
+
+NSString * const MGSColourSchemeKeySyntaxGroupOptions            = @"syntaxGroupOptions";
+
+MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled = @"enabled";
+MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour = @"colour";
+
+
+/* Old color options used in version 2 */
 
 NSString * const MGSColourSchemeKeyColourForAutocomplete = @"colourForAutocomplete";
 NSString * const MGSColourSchemeKeyColourForAttributes   = @"colourForAttributes";
@@ -44,9 +65,9 @@ NSString * const MGSColourSchemeKeyColoursNumbers        = @"coloursNumbers";
 NSString * const MGSColourSchemeKeyColoursStrings        = @"coloursStrings";
 NSString * const MGSColourSchemeKeyColoursVariables      = @"coloursVariables";
 
+
 static NSString * const KMGSColourSchemesFolder = @"Colour Schemes";
 static NSString * const KMGSColourSchemeExt = @"plist";
-
 
 
 @implementation MGSColourScheme
@@ -148,17 +169,18 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             @"Custom Settings", nil, [NSBundle bundleForClass:[self class]],
             @"Name for Custom Settings scheme.");
     NSMutableDictionary *common = [@{
-        @"displayName"                                  : dispName,
-        MGSColourSchemeKeyColoursAttributes             : @YES,
-        MGSColourSchemeKeyColoursAutocomplete           : @NO,
-        MGSColourSchemeKeyColoursCommands               : @YES,
-        MGSColourSchemeKeyColoursComments               : @YES,
-        MGSColourSchemeKeyColoursInstructions           : @YES,
-        MGSColourSchemeKeyColoursKeywords               : @YES,
-        MGSColourSchemeKeyColoursNumbers                : @YES,
-        MGSColourSchemeKeyColoursStrings                : @YES,
-        MGSColourSchemeKeyColoursVariables              : @YES,
-    } mutableCopy];
+            MGSColourSchemeKeyDisplayName  : dispName}
+        mutableCopy];
+    NSDictionary *commonEnabled = @{
+        SMLSyntaxGroupAttribute     : @YES,
+        SMLSyntaxGroupAutoComplete  : @NO,
+        SMLSyntaxGroupCommand       : @YES,
+        SMLSyntaxGroupComment       : @YES,
+        SMLSyntaxGroupInstruction   : @YES,
+        SMLSyntaxGroupKeyword       : @YES,
+        SMLSyntaxGroupNumber        : @YES,
+        SMLSyntaxGroupString        : @YES,
+        SMLSyntaxGroupVariable      : @YES};
     
     BOOL dark = NO;
     if (@available(macOS 10.14.0, *)) {
@@ -167,6 +189,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     }
     
     NSDictionary *colors;
+    NSDictionary *groupColors;
     if (!dark) {
         colors = @{
             MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedRed:1 green:1 blue:0.7 alpha:1],
@@ -174,17 +197,17 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             MGSColourSchemeKeyTextColor                     : [NSColor blackColor],
             MGSColourSchemeKeyBackgroundColor               : [NSColor whiteColor],
             MGSColourSchemeKeyInsertionPointColor           : [NSColor blackColor],
-            MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor colorWithCalibratedRed:0.96f green:0.96f blue:0.71f alpha:1.0],
-            MGSColourSchemeKeyColourForAutocomplete         : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
-            MGSColourSchemeKeyColourForAttributes           : [NSColor colorWithCalibratedRed:0.50f green:0.5f blue:0.2f alpha:1.0],
-            MGSColourSchemeKeyColourForCommands             : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
-            MGSColourSchemeKeyColourForComments             : [NSColor colorWithCalibratedRed:0.0f green:0.45f blue:0.0f alpha:1.0],
-            MGSColourSchemeKeyColourForInstructions         : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
-            MGSColourSchemeKeyColourForKeywords             : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
-            MGSColourSchemeKeyColourForNumbers              : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
-            MGSColourSchemeKeyColourForStrings              : [NSColor colorWithCalibratedRed:0.804f green:0.071f blue:0.153f alpha:1.0],
-            MGSColourSchemeKeyColourForVariables            : [NSColor colorWithCalibratedRed:0.73f green:0.0f blue:0.74f alpha:1.0],
-        };
+            MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor colorWithCalibratedRed:0.96f green:0.96f blue:0.71f alpha:1.0]};
+        groupColors = @{
+            SMLSyntaxGroupAutoComplete : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
+            SMLSyntaxGroupAttribute    : [NSColor colorWithCalibratedRed:0.50f green:0.5f blue:0.2f alpha:1.0],
+            SMLSyntaxGroupCommand      : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
+            SMLSyntaxGroupComment      : [NSColor colorWithCalibratedRed:0.0f green:0.45f blue:0.0f alpha:1.0],
+            SMLSyntaxGroupInstruction  : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
+            SMLSyntaxGroupKeyword      : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
+            SMLSyntaxGroupNumber       : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
+            SMLSyntaxGroupString       : [NSColor colorWithCalibratedRed:0.804f green:0.071f blue:0.153f alpha:1.0],
+            SMLSyntaxGroupVariable     : [NSColor colorWithCalibratedRed:0.73f green:0.0f blue:0.74f alpha:1.0]};
     } else {
         colors = @{
             MGSColourSchemeKeyDefaultErrorHighlightingColor : [NSColor colorWithCalibratedWhite:0.4 alpha:1.0],
@@ -192,20 +215,28 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             MGSColourSchemeKeyTextColor                     : [NSColor whiteColor],
             MGSColourSchemeKeyBackgroundColor               : [NSColor blackColor],
             MGSColourSchemeKeyInsertionPointColor           : [NSColor whiteColor],
-            MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor blackColor],
-            MGSColourSchemeKeyColourForAutocomplete         : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
-            MGSColourSchemeKeyColourForAttributes           : [NSColor colorWithCalibratedRed:0.5f green:0.5f blue:0.2f alpha:1.0],
-            MGSColourSchemeKeyColourForCommands             : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
-            MGSColourSchemeKeyColourForComments             : [NSColor colorWithCalibratedRed:0.254902f green:0.8f blue:0.270588f alpha:1.0],
-            MGSColourSchemeKeyColourForInstructions         : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
-            MGSColourSchemeKeyColourForKeywords             : [NSColor colorWithCalibratedRed:0.827451f green:0.094118f blue:0.580392f alpha:1.0],
-            MGSColourSchemeKeyColourForNumbers              : [NSColor colorWithCalibratedRed:0.466667f green:0.427451f blue:1.0f alpha:1.0],
-            MGSColourSchemeKeyColourForStrings              : [NSColor colorWithCalibratedRed:1.0f green:0.172549f blue:0.219608f alpha:1.0],
-            MGSColourSchemeKeyColourForVariables            : [NSColor colorWithCalibratedRed:0.73f green:0.0f blue:0.74f alpha:1.0],
-        };
+            MGSColourSchemeKeyCurrentLineHighlightColour    : [NSColor blackColor]};
+        groupColors = @{
+            SMLSyntaxGroupAutoComplete : [NSColor colorWithCalibratedRed:0.84f green:0.41f blue:0.006f alpha:1.0],
+            SMLSyntaxGroupAttribute    : [NSColor colorWithCalibratedRed:0.5f green:0.5f blue:0.2f alpha:1.0],
+            SMLSyntaxGroupCommand      : [NSColor colorWithCalibratedRed:0.031f green:0.0f blue:0.855f alpha:1.0],
+            SMLSyntaxGroupComment      : [NSColor colorWithCalibratedRed:0.254902f green:0.8f blue:0.270588f alpha:1.0],
+            SMLSyntaxGroupInstruction  : [NSColor colorWithCalibratedRed:0.737f green:0.0f blue:0.647f alpha:1.0],
+            SMLSyntaxGroupKeyword      : [NSColor colorWithCalibratedRed:0.827451f green:0.094118f blue:0.580392f alpha:1.0],
+            SMLSyntaxGroupNumber       : [NSColor colorWithCalibratedRed:0.466667f green:0.427451f blue:1.0f alpha:1.0],
+            SMLSyntaxGroupString       : [NSColor colorWithCalibratedRed:1.0f green:0.172549f blue:0.219608f alpha:1.0],
+            SMLSyntaxGroupVariable     : [NSColor colorWithCalibratedRed:0.73f green:0.0f blue:0.74f alpha:1.0]};
     }
     
     [common addEntriesFromDictionary:colors];
+    NSMutableDictionary *groups = [NSMutableDictionary dictionary];
+    for (NSString *group in commonEnabled) {
+        NSDictionary *options = @{
+            MGSColourSchemeGroupOptionKeyEnabled: commonEnabled[group],
+            MGSColourSchemeGroupOptionKeyColour:  groupColors[group]};
+        [groups setObject:options forKey:group];
+    }
+    [common setObject:groups forKey:MGSColourSchemeKeySyntaxGroupOptions];
     return [common copy];
 }
 
@@ -213,10 +244,110 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 #pragma mark - Bulk Property Accessors
 
 
-// private
-- (void)setPropertiesFromDictionary:(NSDictionary *)dictionaryRepresentation
++ (NSSet *)keyPathsForValuesAffectingDictionaryRepresentation
 {
-    [self setValuesForKeysWithDictionary:dictionaryRepresentation];
+    static NSSet *cache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cache = [NSSet setWithObjects:
+            NSStringFromSelector(@selector(displayName)),
+            NSStringFromSelector(@selector(insertionPointColor)),
+            NSStringFromSelector(@selector(currentLineHighlightColour)),
+            NSStringFromSelector(@selector(defaultSyntaxErrorHighlightingColour)),
+            NSStringFromSelector(@selector(textColor)),
+            NSStringFromSelector(@selector(backgroundColor)),
+            NSStringFromSelector(@selector(textInvisibleCharactersColour)),
+            NSStringFromSelector(@selector(syntaxGroupOptions)),
+            nil];
+    });
+    return cache;
+}
+
+
+- (NSDictionary *)dictionaryRepresentation
+{
+    return @{
+        MGSColourSchemeKeyDisplayName:                   self.displayName,
+        MGSColourSchemeKeyInsertionPointColor:           self.insertionPointColor,
+        MGSColourSchemeKeyCurrentLineHighlightColour:    self.currentLineHighlightColour,
+        MGSColourSchemeKeyDefaultErrorHighlightingColor: self.defaultSyntaxErrorHighlightingColour,
+        MGSColourSchemeKeyTextColor:                     self.textColor,
+        MGSColourSchemeKeyBackgroundColor:               self.backgroundColor,
+        MGSColourSchemeKeyTextInvisibleCharactersColour: self.textInvisibleCharactersColour,
+        MGSColourSchemeKeySyntaxGroupOptions:            self.syntaxGroupOptions };
+}
+
+
+// private
+- (void)setPropertiesFromDictionary:(NSDictionary *)dict
+{
+    self.displayName                          = dict[MGSColourSchemeKeyDisplayName];
+    self.insertionPointColor                  = dict[MGSColourSchemeKeyInsertionPointColor];
+    self.currentLineHighlightColour           = dict[MGSColourSchemeKeyCurrentLineHighlightColour];
+    self.defaultSyntaxErrorHighlightingColour = dict[MGSColourSchemeKeyDefaultErrorHighlightingColor];
+    self.textColor                            = dict[MGSColourSchemeKeyTextColor];
+    self.backgroundColor                      = dict[MGSColourSchemeKeyBackgroundColor];
+    self.textInvisibleCharactersColour        = dict[MGSColourSchemeKeyTextInvisibleCharactersColour];
+    self.syntaxGroupOptions                   = dict[MGSColourSchemeKeySyntaxGroupOptions];
+}
+
+
+- (id)propertyListRepresentation
+{
+    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
+    
+    return @{
+        MGSColourSchemeKeyDisplayName:
+            self.displayName,
+        MGSColourSchemeKeyInsertionPointColor:
+            [xformer transformedValue:self.insertionPointColor],
+        MGSColourSchemeKeyCurrentLineHighlightColour:
+            [xformer transformedValue:self.currentLineHighlightColour],
+        MGSColourSchemeKeyDefaultErrorHighlightingColor:
+            [xformer transformedValue:self.defaultSyntaxErrorHighlightingColour],
+        MGSColourSchemeKeyTextColor:
+            [xformer transformedValue:self.textColor],
+        MGSColourSchemeKeyBackgroundColor:
+            [xformer transformedValue:self.backgroundColor],
+        MGSColourSchemeKeyTextInvisibleCharactersColour:
+            [xformer transformedValue:self.textInvisibleCharactersColour],
+        MGSColourSchemeKeyColoursAttributes:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupAttribute]),
+        MGSColourSchemeKeyColoursAutocomplete:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupAutoComplete]),
+        MGSColourSchemeKeyColoursCommands:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupCommand]),
+        MGSColourSchemeKeyColoursComments:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupComment]),
+        MGSColourSchemeKeyColoursInstructions:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupInstruction]),
+        MGSColourSchemeKeyColoursKeywords:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupKeyword]),
+        MGSColourSchemeKeyColoursNumbers:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupNumber]),
+        MGSColourSchemeKeyColoursStrings:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupString]),
+        MGSColourSchemeKeyColoursVariables:
+            @([self coloursSyntaxGroup:SMLSyntaxGroupVariable]),
+        MGSColourSchemeKeyColourForAutocomplete:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupAutoComplete]],
+        MGSColourSchemeKeyColourForAttributes:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupAttribute]],
+        MGSColourSchemeKeyColourForCommands:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupCommand]],
+        MGSColourSchemeKeyColourForComments:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupComment]],
+        MGSColourSchemeKeyColourForInstructions:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupInstruction]],
+        MGSColourSchemeKeyColourForKeywords:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupKeyword]],
+        MGSColourSchemeKeyColourForNumbers:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupNumber]],
+        MGSColourSchemeKeyColourForStrings:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupString]],
+        MGSColourSchemeKeyColourForVariables:
+            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupVariable]],
+    };
 }
 
 
@@ -224,14 +355,86 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (BOOL)setPropertiesFromPropertyList:(id)fileContents error:(NSError **)err
 {
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    NSError *outerror = [self parsePropertyList:fileContents intoDictionary:dictionary];
+    
+    if (outerror) {
+        if (err) *err = outerror;
+        return NO;
+    }
+    
+    [self setPropertiesFromDictionary:dictionary];
+    return YES;
+}
+
+
+// private
+- (NSError *)parsePropertyList:(id)fileContents intoDictionary:(NSMutableDictionary *)dictionary
+{
+    NSError *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
     NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
     
-    NSSet *stringKeys = [[self class] propertiesOfTypeString];
-    NSSet *colorKeys = [[self class] propertiesOfTypeColor];
-    NSSet *boolKeys = [[self class] propertiesOfTypeBool];
+    NSDictionary *syntaxGroups = @{
+        SMLSyntaxGroupNumber:       [NSMutableDictionary dictionary],
+        SMLSyntaxGroupString:       [NSMutableDictionary dictionary],
+        SMLSyntaxGroupCommand:      [NSMutableDictionary dictionary],
+        SMLSyntaxGroupComment:      [NSMutableDictionary dictionary],
+        SMLSyntaxGroupKeyword:      [NSMutableDictionary dictionary],
+        SMLSyntaxGroupVariable:     [NSMutableDictionary dictionary],
+        SMLSyntaxGroupAttribute:    [NSMutableDictionary dictionary],
+        SMLSyntaxGroupInstruction:  [NSMutableDictionary dictionary],
+        SMLSyntaxGroupAutoComplete: [NSMutableDictionary dictionary]};
+    
+    NSDictionary *keyToGroup = @{
+        MGSColourSchemeKeyColourForAutocomplete:    SMLSyntaxGroupAutoComplete,
+        MGSColourSchemeKeyColourForAttributes:      SMLSyntaxGroupAttribute,
+        MGSColourSchemeKeyColourForCommands:        SMLSyntaxGroupCommand,
+        MGSColourSchemeKeyColourForComments:        SMLSyntaxGroupComment,
+        MGSColourSchemeKeyColourForInstructions:    SMLSyntaxGroupInstruction,
+        MGSColourSchemeKeyColourForKeywords:        SMLSyntaxGroupKeyword,
+        MGSColourSchemeKeyColourForNumbers:         SMLSyntaxGroupNumber,
+        MGSColourSchemeKeyColourForStrings:         SMLSyntaxGroupString,
+        MGSColourSchemeKeyColourForVariables:       SMLSyntaxGroupVariable,
+        MGSColourSchemeKeyColoursAttributes:        SMLSyntaxGroupAttribute,
+        MGSColourSchemeKeyColoursAutocomplete:      SMLSyntaxGroupAutoComplete,
+        MGSColourSchemeKeyColoursCommands:          SMLSyntaxGroupCommand,
+        MGSColourSchemeKeyColoursComments:          SMLSyntaxGroupComment,
+        MGSColourSchemeKeyColoursInstructions:      SMLSyntaxGroupInstruction,
+        MGSColourSchemeKeyColoursKeywords:          SMLSyntaxGroupKeyword,
+        MGSColourSchemeKeyColoursNumbers:           SMLSyntaxGroupNumber,
+        MGSColourSchemeKeyColoursStrings:           SMLSyntaxGroupString,
+        MGSColourSchemeKeyColoursVariables:         SMLSyntaxGroupVariable};
+
+    NSSet *stringKeys = [NSSet setWithArray:@[
+        MGSColourSchemeKeyDisplayName]];
+    NSSet *colorKeys = [NSSet setWithArray:@[
+        MGSColourSchemeKeyInsertionPointColor,
+        MGSColourSchemeKeyCurrentLineHighlightColour,
+        MGSColourSchemeKeyDefaultErrorHighlightingColor,
+        MGSColourSchemeKeyTextColor,
+        MGSColourSchemeKeyBackgroundColor,
+        MGSColourSchemeKeyTextInvisibleCharactersColour,
+        MGSColourSchemeKeyColourForAutocomplete,
+        MGSColourSchemeKeyColourForAttributes,
+        MGSColourSchemeKeyColourForCommands,
+        MGSColourSchemeKeyColourForComments,
+        MGSColourSchemeKeyColourForInstructions,
+        MGSColourSchemeKeyColourForKeywords,
+        MGSColourSchemeKeyColourForNumbers,
+        MGSColourSchemeKeyColourForStrings,
+        MGSColourSchemeKeyColourForVariables]];
+    NSSet *boolKeys = [NSSet setWithArray:@[
+        MGSColourSchemeKeyColoursAttributes,
+        MGSColourSchemeKeyColoursAutocomplete,
+        MGSColourSchemeKeyColoursCommands,
+        MGSColourSchemeKeyColoursComments,
+        MGSColourSchemeKeyColoursInstructions,
+        MGSColourSchemeKeyColoursKeywords,
+        MGSColourSchemeKeyColoursNumbers,
+        MGSColourSchemeKeyColoursStrings,
+        MGSColourSchemeKeyColoursVariables]];
     
     if (![fileContents isKindOfClass:[NSDictionary class]])
-        goto wrongFormat;
+        return err;
     
     for (NSString *key in fileContents) {
         id object;
@@ -239,7 +442,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         if ([stringKeys containsObject:key]) {
             object = [fileContents objectForKey:key];
             if (![object isKindOfClass:[NSString class]])
-                goto wrongFormat;
+                return err;
             
         } else if ([colorKeys containsObject:key]) {
             id data = [fileContents objectForKey:key];
@@ -248,15 +451,15 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             } else if ([data isKindOfClass:[NSString class]]) {
                 object = [xformer reverseTransformedValue:[fileContents objectForKey:key]];
             } else {
-                goto wrongFormat;
+                return err;
             }
             if (![object isKindOfClass:[NSColor class]])
-                goto wrongFormat;
+                return err;
         
         } else if ([boolKeys containsObject:key]) {
             object = [fileContents objectForKey:key];
             if (![object isKindOfClass:[NSNumber class]])
-                goto wrongFormat;
+                return err;
             
         } else {
             NSLog(@"unrecognized key %@ when loading colour scheme from deserialized plist", key);
@@ -266,51 +469,19 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         [dictionary setObject:object forKey:key];
     }
     
-    [self setPropertiesFromDictionary:dictionary];
-    return YES;
-    
-    
-wrongFormat:
-    if (err)
-        *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
-    return NO;
-}
-
-
-+ (NSSet *)keyPathsForValuesAffectingDictionaryRepresentation
-{
-    return [[self class] propertiesAll];
-}
-
-
-- (NSDictionary *)dictionaryRepresentation
-{
-    return [self dictionaryWithValuesForKeys:[[[self class] propertiesAll] allObjects]];
-}
-
-
-- (NSDictionary *)propertyListRepresentation
-{
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
-
-    for (NSString *key in [self.dictionaryRepresentation allKeys])
-    {
-        if ([[[self class] propertiesOfTypeString] containsObject:key])
-        {
-            [dictionary setObject:[self valueForKey:key] forKey:key];
+    [keyToGroup enumerateKeysAndObjectsUsingBlock:^(NSString *plistkey, NSString *group, BOOL *stop) {
+        id val = [dictionary objectForKey:plistkey];
+        [dictionary removeObjectForKey:plistkey];
+        NSMutableDictionary *groupOpts = [syntaxGroups objectForKey:group];
+        if ([val isKindOfClass:[NSNumber class]]) {
+            [groupOpts setObject:val forKey:MGSColourSchemeGroupOptionKeyEnabled];
+        } else {
+            [groupOpts setObject:val forKey:MGSColourSchemeGroupOptionKeyColour];
         }
-        if ([[[self class] propertiesOfTypeColor] containsObject:key])
-        {
-            [dictionary setObject:[xformer transformedValue:[self valueForKey:key]] forKey:key];
-        }
-        if ([[[self class] propertiesOfTypeBool] containsObject:key])
-        {
-            [dictionary setObject:[self valueForKey:key] forKey:key];
-        }
-    }
+    }];
+    [dictionary setObject:syntaxGroups forKey:MGSColourSchemeKeySyntaxGroupOptions];
     
-    return dictionary;
+    return nil;
 }
 
 
@@ -373,31 +544,7 @@ plistError:
  */
 - (BOOL)isEqualToScheme:(MGSColourScheme *)scheme
 {
-    for (NSString *key in [[self class] propertiesOfScheme])
-    {
-        if ([[self valueForKey:key] isKindOfClass:[NSColor class]])
-        {
-            NSColor *color1 = [self valueForKey:key];
-            NSColor *color2 = [scheme valueForKey:key];
-            BOOL result = [color1 mgs_isEqualToColor:color2 transformedThrough:@"MGSColourToPlainTextTransformer"];
-            if (!result)
-            {
-//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, color1, color2);
-                return result;
-            }
-        }
-        else
-        {
-            BOOL result = [[self valueForKey:key] isEqual:[scheme valueForKey:key]];
-            if (!result)
-            {
-//                NSLog(@"KEY=%@ and SELF=%@ and EXTERNAL=%@", key, [self valueForKey:key], [scheme valueForKey:key] );
-                return result;
-            }
-        }
-    }
-
-    return YES;
+    return [self.dictionaryRepresentation isEqual:scheme.dictionaryRepresentation];
 }
 
 
@@ -410,6 +557,16 @@ plistError:
     if (![self isKindOfClass:[other class]])
         return NO;
     return [self isEqualToScheme:other];
+}
+
+
+- (NSUInteger)hash
+{
+    NSUInteger res = [self.displayName hash];
+    res ^= [self.textColor hash] ^ [self.backgroundColor hash];
+    res ^= [[self colourForSyntaxGroup:SMLSyntaxGroupString] hash];
+    res ^= [[self colourForSyntaxGroup:SMLSyntaxGroupKeyword] hash];
+    return res;
 }
 
 
@@ -431,77 +588,6 @@ plistError:
 - (id)mutableCopyWithZone:(NSZone *)zone
 {
     return [[MGSMutableColourScheme alloc] initWithColourScheme:self];
-}
-
-
-#pragma mark - Property Enumerations
-
-
-// private
-+ (NSSet *)propertiesOfTypeBool
-{
-	return [NSSet setWithArray:@[
-        MGSColourSchemeKeyColoursAttributes,
-        MGSColourSchemeKeyColoursAutocomplete,
-        MGSColourSchemeKeyColoursCommands,
-        MGSColourSchemeKeyColoursComments,
-        MGSColourSchemeKeyColoursInstructions,
-        MGSColourSchemeKeyColoursKeywords,
-        MGSColourSchemeKeyColoursNumbers,
-        MGSColourSchemeKeyColoursStrings,
-        MGSColourSchemeKeyColoursVariables,
-    ]];
-}
-
-
-// private
-+ (NSSet *)propertiesOfTypeColor
-{
-    NSSet *editorColours = [NSSet setWithArray:@[
-        MGSColourSchemeKeyInsertionPointColor,
-        MGSColourSchemeKeyCurrentLineHighlightColour,
-        MGSColourSchemeKeyDefaultErrorHighlightingColor,
-        MGSColourSchemeKeyTextColor,
-        MGSColourSchemeKeyBackgroundColor,
-        MGSColourSchemeKeyTextInvisibleCharactersColour,
-    ]];
-    NSSet *syntaxHighlightingColours = [NSSet setWithArray:@[
-        MGSColourSchemeKeyColourForAutocomplete,
-        MGSColourSchemeKeyColourForAttributes,
-        MGSColourSchemeKeyColourForCommands,
-        MGSColourSchemeKeyColourForComments,
-        MGSColourSchemeKeyColourForInstructions,
-        MGSColourSchemeKeyColourForKeywords,
-        MGSColourSchemeKeyColourForNumbers,
-        MGSColourSchemeKeyColourForStrings,
-        MGSColourSchemeKeyColourForVariables,
-    ]];
-	return [editorColours setByAddingObjectsFromSet:syntaxHighlightingColours];
-}
-
-
-// private
-+ (NSSet *)propertiesOfTypeString
-{
-	return [NSSet setWithArray:@[@"displayName"]];
-}
-
-
-// private
-+ (NSArray *)propertiesOfScheme
-{
-	return [[[[self class] propertiesOfTypeColor] setByAddingObjectsFromSet:
-            [[self class] propertiesOfTypeBool]]
-        allObjects];
-}
-
-
-// private
-+ (NSSet *)propertiesAll
-{
-    return [[[[self class] propertiesOfTypeColor] setByAddingObjectsFromSet:
-             [[self class] propertiesOfTypeBool]] setByAddingObjectsFromSet:
-            [[self class] propertiesOfTypeString]];
 }
 
 
@@ -557,12 +643,112 @@ plistError:
 }
 
 
+- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group
+{
+    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        groupMap = @{
+            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(colourForNumbers)),
+            SMLSyntaxGroupString: NSStringFromSelector(@selector(colourForStrings)),
+            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(colourForCommands)),
+            SMLSyntaxGroupComment: NSStringFromSelector(@selector(colourForComments)),
+            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(colourForKeywords)),
+            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(colourForVariables)),
+            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(colourForAttributes)),
+            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(colourForInstructions)),
+            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(colourForAutocomplete))
+        };
+    });
+    NSString *key = [groupMap objectForKey:group];
+    if (!key)
+        return;
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    [self setValue:color forKey:key];
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+}
+
+
+- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
+{
+    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        groupMap = @{
+            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(setColoursNumbers:)),
+            SMLSyntaxGroupString: NSStringFromSelector(@selector(setColoursStrings:)),
+            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(setColoursCommands:)),
+            SMLSyntaxGroupComment: NSStringFromSelector(@selector(setColoursComments:)),
+            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(setColoursKeywords:)),
+            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(setColoursVariables:)),
+            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(setColoursAttributes:)),
+            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(setColoursInstructions:)),
+            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(setColoursAutocomplete:))
+        };
+    });
+    NSString *key = [groupMap objectForKey:group];
+    if (!key)
+        return;
+    SEL selector = NSSelectorFromString(key);
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    ((void (*)(id _Nonnull, SEL _Nonnull, BOOL))objc_msgSend)(self, selector, enabled);
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+}
+
+
 - (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font
 {
     if (![self coloursSyntaxGroup:group])
         return @{};
     NSColor *color = [self colourForSyntaxGroup:group];
     return @{NSForegroundColorAttributeName: color};
+}
+
+
+- (NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
+{
+    NSArray *allGroups = @[
+        SMLSyntaxGroupNumber,
+        SMLSyntaxGroupString,
+        SMLSyntaxGroupCommand,
+        SMLSyntaxGroupComment,
+        SMLSyntaxGroupKeyword,
+        SMLSyntaxGroupVariable,
+        SMLSyntaxGroupAttribute,
+        SMLSyntaxGroupInstruction,
+        SMLSyntaxGroupAutoComplete];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    for (SMLSyntaxGroup group in allGroups) {
+        NSDictionary *optDict = @{
+            MGSColourSchemeGroupOptionKeyEnabled: @([self coloursSyntaxGroup:group]),
+            MGSColourSchemeGroupOptionKeyColour: [self colourForSyntaxGroup:group]};
+        [dict setObject:optDict forKey:group];
+    }
+    return [dict copy];
+}
+
+
+- (void)setSyntaxGroupOptions:(NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
+{
+    NSArray *allGroups = @[
+        SMLSyntaxGroupNumber,
+        SMLSyntaxGroupString,
+        SMLSyntaxGroupCommand,
+        SMLSyntaxGroupComment,
+        SMLSyntaxGroupKeyword,
+        SMLSyntaxGroupVariable,
+        SMLSyntaxGroupAttribute,
+        SMLSyntaxGroupInstruction,
+        SMLSyntaxGroupAutoComplete];
+    for (SMLSyntaxGroup group in allGroups) {
+        NSDictionary *optDict = [syntaxGroupOptions objectForKey:group];
+        NSNumber *enabled = [optDict objectForKey:MGSColourSchemeGroupOptionKeyEnabled];
+        if (enabled)
+            [self setColours:[enabled boolValue] syntaxGroup:group];
+        NSColor *color = [optDict objectForKey:MGSColourSchemeGroupOptionKeyColour];
+        if (color)
+            [self setColour:[optDict objectForKey:MGSColourSchemeGroupOptionKeyColour] forSyntaxGroup:group];
+    }
 }
 
 
