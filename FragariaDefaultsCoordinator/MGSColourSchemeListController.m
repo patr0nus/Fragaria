@@ -292,12 +292,20 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         return !( self.currentSchemeIsCustom && [self.currentScheme isEqual:obj] );
     }]];
 
-    for (MGSColourSchemeOption *item in list)
-	{
-		if ([scheme isEqualToScheme:item])
-		{
+    /* Convert all schemes to a plist before converting to factor in the
+     * loss in NSColour precision due to serialization */
+    
+    NSDictionary *schemeplist = [scheme propertyListRepresentation];
+    MGSMutableColourScheme *schemetest = [[MGSMutableColourScheme alloc] initWithPropertyList:schemeplist error:nil];
+    [schemetest setDisplayName:@""];
+    
+    for (MGSColourSchemeOption *item in list) {
+        NSDictionary *itemplist = [item propertyListRepresentation];
+        MGSMutableColourScheme *itemtest = [[MGSMutableColourScheme alloc] initWithPropertyList:itemplist error:nil];
+        [itemtest setDisplayName:@""];
+
+		if ([schemetest isEqualToScheme:itemtest])
             return item;
-		}
 	}
 
 	return nil;
