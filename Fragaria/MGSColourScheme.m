@@ -301,6 +301,14 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 {
     NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
     
+    NSMutableDictionary *groupOptions = [NSMutableDictionary dictionary];
+    [_groupData enumerateKeysAndObjectsUsingBlock:^(NSString *key, MGSColourSchemeGroupData *obj, BOOL *stop) {
+        NSMutableDictionary *opts = [[obj optionDictionary] mutableCopy];
+        NSString *newColor = [xformer transformedValue:opts[MGSColourSchemeGroupOptionKeyColour]];
+        [opts setObject:newColor forKey:MGSColourSchemeGroupOptionKeyColour];
+        [groupOptions setObject:opts forKey:key];
+    }];
+    
     return @{
         MGSColourSchemeKeyDisplayName:
             self.displayName,
@@ -316,51 +324,19 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             [xformer transformedValue:self.backgroundColor],
         MGSColourSchemeKeyTextInvisibleCharactersColour:
             [xformer transformedValue:self.textInvisibleCharactersColour],
-        MGSColourSchemeKeyColoursAttributes:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupAttribute]),
-        MGSColourSchemeKeyColoursAutocomplete:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupAutoComplete]),
-        MGSColourSchemeKeyColoursCommands:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupCommand]),
-        MGSColourSchemeKeyColoursComments:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupComment]),
-        MGSColourSchemeKeyColoursInstructions:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupInstruction]),
-        MGSColourSchemeKeyColoursKeywords:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupKeyword]),
-        MGSColourSchemeKeyColoursNumbers:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupNumber]),
-        MGSColourSchemeKeyColoursStrings:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupString]),
-        MGSColourSchemeKeyColoursVariables:
-            @([self coloursSyntaxGroup:SMLSyntaxGroupVariable]),
-        MGSColourSchemeKeyColourForAutocomplete:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupAutoComplete]],
-        MGSColourSchemeKeyColourForAttributes:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupAttribute]],
-        MGSColourSchemeKeyColourForCommands:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupCommand]],
-        MGSColourSchemeKeyColourForComments:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupComment]],
-        MGSColourSchemeKeyColourForInstructions:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupInstruction]],
-        MGSColourSchemeKeyColourForKeywords:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupKeyword]],
-        MGSColourSchemeKeyColourForNumbers:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupNumber]],
-        MGSColourSchemeKeyColourForStrings:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupString]],
-        MGSColourSchemeKeyColourForVariables:
-            [xformer transformedValue:[self colourForSyntaxGroup:SMLSyntaxGroupVariable]],
-    };
+        MGSColourSchemeKeySyntaxGroupOptions:
+            groupOptions};
 }
 
 
 // private
 - (BOOL)setPropertiesFromPropertyList:(id)fileContents error:(NSError **)err
 {
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    NSError *outerror = [self parsePropertyList:fileContents intoDictionary:dictionary];
+    NSMutableDictionary *dictionary = [[[self class] defaultValues] mutableCopy];
+    NSError *outerror = [self parseFragaria3PropertyList:fileContents intoDictionary:dictionary];
+    if (outerror) {
+        outerror = [self parseFragaria2PropertyList:fileContents intoDictionary:dictionary];
+    }
     
     if (outerror) {
         if (err) *err = outerror;
@@ -372,8 +348,95 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
+- (NSError *)parseFragaria3PropertyList:(id)fileContents intoDictionary:(NSMutableDictionary *)dictionary
+{
+    NSError *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
+    NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
+    
+    if (![fileContents isKindOfClass:[NSDictionary class]])
+        return err;
+    
+    if (![fileContents objectForKey:MGSColourSchemeKeySyntaxGroupOptions])
+        return err;
+    
+    NSDictionary *rootKeyTypes = @{
+        MGSColourSchemeKeyDisplayName:                      [NSString class],
+        MGSColourSchemeKeyInsertionPointColor:              [NSString class],
+        MGSColourSchemeKeyCurrentLineHighlightColour:       [NSString class],
+        MGSColourSchemeKeyDefaultErrorHighlightingColor:    [NSString class],
+        MGSColourSchemeKeyTextColor:                        [NSString class],
+        MGSColourSchemeKeyBackgroundColor:                  [NSString class],
+        MGSColourSchemeKeyTextInvisibleCharactersColour:    [NSString class],
+        MGSColourSchemeKeySyntaxGroupOptions:               [NSDictionary class]};
+    if (![self checkObjectTypes:rootKeyTypes inDictionary:fileContents])
+        return err;
+    
+    id tmp;
+    if ((tmp = [fileContents objectForKey:MGSColourSchemeKeyDisplayName]))
+        [dictionary setObject:tmp forKey:MGSColourSchemeKeyDisplayName];
+    NSArray *baseColors = @[
+        MGSColourSchemeKeyInsertionPointColor,
+        MGSColourSchemeKeyCurrentLineHighlightColour,
+        MGSColourSchemeKeyDefaultErrorHighlightingColor,
+        MGSColourSchemeKeyTextColor,
+        MGSColourSchemeKeyBackgroundColor,
+        MGSColourSchemeKeyTextInvisibleCharactersColour];
+    for (NSString *key in baseColors) {
+        if (!(tmp = [fileContents objectForKey:key]))
+            continue;
+        NSColor *new = [xformer reverseTransformedValue:tmp];
+        if (!new)
+            return err;
+        [dictionary setObject:new forKey:key];
+    }
+    
+    NSDictionary *optionTypes = @{
+        MGSColourSchemeGroupOptionKeyEnabled:               [NSNumber class],
+        MGSColourSchemeGroupOptionKeyColour:                [NSString class],
+        MGSColourSchemeGroupOptionKeyFontVariant:           [NSNumber class]};
+    NSMutableDictionary *newOptions = [NSMutableDictionary dictionary];
+    NSDictionary *optionDict = fileContents[MGSColourSchemeKeySyntaxGroupOptions];
+    for (id key in optionDict) {
+        if (![key isKindOfClass:[NSString class]])
+            return err;
+        id options = [optionDict objectForKey:key];
+        if (![options isKindOfClass:[NSDictionary class]])
+            return err;
+        if (![self checkObjectTypes:optionTypes inDictionary:options])
+            return err;
+        
+        NSMutableDictionary *fixedOptionDict = [options mutableCopy];
+        NSString *colorstring;
+        if ((colorstring = [fixedOptionDict objectForKey:MGSColourSchemeGroupOptionKeyColour])) {
+            NSColor *newcolor = [xformer reverseTransformedValue:colorstring];
+            [fixedOptionDict setObject:newcolor forKey:MGSColourSchemeGroupOptionKeyColour];
+        }
+        [newOptions setObject:fixedOptionDict forKey:key];
+    }
+    [dictionary setObject:newOptions forKey:MGSColourSchemeKeySyntaxGroupOptions];
+    
+    return nil;
+}
+
+
+- (BOOL)checkObjectTypes:(NSDictionary<id, Class> *)keyToType inDictionary:(NSDictionary *)dict
+{
+    __block BOOL res = YES;
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        Class expected = [keyToType objectForKey:key];
+        if (!expected) {
+            NSLog(@"unrecognized key %@ when loading colour scheme from V3 deserialized plist", key);
+        } else if (![obj isKindOfClass:expected]) {
+            *stop = YES;
+            res = NO;
+        }
+    }];
+    return res;
+}
+
+
 // private
-- (NSError *)parsePropertyList:(id)fileContents intoDictionary:(NSMutableDictionary *)dictionary
+- (NSError *)parseFragaria2PropertyList:(id)fileContents intoDictionary:(NSMutableDictionary *)dictionary
 {
     NSError *err = [NSError errorWithDomain:MGSColourSchemeErrorDomain code:MGSColourSchemeWrongFileFormat userInfo:@{}];
     NSValueTransformer *xformer = [NSValueTransformer valueTransformerForName:@"MGSColourToPlainTextTransformer"];
