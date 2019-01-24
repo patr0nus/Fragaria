@@ -8,6 +8,8 @@
 #import <Cocoa/Cocoa.h>
 #import "MGSSyntaxParserClient.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 extern NSString * const MGSColourSchemeErrorDomain;
 
@@ -32,22 +34,21 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 
 
 /** Initialize a new colour scheme instance from a dictionary.
- *  @param dictionary The dictionary representation of the plist file that
- *      defines the color scheme. Each key must map to an NSColor value
- *      (no unarchiving will be attempted). */
+ *  @param dictionary A dictionary in the same format as what is
+ *    returned by -dictionaryRepresentation. */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
 
 /** Initializes a new colour scheme instance from a file.
- *  @param file The URL of the plist file which contains the colour scheme values.
+ *  @param file The URL of the plist file.
  *  @param err Upon return, if the initialization failed, contains an NSError object
  *         that describes the problem. */
-- (instancetype)initWithSchemeFileURL:(NSURL *)file error:(NSError **)err;
+- (instancetype)initWithSchemeFileURL:(NSURL *)file error:(out NSError **)err;
 
 /** Initializes a new colour scheme instance from a deserialized property list.
  *  @param plist The deserialized plist
  *  @param err   Upon return, if the initialization failed, contains an NSError object
  *               which describes the problem. */
-- (instancetype)initWithPropertyList:(id)plist error:(NSError **)err;
+- (instancetype)initWithPropertyList:(id)plist error:(out NSError **)err;
 
 /** Initializes a new colour scheme instance by copying another colour scheme.
  *  @param scheme The original colour scheme to copy. */
@@ -72,7 +73,7 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *  @param err Upon return, if the operation failed, contains an NSError object
  *         that describes the problem.
  *  @returns YES if the operation succeeded, otherwise NO. */
-- (BOOL)writeToSchemeFileURL:(NSURL *)file error:(NSError **)err;
+- (BOOL)writeToSchemeFileURL:(NSURL *)file error:(out NSError **)err;
 
 
 /** An NSDictionary representation of the Colour Scheme.
@@ -120,9 +121,10 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 /** Editor insertion point color. */
 @property (nonatomic, strong, readonly) NSColor *insertionPointColor;
 
-/** Returns the highlighting colour of specified syntax group.
+/** Returns the highlighting colour of specified syntax group, or nil
+ *  if the specified group is not associated with an highlighting colour.
  *  @param syntaxGroup The syntax group identifier. */
-- (NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (nullable NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
 /** Returns if the specified syntax group will be highlighted.
  *  @param syntaxGroup The syntax group identifier. */
@@ -145,4 +147,6 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
 
 
 @end
+
+NS_ASSUME_NONNULL_END
 

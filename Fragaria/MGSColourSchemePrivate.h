@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "MGSColourScheme.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 extern NSString * const MGSColourSchemeKeySyntaxGroupOptions;
 
@@ -29,30 +31,24 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
 @property (nonatomic, strong) NSColor *currentLineHighlightColour;
 @property (nonatomic, strong) NSColor *insertionPointColor;
 
-@property (nonatomic, strong) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
-
-@property (nonatomic, strong) NSColor *colourForAttributes;
-@property (nonatomic, strong) NSColor *colourForAutocomplete;
-@property (nonatomic, strong) NSColor *colourForCommands;
-@property (nonatomic, strong) NSColor *colourForComments;
-@property (nonatomic, strong) NSColor *colourForInstructions;
-@property (nonatomic, strong) NSColor *colourForKeywords;
-@property (nonatomic, strong) NSColor *colourForNumbers;
-@property (nonatomic, strong) NSColor *colourForStrings;
-@property (nonatomic, strong) NSColor *colourForVariables;
-
-@property (nonatomic, assign) BOOL coloursAttributes;
-@property (nonatomic, assign) BOOL coloursAutocomplete;
-@property (nonatomic, assign) BOOL coloursCommands;
-@property (nonatomic, assign) BOOL coloursComments;
-@property (nonatomic, assign) BOOL coloursInstructions;
-@property (nonatomic, assign) BOOL coloursKeywords;
-@property (nonatomic, assign) BOOL coloursNumbers;
-@property (nonatomic, assign) BOOL coloursStrings;
-@property (nonatomic, assign) BOOL coloursVariables;
+@property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 - (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
 @end
+
+
+@interface MGSColourSchemeGroupData : NSObject
+
+- (instancetype)initWithOptionDictionary:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
+- (NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
+
+@property (nonatomic) BOOL enabled;
+@property (nonatomic, nullable) NSColor *color;
+
+@end
+
+
+NS_ASSUME_NONNULL_END
 

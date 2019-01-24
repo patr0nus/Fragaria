@@ -71,6 +71,9 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 @implementation MGSColourScheme
+{
+    NSMutableDictionary<SMLSyntaxGroup, MGSColourSchemeGroupData *> *_groupData;
+}
 
 
 #pragma mark - Initializers
@@ -79,6 +82,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 {
     self = [super init];
+    
+    _groupData = [[NSMutableDictionary alloc] init];
     
     NSDictionary *defaults = [[self class] defaultValues];
     NSMutableDictionary *tmp = [defaults mutableCopy];
@@ -596,102 +601,49 @@ plistError:
 
 - (NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
 {
-    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        groupMap = @{
-            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(colourForNumbers)),
-            SMLSyntaxGroupString: NSStringFromSelector(@selector(colourForStrings)),
-            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(colourForCommands)),
-            SMLSyntaxGroupComment: NSStringFromSelector(@selector(colourForComments)),
-            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(colourForKeywords)),
-            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(colourForVariables)),
-            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(colourForAttributes)),
-            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(colourForInstructions)),
-            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(colourForAutocomplete))
-        };
-    });
-    NSString *key = [groupMap objectForKey:syntaxGroup];
-    if (!key)
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:syntaxGroup];
+    if (!data)
         return nil;
-    return [self valueForKey:key];
+    return data.color;
 }
 
 
 - (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
 {
-    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        groupMap = @{
-            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(coloursNumbers)),
-            SMLSyntaxGroupString: NSStringFromSelector(@selector(coloursStrings)),
-            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(coloursCommands)),
-            SMLSyntaxGroupComment: NSStringFromSelector(@selector(coloursComments)),
-            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(coloursKeywords)),
-            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(coloursVariables)),
-            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(coloursAttributes)),
-            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(coloursInstructions)),
-            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(coloursAutocomplete))
-        };
-    });
-    NSString *key = [groupMap objectForKey:syntaxGroup];
-    if (!key)
-        return YES;
-    SEL selector = NSSelectorFromString(key);
-    return ((BOOL (*)(id _Nonnull, SEL _Nonnull))objc_msgSend)(self, selector);
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:syntaxGroup];
+    if (!data)
+        return NO;
+    return data.enabled;
+}
+
+
+- (MGSColourSchemeGroupData *)returnOrCreateDataForGroup:(SMLSyntaxGroup)group
+{
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:group];
+    if (data)
+        return data;
+    return [[MGSColourSchemeGroupData alloc] init];
 }
 
 
 - (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group
 {
-    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        groupMap = @{
-            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(colourForNumbers)),
-            SMLSyntaxGroupString: NSStringFromSelector(@selector(colourForStrings)),
-            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(colourForCommands)),
-            SMLSyntaxGroupComment: NSStringFromSelector(@selector(colourForComments)),
-            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(colourForKeywords)),
-            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(colourForVariables)),
-            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(colourForAttributes)),
-            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(colourForInstructions)),
-            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(colourForAutocomplete))
-        };
-    });
-    NSString *key = [groupMap objectForKey:group];
-    if (!key)
-        return;
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-    [self setValue:color forKey:key];
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
+    data.color = color;
+    
     [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
 }
 
 
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
 {
-    static NSDictionary<SMLSyntaxGroup, NSString *> *groupMap;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        groupMap = @{
-            SMLSyntaxGroupNumber: NSStringFromSelector(@selector(setColoursNumbers:)),
-            SMLSyntaxGroupString: NSStringFromSelector(@selector(setColoursStrings:)),
-            SMLSyntaxGroupCommand: NSStringFromSelector(@selector(setColoursCommands:)),
-            SMLSyntaxGroupComment: NSStringFromSelector(@selector(setColoursComments:)),
-            SMLSyntaxGroupKeyword: NSStringFromSelector(@selector(setColoursKeywords:)),
-            SMLSyntaxGroupVariable: NSStringFromSelector(@selector(setColoursVariables:)),
-            SMLSyntaxGroupAttribute: NSStringFromSelector(@selector(setColoursAttributes:)),
-            SMLSyntaxGroupInstruction: NSStringFromSelector(@selector(setColoursInstructions:)),
-            SMLSyntaxGroupAutoComplete: NSStringFromSelector(@selector(setColoursAutocomplete:))
-        };
-    });
-    NSString *key = [groupMap objectForKey:group];
-    if (!key)
-        return;
-    SEL selector = NSSelectorFromString(key);
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-    ((void (*)(id _Nonnull, SEL _Nonnull, BOOL))objc_msgSend)(self, selector, enabled);
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
+    data.enabled = enabled;
+    
     [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
 }
 
@@ -701,55 +653,72 @@ plistError:
     if (![self coloursSyntaxGroup:group])
         return @{};
     NSColor *color = [self colourForSyntaxGroup:group];
+    if (!color)
+        color = self.textColor;
     return @{NSForegroundColorAttributeName: color};
 }
 
 
 - (NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
 {
-    NSArray *allGroups = @[
-        SMLSyntaxGroupNumber,
-        SMLSyntaxGroupString,
-        SMLSyntaxGroupCommand,
-        SMLSyntaxGroupComment,
-        SMLSyntaxGroupKeyword,
-        SMLSyntaxGroupVariable,
-        SMLSyntaxGroupAttribute,
-        SMLSyntaxGroupInstruction,
-        SMLSyntaxGroupAutoComplete];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (SMLSyntaxGroup group in allGroups) {
-        NSDictionary *optDict = @{
-            MGSColourSchemeGroupOptionKeyEnabled: @([self coloursSyntaxGroup:group]),
-            MGSColourSchemeGroupOptionKeyColour: [self colourForSyntaxGroup:group]};
-        [dict setObject:optDict forKey:group];
-    }
+    [_groupData enumerateKeysAndObjectsUsingBlock:^(NSString *group, MGSColourSchemeGroupData *data, BOOL *stop) {
+        [dict setObject:[data optionDictionary] forKey:group];
+    }];
     return [dict copy];
 }
 
 
 - (void)setSyntaxGroupOptions:(NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
 {
-    NSArray *allGroups = @[
-        SMLSyntaxGroupNumber,
-        SMLSyntaxGroupString,
-        SMLSyntaxGroupCommand,
-        SMLSyntaxGroupComment,
-        SMLSyntaxGroupKeyword,
-        SMLSyntaxGroupVariable,
-        SMLSyntaxGroupAttribute,
-        SMLSyntaxGroupInstruction,
-        SMLSyntaxGroupAutoComplete];
-    for (SMLSyntaxGroup group in allGroups) {
-        NSDictionary *optDict = [syntaxGroupOptions objectForKey:group];
-        NSNumber *enabled = [optDict objectForKey:MGSColourSchemeGroupOptionKeyEnabled];
-        if (enabled)
-            [self setColours:[enabled boolValue] syntaxGroup:group];
-        NSColor *color = [optDict objectForKey:MGSColourSchemeGroupOptionKeyColour];
-        if (color)
-            [self setColour:[optDict objectForKey:MGSColourSchemeGroupOptionKeyColour] forSyntaxGroup:group];
-    }
+    [_groupData removeAllObjects];
+    [syntaxGroupOptions enumerateKeysAndObjectsUsingBlock:^(NSString *group, NSDictionary<NSString *,id> *opts, BOOL *stop) {
+        MGSColourSchemeGroupData *data = [[MGSColourSchemeGroupData alloc] initWithOptionDictionary:opts];
+        [self->_groupData setObject:data forKey:group];
+    }];
 }
 
 
 @end
+
+
+#pragma mark - Group Data Object
+
+
+@implementation MGSColourSchemeGroupData
+
+
+- (instancetype)init
+{
+    self = [super init];
+    _enabled = YES;
+    _color = nil;
+    return self;
+}
+
+
+- (instancetype)initWithOptionDictionary:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary
+{
+    self = [self init];
+    NSNumber *enabled = [optionDictionary objectForKey:MGSColourSchemeGroupOptionKeyEnabled];
+    if (enabled)
+        _enabled = [enabled boolValue];
+    NSColor *color = [optionDictionary objectForKey:MGSColourSchemeGroupOptionKeyColour];
+    if (color)
+        _color = color;
+    return self;
+}
+
+
+- (NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionary];
+    [res setObject:@(self.enabled) forKey:MGSColourSchemeGroupOptionKeyEnabled];
+    if (self.color)
+        [res setObject:self.color forKey:MGSColourSchemeGroupOptionKeyColour];
+    return [res copy];
+}
+
+
+@end
+
