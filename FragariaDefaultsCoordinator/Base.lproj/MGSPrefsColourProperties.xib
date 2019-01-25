@@ -468,9 +468,9 @@
                                                         <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectAny" id="BUR-e8-lJ7">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <segments>
-                                                                <segment label="B" width="20"/>
-                                                                <segment label="I" width="20"/>
-                                                                <segment label="U" width="20"/>
+                                                                <segment image="MGSBold" imageScaling="none" width="20"/>
+                                                                <segment image="MGSItalic" imageScaling="none" width="20"/>
+                                                                <segment image="MGSUnderline" imageScaling="none" width="20"/>
                                                             </segments>
                                                         </segmentedCell>
                                                         <connections>
@@ -595,4 +595,9 @@
             <point key="canvasLocation" x="133" y="631"/>
         </customView>
     </objects>
+    <resources>
+        <image name="MGSBold" width="16" height="16"/>
+        <image name="MGSItalic" width="16" height="16"/>
+        <image name="MGSUnderline" width="16" height="16"/>
+    </resources>
 </document>

@@ -179,6 +179,7 @@
 		01A0EC4F1E6C761400818624 /* MGSMutableSubstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 01FBC7E91B0679520008EAF8 /* MGSMutableSubstring.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01AC7E721AA341AA00DF7620 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01AC7E711AA341AA00DF7620 /* Images.xcassets */; };
 		01B50A801B07AD8C00C9A856 /* NSString+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B50A7E1B07AD8C00C9A856 /* NSString+Fragaria.m */; };
+		01B5779C21FB78BD0046EC22 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B5779B21FB78BD0046EC22 /* Images.xcassets */; };
 		01BB1BF41A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BB1BF21A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m */; };
 		01D39A431B19DA690072F43F /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D39A421B19DA690072F43F /* ApplicationDelegate.m */; };
 		01D39A441B19DDD20072F43F /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718B821AB553A20073493A /* MASPreferencesWindowController.m */; };
@@ -678,6 +679,7 @@
 		01AC7E711AA341AA00DF7620 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01B50A7D1B07AD8C00C9A856 /* NSString+Fragaria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Fragaria.h"; sourceTree = "<group>"; };
 		01B50A7E1B07AD8C00C9A856 /* NSString+Fragaria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Fragaria.m"; sourceTree = "<group>"; };
+		01B5779B21FB78BD0046EC22 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01BB1BF11A79AA15006C0056 /* MGSSimpleBreakpointDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSSimpleBreakpointDelegate.h; sourceTree = "<group>"; };
 		01BB1BF21A79AA15006C0056 /* MGSSimpleBreakpointDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSSimpleBreakpointDelegate.m; sourceTree = "<group>"; };
 		01C35C1521B2FDA2009A12AB /* MGSSyntaxAwareEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSSyntaxAwareEditor.h; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 				D07188421AB3D2220073493A /* MGSPreferencesProxyDictionary.m */,
 				01919E48217D210200E26B9D /* User Interface */,
 				01919E26217D20A800E26B9D /* Info.plist */,
+				01B5779B21FB78BD0046EC22 /* Images.xcassets */,
 			);
 			path = FragariaDefaultsCoordinator;
 			sourceTree = "<group>";
@@ -1741,6 +1744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01919E56217D234C00E26B9D /* MGSPrefsEditorProperties.xib in Resources */,
+				01B5779C21FB78BD0046EC22 /* Images.xcassets in Resources */,
 				01919E50217D233B00E26B9D /* MGSPrefsCommonViews.xib in Resources */,
 				01919E55217D234C00E26B9D /* MGSPrefsColourProperties.xib in Resources */,
 				01919E57217D234C00E26B9D /* MGSColourSchemeSave.xib in Resources */,
