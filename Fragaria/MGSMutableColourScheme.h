@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSColor *insertionPointColor;
 
 - (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
 

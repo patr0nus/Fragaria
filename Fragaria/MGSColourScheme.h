@@ -12,10 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 extern NSString * const MGSColourSchemeErrorDomain;
-
 typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
     MGSColourSchemeWrongFileFormat = 1
 };
+
+typedef NS_OPTIONS(NSUInteger, MGSFontVariant) {
+    MGSFontVariantBold = 1 << 0,
+    MGSFontVariantItalic = 1 << 1,
+    MGSFontVariantUnderline = 1 << 2
+};
+
 
 @class MGSFragariaView;
 
@@ -125,6 +131,8 @@ typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
  *  if the specified group is not associated with an highlighting colour.
  *  @param syntaxGroup The syntax group identifier. */
 - (nullable NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+- (MGSFontVariant)fontVariantForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
 /** Returns if the specified syntax group will be highlighted.
  *  @param syntaxGroup The syntax group identifier. */

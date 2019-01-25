@@ -34,6 +34,7 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
 @property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 - (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
 @end
@@ -46,6 +47,7 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
 
 @property (nonatomic) BOOL enabled;
 @property (nonatomic, nullable) NSColor *color;
+@property (nonatomic) MGSFontVariant fontVariant;
 
 @end
 

@@ -282,7 +282,8 @@ NSString * const SMLSyntaxGroupComment = @"comments";
     
     NSDictionary *attributes = @{
         NSForegroundColorAttributeName: self.colourScheme.textColor,
-        NSFontAttributeName: self.textFont};
+        NSFontAttributeName: self.textFont,
+        NSUnderlineStyleAttributeName: @(0)};
     [self.textStorage addAttributes:attributes range:realrange];
     [self.textStorage removeAttribute:SMLSyntaxGroupAttributeName range:realrange];
     

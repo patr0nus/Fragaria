@@ -41,6 +41,7 @@ NSString * const MGSColourSchemeKeySyntaxGroupOptions            = @"syntaxGroup
 
 MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled = @"enabled";
 MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour = @"colour";
+MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant = @"fontVariant";
 
 
 /* Old color options used in version 2 */
@@ -671,6 +672,15 @@ plistError:
 }
 
 
+- (MGSFontVariant)fontVariantForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:syntaxGroup];
+    if (!data)
+        return 0;
+    return data.fontVariant;
+}
+
+
 - (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
 {
     MGSColourSchemeGroupData *data = [_groupData objectForKey:syntaxGroup];
@@ -700,6 +710,17 @@ plistError:
 }
 
 
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+{
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:syntaxGroup];
+    data.fontVariant = variant;
+    
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+}
+
+
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
 {
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
@@ -715,10 +736,26 @@ plistError:
 {
     if (![self coloursSyntaxGroup:group])
         return @{};
+    
     NSColor *color = [self colourForSyntaxGroup:group];
     if (!color)
         color = self.textColor;
-    return @{NSForegroundColorAttributeName: color};
+    
+    MGSFontVariant variant = [self fontVariantForSyntaxGroup:group];
+    NSUnderlineStyle underline = (variant & MGSFontVariantUnderline) ? NSUnderlineStyleSingle : 0;
+    
+    NSFont *newfont = font;
+    if (variant & (MGSFontVariantBold + MGSFontVariantItalic)) {
+        NSFontTraitMask traits = 0;
+        traits += (variant & MGSFontVariantBold) ? NSFontBoldTrait : 0;
+        traits += (variant & MGSFontVariantItalic) ? NSFontItalicTrait : 0;
+        newfont = [[NSFontManager sharedFontManager] convertFont:font toHaveTrait:traits];
+    }
+    
+    return @{
+        NSForegroundColorAttributeName: color,
+        NSFontAttributeName: newfont,
+        NSUnderlineStyleAttributeName: @(underline)};
 }
 
 
@@ -756,6 +793,7 @@ plistError:
     self = [super init];
     _enabled = YES;
     _color = nil;
+    _fontVariant = 0;
     return self;
 }
 
@@ -769,6 +807,9 @@ plistError:
     NSColor *color = [optionDictionary objectForKey:MGSColourSchemeGroupOptionKeyColour];
     if (color)
         _color = color;
+    NSNumber *variant = [optionDictionary objectForKey:MGSColourSchemeGroupOptionKeyFontVariant];
+    if (variant)
+        _fontVariant = [variant unsignedIntegerValue];
     return self;
 }
 
@@ -777,6 +818,8 @@ plistError:
 {
     NSMutableDictionary *res = [NSMutableDictionary dictionary];
     [res setObject:@(self.enabled) forKey:MGSColourSchemeGroupOptionKeyEnabled];
+    if (_fontVariant != 0)
+        [res setObject:@(self.fontVariant) forKey:MGSColourSchemeGroupOptionKeyFontVariant];
     if (self.color)
         [res setObject:self.color forKey:MGSColourSchemeGroupOptionKeyColour];
     return [res copy];

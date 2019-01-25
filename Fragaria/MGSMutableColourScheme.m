@@ -46,4 +46,10 @@
 }
 
 
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    [super setFontVariant:variant forSyntaxGroup:syntaxGroup];
+}
+
+
 @end

@@ -463,13 +463,29 @@
                                                             <action selector="updateScheme:" target="fpt-ZJ-Dce" id="s8C-qN-a42"/>
                                                         </connections>
                                                     </colorWell>
+                                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Cf-xR-bDt">
+                                                        <rect key="frame" x="303" y="0.0" width="68" height="21"/>
+                                                        <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectAny" id="BUR-e8-lJ7">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <segments>
+                                                                <segment label="B" width="20"/>
+                                                                <segment label="I" width="20"/>
+                                                                <segment label="U" width="20"/>
+                                                            </segments>
+                                                        </segmentedCell>
+                                                        <connections>
+                                                            <action selector="updateScheme:" target="fpt-ZJ-Dce" id="5Xe-JR-yvm"/>
+                                                        </connections>
+                                                    </segmentedControl>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="sJU-uU-eab" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Gz-dB-bEp" secondAttribute="trailing" constant="8" symbolic="YES" id="0KD-vN-uBU"/>
+                                                    <constraint firstItem="2Cf-xR-bDt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Gz-dB-bEp" secondAttribute="trailing" constant="8" symbolic="YES" id="0KD-vN-uBU"/>
                                                     <constraint firstItem="nEs-j8-yhq" firstAttribute="leading" secondItem="fpt-ZJ-Dce" secondAttribute="leading" constant="4" id="8Mz-AP-8Pc"/>
                                                     <constraint firstAttribute="trailing" secondItem="sJU-uU-eab" secondAttribute="trailing" constant="4" id="DKz-VF-Bp2"/>
                                                     <constraint firstAttribute="bottom" secondItem="nEs-j8-yhq" secondAttribute="bottom" constant="4" id="Kmy-9F-oGA"/>
                                                     <constraint firstAttribute="bottom" secondItem="sJU-uU-eab" secondAttribute="bottom" id="MLq-19-7wT"/>
+                                                    <constraint firstItem="2Cf-xR-bDt" firstAttribute="centerY" secondItem="fpt-ZJ-Dce" secondAttribute="centerY" id="YB0-nL-qeG"/>
+                                                    <constraint firstItem="sJU-uU-eab" firstAttribute="leading" secondItem="2Cf-xR-bDt" secondAttribute="trailing" constant="8" id="cnR-e0-w22"/>
                                                     <constraint firstItem="4Gz-dB-bEp" firstAttribute="firstBaseline" secondItem="nEs-j8-yhq" secondAttribute="firstBaseline" id="gBW-pK-RaP"/>
                                                     <constraint firstItem="4Gz-dB-bEp" firstAttribute="leading" secondItem="nEs-j8-yhq" secondAttribute="trailing" constant="4" id="iX0-mZ-kjn"/>
                                                     <constraint firstItem="nEs-j8-yhq" firstAttribute="top" secondItem="fpt-ZJ-Dce" secondAttribute="top" constant="4" id="r1K-ZX-MEj"/>
@@ -479,6 +495,7 @@
                                                     <outlet property="colorWell" destination="sJU-uU-eab" id="oXP-UR-Hha"/>
                                                     <outlet property="enabled" destination="nEs-j8-yhq" id="jyi-x7-gw1"/>
                                                     <outlet property="label" destination="4Gz-dB-bEp" id="oCR-yV-nfV"/>
+                                                    <outlet property="textVariant" destination="2Cf-xR-bDt" id="yX3-sH-Ccu"/>
                                                 </connections>
                                             </customView>
                                         </prototypeCellViews>

@@ -186,25 +186,45 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 - (void)updateView
 {
     MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
-    self.label.stringValue = self.syntaxGroup;
-    self.colorWell.color = [scheme colourForSyntaxGroup:self.syntaxGroup];
     BOOL colors = [scheme coloursSyntaxGroup:self.syntaxGroup];
-    self.enabled.state = colors ? NSControlStateValueOn : NSControlStateValueOff;
-    self.colorWell.enabled = colors;
     NSNumber *isManagedGlobal = [self.parentVc.managedGlobalProperties valueForKey:@"colourScheme"];
+    
+    self.label.stringValue = self.syntaxGroup;
     self.label.font = [isManagedGlobal boolValue] ? [NSFont boldSystemFontOfSize:0.0] : [NSFont systemFontOfSize:0.0];
+    
+    self.colorWell.color = [scheme colourForSyntaxGroup:self.syntaxGroup];
+    self.colorWell.enabled = colors;
+    
+    self.enabled.state = colors ? NSControlStateValueOn : NSControlStateValueOff;
+    
     NSString *tooltip = [[NSValueTransformer valueTransformerForName:@"MGSBoolToGlobalHintTransformer"] transformedValue:isManagedGlobal];
     self.label.toolTip = tooltip;
+    
+    MGSFontVariant variant = [scheme fontVariantForSyntaxGroup:self.syntaxGroup];
+    [self.textVariant setSelected:!!(variant & MGSFontVariantBold) forSegment:0];
+    [self.textVariant setSelected:!!(variant & MGSFontVariantItalic) forSegment:1];
+    [self.textVariant setSelected:!!(variant & MGSFontVariantUnderline) forSegment:2];
+    self.textVariant.enabled = colors;
 }
 
 
 - (IBAction)updateScheme:(id)sender
 {
     MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
+    
     BOOL newColors = self.enabled.state == NSControlStateValueOn ? YES : NO;
+    
     NSColor *newColor = self.colorWell.color;
+    
+    MGSFontVariant variant = 0;
+    variant += [self.textVariant isSelectedForSegment:0] ? MGSFontVariantBold : 0;
+    variant += [self.textVariant isSelectedForSegment:1] ? MGSFontVariantItalic : 0;
+    variant += [self.textVariant isSelectedForSegment:2] ? MGSFontVariantUnderline : 0;
+    
     [scheme setColours:newColors syntaxGroup:self.syntaxGroup];
     [scheme setColour:newColor forSyntaxGroup:self.syntaxGroup];
+    [scheme setFontVariant:variant forSyntaxGroup:self.syntaxGroup];
+    
     [self updateView];
 }
 
