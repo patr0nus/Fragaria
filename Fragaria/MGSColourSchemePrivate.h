@@ -13,12 +13,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const MGSColourSchemeKeySyntaxGroupOptions;
 
-typedef NSString * const MGSColourSchemeGroupOptionKey NS_EXTENSIBLE_STRING_ENUM;
-extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled;
-extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
+
+@interface MGSColourSchemeGroupData : NSObject
+
+- (instancetype)initWithOptionDictionary:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
+- (NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
+
+@property (nonatomic) BOOL enabled;
+@property (nonatomic, nullable) NSColor *color;
+@property (nonatomic) MGSFontVariant fontVariant;
+
+@end
 
 
 @interface MGSColourScheme ()
+{
+    @protected
+    NSMutableDictionary<SMLSyntaxGroup, MGSColourSchemeGroupData *> *_groupData;
+}
 
 - (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err;
 
@@ -32,22 +44,6 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
 @property (nonatomic, strong) NSColor *insertionPointColor;
 
 @property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
-
-- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
-- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
-
-@end
-
-
-@interface MGSColourSchemeGroupData : NSObject
-
-- (instancetype)initWithOptionDictionary:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
-- (NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionDictionary;
-
-@property (nonatomic) BOOL enabled;
-@property (nonatomic, nullable) NSColor *color;
-@property (nonatomic) MGSFontVariant fontVariant;
 
 @end
 

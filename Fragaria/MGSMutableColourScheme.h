@@ -49,6 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
+- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+@property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+
 
 @end
 

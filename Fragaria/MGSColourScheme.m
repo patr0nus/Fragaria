@@ -72,9 +72,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 @implementation MGSColourScheme
-{
-    NSMutableDictionary<SMLSyntaxGroup, MGSColourSchemeGroupData *> *_groupData;
-}
 
 
 #pragma mark - Initializers
@@ -690,46 +687,36 @@ plistError:
 }
 
 
-- (MGSColourSchemeGroupData *)returnOrCreateDataForGroup:(SMLSyntaxGroup)group
+- (NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionsForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
 {
-    MGSColourSchemeGroupData *data = [_groupData objectForKey:group];
-    if (data)
-        return data;
-    return [[MGSColourSchemeGroupData alloc] init];
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:syntaxGroup];
+    if (!data)
+        return nil;
+    return [data optionDictionary];
 }
 
 
-- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group
+- (NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
 {
-    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-    
-    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
-    data.color = color;
-    
-    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [_groupData enumerateKeysAndObjectsUsingBlock:^(NSString *group, MGSColourSchemeGroupData *data, BOOL *stop) {
+        [dict setObject:[data optionDictionary] forKey:group];
+    }];
+    return [dict copy];
 }
 
 
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (void)setSyntaxGroupOptions:(NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
 {
-    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-    
-    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:syntaxGroup];
-    data.fontVariant = variant;
-    
-    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    [_groupData removeAllObjects];
+    [syntaxGroupOptions enumerateKeysAndObjectsUsingBlock:^(NSString *group, NSDictionary<NSString *,id> *opts, BOOL *stop) {
+        MGSColourSchemeGroupData *data = [[MGSColourSchemeGroupData alloc] initWithOptionDictionary:opts];
+        [self->_groupData setObject:data forKey:group];
+    }];
 }
 
 
-- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
-{
-    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-    
-    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
-    data.enabled = enabled;
-    
-    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
-}
+#pragma mark - Resolving Syntax Groups for Highlighting
 
 
 - (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font
@@ -756,26 +743,6 @@ plistError:
         NSForegroundColorAttributeName: color,
         NSFontAttributeName: newfont,
         NSUnderlineStyleAttributeName: @(underline)};
-}
-
-
-- (NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [_groupData enumerateKeysAndObjectsUsingBlock:^(NSString *group, MGSColourSchemeGroupData *data, BOOL *stop) {
-        [dict setObject:[data optionDictionary] forKey:group];
-    }];
-    return [dict copy];
-}
-
-
-- (void)setSyntaxGroupOptions:(NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *)syntaxGroupOptions
-{
-    [_groupData removeAllObjects];
-    [syntaxGroupOptions enumerateKeysAndObjectsUsingBlock:^(NSString *group, NSDictionary<NSString *,id> *opts, BOOL *stop) {
-        MGSColourSchemeGroupData *data = [[MGSColourSchemeGroupData alloc] initWithOptionDictionary:opts];
-        [self->_groupData setObject:data forKey:group];
-    }];
 }
 
 

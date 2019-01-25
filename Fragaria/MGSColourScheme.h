@@ -22,6 +22,11 @@ typedef NS_OPTIONS(NSUInteger, MGSFontVariant) {
     MGSFontVariantUnderline = 1 << 2
 };
 
+typedef NSString * const MGSColourSchemeGroupOptionKey NS_EXTENSIBLE_STRING_ENUM;
+extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled;
+extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
+extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
+
 
 @class MGSFragariaView;
 
@@ -137,6 +142,15 @@ typedef NS_OPTIONS(NSUInteger, MGSFontVariant) {
 /** Returns if the specified syntax group will be highlighted.
  *  @param syntaxGroup The syntax group identifier. */
 - (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+- (nullable NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionsForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+@property (nonatomic, copy, readonly) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+
+
+#pragma mark - Resolving Syntax Groups for Highlighting
+/// @name Resolving Syntax Groups for Highlighting
+
 
 /** Returns the dictionary of attributes to use for colouring a
  *  token of a given syntax group.

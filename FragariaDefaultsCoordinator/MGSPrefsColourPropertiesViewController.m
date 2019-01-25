@@ -221,9 +221,11 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
     variant += [self.textVariant isSelectedForSegment:1] ? MGSFontVariantItalic : 0;
     variant += [self.textVariant isSelectedForSegment:2] ? MGSFontVariantUnderline : 0;
     
-    [scheme setColours:newColors syntaxGroup:self.syntaxGroup];
-    [scheme setColour:newColor forSyntaxGroup:self.syntaxGroup];
-    [scheme setFontVariant:variant forSyntaxGroup:self.syntaxGroup];
+    [scheme setOptions:@{
+            MGSColourSchemeGroupOptionKeyEnabled: @(newColors),
+            MGSColourSchemeGroupOptionKeyColour: newColor,
+            MGSColourSchemeGroupOptionKeyFontVariant: @(variant)}
+        forSyntaxGroup:self.syntaxGroup];
     
     [self updateView];
 }

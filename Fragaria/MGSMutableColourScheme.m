@@ -20,6 +20,7 @@
 @dynamic textInvisibleCharactersColour;
 @dynamic currentLineHighlightColour;
 @dynamic insertionPointColor;
+@dynamic syntaxGroupOptions;
 
 
 - (id)copyWithZone:(NSZone *)zone
@@ -34,21 +35,56 @@
 }
 
 
+- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+{
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    
+    MGSColourSchemeGroupData *data = [[MGSColourSchemeGroupData alloc] initWithOptionDictionary:options];
+    [_groupData setObject:data forKey:syntaxGroup];
+    
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+}
+
+
+- (MGSColourSchemeGroupData *)returnOrCreateDataForGroup:(SMLSyntaxGroup)group
+{
+    MGSColourSchemeGroupData *data = [_groupData objectForKey:group];
+    if (data)
+        return data;
+    return [[MGSColourSchemeGroupData alloc] init];
+}
+
+
 - (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group
 {
-    [super setColour:color forSyntaxGroup:group];
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
+    data.color = color;
+    
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+}
+
+
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+{
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:syntaxGroup];
+    data.fontVariant = variant;
+    
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
 }
 
 
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
 {
-    [super setColours:enabled syntaxGroup:group];
-}
-
-
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
-{
-    [super setFontVariant:variant forSyntaxGroup:syntaxGroup];
+    [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
+    
+    MGSColourSchemeGroupData *data = [self returnOrCreateDataForGroup:group];
+    data.enabled = enabled;
+    
+    [self didChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
 }
 
 
