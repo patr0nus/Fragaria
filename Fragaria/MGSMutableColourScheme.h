@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
+/**
+ *  The mutable subclass of MGSColourScheme.
+ */
 @interface MGSMutableColourScheme : MGSColourScheme
 
 
@@ -22,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param file The complete path and file to read.
  *  @param err Upon return, if the loading failed, contains an NSError object
  *         that describes the problem. */
-- (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err;
+- (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(out NSError **)err;
 
 
 #pragma mark - Colour Scheme Properties
@@ -45,12 +48,33 @@ NS_ASSUME_NONNULL_BEGIN
 /** Editor insertion point color. */
 @property (nonatomic, strong) NSColor *insertionPointColor;
 
-- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+/** Sets if the specified syntax group will be coloured.
+ *  @param enabled YES to enable the syntax group, NO otherwise.
+ *  @param group The syntax group identifier. */
 - (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
 
+/** Sets the highlighting colour for the specified syntax group.
+ *  @param color The colour to use for highlighting the group.
+ *  @param group The syntax group identifier. */
+- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+
+/** Sets the font variant used for highlighting the specified syntax
+ *  group.
+ *  @param variant The font variant to use for highlighting the group.
+ *  @param syntaxGroup The syntax group identifier. */
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+/** Sets the options for the specified syntax group to the values in the
+ *  given dictionary.
+ *  @param options A dictionary of options for the syntax group.
+ *  @param syntaxGroup The syntax group identifier.
+ *  @note When an option key is missing from the dictionary, the default values
+ *    are set for that option instead. */
 - (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
+/** A dictionary containing the option dictionaries of all
+ *  syntax groups recognized by this colour scheme. */
 @property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 

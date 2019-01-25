@@ -11,32 +11,47 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
+/** Errors returned by MGSColourScheme */
 extern NSString * const MGSColourSchemeErrorDomain;
+
+/** Error code associated to the MGSColourSchemeErrorDomain error domain. */
 typedef NS_ENUM(NSUInteger, MGSColourSchemeErrorCode) {
+    /** The file or PList has an invalid format. */
     MGSColourSchemeWrongFileFormat = 1
 };
 
+/** Bitmask of font variants used for highlighting a syntax group. */
 typedef NS_OPTIONS(NSUInteger, MGSFontVariant) {
+    /** A mask that specifies a bold font. */
     MGSFontVariantBold = 1 << 0,
+    /** A mask that specifies an italic font. */
     MGSFontVariantItalic = 1 << 1,
+    /** A mask that specifies that the token should be underlined. */
     MGSFontVariantUnderline = 1 << 2
 };
 
+/** Keys in syntax group option dictionaries. */
 typedef NSString * const MGSColourSchemeGroupOptionKey NS_EXTENSIBLE_STRING_ENUM;
+/** Key associated to a boolean NSNumber which specifies if highlighting the
+ *  syntax group is enabled. */
 extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyEnabled;
+/** Key associated to the NSColor used for highlighting the syntax group. */
 extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyColour;
+/** Key associated to an NSNumber wrapping a MGSFontVariant specifying the
+ *  font variant used for highlighting the syntax group. */
 extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
 
 
-@class MGSFragariaView;
-
-
 /**
- *  MGSColourScheme defines a colour scheme for MGSColourSchemeListController.
- *  @discussion Property names (except for displayName) are identical
- *      to the MGSFragariaView property names.
+ *  MGSColourScheme wraps all the properties related to how the text
+ *  in an instance of MGSFragaria is highlighted.
+ *
+ *  A colour scheme includes both global properties like the colour of the
+ *  text and the background, and a collection of options specific to each
+ *  SMLSyntaxGroup. The options can be accessed by methods that handle
+ *  one option at a time, one syntax group at a time, or all syntax group at
+ *  once.
  */
-
 @interface MGSColourScheme : NSObject <NSCopying, NSMutableCopying>
 
 
@@ -137,14 +152,22 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
  *  @param syntaxGroup The syntax group identifier. */
 - (nullable NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
+/** Returns the font variant used for highlighting the specified syntax
+ *  group.
+ *  @param syntaxGroup The syntax group identifier. */
 - (MGSFontVariant)fontVariantForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
 /** Returns if the specified syntax group will be highlighted.
  *  @param syntaxGroup The syntax group identifier. */
 - (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
+/** Returns a dictionary containing all the options associated to the
+ *  highlighting of the specified syntax group.
+ *  @param syntaxGroup The syntax group identifier. */
 - (nullable NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionsForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
+/** A dictionary containing the option dictionaries of all
+ *  syntax groups recognized by this colour scheme. */
 @property (nonatomic, copy, readonly) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 
