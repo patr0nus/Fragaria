@@ -259,7 +259,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
             MGSColourSchemeOption *newScheme = [self.arrangedObjects objectAtIndex:self.selectionIndex];
-            if (self.currentSchemeIsCustom)
+            if (self.currentSchemeIsCustom && newScheme != self.currentScheme)
             {
                 self.ignoreObservations = YES;
                 [self removeObject:self.currentScheme];
