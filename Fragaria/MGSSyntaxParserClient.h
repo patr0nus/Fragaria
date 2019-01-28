@@ -11,17 +11,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** Syntax groups are tags for identifying tokens in the text that must be
- *  coloured. */
+ *  coloured. Some syntax group tags are pre-defined by Fragaria, but parsers can make
+ *  up new syntax groups if they wish.
+ *
+ *  User-defined syntax groups can also be declared as a sub-group of an
+ *  existing group by using dot notation. Sub-groups can have custom
+ *  colouring settings, but recursively fallback to the settings of the
+ *  supergroup otherwise. For example, "number.hex" is a subgroup of
+ *  the "number" group. */
 typedef NSString *SMLSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
+/** Syntax group for numeric literals */
 extern SMLSyntaxGroup const SMLSyntaxGroupNumber;
+/** Syntax group for language keywords */
+extern SMLSyntaxGroup const SMLSyntaxGroupKeyword;
+/** Syntax group for variable identifiers */
+extern SMLSyntaxGroup const SMLSyntaxGroupVariable;
+/** Syntax group for string literals */
+extern SMLSyntaxGroup const SMLSyntaxGroupString;
+/** Syntax group for comments */
+extern SMLSyntaxGroup const SMLSyntaxGroupComment;
 extern SMLSyntaxGroup const SMLSyntaxGroupCommand;
 extern SMLSyntaxGroup const SMLSyntaxGroupInstruction;
-extern SMLSyntaxGroup const SMLSyntaxGroupKeyword;
 extern SMLSyntaxGroup const SMLSyntaxGroupAutoComplete;
-extern SMLSyntaxGroup const SMLSyntaxGroupVariable;
-extern SMLSyntaxGroup const SMLSyntaxGroupString;
 extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
-extern SMLSyntaxGroup const SMLSyntaxGroupComment;
 
 
 /** MGSSyntaxParserClient specifies the methods used by MGSSyntaxParser

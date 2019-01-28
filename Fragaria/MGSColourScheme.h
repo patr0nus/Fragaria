@@ -175,10 +175,18 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
 /// @name Resolving Syntax Groups for Highlighting
 
 
+/** Resolves a syntax group to the closest super-group known to
+ *  this colour scheme.
+ *  @param group A syntax group
+ *  @returns The resolved syntax group or nil if no super-group
+ *    of the specified group is known to this colour scheme. */
+- (nullable SMLSyntaxGroup)resolveSyntaxGroup:(SMLSyntaxGroup)group;
+
 /** Returns the dictionary of attributes to use for colouring a
  *  token of a given syntax group.
  *  @param group The syntax group of the token.
- *  @param font The font used for non-highlighted text. */
+ *  @param font The font used for non-highlighted text.
+ *  @note This method also does syntax group resolution. */
 - (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font;
 
 

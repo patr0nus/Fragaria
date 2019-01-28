@@ -185,13 +185,15 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 - (void)updateView
 {
     MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
-    BOOL colors = [scheme coloursSyntaxGroup:self.syntaxGroup];
+    SMLSyntaxGroup resolvedGrp = [scheme resolveSyntaxGroup:self.syntaxGroup];
+    
+    BOOL colors = [scheme coloursSyntaxGroup:resolvedGrp];
     NSNumber *isManagedGlobal = [self.parentVc.managedGlobalProperties valueForKey:@"colourScheme"];
     
     self.label.stringValue = [[MGSSyntaxController sharedInstance] localizedDisplayNameForSyntaxGroup:self.syntaxGroup];
     self.label.font = [isManagedGlobal boolValue] ? [NSFont boldSystemFontOfSize:0.0] : [NSFont systemFontOfSize:0.0];
     
-    self.colorWell.color = [scheme colourForSyntaxGroup:self.syntaxGroup];
+    self.colorWell.color = [scheme colourForSyntaxGroup:resolvedGrp];
     self.colorWell.enabled = colors;
     
     self.enabled.state = colors ? NSControlStateValueOn : NSControlStateValueOff;
@@ -199,7 +201,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
     NSString *tooltip = [[NSValueTransformer valueTransformerForName:@"MGSBoolToGlobalHintTransformer"] transformedValue:isManagedGlobal];
     self.label.toolTip = tooltip;
     
-    MGSFontVariant variant = [scheme fontVariantForSyntaxGroup:self.syntaxGroup];
+    MGSFontVariant variant = [scheme fontVariantForSyntaxGroup:resolvedGrp];
     [self.textVariant setSelected:!!(variant & MGSFontVariantBold) forSegment:0];
     [self.textVariant setSelected:!!(variant & MGSFontVariantItalic) forSegment:1];
     [self.textVariant setSelected:!!(variant & MGSFontVariantUnderline) forSegment:2];

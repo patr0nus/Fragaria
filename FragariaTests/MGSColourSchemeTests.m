@@ -220,4 +220,18 @@ NSColor *MGSTestRandomColor(void)
 }
 
 
+- (void)test_groupResolution
+{
+    MGSMutableColourScheme *cs = [[MGSMutableColourScheme alloc] init];
+    XCTAssertEqualObjects(SMLSyntaxGroupNumber, [cs resolveSyntaxGroup:SMLSyntaxGroupNumber]);
+    XCTAssertEqualObjects(SMLSyntaxGroupNumber, [cs resolveSyntaxGroup:@"number.test"]);
+    XCTAssertEqualObjects(nil, [cs resolveSyntaxGroup:@"nonexistent"]);
+    [cs setColour:[NSColor redColor] forSyntaxGroup:@"strings.example"];
+    XCTAssertEqualObjects(@"strings.example", [cs resolveSyntaxGroup:@"strings.example.nonexistent"]);
+    XCTAssertEqualObjects(@"strings.example", [cs resolveSyntaxGroup:@"strings.example"]);
+    XCTAssertEqualObjects(SMLSyntaxGroupString, [cs resolveSyntaxGroup:@"strings"]);
+    XCTAssertEqualObjects(SMLSyntaxGroupString, [cs resolveSyntaxGroup:@"strings.nonexistent"]);
+}
+
+
 @end

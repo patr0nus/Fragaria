@@ -719,9 +719,25 @@ plistError:
 #pragma mark - Resolving Syntax Groups for Highlighting
 
 
+- (nullable SMLSyntaxGroup)resolveSyntaxGroup:(SMLSyntaxGroup)group
+{
+    NSString *supergrp = group;
+    while (supergrp != nil && ![_groupData objectForKey:supergrp]) {
+        NSRange range = [supergrp rangeOfString:@"." options:NSLiteralSearch+NSBackwardsSearch];
+        if (range.location == NSNotFound)
+            supergrp = nil;
+        else
+            supergrp = [supergrp substringWithRange:NSMakeRange(0, range.location)];
+    }
+    return supergrp;
+}
+
+
 - (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font
 {
-    if (![self coloursSyntaxGroup:group])
+    group = [self resolveSyntaxGroup:group];
+
+    if (!group || ![self coloursSyntaxGroup:group])
         return @{};
     
     NSColor *color = [self colourForSyntaxGroup:group];
