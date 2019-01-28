@@ -1,33 +1,30 @@
-/* String for cancel button. */
-"Cancel" = "Cancel";
+/* Localized name of syntax group \"attribute\" */
+"Attribute" = "Attribute";
 
-/* Toolbar item name for the Colors preference pane */
-"Colors" = "Colors";
+/* Localized name of syntax group \"autocomplete\" */
+"Autocomplete" = "Autocomplete";
+
+/* Localized name of syntax group \"command\" */
+"Command" = "Command";
+
+/* Localized name of syntax group \"comment\" */
+"Comment" = "Comment";
 
 /* Name for Custom Settings scheme. */
 "Custom Settings" = "Custom Settings";
 
-/* String for delete button. */
-"Delete" = "Delete";
+/* Localized name of syntax group \"instruction\" */
+"Instruction" = "Instruction";
 
-/* The text for the save/delete scheme button when it should read Delete Scheme… */
-"Delete Scheme…" = "Delete Scheme…";
+/* Localized name of syntax group \"keyword\" */
+"Keyword" = "Keyword";
 
-/* String to alert. */
-"Delete the scheme?" = "Delete the scheme?";
+/* Localized name of syntax group \"number\" */
+"Number" = "Number";
 
-/* String for alert information. */
-"Deleted schemes cannot be restored." = "Deleted schemes cannot be restored.";
+/* Localized name of syntax group \"string\" */
+"String" = "String";
 
-/* Toolbar item name for the Editor preference pane */
-"Editor" = "Editor";
-
-/* Hint explaining why certain items are bold. */
-"Items in bold affect all of your views." = "Items in bold affect all of your views.";
-
-/* Default name for new schemes. */
-"New Scheme" = "New Scheme";
-
-/* The text for the save/delete scheme button when it should read Save Scheme… */
-"Save Scheme…" = "Save Scheme…";
+/* Localized name of syntax group \"variable\" */
+"Variable" = "Variable";
 

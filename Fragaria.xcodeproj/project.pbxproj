@@ -187,6 +187,7 @@
 		01D81AD21AA7E37E006DF8B8 /* Features.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81ACF1AA7E37E006DF8B8 /* Features.xib */; };
 		01D81AD31AA7E37E006DF8B8 /* Lorem.html in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD01AA7E37E006DF8B8 /* Lorem.html */; };
 		01D81AD41AA7E37E006DF8B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD11AA7E37E006DF8B8 /* MainMenu.xib */; };
+		01DE21C721FFAA860076770C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01DE21C921FFAA860076770C /* Localizable.strings */; };
 		01E4D55321D51CE5005AC122 /* MGSClassicFragariaParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55121D51CE5005AC122 /* MGSClassicFragariaParserFactory.m */; };
 		01E4D55721D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55521D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m */; };
 		01E4D55921D57409005AC122 /* MGSSyntaxParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 013645072187E7A70088B324 /* MGSSyntaxParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -688,6 +689,8 @@
 		01D81ACF1AA7E37E006DF8B8 /* Features.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Features.xib; sourceTree = "<group>"; };
 		01D81AD01AA7E37E006DF8B8 /* Lorem.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Lorem.html; sourceTree = "<group>"; };
 		01D81AD11AA7E37E006DF8B8 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		01DE21C821FFAA860076770C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01DE21CA21FFAA880076770C /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSClassicFragariaParserFactory.h; sourceTree = "<group>"; };
 		01E4D55121D51CE5005AC122 /* MGSClassicFragariaParserFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSClassicFragariaParserFactory.m; sourceTree = "<group>"; };
 		01E4D55421D5723D005AC122 /* MGSClassicFragariaSyntaxParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSClassicFragariaSyntaxParser.h; sourceTree = "<group>"; };
@@ -1059,6 +1062,7 @@
 				01919E48217D210200E26B9D /* User Interface */,
 				01919E26217D20A800E26B9D /* Info.plist */,
 				01B5779B21FB78BD0046EC22 /* Images.xcassets */,
+				01DE21C921FFAA860076770C /* Localizable.strings */,
 			);
 			path = FragariaDefaultsCoordinator;
 			sourceTree = "<group>";
@@ -1744,6 +1748,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01919E56217D234C00E26B9D /* MGSPrefsEditorProperties.xib in Resources */,
+				01DE21C721FFAA860076770C /* Localizable.strings in Resources */,
 				01B5779C21FB78BD0046EC22 /* Images.xcassets in Resources */,
 				01919E50217D233B00E26B9D /* MGSPrefsCommonViews.xib in Resources */,
 				01919E55217D234C00E26B9D /* MGSPrefsColourProperties.xib in Resources */,
@@ -2072,6 +2077,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		01DE21C921FFAA860076770C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01DE21C821FFAA860076770C /* en */,
+				01DE21CA21FFAA880076770C /* en-GB */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D00BB04B213876A3007E5FA6 /* SMLGoToLine.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
