@@ -51,7 +51,9 @@
     MGSColourSchemeGroupData *data = [_groupData objectForKey:group];
     if (data)
         return data;
-    return [[MGSColourSchemeGroupData alloc] init];
+    data = [[MGSColourSchemeGroupData alloc] init];
+    [_groupData setObject:data forKey:group];
+    return data;
 }
 
 
