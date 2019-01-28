@@ -324,4 +324,43 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
+- (NSArray<SMLSyntaxGroup> *)syntaxGroupsForParsers
+{
+    return @[
+        SMLSyntaxGroupNumber,
+        SMLSyntaxGroupCommand,
+        SMLSyntaxGroupInstruction,
+        SMLSyntaxGroupKeyword,
+        SMLSyntaxGroupAutoComplete,
+        SMLSyntaxGroupVariable,
+        SMLSyntaxGroupString,
+        SMLSyntaxGroupAttribute,
+        SMLSyntaxGroupComment];
+}
+
+
+- (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    if ([syntaxGroup isEqual:SMLSyntaxGroupNumber])
+        return NSLocalizedString(@"Number", @"Localized name of syntax group \"number\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupCommand])
+        return NSLocalizedString(@"Command", @"Localized name of syntax group \"command\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupInstruction])
+        return NSLocalizedString(@"Instruction", @"Localized name of syntax group \"instruction\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupKeyword])
+        return NSLocalizedString(@"Keyword", @"Localized name of syntax group \"keyword\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupAutoComplete])
+        return NSLocalizedString(@"Autocomplete", @"Localized name of syntax group \"autocomplete\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupVariable])
+        return NSLocalizedString(@"Variable", @"Localized name of syntax group \"variable\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupString])
+        return NSLocalizedString(@"String", @"Localized name of syntax group \"string\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupAttribute])
+        return NSLocalizedString(@"Attribute", @"Localized name of syntax group \"attribute\"");
+    if ([syntaxGroup isEqual:SMLSyntaxGroupComment])
+        return NSLocalizedString(@"Comment", @"Localized name of syntax group \"comment\"");
+    return nil;
+}
+
+
 @end

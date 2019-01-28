@@ -95,6 +95,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef;
 
 
+#pragma mark - Finding Syntax Groups
+/// @name Finding Syntax Groups
+
+
+/** The list of SMLSyntaxGroups that all the parsers can use, intended
+ *  for UX purposes.
+ *  @note This property is not intended as an exhaustive list, but as an
+ *    implementation aid for colour scheme editors. */
+@property (nonatomic, readonly) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
+
+/** Returns a user-consumable name for a syntax group.
+ *  @param syntaxGroup The syntax group identifier.
+ *  @returns A localized string associated with the syntax group, or a
+ *    generic non-localized name if such string is not available. */
+- (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+
+
 #pragma mark - Adding Syntax Definitions
 /// @name Adding Syntax Definitions
 

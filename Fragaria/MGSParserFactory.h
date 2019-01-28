@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MGSSyntaxParserClient.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /** The list of language identifiers provided by this object. */
-@property (strong, nonatomic, readonly) NSArray *syntaxDefinitionNames;
+@property (nonatomic, readonly) NSArray<NSString *> *syntaxDefinitionNames;
 
 /** Returns a MGSSyntaxParser suitable for parsing a string of the specified
  *  language.
@@ -55,6 +56,23 @@ NS_ASSUME_NONNULL_BEGIN
  *  @note This method shall not return a language identifier not included in
  *        syntaxDefinitionNames. */
 - (NSArray <NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine;
+
+
+/** The list of SMLSyntaxGroups that the parsers provided by this
+ *  factory can use, intended for UX purposes.
+ *  @note This property is not intended as an exhaustive list, but as an
+ *    implementation aid for colour scheme editors. Thus, if the parsers
+ *    only wrap an existing parser already registered by another parser
+ *    factory, this method can be ignored. */
+@property (nonatomic, readonly) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
+
+/** Returns a user-consumable name for a syntax group.
+ *  @param syntaxGroup The syntax group identifier.
+ *  @returns A localized string associated with the syntax group.
+ *  @note Typically this method is called only with the syntax groups
+ *    returned by syntaxGroupsForParsers. It is not necessary to return
+ *    a string for syntax groups declared by Fragaria itself. */
+- (nullable NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
 
 
 @end

@@ -33,15 +33,15 @@
 NSAttributedStringKey SMLSyntaxGroupAttributeName = @"group";
 
 // syntax colouring group names
-NSString * const SMLSyntaxGroupNumber = @"number";
-NSString * const SMLSyntaxGroupCommand = @"command";
-NSString * const SMLSyntaxGroupInstruction = @"instruction";
-NSString * const SMLSyntaxGroupKeyword = @"keyword";
+NSString * const SMLSyntaxGroupNumber       = @"number";
+NSString * const SMLSyntaxGroupCommand      = @"command";
+NSString * const SMLSyntaxGroupInstruction  = @"instruction";
+NSString * const SMLSyntaxGroupKeyword      = @"keyword";
 NSString * const SMLSyntaxGroupAutoComplete = @"autocomplete";
-NSString * const SMLSyntaxGroupVariable = @"variable";
-NSString * const SMLSyntaxGroupString = @"strings";
-NSString * const SMLSyntaxGroupAttribute = @"attribute";
-NSString * const SMLSyntaxGroupComment = @"comments";
+NSString * const SMLSyntaxGroupVariable     = @"variable";
+NSString * const SMLSyntaxGroupString       = @"strings";
+NSString * const SMLSyntaxGroupAttribute    = @"attribute";
+NSString * const SMLSyntaxGroupComment      = @"comments";
 
 
 @interface SMLSyntaxColouring()

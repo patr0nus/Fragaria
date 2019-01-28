@@ -9,6 +9,7 @@
 #import "MGSPrefsColourPropertiesViewController.h"
 #import "MGSFragariaView+Definitions.h"
 #import "MGSMutableColourScheme.h"
+#import "MGSSyntaxController.h"
 
 
 static void *ColourSchemeChangedContext = &ColourSchemeChangedContext;
@@ -27,9 +28,11 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 @end
 
 
-@implementation MGSPrefsColourPropertiesViewController {
+@implementation MGSPrefsColourPropertiesViewController
+{
     BOOL updatingFromDefaults;
     BOOL savingToDefaults;
+    NSArray<SMLSyntaxGroup> *_colouringGroupsCache;
 }
 
 /*
@@ -148,15 +151,11 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 
 - (NSArray<SMLSyntaxGroup> *)colouringGroups
 {
-    return @[SMLSyntaxGroupAutoComplete,
-        SMLSyntaxGroupInstruction,
-        SMLSyntaxGroupAttribute,
-        SMLSyntaxGroupVariable,
-        SMLSyntaxGroupKeyword,
-        SMLSyntaxGroupComment,
-        SMLSyntaxGroupCommand,
-        SMLSyntaxGroupString,
-        SMLSyntaxGroupNumber];
+    if (!_colouringGroupsCache) {
+        NSArray *tmp = [[MGSSyntaxController sharedInstance] syntaxGroupsForParsers];
+        _colouringGroupsCache = [tmp sortedArrayUsingSelector:@selector(compare:)];
+    }
+    return _colouringGroupsCache;
 }
 
 
@@ -189,7 +188,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
     BOOL colors = [scheme coloursSyntaxGroup:self.syntaxGroup];
     NSNumber *isManagedGlobal = [self.parentVc.managedGlobalProperties valueForKey:@"colourScheme"];
     
-    self.label.stringValue = self.syntaxGroup;
+    self.label.stringValue = [[MGSSyntaxController sharedInstance] localizedDisplayNameForSyntaxGroup:self.syntaxGroup];
     self.label.font = [isManagedGlobal boolValue] ? [NSFont boldSystemFontOfSize:0.0] : [NSFont systemFontOfSize:0.0];
     
     self.colorWell.color = [scheme colourForSyntaxGroup:self.syntaxGroup];

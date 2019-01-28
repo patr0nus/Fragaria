@@ -12,16 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Syntax groups are tags for identifying tokens in the text that must be
  *  coloured. */
-typedef NSString * const SMLSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
-extern SMLSyntaxGroup SMLSyntaxGroupNumber;
-extern SMLSyntaxGroup SMLSyntaxGroupCommand;
-extern SMLSyntaxGroup SMLSyntaxGroupInstruction;
-extern SMLSyntaxGroup SMLSyntaxGroupKeyword;
-extern SMLSyntaxGroup SMLSyntaxGroupAutoComplete;
-extern SMLSyntaxGroup SMLSyntaxGroupVariable;
-extern SMLSyntaxGroup SMLSyntaxGroupString;
-extern SMLSyntaxGroup SMLSyntaxGroupAttribute;
-extern SMLSyntaxGroup SMLSyntaxGroupComment;
+typedef NSString *SMLSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
+extern SMLSyntaxGroup const SMLSyntaxGroupNumber;
+extern SMLSyntaxGroup const SMLSyntaxGroupCommand;
+extern SMLSyntaxGroup const SMLSyntaxGroupInstruction;
+extern SMLSyntaxGroup const SMLSyntaxGroupKeyword;
+extern SMLSyntaxGroup const SMLSyntaxGroupAutoComplete;
+extern SMLSyntaxGroup const SMLSyntaxGroupVariable;
+extern SMLSyntaxGroup const SMLSyntaxGroupString;
+extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
+extern SMLSyntaxGroup const SMLSyntaxGroupComment;
 
 
 /** MGSSyntaxParserClient specifies the methods used by MGSSyntaxParser

@@ -32,16 +32,19 @@ static MGSSyntaxController *sharedInstance = nil;
 
 @interface MGSSyntaxController()
 
-@property (strong) NSMutableArray<id <MGSParserFactory>> *allFactories;
-@property (strong) NSMutableDictionary<NSString *, id <MGSParserFactory>> *definitionToFactory;
-@property (strong) NSMutableDictionary<NSString *, NSString *> *disambiguatedDefinitions;
+@property (nonatomic, strong) NSMutableArray<id <MGSParserFactory>> *allFactories;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, id <MGSParserFactory>> *definitionToFactory;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *disambiguatedDefinitions;
+
+@property (nonatomic) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
 
 @end
 
 
 @implementation MGSSyntaxController
 {
-    NSArray <NSString *> *_syntaxDefinitionNamesCache;
+    NSArray<NSString *> *_syntaxDefinitionNamesCache;
+    NSMutableDictionary<SMLSyntaxGroup, NSString *> *_localizedGroupNameCache;
 }
 
 
@@ -72,6 +75,7 @@ static MGSSyntaxController *sharedInstance = nil;
     _allFactories = [[NSMutableArray alloc] init];
     _definitionToFactory = [[NSMutableDictionary alloc] init];
     _disambiguatedDefinitions = [[NSMutableDictionary alloc] init];
+    _localizedGroupNameCache = [[NSMutableDictionary alloc] init];
     [self registerParserFactory:[[MGSClassicFragariaParserFactory alloc] init]];
     
     return self;
@@ -104,6 +108,23 @@ static MGSSyntaxController *sharedInstance = nil;
         }
         
         [self.definitionToFactory setObject:parserFactory forKey:disambigDef];
+    }
+    
+    if ([parserFactory respondsToSelector:@selector(syntaxGroupsForParsers)]) {
+        NSMutableSet *syntaxGrps = [NSMutableSet setWithArray:self.syntaxGroupsForParsers];
+        NSMutableSet *newGrps = [NSMutableSet setWithArray:parserFactory.syntaxGroupsForParsers];
+        [newGrps minusSet:syntaxGrps];
+        
+        [syntaxGrps addObjectsFromArray:parserFactory.syntaxGroupsForParsers];
+        self.syntaxGroupsForParsers = [syntaxGrps allObjects];
+        
+        if ([parserFactory respondsToSelector:@selector(localizedDisplayNameForSyntaxGroup:)]) {
+            for (SMLSyntaxGroup grp in newGrps) {
+                NSString *str = [parserFactory localizedDisplayNameForSyntaxGroup:grp];
+                if (str)
+                    [_localizedGroupNameCache setObject:str forKey:grp];
+            }
+        }
     }
     
     [self didChangeValueForKey:@"syntaxDefinitionNames"];
@@ -169,6 +190,15 @@ static MGSSyntaxController *sharedInstance = nil;
     if (!realid)
         realid = syndef;
     return [factory parserForSyntaxDefinitionName:realid];
+}
+
+
+- (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+{
+    NSString *res = [_localizedGroupNameCache objectForKey:syntaxGroup];
+    if (!res)
+        return syntaxGroup;
+    return res;
 }
 
 
