@@ -173,6 +173,9 @@ typedef NSInteger SMLSyntaxGroupInteger;
         }
     }
     
+    if (effectiveRange.length < 1)
+        return effectiveRange;
+    
     /* Expand the range to not start or end in the middle of an already coloured
      * block. */
     NSRange longRange;
@@ -180,7 +183,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     if ([client groupOfTokenAtCharacterIndex:effectiveRange.location isAtomic:NULL range:&longRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
-    if (NSMaxRange(effectiveRange) < documentString.length && [client groupOfTokenAtCharacterIndex:NSMaxRange(effectiveRange) isAtomic:NULL range:&longRange]) {
+    if (NSMaxRange(effectiveRange) < documentString.length && [client groupOfTokenAtCharacterIndex:NSMaxRange(effectiveRange)-1 isAtomic:NULL range:&longRange]) {
         effectiveRange = NSUnionRange(effectiveRange, longRange);
     }
     
