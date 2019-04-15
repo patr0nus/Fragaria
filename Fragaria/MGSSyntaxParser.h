@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Atomic tokens cannot break, they disappear instead. Non-atomic tokens break
  *  as described.
  *
- *  For example, consider the string "123456", which forms single token of
+ *  For example, consider the string "123456", which forms a single token of
  *  group A.
  *  If such token is atomic, creating a new group B token for the substring
  *  "34" results in a single "34" token. Afterwards, "12" and "56" are not
