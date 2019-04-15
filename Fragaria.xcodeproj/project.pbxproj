@@ -1850,6 +1850,7 @@
 			files = (
 			);
 			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "Write Version";
 			outputPaths = (
