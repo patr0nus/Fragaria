@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beginCommand</key>
@@ -57,9 +57,9 @@
 		<string>func</string>
 		<string>if</string>
 		<string>ifstream</string>
-		<string>include</string>	
+		<string>include</string>
 		<string>int</string>
-		<string>intalledge</string>		
+		<string>intalledge</string>
 		<string>load</string>
 		<string>macro</string>
 		<string>matrix</string>
@@ -76,53 +76,53 @@
 		<string>string</string>
 		<string>vertex</string>
 		<string>varf</string>
-		<string>while</string>	
-		<string>int1d</string>		
+		<string>while</string>
+		<string>int1d</string>
 		<string>int2d</string>
-		<string>on</string>	
-		<string>square</string>	
-		<string>dx</string>	
-		<string>dy</string>	
+		<string>on</string>
+		<string>square</string>
+		<string>dx</string>
+		<string>dy</string>
 		<string>convect</string>
 		<string>jump</string>
 		<string>mean</string>
 		<string>wait</string>
-		<string>ps</string>		
-		<string>solver</string>		
-		<string>CG</string>		
-		<string>LU</string>		
-		<string>UMFPACK</string>		
-		<string>factorize</string>		
-		<string>init</string>		
-		<string>endl</string>		
-		<string>x</string>		
-		<string>y</string>		
+		<string>ps</string>
+		<string>solver</string>
+		<string>CG</string>
+		<string>LU</string>
+		<string>UMFPACK</string>
+		<string>factorize</string>
+		<string>init</string>
+		<string>endl</string>
+		<string>x</string>
+		<string>y</string>
 		<string>z</string>
-		<string>pi</string>		
-		<string>i</string>		
-		<string>sin</string>		
-		<string>cos</string>		
-		<string>tan</string>		
-		<string>atan</string>		
-		<string>asin</string>		
-		<string>acos</string>		
-		<string>cotan</string>		
-		<string>sinh</string>		
-		<string>cosh</string>		
-		<string>tanh</string>		
-		<string>cotanh</string>		
-		<string>exp</string>		
-		<string>log</string>		
-		<string>log10</string>		
-		<string>sqrt</string>		
-		<string>abs</string>		
-		<string>max</string>		
+		<string>pi</string>
+		<string>i</string>
+		<string>sin</string>
+		<string>cos</string>
+		<string>tan</string>
+		<string>atan</string>
+		<string>asin</string>
+		<string>acos</string>
+		<string>cotan</string>
+		<string>sinh</string>
+		<string>cosh</string>
+		<string>tanh</string>
+		<string>cotanh</string>
+		<string>exp</string>
+		<string>log</string>
+		<string>log10</string>
+		<string>sqrt</string>
+		<string>abs</string>
+		<string>max</string>
 		<string>min</string>
 		<string>nbvx</string>
 		<string>label</string>
 		<string>region</string>
 		<string>value</string>
-		<string>set</string>	
+		<string>set</string>
 		<string>fill</string>
 		<string>true</string>
 		<string>false</string>
@@ -133,17 +133,20 @@
 		<string>region</string>
 		<string>readmesh</string>
 		<string>randreal1</string>
-		<string>randreal2</string>			
+		<string>randreal2</string>
 		<string>randreal3</string>
-		<string>randint31</string>				
-		<string>randint32</string>						
-		<string>randres53</string>	
-		<string>polar</string>	
+		<string>randint31</string>
+		<string>randint32</string>
+		<string>randres53</string>
+		<string>polar</string>
 		<string>pow</string>
-		<string>on</string>																				
+		<string>on</string>
 	</array>
 	<key>autocompleteWords</key>
-	<array>
-	</array>
+	<array/>
+	<key>name</key>
+	<string>FreeFem++</string>
+	<key>extensions</key>
+	<string>edp</string>
 </dict>
 </plist>

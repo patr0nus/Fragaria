@@ -15,7 +15,7 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>&apos;</string>
+	<string>'</string>
 	<key>secondString</key>
 	<string></string>
 	<key>firstSingleLineComment</key>
@@ -23,9 +23,9 @@
 	<key>secondSingleLineComment</key>
 	<string></string>
 	<key>beginFirstMultiLineComment</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>endFirstMultiLineComment</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>beginSecondMultiLineComment</key>
 	<string></string>
 	<key>endSecondMultiLineComment</key>
@@ -167,5 +167,9 @@
 	</array>
 	<key>autocompleteWords</key>
 	<array/>
+	<key>name</key>
+	<string>F-Script</string>
+	<key>extensions</key>
+	<string>fs</string>
 </dict>
 </plist>

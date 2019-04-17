@@ -29,7 +29,7 @@
 	<key>firstSingleLineComment</key>
 	<string>#</string>
 	<key>firstString</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>functionDefinition</key>
 	<string></string>
 	<key>includeInKeywordStartCharacterSet</key>
@@ -136,8 +136,12 @@
 	<key>secondSingleLineComment</key>
 	<string></string>
 	<key>secondString</key>
-	<string>&apos;</string>
+	<string>'</string>
 	<key>excludeFromKeywordEndCharacterSet</key>
 	<string>:</string>
+	<key>name</key>
+	<string>ASM-MIPS</string>
+	<key>extensions</key>
+	<string>asm</string>
 </dict>
 </plist>

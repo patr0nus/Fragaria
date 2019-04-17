@@ -13,9 +13,9 @@
 	<key>beginVariable</key>
 	<string>%</string>
 	<key>endVariable</key>
-	<string> \.\=\\\&quot;</string>
+	<string> \.\=\\\"</string>
 	<key>firstString</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>secondString</key>
 	<string></string>
 	<key>firstSingleLineComment</key>
@@ -89,5 +89,9 @@
 	</array>
 	<key>autocompleteWords</key>
 	<array/>
+	<key>name</key>
+	<string>Batch</string>
+	<key>extensions</key>
+	<string>bat cmd</string>
 </dict>
 </plist>

@@ -51,44 +51,31 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
-/*
- * - insertSyntaxDefinitions
- */
 - (void)insertSyntaxDefinitions
 {
-    // load definitions
-    NSMutableArray *syntaxDefinitionsArray = [self loadSyntaxDefinitions];
-    
-    // add Standard and None definitions
-    NSDictionary *standard = @{@"name": [[self class] standardSyntaxDefinitionName],
-                               @"file": @"standard",
-                               @"extensions": @""};
-    NSDictionary *none = @{@"name": @"None",
-                           @"file": @"none",
-                           @"extensions": @"txt"};
-    [syntaxDefinitionsArray insertObject:none atIndex:0];
-    [syntaxDefinitionsArray insertObject:standard atIndex:0];
+    NSArray <NSURL *> *syntaxDefFiles = [self searchSyntaxDefinitions];
     
     //build a dictionary of definitions keyed by lowercase definition name
-    self.syntaxDefinitions = [NSMutableDictionary dictionaryWithCapacity:30];
-    NSMutableArray *definitionNames = [NSMutableArray arrayWithCapacity:30];
+    self.syntaxDefinitions = [NSMutableDictionary dictionary];
+    NSMutableArray *definitionNames = [NSMutableArray array];
     
-    NSInteger idx = 0;
-    for (id item in syntaxDefinitionsArray) {
-        
-        if ([[item objectForKey:@"extensions"] isKindOfClass:[NSArray class]]) {
-            // If extensions is an array instead of a string, i.e. an older version
+    for (NSURL *file in syntaxDefFiles) {
+        NSDictionary *root = [NSDictionary dictionaryWithContentsOfURL:file];
+        if (!root) {
+            NSLog(@"Syntax definition file %@ cannot be loaded; not a dictionary root plist file", file);
             continue;
         }
         
-        NSString *name = [item objectForKey:@"name"];
+        NSString *name = [root objectForKey:@"name"];
+        if (!name)
+            name = [[file URLByDeletingPathExtension] lastPathComponent];
+        NSString *extensions = [root objectForKey:@"extensions"] ?: @"";
         
-        id syntaxDefinition = [NSMutableDictionary dictionaryWithCapacity:6];
-        [syntaxDefinition setObject:name forKey:@"name"];
-        [syntaxDefinition setObject:[item objectForKey:@"file"] forKey:@"file"];
-        [syntaxDefinition setObject:[NSNumber numberWithInteger:idx] forKey:@"sortOrder"];
-        [syntaxDefinition setObject:[item objectForKey:@"extensions"] forKey:@"extensions"];
-        idx++;
+        NSDictionary *syntaxDefinition = @{
+            @"name": name,
+            @"file": file,
+            @"extensions": extensions,
+            @"syntaxDictionary": root};
         
         // key is lowercase name
         [self.syntaxDefinitions setObject:syntaxDefinition forKey:[name lowercaseString]];
@@ -99,28 +86,51 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
-/*
- * - loadSyntaxDefinitions
- */
-- (NSMutableArray *)loadSyntaxDefinitions
+- (NSArray <NSURL *> *)syntaxDefinitionSearchPaths
 {
-    NSMutableArray *syntaxDefinitionsArray = [NSMutableArray arrayWithCapacity:30];
+    NSMutableArray *searchPaths = [NSMutableArray array];
     
-    // load syntax definitions from this bundle
-    NSString *path = [[self bundle] pathForResource:KMGSSyntaxDefinitions ofType:KMGSSyntaxDefinitionsExt];
-    NSAssert(path, @"framework syntax definitions not found");
-    [self addSyntaxDefinitions:syntaxDefinitionsArray path:path];
+    NSURL *fwkResources = [[[self bundle] resourceURL] URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+    if (fwkResources)
+        [searchPaths addObject:fwkResources];
     
-    // load syntax definitions from app bundle
-    path = [[NSBundle mainBundle] pathForResource:KMGSSyntaxDefinitions ofType:KMGSSyntaxDefinitionsExt];
-    [self addSyntaxDefinitions:syntaxDefinitionsArray path:path];
+    NSURL *appResources = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+    if (appResources)
+        [searchPaths addObject:appResources];
     
-    // load syntax definitions from application support
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    path = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"Application Support"] stringByAppendingPathComponent:appName] stringByAppendingPathComponent:kMGSSyntaxDefinitionsFile];
-    [self addSyntaxDefinitions:syntaxDefinitionsArray path:path];
+    NSURL *appSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    appSupport = [appSupport URLByAppendingPathComponent:appName];
+    appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+    if (appSupport)
+        [searchPaths addObject:appSupport];
     
-    return syntaxDefinitionsArray;
+    return [searchPaths copy];
+}
+
+
+- (NSArray <NSURL *> *)searchSyntaxDefinitions
+{
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSMutableArray <NSURL *> *res = [NSMutableArray array];
+    NSArray <NSURL *> *searchPaths = [self syntaxDefinitionSearchPaths];
+    
+    for (NSURL *path in searchPaths) {
+        NSURL *realPath = [path URLByResolvingSymlinksInPath];
+        NSDirectoryEnumerator <NSURL *> *de = [fm enumeratorAtURL:realPath includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:nil];
+        NSURL *f;
+        while ((f = de.nextObject)) {
+            NSNumber *isdir;
+            if (![f getResourceValue:&isdir forKey:NSURLIsDirectoryKey error:nil])
+                continue;
+            if (isdir.boolValue)
+                continue;
+            if (![[[f pathExtension] lowercaseString] isEqual:KMGSSyntaxDictionaryExt])
+                continue;
+            [res addObject:f];
+        }
+    }
+    return [res copy];
 }
 
 
@@ -275,41 +285,9 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
     }
     
     NSDictionary *definition = [self syntaxDefinitionWithName:name];
-    
-    for (NSInteger i = 0; i <= 1; i++) {
-        NSString *fileName = [definition objectForKey:@"file"];
-        
-        // load dictionary from this bundle
-        NSDictionary *syntaxDictionary = [[NSDictionary alloc] initWithContentsOfFile:[[self bundle] pathForResource:fileName ofType:KMGSSyntaxDefinitionsExt inDirectory:KMGSSyntaxDefinitionsFolder]];
-        if (syntaxDictionary) return syntaxDictionary;
-        
-        // load dictionary from main bundle
-        syntaxDictionary = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fileName ofType:KMGSSyntaxDefinitionsExt inDirectory:KMGSSyntaxDefinitionsFolder]];
-        if (syntaxDictionary) return syntaxDictionary;
-        
-        // load from application support
-        NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-        NSString *path = [[[[[NSHomeDirectory() stringByAppendingPathComponent:@"Library"] stringByAppendingPathComponent:@"Application Support"] stringByAppendingPathComponent:appName] stringByAppendingPathComponent:fileName] stringByAppendingString:KMGSSyntaxDictionaryExt];
-        syntaxDictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
-        if (syntaxDictionary) return syntaxDictionary;
-        
-        // no dictionary found so use standard definition
-        definition = [self standardSyntaxDefinition];
-    }
-    
-    return nil;
-}
-
-
-/*
- * - addSyntaxDefinitions:path:
- */
-- (void)addSyntaxDefinitions:(NSMutableArray *)definitions path:(NSString *)path
-{
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path] == YES) {
-        [definitions addObjectsFromArray:[[NSArray alloc] initWithContentsOfFile:path]];
-    }
-    
+    if (!definition)
+        return nil;
+    return [definition objectForKey:@"syntaxDictionary"];
 }
 
 

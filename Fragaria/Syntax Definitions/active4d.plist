@@ -27,7 +27,7 @@
 	<key>firstSingleLineComment</key>
 	<string>`</string>
 	<key>firstString</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>functionDefinition</key>
 	<string>^\s*Method\s+.*</string>
 	<key>keywords</key>
@@ -333,6 +333,10 @@
 	<key>secondSingleLineComment</key>
 	<string></string>
 	<key>secondString</key>
-	<string>&apos;</string>
+	<string>'</string>
+	<key>name</key>
+	<string>Active4D</string>
+	<key>extensions</key>
+	<string>a4d a4l etc</string>
 </dict>
 </plist>

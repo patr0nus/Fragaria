@@ -17,9 +17,9 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>secondString</key>
-	<string>&apos;</string>
+	<string>'</string>
 	<key>firstSingleLineComment</key>
 	<string>//</string>
 	<key>secondSingleLineComment</key>
@@ -813,5 +813,9 @@
 	</array>
 	<key>autocompleteWords</key>
 	<array/>
+	<key>name</key>
+	<string>Objective-C</string>
+	<key>extensions</key>
+	<string>m mm</string>
 </dict>
 </plist>

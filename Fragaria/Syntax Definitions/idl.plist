@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beginCommand</key>
 	<string></string>
 	<key>endCommand</key>
-	<string></string>	
+	<string></string>
 	<key>beginInstruction</key>
-	<string></string>	
+	<string></string>
 	<key>endInstruction</key>
-	<string></string>	
+	<string></string>
 	<key>beginVariable</key>
-	<string></string>	
+	<string></string>
 	<key>endVariable</key>
-	<string></string>	
+	<string></string>
 	<key>firstString</key>
 	<string>"</string>
 	<key>secondString</key>
 	<string>'</string>
 	<key>firstSingleLineComment</key>
-	<string>;</string>	
+	<string>;</string>
 	<key>secondSingleLineComment</key>
-	<string></string>	
+	<string></string>
 	<key>beginFirstMultiLineComment</key>
-	<string></string>	
+	<string></string>
 	<key>endFirstMultiLineComment</key>
-	<string></string>	
+	<string></string>
 	<key>beginSecondMultiLineComment</key>
-	<string></string>	
+	<string></string>
 	<key>endSecondMultiLineComment</key>
-	<string></string>	
+	<string></string>
 	<key>functionDefinition</key>
-	<string>(^pro [^[:cntrl:]]*|^PRO [^[:cntrl:]]*|^Pro [^[:cntrl:]]*|^function [^[:cntrl:]]*|^Function [^[:cntrl:]]*|^FUNCTION [^[:cntrl:]]*)</string>	
+	<string>(^pro [^[:cntrl:]]*|^PRO [^[:cntrl:]]*|^Pro [^[:cntrl:]]*|^function [^[:cntrl:]]*|^Function [^[:cntrl:]]*|^FUNCTION [^[:cntrl:]]*)</string>
 	<key>removeFromFunction</key>
-	<string>,;*</string>	
+	<string>,;*</string>
 	<key>keywordsCaseSensitive</key>
 	<false/>
 	<key>recolourKeywordIfAlreadyColoured</key>
@@ -192,7 +192,7 @@
 		<string>CW_PDMENU</string>
 		<string>CW_RGBSLIDER</string>
 		<string>CW_TMPL</string>
-		<string>CW_ZOOM</string>		
+		<string>CW_ZOOM</string>
 		<string>DBLARR</string>
 		<string>DCINDGEN</string>
 		<string>DCOMPLEX</string>
@@ -224,7 +224,7 @@
 		<string>DLM_REGISTER</string>
 		<string>DOC_LIBRARY</string>
 		<string>DOUBLE</string>
-		<string>DRAW_ROI</string>	
+		<string>DRAW_ROI</string>
 		<string>EFONT</string>
 		<string>EIGENQL</string>
 		<string>EIGENVEC</string>
@@ -245,7 +245,7 @@
 		<string>EXPAND_PATH</string>
 		<string>EXPINT</string>
 		<string>EXTRAC</string>
-		<string>EXTRACT_SLICE</string>	
+		<string>EXTRACT_SLICE</string>
 		<string>F_CVF</string>
 		<string>F_PDF</string>
 		<string>FACTORIAL</string>
@@ -1357,9 +1357,12 @@
 		<string>TrackBall::Init</string>
 		<string>TrackBall::Reset</string>
 		<string>TrackBall::Update</string>
-	</array>	
-	<key>autocompleteWords</key>
-	<array>
 	</array>
+	<key>autocompleteWords</key>
+	<array/>
+	<key>name</key>
+	<string>IDL</string>
+	<key>extensions</key>
+	<string>pro</string>
 </dict>
 </plist>

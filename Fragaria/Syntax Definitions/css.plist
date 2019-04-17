@@ -15,7 +15,7 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>&quot;</string>
+	<string>"</string>
 	<key>secondString</key>
 	<string></string>
 	<key>firstSingleLineComment</key>
@@ -535,5 +535,9 @@
 		<string>yellow</string>
 		<string>yellowgreen</string>
 	</array>
+	<key>name</key>
+	<string>CSS</string>
+	<key>extensions</key>
+	<string>css</string>
 </dict>
 </plist>

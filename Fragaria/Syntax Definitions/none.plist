@@ -44,5 +44,9 @@
 	<array/>
 	<key>autocompleteWords</key>
 	<array/>
+	<key>name</key>
+	<string>None</string>
+	<key>extensions</key>
+	<string>txt</string>
 </dict>
 </plist>

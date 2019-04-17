@@ -528,5 +528,9 @@
 	<string>#</string>
 	<key>secondString</key>
 	<string>'</string>
+	<key>name</key>
+	<string>MySQL</string>
+	<key>extensions</key>
+	<string>sql</string>
 </dict>
 </plist>
