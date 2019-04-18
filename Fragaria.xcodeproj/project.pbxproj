@@ -21,97 +21,442 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		010870491C99E1C100C335DA /* actionscript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
-		0108704A1C99E1C100C335DA /* actionscript3.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
-		0108704B1C99E1C100C335DA /* active4d.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
-		0108704C1C99E1C100C335DA /* ada.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
-		0108704D1C99E1C100C335DA /* ampl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
-		0108704E1C99E1C100C335DA /* apache.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
-		0108704F1C99E1C100C335DA /* applescript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
-		010870501C99E1C100C335DA /* asm-m68k.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
-		010870511C99E1C100C335DA /* asm-mips.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
-		010870521C99E1C100C335DA /* asm-x86.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
-		010870531C99E1C100C335DA /* asp-js.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
-		010870541C99E1C100C335DA /* asp-vb.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
-		010870551C99E1C100C335DA /* aspdotnet-cs.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
-		010870561C99E1C100C335DA /* aspdotnet-vb.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
-		010870571C99E1C100C335DA /* awk.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
-		010870581C99E1C100C335DA /* batch.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
-		010870591C99E1C100C335DA /* c.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
-		0108705A1C99E1C100C335DA /* cobol.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
-		0108705B1C99E1C100C335DA /* coffeescript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
-		0108705C1C99E1C100C335DA /* coldfusion.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
-		0108705D1C99E1C100C335DA /* cpp.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
-		0108705E1C99E1C100C335DA /* csharp.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
-		0108705F1C99E1C100C335DA /* csound.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
-		010870601C99E1C100C335DA /* css.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
-		010870611C99E1C100C335DA /* d.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
-		010870621C99E1C100C335DA /* dylan.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
-		010870631C99E1C100C335DA /* eiffel.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
-		010870641C99E1C100C335DA /* erl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
-		010870651C99E1C100C335DA /* eztpl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
-		010870661C99E1C100C335DA /* f-script.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
-		010870671C99E1C100C335DA /* fortran.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
-		010870681C99E1C100C335DA /* freefem.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
-		010870691C99E1C100C335DA /* gedcom.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
-		0108706A1C99E1C100C335DA /* gnuassembler.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
-		0108706B1C99E1C100C335DA /* graphviz.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
-		0108706C1C99E1C100C335DA /* haskell.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
-		0108706D1C99E1C100C335DA /* header.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
-		0108706E1C99E1C100C335DA /* html.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
-		0108706F1C99E1C100C335DA /* idl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
-		010870701C99E1C100C335DA /* java.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
-		010870711C99E1C100C335DA /* javafx.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
-		010870721C99E1C100C335DA /* javascript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
-		010870731C99E1C100C335DA /* jsp.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
-		010870741C99E1C100C335DA /* latex.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
-		010870751C99E1C100C335DA /* lilypond.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
-		010870761C99E1C100C335DA /* lisp.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
-		010870771C99E1C100C335DA /* logtalk.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
-		010870781C99E1C100C335DA /* lsl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
-		010870791C99E1C100C335DA /* lua.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
-		0108707A1C99E1C100C335DA /* markdown.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
-		0108707B1C99E1C100C335DA /* matlab.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
-		0108707C1C99E1C100C335DA /* mel.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
-		0108707D1C99E1C100C335DA /* metapost.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
-		0108707E1C99E1C100C335DA /* metaslang.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
-		0108707F1C99E1C100C335DA /* mysql.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
-		010870801C99E1C100C335DA /* nemerle.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
-		010870811C99E1C100C335DA /* none.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD21C99E16E00C335DA /* none.plist */; };
-		010870821C99E1C100C335DA /* nrnhoc.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
-		010870831C99E1C100C335DA /* objectivec.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
-		010870841C99E1C100C335DA /* objectivecaml.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
-		010870851C99E1C100C335DA /* ox.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
-		010870861C99E1C100C335DA /* pascal.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
-		010870871C99E1C100C335DA /* pdf.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
-		010870881C99E1C100C335DA /* perl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
-		010870891C99E1C100C335DA /* php.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
-		0108708A1C99E1C100C335DA /* plist.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
-		0108708B1C99E1C100C335DA /* postscript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
-		0108708C1C99E1C100C335DA /* prolog.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
-		0108708D1C99E1C100C335DA /* python.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
-		0108708E1C99E1C100C335DA /* r.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
-		0108708F1C99E1C100C335DA /* rhtml.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
-		010870901C99E1C100C335DA /* ruby.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
-		010870911C99E1C200C335DA /* scala.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
-		010870921C99E1C200C335DA /* sgml.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
-		010870931C99E1C200C335DA /* shell.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
-		010870941C99E1C200C335DA /* sml.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
-		010870951C99E1C200C335DA /* sql.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
-		010870961C99E1C200C335DA /* standard.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE71C99E16E00C335DA /* standard.plist */; };
-		010870971C99E1C200C335DA /* stata.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
-		010870981C99E1C200C335DA /* supercollider.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
-		010870991C99E1C200C335DA /* tcltk.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
-		0108709A1C99E1C200C335DA /* torquescript.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
-		0108709B1C99E1C200C335DA /* udo.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
-		0108709C1C99E1C200C335DA /* vb.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
-		0108709D1C99E1C200C335DA /* verilog.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
-		0108709E1C99E1C200C335DA /* vhdl.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
-		0108709F1C99E1C200C335DA /* xml.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
 		010870A61C99E26E00C335DA /* Classic Fragaria.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A11C99E24F00C335DA /* Classic Fragaria.plist */; };
 		010870A71C99E26E00C335DA /* Midnight.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A21C99E24F00C335DA /* Midnight.plist */; };
 		010870A81C99E26E00C335DA /* Solarized Dark.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A31C99E24F00C335DA /* Solarized Dark.plist */; };
 		010870A91C99E26E00C335DA /* Solarized Light.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A41C99E24F00C335DA /* Solarized Light.plist */; };
+		010890C82268C3ED00A874FF /* none.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 010890C42268C3CE00A874FF /* none.plist */; };
+		010890C92268C3ED00A874FF /* standard.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 010890C52268C3CE00A874FF /* standard.plist */; };
+		010890CB2268C41B00A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
+		010890CC2268C41B00A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
+		010890CD2268C41B00A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
+		010890CE2268C41B00A874FF /* ada.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
+		010890CF2268C41B00A874FF /* ampl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
+		010890D02268C41B00A874FF /* apache.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
+		010890D12268C41B00A874FF /* apex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		010890D22268C41B00A874FF /* applescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
+		010890D32268C41B00A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
+		010890D42268C41B00A874FF /* asm-mips.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
+		010890D52268C41B00A874FF /* asm-x86.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
+		010890D62268C41B00A874FF /* asp-js.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
+		010890D72268C41B00A874FF /* asp-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
+		010890D82268C41B00A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
+		010890D92268C41B00A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
+		010890DA2268C41B00A874FF /* awk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
+		010890DB2268C41B00A874FF /* batch.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
+		010890DC2268C41B00A874FF /* c.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
+		010890DD2268C41B00A874FF /* cobol.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
+		010890DE2268C41B00A874FF /* coffeescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
+		010890DF2268C41B00A874FF /* coldfusion.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
+		010890E02268C41B00A874FF /* cpp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
+		010890E12268C41B00A874FF /* csharp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
+		010890E22268C41B00A874FF /* csound.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
+		010890E32268C41B00A874FF /* css.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
+		010890E42268C41B00A874FF /* d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
+		010890E52268C41B00A874FF /* dylan.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
+		010890E62268C41B00A874FF /* eiffel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
+		010890E72268C41B00A874FF /* erl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
+		010890E82268C41B00A874FF /* eztpl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
+		010890E92268C41B00A874FF /* f-script.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
+		010890EA2268C41B00A874FF /* fortran.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
+		010890EB2268C41B00A874FF /* freefem.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
+		010890EC2268C41B00A874FF /* gedcom.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
+		010890ED2268C41B00A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
+		010890EE2268C41B00A874FF /* graphviz.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
+		010890EF2268C41B00A874FF /* haskell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
+		010890F02268C41B00A874FF /* header.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
+		010890F12268C41B00A874FF /* html.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
+		010890F22268C41B00A874FF /* idl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
+		010890F32268C41B00A874FF /* java.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
+		010890F42268C41B00A874FF /* javafx.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
+		010890F52268C41B00A874FF /* javascript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
+		010890F62268C41B00A874FF /* jsp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
+		010890F72268C41B00A874FF /* latex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
+		010890F82268C41B00A874FF /* lilypond.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
+		010890F92268C41B00A874FF /* lisp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
+		010890FA2268C41B00A874FF /* logtalk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
+		010890FB2268C41B00A874FF /* lsl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
+		010890FC2268C41B00A874FF /* lua.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
+		010890FD2268C41B00A874FF /* markdown.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
+		010890FE2268C41B00A874FF /* matlab.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
+		010890FF2268C41B00A874FF /* mel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
+		010891002268C41B00A874FF /* metapost.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
+		010891012268C41B00A874FF /* metaslang.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
+		010891022268C41B00A874FF /* mysql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
+		010891032268C41B00A874FF /* nemerle.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
+		010891042268C41B00A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
+		010891052268C41B00A874FF /* objectivec.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
+		010891062268C41B00A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
+		010891072268C41B00A874FF /* ox.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
+		010891082268C41B00A874FF /* pascal.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
+		010891092268C41B00A874FF /* pdf.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
+		0108910A2268C41B00A874FF /* perl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
+		0108910B2268C41B00A874FF /* php.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
+		0108910C2268C41B00A874FF /* plist.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
+		0108910D2268C41B00A874FF /* postscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
+		0108910E2268C41B00A874FF /* prolog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
+		0108910F2268C41B00A874FF /* python.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
+		010891102268C41B00A874FF /* r.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
+		010891112268C41B00A874FF /* rhtml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
+		010891122268C41B00A874FF /* ruby.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
+		010891132268C41B00A874FF /* scala.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
+		010891142268C41B00A874FF /* sgml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
+		010891152268C41B00A874FF /* shell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
+		010891162268C41B00A874FF /* sml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
+		010891172268C41B00A874FF /* sql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
+		010891182268C41B00A874FF /* stata.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
+		010891192268C41B00A874FF /* supercollider.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
+		0108911A2268C41B00A874FF /* tcltk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
+		0108911B2268C41B00A874FF /* torquescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
+		0108911C2268C41B00A874FF /* udo.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
+		0108911D2268C41B00A874FF /* vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
+		0108911E2268C41B00A874FF /* verilog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
+		0108911F2268C41B00A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
+		010891202268C41B00A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
+		010891232268C48B00A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
+		010891242268C48B00A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
+		010891252268C48B00A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
+		010891262268C48B00A874FF /* ada.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
+		010891272268C48B00A874FF /* ampl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
+		010891282268C48B00A874FF /* apache.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
+		010891292268C48B00A874FF /* apex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		0108912A2268C48B00A874FF /* applescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
+		0108912B2268C48B00A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
+		0108912C2268C48B00A874FF /* asm-mips.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
+		0108912D2268C48B00A874FF /* asm-x86.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
+		0108912E2268C48B00A874FF /* asp-js.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
+		0108912F2268C48B00A874FF /* asp-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
+		010891302268C48B00A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
+		010891312268C48B00A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
+		010891322268C48B00A874FF /* awk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
+		010891332268C48B00A874FF /* batch.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
+		010891342268C48B00A874FF /* c.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
+		010891352268C48B00A874FF /* cobol.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
+		010891362268C48B00A874FF /* coffeescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
+		010891372268C48B00A874FF /* coldfusion.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
+		010891382268C48B00A874FF /* cpp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
+		010891392268C48B00A874FF /* csharp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
+		0108913A2268C48B00A874FF /* csound.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
+		0108913B2268C48B00A874FF /* css.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
+		0108913C2268C48B00A874FF /* d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
+		0108913D2268C48B00A874FF /* dylan.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
+		0108913E2268C48B00A874FF /* eiffel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
+		0108913F2268C48B00A874FF /* erl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
+		010891402268C48B00A874FF /* eztpl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
+		010891412268C48B00A874FF /* f-script.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
+		010891422268C48B00A874FF /* fortran.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
+		010891432268C48B00A874FF /* freefem.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
+		010891442268C48B00A874FF /* gedcom.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
+		010891452268C48B00A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
+		010891462268C48B00A874FF /* graphviz.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
+		010891472268C48B00A874FF /* haskell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
+		010891482268C48B00A874FF /* header.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
+		010891492268C48B00A874FF /* html.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
+		0108914A2268C48B00A874FF /* idl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
+		0108914B2268C48B00A874FF /* java.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
+		0108914C2268C48B00A874FF /* javafx.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
+		0108914D2268C48B00A874FF /* javascript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
+		0108914E2268C48B00A874FF /* jsp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
+		0108914F2268C48B00A874FF /* latex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
+		010891502268C48B00A874FF /* lilypond.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
+		010891512268C48B00A874FF /* lisp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
+		010891522268C48B00A874FF /* logtalk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
+		010891532268C48B00A874FF /* lsl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
+		010891542268C48B00A874FF /* lua.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
+		010891552268C48B00A874FF /* markdown.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
+		010891562268C48B00A874FF /* matlab.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
+		010891572268C48B00A874FF /* mel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
+		010891582268C48C00A874FF /* metapost.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
+		010891592268C48C00A874FF /* metaslang.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
+		0108915A2268C48C00A874FF /* mysql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
+		0108915B2268C48C00A874FF /* nemerle.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
+		0108915C2268C48C00A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
+		0108915D2268C48C00A874FF /* objectivec.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
+		0108915E2268C48C00A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
+		0108915F2268C48C00A874FF /* ox.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
+		010891602268C48C00A874FF /* pascal.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
+		010891612268C48C00A874FF /* pdf.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
+		010891622268C48C00A874FF /* perl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
+		010891632268C48C00A874FF /* php.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
+		010891642268C48C00A874FF /* plist.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
+		010891652268C48C00A874FF /* postscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
+		010891662268C48C00A874FF /* prolog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
+		010891672268C48C00A874FF /* python.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
+		010891682268C48C00A874FF /* r.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
+		010891692268C48C00A874FF /* rhtml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
+		0108916A2268C48C00A874FF /* ruby.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
+		0108916B2268C48C00A874FF /* scala.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
+		0108916C2268C48C00A874FF /* sgml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
+		0108916D2268C48C00A874FF /* shell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
+		0108916E2268C48C00A874FF /* sml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
+		0108916F2268C48C00A874FF /* sql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
+		010891702268C48C00A874FF /* stata.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
+		010891712268C48C00A874FF /* supercollider.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
+		010891722268C48C00A874FF /* tcltk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
+		010891732268C48C00A874FF /* torquescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
+		010891742268C48C00A874FF /* udo.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
+		010891752268C48C00A874FF /* vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
+		010891762268C48C00A874FF /* verilog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
+		010891772268C48C00A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
+		010891782268C48C00A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
+		0108917A2268C4B300A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
+		0108917B2268C4B300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
+		0108917C2268C4B300A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
+		0108917D2268C4B300A874FF /* ada.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
+		0108917E2268C4B300A874FF /* ampl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
+		0108917F2268C4B300A874FF /* apache.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
+		010891802268C4B300A874FF /* apex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		010891812268C4B300A874FF /* applescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
+		010891822268C4B300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
+		010891832268C4B300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
+		010891842268C4B300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
+		010891852268C4B300A874FF /* asp-js.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
+		010891862268C4B300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
+		010891872268C4B300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
+		010891882268C4B300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
+		010891892268C4B300A874FF /* awk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
+		0108918A2268C4B300A874FF /* batch.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
+		0108918B2268C4B300A874FF /* c.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
+		0108918C2268C4B300A874FF /* cobol.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
+		0108918D2268C4B300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
+		0108918E2268C4B300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
+		0108918F2268C4B300A874FF /* cpp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
+		010891902268C4B300A874FF /* csharp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
+		010891912268C4B300A874FF /* csound.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
+		010891922268C4B300A874FF /* css.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
+		010891932268C4B300A874FF /* d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
+		010891942268C4B300A874FF /* dylan.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
+		010891952268C4B300A874FF /* eiffel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
+		010891962268C4B300A874FF /* erl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
+		010891972268C4B300A874FF /* eztpl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
+		010891982268C4B300A874FF /* f-script.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
+		010891992268C4B300A874FF /* fortran.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
+		0108919A2268C4B300A874FF /* freefem.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
+		0108919B2268C4B300A874FF /* gedcom.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
+		0108919C2268C4B300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
+		0108919D2268C4B300A874FF /* graphviz.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
+		0108919E2268C4B300A874FF /* haskell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
+		0108919F2268C4B300A874FF /* header.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
+		010891A02268C4B300A874FF /* html.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
+		010891A12268C4B300A874FF /* idl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
+		010891A22268C4B300A874FF /* java.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
+		010891A32268C4B300A874FF /* javafx.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
+		010891A42268C4B300A874FF /* javascript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
+		010891A52268C4B300A874FF /* jsp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
+		010891A62268C4B300A874FF /* latex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
+		010891A72268C4B300A874FF /* lilypond.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
+		010891A82268C4B300A874FF /* lisp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
+		010891A92268C4B300A874FF /* logtalk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
+		010891AA2268C4B300A874FF /* lsl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
+		010891AB2268C4B300A874FF /* lua.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
+		010891AC2268C4B300A874FF /* markdown.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
+		010891AD2268C4B300A874FF /* matlab.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
+		010891AE2268C4B300A874FF /* mel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
+		010891AF2268C4B300A874FF /* metapost.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
+		010891B02268C4B300A874FF /* metaslang.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
+		010891B12268C4B300A874FF /* mysql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
+		010891B22268C4B300A874FF /* nemerle.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
+		010891B32268C4B300A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
+		010891B42268C4B300A874FF /* objectivec.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
+		010891B52268C4B300A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
+		010891B62268C4B300A874FF /* ox.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
+		010891B72268C4B300A874FF /* pascal.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
+		010891B82268C4B300A874FF /* pdf.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
+		010891B92268C4B300A874FF /* perl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
+		010891BA2268C4B300A874FF /* php.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
+		010891BB2268C4B300A874FF /* plist.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
+		010891BC2268C4B300A874FF /* postscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
+		010891BD2268C4B300A874FF /* prolog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
+		010891BE2268C4B300A874FF /* python.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
+		010891BF2268C4B300A874FF /* r.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
+		010891C02268C4B300A874FF /* rhtml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
+		010891C12268C4B300A874FF /* ruby.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
+		010891C22268C4B300A874FF /* scala.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
+		010891C32268C4B300A874FF /* sgml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
+		010891C42268C4B300A874FF /* shell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
+		010891C52268C4B300A874FF /* sml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
+		010891C62268C4B300A874FF /* sql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
+		010891C72268C4B300A874FF /* stata.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
+		010891C82268C4B300A874FF /* supercollider.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
+		010891C92268C4B300A874FF /* tcltk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
+		010891CA2268C4B300A874FF /* torquescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
+		010891CB2268C4B300A874FF /* udo.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
+		010891CC2268C4B300A874FF /* vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
+		010891CD2268C4B300A874FF /* verilog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
+		010891CE2268C4B300A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
+		010891CF2268C4B300A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
+		010891D12268C4D300A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
+		010891D22268C4D300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
+		010891D32268C4D300A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
+		010891D42268C4D300A874FF /* ada.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
+		010891D52268C4D300A874FF /* ampl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
+		010891D62268C4D300A874FF /* apache.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
+		010891D72268C4D300A874FF /* apex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		010891D82268C4D300A874FF /* applescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
+		010891D92268C4D300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
+		010891DA2268C4D300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
+		010891DB2268C4D300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
+		010891DC2268C4D300A874FF /* asp-js.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
+		010891DD2268C4D300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
+		010891DE2268C4D300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
+		010891DF2268C4D300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
+		010891E02268C4D300A874FF /* awk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
+		010891E12268C4D300A874FF /* batch.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
+		010891E22268C4D300A874FF /* c.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
+		010891E32268C4D300A874FF /* cobol.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
+		010891E42268C4D300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
+		010891E52268C4D300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
+		010891E62268C4D300A874FF /* cpp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
+		010891E72268C4D300A874FF /* csharp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
+		010891E82268C4D300A874FF /* csound.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
+		010891E92268C4D300A874FF /* css.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
+		010891EA2268C4D300A874FF /* d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
+		010891EB2268C4D300A874FF /* dylan.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
+		010891EC2268C4D300A874FF /* eiffel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
+		010891ED2268C4D300A874FF /* erl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
+		010891EE2268C4D300A874FF /* eztpl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
+		010891EF2268C4D300A874FF /* f-script.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
+		010891F02268C4D300A874FF /* fortran.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
+		010891F12268C4D300A874FF /* freefem.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
+		010891F22268C4D300A874FF /* gedcom.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
+		010891F32268C4D300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
+		010891F42268C4D300A874FF /* graphviz.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
+		010891F52268C4D300A874FF /* haskell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
+		010891F62268C4D300A874FF /* header.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
+		010891F72268C4D300A874FF /* html.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
+		010891F82268C4D300A874FF /* idl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
+		010891F92268C4D300A874FF /* java.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
+		010891FA2268C4D300A874FF /* javafx.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
+		010891FB2268C4D300A874FF /* javascript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
+		010891FC2268C4D300A874FF /* jsp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
+		010891FD2268C4D300A874FF /* latex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
+		010891FE2268C4D300A874FF /* lilypond.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
+		010891FF2268C4D300A874FF /* lisp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
+		010892002268C4D300A874FF /* logtalk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
+		010892012268C4D300A874FF /* lsl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
+		010892022268C4D300A874FF /* lua.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
+		010892032268C4D300A874FF /* markdown.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
+		010892042268C4D300A874FF /* matlab.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
+		010892052268C4D300A874FF /* mel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
+		010892062268C4D300A874FF /* metapost.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
+		010892072268C4D300A874FF /* metaslang.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
+		010892082268C4D300A874FF /* mysql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
+		010892092268C4D400A874FF /* nemerle.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
+		0108920A2268C4D400A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
+		0108920B2268C4D400A874FF /* objectivec.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
+		0108920C2268C4D400A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
+		0108920D2268C4D400A874FF /* ox.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
+		0108920E2268C4D400A874FF /* pascal.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
+		0108920F2268C4D400A874FF /* pdf.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
+		010892102268C4D400A874FF /* perl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
+		010892112268C4D400A874FF /* php.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
+		010892122268C4D400A874FF /* plist.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
+		010892132268C4D400A874FF /* postscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
+		010892142268C4D400A874FF /* prolog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
+		010892152268C4D400A874FF /* python.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
+		010892162268C4D400A874FF /* r.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
+		010892172268C4D400A874FF /* rhtml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
+		010892182268C4D400A874FF /* ruby.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
+		010892192268C4D400A874FF /* scala.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
+		0108921A2268C4D400A874FF /* sgml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
+		0108921B2268C4D400A874FF /* shell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
+		0108921C2268C4D400A874FF /* sml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
+		0108921D2268C4D400A874FF /* sql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
+		0108921E2268C4D400A874FF /* stata.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
+		0108921F2268C4D400A874FF /* supercollider.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
+		010892202268C4D400A874FF /* tcltk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
+		010892212268C4D400A874FF /* torquescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
+		010892222268C4D400A874FF /* udo.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
+		010892232268C4D400A874FF /* vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
+		010892242268C4D400A874FF /* verilog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
+		010892252268C4D400A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
+		010892262268C4D400A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
+		010892282268C51300A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
+		010892292268C51300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
+		0108922A2268C51300A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
+		0108922B2268C51300A874FF /* ada.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9D1C99E16E00C335DA /* ada.plist */; };
+		0108922C2268C51300A874FF /* ampl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9E1C99E16E00C335DA /* ampl.plist */; };
+		0108922D2268C51300A874FF /* apache.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9F1C99E16E00C335DA /* apache.plist */; };
+		0108922E2268C51300A874FF /* apex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
+		0108922F2268C51300A874FF /* applescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA01C99E16E00C335DA /* applescript.plist */; };
+		010892302268C51300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA11C99E16E00C335DA /* asm-m68k.plist */; };
+		010892312268C51300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA21C99E16E00C335DA /* asm-mips.plist */; };
+		010892322268C51300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA31C99E16E00C335DA /* asm-x86.plist */; };
+		010892332268C51300A874FF /* asp-js.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA41C99E16E00C335DA /* asp-js.plist */; };
+		010892342268C51300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA51C99E16E00C335DA /* asp-vb.plist */; };
+		010892352268C51300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA61C99E16E00C335DA /* aspdotnet-cs.plist */; };
+		010892362268C51300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA71C99E16E00C335DA /* aspdotnet-vb.plist */; };
+		010892372268C51300A874FF /* awk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA81C99E16E00C335DA /* awk.plist */; };
+		010892382268C51300A874FF /* batch.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FA91C99E16E00C335DA /* batch.plist */; };
+		010892392268C51300A874FF /* c.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAA1C99E16E00C335DA /* c.plist */; };
+		0108923A2268C51300A874FF /* cobol.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAB1C99E16E00C335DA /* cobol.plist */; };
+		0108923B2268C51300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAC1C99E16E00C335DA /* coffeescript.plist */; };
+		0108923C2268C51300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAD1C99E16E00C335DA /* coldfusion.plist */; };
+		0108923D2268C51300A874FF /* cpp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAE1C99E16E00C335DA /* cpp.plist */; };
+		0108923E2268C51300A874FF /* csharp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FAF1C99E16E00C335DA /* csharp.plist */; };
+		0108923F2268C51300A874FF /* csound.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB01C99E16E00C335DA /* csound.plist */; };
+		010892402268C51300A874FF /* css.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB11C99E16E00C335DA /* css.plist */; };
+		010892412268C51300A874FF /* d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB21C99E16E00C335DA /* d.plist */; };
+		010892422268C51300A874FF /* dylan.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB31C99E16E00C335DA /* dylan.plist */; };
+		010892432268C51300A874FF /* eiffel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB41C99E16E00C335DA /* eiffel.plist */; };
+		010892442268C51300A874FF /* erl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB51C99E16E00C335DA /* erl.plist */; };
+		010892452268C51300A874FF /* eztpl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB61C99E16E00C335DA /* eztpl.plist */; };
+		010892462268C51300A874FF /* f-script.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB71C99E16E00C335DA /* f-script.plist */; };
+		010892472268C51300A874FF /* fortran.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB81C99E16E00C335DA /* fortran.plist */; };
+		010892482268C51300A874FF /* freefem.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FB91C99E16E00C335DA /* freefem.plist */; };
+		010892492268C51300A874FF /* gedcom.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBA1C99E16E00C335DA /* gedcom.plist */; };
+		0108924A2268C51300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBB1C99E16E00C335DA /* gnuassembler.plist */; };
+		0108924B2268C51300A874FF /* graphviz.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBC1C99E16E00C335DA /* graphviz.plist */; };
+		0108924C2268C51300A874FF /* haskell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBD1C99E16E00C335DA /* haskell.plist */; };
+		0108924D2268C51300A874FF /* header.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBE1C99E16E00C335DA /* header.plist */; };
+		0108924E2268C51300A874FF /* html.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FBF1C99E16E00C335DA /* html.plist */; };
+		0108924F2268C51300A874FF /* idl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC01C99E16E00C335DA /* idl.plist */; };
+		010892502268C51300A874FF /* java.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC11C99E16E00C335DA /* java.plist */; };
+		010892512268C51300A874FF /* javafx.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC21C99E16E00C335DA /* javafx.plist */; };
+		010892522268C51300A874FF /* javascript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC31C99E16E00C335DA /* javascript.plist */; };
+		010892532268C51300A874FF /* jsp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC41C99E16E00C335DA /* jsp.plist */; };
+		010892542268C51300A874FF /* latex.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC51C99E16E00C335DA /* latex.plist */; };
+		010892552268C51300A874FF /* lilypond.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC61C99E16E00C335DA /* lilypond.plist */; };
+		010892562268C51300A874FF /* lisp.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC71C99E16E00C335DA /* lisp.plist */; };
+		010892572268C51300A874FF /* logtalk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC81C99E16E00C335DA /* logtalk.plist */; };
+		010892582268C51300A874FF /* lsl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FC91C99E16E00C335DA /* lsl.plist */; };
+		010892592268C51300A874FF /* lua.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCA1C99E16E00C335DA /* lua.plist */; };
+		0108925A2268C51300A874FF /* markdown.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCB1C99E16E00C335DA /* markdown.plist */; };
+		0108925B2268C51300A874FF /* matlab.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCC1C99E16E00C335DA /* matlab.plist */; };
+		0108925C2268C51300A874FF /* mel.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCD1C99E16E00C335DA /* mel.plist */; };
+		0108925D2268C51300A874FF /* metapost.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCE1C99E16E00C335DA /* metapost.plist */; };
+		0108925E2268C51300A874FF /* metaslang.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FCF1C99E16E00C335DA /* metaslang.plist */; };
+		0108925F2268C51300A874FF /* mysql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD01C99E16E00C335DA /* mysql.plist */; };
+		010892602268C51300A874FF /* nemerle.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD11C99E16E00C335DA /* nemerle.plist */; };
+		010892612268C51300A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD31C99E16E00C335DA /* nrnhoc.plist */; };
+		010892622268C51300A874FF /* objectivec.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD41C99E16E00C335DA /* objectivec.plist */; };
+		010892632268C51300A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD51C99E16E00C335DA /* objectivecaml.plist */; };
+		010892642268C51300A874FF /* ox.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD61C99E16E00C335DA /* ox.plist */; };
+		010892652268C51300A874FF /* pascal.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD71C99E16E00C335DA /* pascal.plist */; };
+		010892662268C51300A874FF /* pdf.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD81C99E16E00C335DA /* pdf.plist */; };
+		010892672268C51300A874FF /* perl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FD91C99E16E00C335DA /* perl.plist */; };
+		010892682268C51300A874FF /* php.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDA1C99E16E00C335DA /* php.plist */; };
+		010892692268C51300A874FF /* plist.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDB1C99E16E00C335DA /* plist.plist */; };
+		0108926A2268C51300A874FF /* postscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDC1C99E16E00C335DA /* postscript.plist */; };
+		0108926B2268C51300A874FF /* prolog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDD1C99E16E00C335DA /* prolog.plist */; };
+		0108926C2268C51300A874FF /* python.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDE1C99E16E00C335DA /* python.plist */; };
+		0108926D2268C51300A874FF /* r.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FDF1C99E16E00C335DA /* r.plist */; };
+		0108926E2268C51300A874FF /* rhtml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE01C99E16E00C335DA /* rhtml.plist */; };
+		0108926F2268C51300A874FF /* ruby.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE11C99E16E00C335DA /* ruby.plist */; };
+		010892702268C51300A874FF /* scala.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE21C99E16E00C335DA /* scala.plist */; };
+		010892712268C51300A874FF /* sgml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE31C99E16E00C335DA /* sgml.plist */; };
+		010892722268C51300A874FF /* shell.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE41C99E16E00C335DA /* shell.plist */; };
+		010892732268C51300A874FF /* sml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE51C99E16E00C335DA /* sml.plist */; };
+		010892742268C51300A874FF /* sql.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE61C99E16E00C335DA /* sql.plist */; };
+		010892752268C51300A874FF /* stata.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE81C99E16E00C335DA /* stata.plist */; };
+		010892762268C51300A874FF /* supercollider.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FE91C99E16E00C335DA /* supercollider.plist */; };
+		010892772268C51300A874FF /* tcltk.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEA1C99E16E00C335DA /* tcltk.plist */; };
+		010892782268C51300A874FF /* torquescript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEB1C99E16E00C335DA /* torquescript.plist */; };
+		010892792268C51300A874FF /* udo.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEC1C99E16E00C335DA /* udo.plist */; };
+		0108927A2268C51300A874FF /* vb.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FED1C99E16E00C335DA /* vb.plist */; };
+		0108927B2268C51300A874FF /* verilog.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEE1C99E16E00C335DA /* verilog.plist */; };
+		0108927C2268C51300A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
+		0108927D2268C51300A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
 		011B56D71C1DC7AB00540669 /* MGSLineNumberCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */; };
 		01281839206FD3E6004D2C3B /* example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01281838206FD3E5004D2C3B /* example.txt */; };
 		0132786A1A81650300D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 013278671A81614600D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m */; };
@@ -273,7 +618,6 @@
 		E3D4B2771714D89700BB2CC6 /* SMLSyntaxError.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D4B2751714D89700BB2CC6 /* SMLSyntaxError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3D4B2781714D89700BB2CC6 /* SMLSyntaxError.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D4B2761714D89700BB2CC6 /* SMLSyntaxError.m */; };
 		F4592CC221AB89100042F2AD /* apex.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
-		F4592CCB21AB8B370042F2AD /* apex.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = F4592CC121AB89100042F2AD /* apex.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,94 +714,8 @@
 			dstPath = "Syntax Definitions";
 			dstSubfolderSpec = 7;
 			files = (
-				F4592CCB21AB8B370042F2AD /* apex.plist in Copy Syntax Definitions */,
-				010870491C99E1C100C335DA /* actionscript.plist in Copy Syntax Definitions */,
-				0108704A1C99E1C100C335DA /* actionscript3.plist in Copy Syntax Definitions */,
-				0108704B1C99E1C100C335DA /* active4d.plist in Copy Syntax Definitions */,
-				0108704C1C99E1C100C335DA /* ada.plist in Copy Syntax Definitions */,
-				0108704D1C99E1C100C335DA /* ampl.plist in Copy Syntax Definitions */,
-				0108704E1C99E1C100C335DA /* apache.plist in Copy Syntax Definitions */,
-				0108704F1C99E1C100C335DA /* applescript.plist in Copy Syntax Definitions */,
-				010870501C99E1C100C335DA /* asm-m68k.plist in Copy Syntax Definitions */,
-				010870511C99E1C100C335DA /* asm-mips.plist in Copy Syntax Definitions */,
-				010870521C99E1C100C335DA /* asm-x86.plist in Copy Syntax Definitions */,
-				010870531C99E1C100C335DA /* asp-js.plist in Copy Syntax Definitions */,
-				010870541C99E1C100C335DA /* asp-vb.plist in Copy Syntax Definitions */,
-				010870551C99E1C100C335DA /* aspdotnet-cs.plist in Copy Syntax Definitions */,
-				010870561C99E1C100C335DA /* aspdotnet-vb.plist in Copy Syntax Definitions */,
-				010870571C99E1C100C335DA /* awk.plist in Copy Syntax Definitions */,
-				010870581C99E1C100C335DA /* batch.plist in Copy Syntax Definitions */,
-				010870591C99E1C100C335DA /* c.plist in Copy Syntax Definitions */,
-				0108705A1C99E1C100C335DA /* cobol.plist in Copy Syntax Definitions */,
-				0108705B1C99E1C100C335DA /* coffeescript.plist in Copy Syntax Definitions */,
-				0108705C1C99E1C100C335DA /* coldfusion.plist in Copy Syntax Definitions */,
-				0108705D1C99E1C100C335DA /* cpp.plist in Copy Syntax Definitions */,
-				0108705E1C99E1C100C335DA /* csharp.plist in Copy Syntax Definitions */,
-				0108705F1C99E1C100C335DA /* csound.plist in Copy Syntax Definitions */,
-				010870601C99E1C100C335DA /* css.plist in Copy Syntax Definitions */,
-				010870611C99E1C100C335DA /* d.plist in Copy Syntax Definitions */,
-				010870621C99E1C100C335DA /* dylan.plist in Copy Syntax Definitions */,
-				010870631C99E1C100C335DA /* eiffel.plist in Copy Syntax Definitions */,
-				010870641C99E1C100C335DA /* erl.plist in Copy Syntax Definitions */,
-				010870651C99E1C100C335DA /* eztpl.plist in Copy Syntax Definitions */,
-				010870661C99E1C100C335DA /* f-script.plist in Copy Syntax Definitions */,
-				010870671C99E1C100C335DA /* fortran.plist in Copy Syntax Definitions */,
-				010870681C99E1C100C335DA /* freefem.plist in Copy Syntax Definitions */,
-				010870691C99E1C100C335DA /* gedcom.plist in Copy Syntax Definitions */,
-				0108706A1C99E1C100C335DA /* gnuassembler.plist in Copy Syntax Definitions */,
-				0108706B1C99E1C100C335DA /* graphviz.plist in Copy Syntax Definitions */,
-				0108706C1C99E1C100C335DA /* haskell.plist in Copy Syntax Definitions */,
-				0108706D1C99E1C100C335DA /* header.plist in Copy Syntax Definitions */,
-				0108706E1C99E1C100C335DA /* html.plist in Copy Syntax Definitions */,
-				0108706F1C99E1C100C335DA /* idl.plist in Copy Syntax Definitions */,
-				010870701C99E1C100C335DA /* java.plist in Copy Syntax Definitions */,
-				010870711C99E1C100C335DA /* javafx.plist in Copy Syntax Definitions */,
-				010870721C99E1C100C335DA /* javascript.plist in Copy Syntax Definitions */,
-				010870731C99E1C100C335DA /* jsp.plist in Copy Syntax Definitions */,
-				010870741C99E1C100C335DA /* latex.plist in Copy Syntax Definitions */,
-				010870751C99E1C100C335DA /* lilypond.plist in Copy Syntax Definitions */,
-				010870761C99E1C100C335DA /* lisp.plist in Copy Syntax Definitions */,
-				010870771C99E1C100C335DA /* logtalk.plist in Copy Syntax Definitions */,
-				010870781C99E1C100C335DA /* lsl.plist in Copy Syntax Definitions */,
-				010870791C99E1C100C335DA /* lua.plist in Copy Syntax Definitions */,
-				0108707A1C99E1C100C335DA /* markdown.plist in Copy Syntax Definitions */,
-				0108707B1C99E1C100C335DA /* matlab.plist in Copy Syntax Definitions */,
-				0108707C1C99E1C100C335DA /* mel.plist in Copy Syntax Definitions */,
-				0108707D1C99E1C100C335DA /* metapost.plist in Copy Syntax Definitions */,
-				0108707E1C99E1C100C335DA /* metaslang.plist in Copy Syntax Definitions */,
-				0108707F1C99E1C100C335DA /* mysql.plist in Copy Syntax Definitions */,
-				010870801C99E1C100C335DA /* nemerle.plist in Copy Syntax Definitions */,
-				010870811C99E1C100C335DA /* none.plist in Copy Syntax Definitions */,
-				010870821C99E1C100C335DA /* nrnhoc.plist in Copy Syntax Definitions */,
-				010870831C99E1C100C335DA /* objectivec.plist in Copy Syntax Definitions */,
-				010870841C99E1C100C335DA /* objectivecaml.plist in Copy Syntax Definitions */,
-				010870851C99E1C100C335DA /* ox.plist in Copy Syntax Definitions */,
-				010870861C99E1C100C335DA /* pascal.plist in Copy Syntax Definitions */,
-				010870871C99E1C100C335DA /* pdf.plist in Copy Syntax Definitions */,
-				010870881C99E1C100C335DA /* perl.plist in Copy Syntax Definitions */,
-				010870891C99E1C100C335DA /* php.plist in Copy Syntax Definitions */,
-				0108708A1C99E1C100C335DA /* plist.plist in Copy Syntax Definitions */,
-				0108708B1C99E1C100C335DA /* postscript.plist in Copy Syntax Definitions */,
-				0108708C1C99E1C100C335DA /* prolog.plist in Copy Syntax Definitions */,
-				0108708D1C99E1C100C335DA /* python.plist in Copy Syntax Definitions */,
-				0108708E1C99E1C100C335DA /* r.plist in Copy Syntax Definitions */,
-				0108708F1C99E1C100C335DA /* rhtml.plist in Copy Syntax Definitions */,
-				010870901C99E1C100C335DA /* ruby.plist in Copy Syntax Definitions */,
-				010870911C99E1C200C335DA /* scala.plist in Copy Syntax Definitions */,
-				010870921C99E1C200C335DA /* sgml.plist in Copy Syntax Definitions */,
-				010870931C99E1C200C335DA /* shell.plist in Copy Syntax Definitions */,
-				010870941C99E1C200C335DA /* sml.plist in Copy Syntax Definitions */,
-				010870951C99E1C200C335DA /* sql.plist in Copy Syntax Definitions */,
-				010870961C99E1C200C335DA /* standard.plist in Copy Syntax Definitions */,
-				010870971C99E1C200C335DA /* stata.plist in Copy Syntax Definitions */,
-				010870981C99E1C200C335DA /* supercollider.plist in Copy Syntax Definitions */,
-				010870991C99E1C200C335DA /* tcltk.plist in Copy Syntax Definitions */,
-				0108709A1C99E1C200C335DA /* torquescript.plist in Copy Syntax Definitions */,
-				0108709B1C99E1C200C335DA /* udo.plist in Copy Syntax Definitions */,
-				0108709C1C99E1C200C335DA /* vb.plist in Copy Syntax Definitions */,
-				0108709D1C99E1C200C335DA /* verilog.plist in Copy Syntax Definitions */,
-				0108709E1C99E1C200C335DA /* vhdl.plist in Copy Syntax Definitions */,
-				0108709F1C99E1C200C335DA /* xml.plist in Copy Syntax Definitions */,
+				010890C82268C3ED00A874FF /* none.plist in Copy Syntax Definitions */,
+				010890C92268C3ED00A874FF /* standard.plist in Copy Syntax Definitions */,
 			);
 			name = "Copy Syntax Definitions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +732,486 @@
 				010870A91C99E26E00C335DA /* Solarized Light.plist in Copy Colour Schemes */,
 			);
 			name = "Copy Colour Schemes";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		010890CA2268C3FB00A874FF /* Install Additional Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				010890CB2268C41B00A874FF /* actionscript.plist in Install Additional Syntax Definitions */,
+				010890CC2268C41B00A874FF /* actionscript3.plist in Install Additional Syntax Definitions */,
+				010890CD2268C41B00A874FF /* active4d.plist in Install Additional Syntax Definitions */,
+				010890CE2268C41B00A874FF /* ada.plist in Install Additional Syntax Definitions */,
+				010890CF2268C41B00A874FF /* ampl.plist in Install Additional Syntax Definitions */,
+				010890D02268C41B00A874FF /* apache.plist in Install Additional Syntax Definitions */,
+				010890D12268C41B00A874FF /* apex.plist in Install Additional Syntax Definitions */,
+				010890D22268C41B00A874FF /* applescript.plist in Install Additional Syntax Definitions */,
+				010890D32268C41B00A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */,
+				010890D42268C41B00A874FF /* asm-mips.plist in Install Additional Syntax Definitions */,
+				010890D52268C41B00A874FF /* asm-x86.plist in Install Additional Syntax Definitions */,
+				010890D62268C41B00A874FF /* asp-js.plist in Install Additional Syntax Definitions */,
+				010890D72268C41B00A874FF /* asp-vb.plist in Install Additional Syntax Definitions */,
+				010890D82268C41B00A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */,
+				010890D92268C41B00A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */,
+				010890DA2268C41B00A874FF /* awk.plist in Install Additional Syntax Definitions */,
+				010890DB2268C41B00A874FF /* batch.plist in Install Additional Syntax Definitions */,
+				010890DC2268C41B00A874FF /* c.plist in Install Additional Syntax Definitions */,
+				010890DD2268C41B00A874FF /* cobol.plist in Install Additional Syntax Definitions */,
+				010890DE2268C41B00A874FF /* coffeescript.plist in Install Additional Syntax Definitions */,
+				010890DF2268C41B00A874FF /* coldfusion.plist in Install Additional Syntax Definitions */,
+				010890E02268C41B00A874FF /* cpp.plist in Install Additional Syntax Definitions */,
+				010890E12268C41B00A874FF /* csharp.plist in Install Additional Syntax Definitions */,
+				010890E22268C41B00A874FF /* csound.plist in Install Additional Syntax Definitions */,
+				010890E32268C41B00A874FF /* css.plist in Install Additional Syntax Definitions */,
+				010890E42268C41B00A874FF /* d.plist in Install Additional Syntax Definitions */,
+				010890E52268C41B00A874FF /* dylan.plist in Install Additional Syntax Definitions */,
+				010890E62268C41B00A874FF /* eiffel.plist in Install Additional Syntax Definitions */,
+				010890E72268C41B00A874FF /* erl.plist in Install Additional Syntax Definitions */,
+				010890E82268C41B00A874FF /* eztpl.plist in Install Additional Syntax Definitions */,
+				010890E92268C41B00A874FF /* f-script.plist in Install Additional Syntax Definitions */,
+				010890EA2268C41B00A874FF /* fortran.plist in Install Additional Syntax Definitions */,
+				010890EB2268C41B00A874FF /* freefem.plist in Install Additional Syntax Definitions */,
+				010890EC2268C41B00A874FF /* gedcom.plist in Install Additional Syntax Definitions */,
+				010890ED2268C41B00A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */,
+				010890EE2268C41B00A874FF /* graphviz.plist in Install Additional Syntax Definitions */,
+				010890EF2268C41B00A874FF /* haskell.plist in Install Additional Syntax Definitions */,
+				010890F02268C41B00A874FF /* header.plist in Install Additional Syntax Definitions */,
+				010890F12268C41B00A874FF /* html.plist in Install Additional Syntax Definitions */,
+				010890F22268C41B00A874FF /* idl.plist in Install Additional Syntax Definitions */,
+				010890F32268C41B00A874FF /* java.plist in Install Additional Syntax Definitions */,
+				010890F42268C41B00A874FF /* javafx.plist in Install Additional Syntax Definitions */,
+				010890F52268C41B00A874FF /* javascript.plist in Install Additional Syntax Definitions */,
+				010890F62268C41B00A874FF /* jsp.plist in Install Additional Syntax Definitions */,
+				010890F72268C41B00A874FF /* latex.plist in Install Additional Syntax Definitions */,
+				010890F82268C41B00A874FF /* lilypond.plist in Install Additional Syntax Definitions */,
+				010890F92268C41B00A874FF /* lisp.plist in Install Additional Syntax Definitions */,
+				010890FA2268C41B00A874FF /* logtalk.plist in Install Additional Syntax Definitions */,
+				010890FB2268C41B00A874FF /* lsl.plist in Install Additional Syntax Definitions */,
+				010890FC2268C41B00A874FF /* lua.plist in Install Additional Syntax Definitions */,
+				010890FD2268C41B00A874FF /* markdown.plist in Install Additional Syntax Definitions */,
+				010890FE2268C41B00A874FF /* matlab.plist in Install Additional Syntax Definitions */,
+				010890FF2268C41B00A874FF /* mel.plist in Install Additional Syntax Definitions */,
+				010891002268C41B00A874FF /* metapost.plist in Install Additional Syntax Definitions */,
+				010891012268C41B00A874FF /* metaslang.plist in Install Additional Syntax Definitions */,
+				010891022268C41B00A874FF /* mysql.plist in Install Additional Syntax Definitions */,
+				010891032268C41B00A874FF /* nemerle.plist in Install Additional Syntax Definitions */,
+				010891042268C41B00A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */,
+				010891052268C41B00A874FF /* objectivec.plist in Install Additional Syntax Definitions */,
+				010891062268C41B00A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */,
+				010891072268C41B00A874FF /* ox.plist in Install Additional Syntax Definitions */,
+				010891082268C41B00A874FF /* pascal.plist in Install Additional Syntax Definitions */,
+				010891092268C41B00A874FF /* pdf.plist in Install Additional Syntax Definitions */,
+				0108910A2268C41B00A874FF /* perl.plist in Install Additional Syntax Definitions */,
+				0108910B2268C41B00A874FF /* php.plist in Install Additional Syntax Definitions */,
+				0108910C2268C41B00A874FF /* plist.plist in Install Additional Syntax Definitions */,
+				0108910D2268C41B00A874FF /* postscript.plist in Install Additional Syntax Definitions */,
+				0108910E2268C41B00A874FF /* prolog.plist in Install Additional Syntax Definitions */,
+				0108910F2268C41B00A874FF /* python.plist in Install Additional Syntax Definitions */,
+				010891102268C41B00A874FF /* r.plist in Install Additional Syntax Definitions */,
+				010891112268C41B00A874FF /* rhtml.plist in Install Additional Syntax Definitions */,
+				010891122268C41B00A874FF /* ruby.plist in Install Additional Syntax Definitions */,
+				010891132268C41B00A874FF /* scala.plist in Install Additional Syntax Definitions */,
+				010891142268C41B00A874FF /* sgml.plist in Install Additional Syntax Definitions */,
+				010891152268C41B00A874FF /* shell.plist in Install Additional Syntax Definitions */,
+				010891162268C41B00A874FF /* sml.plist in Install Additional Syntax Definitions */,
+				010891172268C41B00A874FF /* sql.plist in Install Additional Syntax Definitions */,
+				010891182268C41B00A874FF /* stata.plist in Install Additional Syntax Definitions */,
+				010891192268C41B00A874FF /* supercollider.plist in Install Additional Syntax Definitions */,
+				0108911A2268C41B00A874FF /* tcltk.plist in Install Additional Syntax Definitions */,
+				0108911B2268C41B00A874FF /* torquescript.plist in Install Additional Syntax Definitions */,
+				0108911C2268C41B00A874FF /* udo.plist in Install Additional Syntax Definitions */,
+				0108911D2268C41B00A874FF /* vb.plist in Install Additional Syntax Definitions */,
+				0108911E2268C41B00A874FF /* verilog.plist in Install Additional Syntax Definitions */,
+				0108911F2268C41B00A874FF /* vhdl.plist in Install Additional Syntax Definitions */,
+				010891202268C41B00A874FF /* xml.plist in Install Additional Syntax Definitions */,
+			);
+			name = "Install Additional Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		010891222268C45500A874FF /* Install Additional Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				010891232268C48B00A874FF /* actionscript.plist in Install Additional Syntax Definitions */,
+				010891242268C48B00A874FF /* actionscript3.plist in Install Additional Syntax Definitions */,
+				010891252268C48B00A874FF /* active4d.plist in Install Additional Syntax Definitions */,
+				010891262268C48B00A874FF /* ada.plist in Install Additional Syntax Definitions */,
+				010891272268C48B00A874FF /* ampl.plist in Install Additional Syntax Definitions */,
+				010891282268C48B00A874FF /* apache.plist in Install Additional Syntax Definitions */,
+				010891292268C48B00A874FF /* apex.plist in Install Additional Syntax Definitions */,
+				0108912A2268C48B00A874FF /* applescript.plist in Install Additional Syntax Definitions */,
+				0108912B2268C48B00A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */,
+				0108912C2268C48B00A874FF /* asm-mips.plist in Install Additional Syntax Definitions */,
+				0108912D2268C48B00A874FF /* asm-x86.plist in Install Additional Syntax Definitions */,
+				0108912E2268C48B00A874FF /* asp-js.plist in Install Additional Syntax Definitions */,
+				0108912F2268C48B00A874FF /* asp-vb.plist in Install Additional Syntax Definitions */,
+				010891302268C48B00A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */,
+				010891312268C48B00A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */,
+				010891322268C48B00A874FF /* awk.plist in Install Additional Syntax Definitions */,
+				010891332268C48B00A874FF /* batch.plist in Install Additional Syntax Definitions */,
+				010891342268C48B00A874FF /* c.plist in Install Additional Syntax Definitions */,
+				010891352268C48B00A874FF /* cobol.plist in Install Additional Syntax Definitions */,
+				010891362268C48B00A874FF /* coffeescript.plist in Install Additional Syntax Definitions */,
+				010891372268C48B00A874FF /* coldfusion.plist in Install Additional Syntax Definitions */,
+				010891382268C48B00A874FF /* cpp.plist in Install Additional Syntax Definitions */,
+				010891392268C48B00A874FF /* csharp.plist in Install Additional Syntax Definitions */,
+				0108913A2268C48B00A874FF /* csound.plist in Install Additional Syntax Definitions */,
+				0108913B2268C48B00A874FF /* css.plist in Install Additional Syntax Definitions */,
+				0108913C2268C48B00A874FF /* d.plist in Install Additional Syntax Definitions */,
+				0108913D2268C48B00A874FF /* dylan.plist in Install Additional Syntax Definitions */,
+				0108913E2268C48B00A874FF /* eiffel.plist in Install Additional Syntax Definitions */,
+				0108913F2268C48B00A874FF /* erl.plist in Install Additional Syntax Definitions */,
+				010891402268C48B00A874FF /* eztpl.plist in Install Additional Syntax Definitions */,
+				010891412268C48B00A874FF /* f-script.plist in Install Additional Syntax Definitions */,
+				010891422268C48B00A874FF /* fortran.plist in Install Additional Syntax Definitions */,
+				010891432268C48B00A874FF /* freefem.plist in Install Additional Syntax Definitions */,
+				010891442268C48B00A874FF /* gedcom.plist in Install Additional Syntax Definitions */,
+				010891452268C48B00A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */,
+				010891462268C48B00A874FF /* graphviz.plist in Install Additional Syntax Definitions */,
+				010891472268C48B00A874FF /* haskell.plist in Install Additional Syntax Definitions */,
+				010891482268C48B00A874FF /* header.plist in Install Additional Syntax Definitions */,
+				010891492268C48B00A874FF /* html.plist in Install Additional Syntax Definitions */,
+				0108914A2268C48B00A874FF /* idl.plist in Install Additional Syntax Definitions */,
+				0108914B2268C48B00A874FF /* java.plist in Install Additional Syntax Definitions */,
+				0108914C2268C48B00A874FF /* javafx.plist in Install Additional Syntax Definitions */,
+				0108914D2268C48B00A874FF /* javascript.plist in Install Additional Syntax Definitions */,
+				0108914E2268C48B00A874FF /* jsp.plist in Install Additional Syntax Definitions */,
+				0108914F2268C48B00A874FF /* latex.plist in Install Additional Syntax Definitions */,
+				010891502268C48B00A874FF /* lilypond.plist in Install Additional Syntax Definitions */,
+				010891512268C48B00A874FF /* lisp.plist in Install Additional Syntax Definitions */,
+				010891522268C48B00A874FF /* logtalk.plist in Install Additional Syntax Definitions */,
+				010891532268C48B00A874FF /* lsl.plist in Install Additional Syntax Definitions */,
+				010891542268C48B00A874FF /* lua.plist in Install Additional Syntax Definitions */,
+				010891552268C48B00A874FF /* markdown.plist in Install Additional Syntax Definitions */,
+				010891562268C48B00A874FF /* matlab.plist in Install Additional Syntax Definitions */,
+				010891572268C48B00A874FF /* mel.plist in Install Additional Syntax Definitions */,
+				010891582268C48C00A874FF /* metapost.plist in Install Additional Syntax Definitions */,
+				010891592268C48C00A874FF /* metaslang.plist in Install Additional Syntax Definitions */,
+				0108915A2268C48C00A874FF /* mysql.plist in Install Additional Syntax Definitions */,
+				0108915B2268C48C00A874FF /* nemerle.plist in Install Additional Syntax Definitions */,
+				0108915C2268C48C00A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */,
+				0108915D2268C48C00A874FF /* objectivec.plist in Install Additional Syntax Definitions */,
+				0108915E2268C48C00A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */,
+				0108915F2268C48C00A874FF /* ox.plist in Install Additional Syntax Definitions */,
+				010891602268C48C00A874FF /* pascal.plist in Install Additional Syntax Definitions */,
+				010891612268C48C00A874FF /* pdf.plist in Install Additional Syntax Definitions */,
+				010891622268C48C00A874FF /* perl.plist in Install Additional Syntax Definitions */,
+				010891632268C48C00A874FF /* php.plist in Install Additional Syntax Definitions */,
+				010891642268C48C00A874FF /* plist.plist in Install Additional Syntax Definitions */,
+				010891652268C48C00A874FF /* postscript.plist in Install Additional Syntax Definitions */,
+				010891662268C48C00A874FF /* prolog.plist in Install Additional Syntax Definitions */,
+				010891672268C48C00A874FF /* python.plist in Install Additional Syntax Definitions */,
+				010891682268C48C00A874FF /* r.plist in Install Additional Syntax Definitions */,
+				010891692268C48C00A874FF /* rhtml.plist in Install Additional Syntax Definitions */,
+				0108916A2268C48C00A874FF /* ruby.plist in Install Additional Syntax Definitions */,
+				0108916B2268C48C00A874FF /* scala.plist in Install Additional Syntax Definitions */,
+				0108916C2268C48C00A874FF /* sgml.plist in Install Additional Syntax Definitions */,
+				0108916D2268C48C00A874FF /* shell.plist in Install Additional Syntax Definitions */,
+				0108916E2268C48C00A874FF /* sml.plist in Install Additional Syntax Definitions */,
+				0108916F2268C48C00A874FF /* sql.plist in Install Additional Syntax Definitions */,
+				010891702268C48C00A874FF /* stata.plist in Install Additional Syntax Definitions */,
+				010891712268C48C00A874FF /* supercollider.plist in Install Additional Syntax Definitions */,
+				010891722268C48C00A874FF /* tcltk.plist in Install Additional Syntax Definitions */,
+				010891732268C48C00A874FF /* torquescript.plist in Install Additional Syntax Definitions */,
+				010891742268C48C00A874FF /* udo.plist in Install Additional Syntax Definitions */,
+				010891752268C48C00A874FF /* vb.plist in Install Additional Syntax Definitions */,
+				010891762268C48C00A874FF /* verilog.plist in Install Additional Syntax Definitions */,
+				010891772268C48C00A874FF /* vhdl.plist in Install Additional Syntax Definitions */,
+				010891782268C48C00A874FF /* xml.plist in Install Additional Syntax Definitions */,
+			);
+			name = "Install Additional Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		010891792268C49700A874FF /* Install Additional Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				0108917A2268C4B300A874FF /* actionscript.plist in Install Additional Syntax Definitions */,
+				0108917B2268C4B300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */,
+				0108917C2268C4B300A874FF /* active4d.plist in Install Additional Syntax Definitions */,
+				0108917D2268C4B300A874FF /* ada.plist in Install Additional Syntax Definitions */,
+				0108917E2268C4B300A874FF /* ampl.plist in Install Additional Syntax Definitions */,
+				0108917F2268C4B300A874FF /* apache.plist in Install Additional Syntax Definitions */,
+				010891802268C4B300A874FF /* apex.plist in Install Additional Syntax Definitions */,
+				010891812268C4B300A874FF /* applescript.plist in Install Additional Syntax Definitions */,
+				010891822268C4B300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */,
+				010891832268C4B300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */,
+				010891842268C4B300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */,
+				010891852268C4B300A874FF /* asp-js.plist in Install Additional Syntax Definitions */,
+				010891862268C4B300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */,
+				010891872268C4B300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */,
+				010891882268C4B300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */,
+				010891892268C4B300A874FF /* awk.plist in Install Additional Syntax Definitions */,
+				0108918A2268C4B300A874FF /* batch.plist in Install Additional Syntax Definitions */,
+				0108918B2268C4B300A874FF /* c.plist in Install Additional Syntax Definitions */,
+				0108918C2268C4B300A874FF /* cobol.plist in Install Additional Syntax Definitions */,
+				0108918D2268C4B300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */,
+				0108918E2268C4B300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */,
+				0108918F2268C4B300A874FF /* cpp.plist in Install Additional Syntax Definitions */,
+				010891902268C4B300A874FF /* csharp.plist in Install Additional Syntax Definitions */,
+				010891912268C4B300A874FF /* csound.plist in Install Additional Syntax Definitions */,
+				010891922268C4B300A874FF /* css.plist in Install Additional Syntax Definitions */,
+				010891932268C4B300A874FF /* d.plist in Install Additional Syntax Definitions */,
+				010891942268C4B300A874FF /* dylan.plist in Install Additional Syntax Definitions */,
+				010891952268C4B300A874FF /* eiffel.plist in Install Additional Syntax Definitions */,
+				010891962268C4B300A874FF /* erl.plist in Install Additional Syntax Definitions */,
+				010891972268C4B300A874FF /* eztpl.plist in Install Additional Syntax Definitions */,
+				010891982268C4B300A874FF /* f-script.plist in Install Additional Syntax Definitions */,
+				010891992268C4B300A874FF /* fortran.plist in Install Additional Syntax Definitions */,
+				0108919A2268C4B300A874FF /* freefem.plist in Install Additional Syntax Definitions */,
+				0108919B2268C4B300A874FF /* gedcom.plist in Install Additional Syntax Definitions */,
+				0108919C2268C4B300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */,
+				0108919D2268C4B300A874FF /* graphviz.plist in Install Additional Syntax Definitions */,
+				0108919E2268C4B300A874FF /* haskell.plist in Install Additional Syntax Definitions */,
+				0108919F2268C4B300A874FF /* header.plist in Install Additional Syntax Definitions */,
+				010891A02268C4B300A874FF /* html.plist in Install Additional Syntax Definitions */,
+				010891A12268C4B300A874FF /* idl.plist in Install Additional Syntax Definitions */,
+				010891A22268C4B300A874FF /* java.plist in Install Additional Syntax Definitions */,
+				010891A32268C4B300A874FF /* javafx.plist in Install Additional Syntax Definitions */,
+				010891A42268C4B300A874FF /* javascript.plist in Install Additional Syntax Definitions */,
+				010891A52268C4B300A874FF /* jsp.plist in Install Additional Syntax Definitions */,
+				010891A62268C4B300A874FF /* latex.plist in Install Additional Syntax Definitions */,
+				010891A72268C4B300A874FF /* lilypond.plist in Install Additional Syntax Definitions */,
+				010891A82268C4B300A874FF /* lisp.plist in Install Additional Syntax Definitions */,
+				010891A92268C4B300A874FF /* logtalk.plist in Install Additional Syntax Definitions */,
+				010891AA2268C4B300A874FF /* lsl.plist in Install Additional Syntax Definitions */,
+				010891AB2268C4B300A874FF /* lua.plist in Install Additional Syntax Definitions */,
+				010891AC2268C4B300A874FF /* markdown.plist in Install Additional Syntax Definitions */,
+				010891AD2268C4B300A874FF /* matlab.plist in Install Additional Syntax Definitions */,
+				010891AE2268C4B300A874FF /* mel.plist in Install Additional Syntax Definitions */,
+				010891AF2268C4B300A874FF /* metapost.plist in Install Additional Syntax Definitions */,
+				010891B02268C4B300A874FF /* metaslang.plist in Install Additional Syntax Definitions */,
+				010891B12268C4B300A874FF /* mysql.plist in Install Additional Syntax Definitions */,
+				010891B22268C4B300A874FF /* nemerle.plist in Install Additional Syntax Definitions */,
+				010891B32268C4B300A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */,
+				010891B42268C4B300A874FF /* objectivec.plist in Install Additional Syntax Definitions */,
+				010891B52268C4B300A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */,
+				010891B62268C4B300A874FF /* ox.plist in Install Additional Syntax Definitions */,
+				010891B72268C4B300A874FF /* pascal.plist in Install Additional Syntax Definitions */,
+				010891B82268C4B300A874FF /* pdf.plist in Install Additional Syntax Definitions */,
+				010891B92268C4B300A874FF /* perl.plist in Install Additional Syntax Definitions */,
+				010891BA2268C4B300A874FF /* php.plist in Install Additional Syntax Definitions */,
+				010891BB2268C4B300A874FF /* plist.plist in Install Additional Syntax Definitions */,
+				010891BC2268C4B300A874FF /* postscript.plist in Install Additional Syntax Definitions */,
+				010891BD2268C4B300A874FF /* prolog.plist in Install Additional Syntax Definitions */,
+				010891BE2268C4B300A874FF /* python.plist in Install Additional Syntax Definitions */,
+				010891BF2268C4B300A874FF /* r.plist in Install Additional Syntax Definitions */,
+				010891C02268C4B300A874FF /* rhtml.plist in Install Additional Syntax Definitions */,
+				010891C12268C4B300A874FF /* ruby.plist in Install Additional Syntax Definitions */,
+				010891C22268C4B300A874FF /* scala.plist in Install Additional Syntax Definitions */,
+				010891C32268C4B300A874FF /* sgml.plist in Install Additional Syntax Definitions */,
+				010891C42268C4B300A874FF /* shell.plist in Install Additional Syntax Definitions */,
+				010891C52268C4B300A874FF /* sml.plist in Install Additional Syntax Definitions */,
+				010891C62268C4B300A874FF /* sql.plist in Install Additional Syntax Definitions */,
+				010891C72268C4B300A874FF /* stata.plist in Install Additional Syntax Definitions */,
+				010891C82268C4B300A874FF /* supercollider.plist in Install Additional Syntax Definitions */,
+				010891C92268C4B300A874FF /* tcltk.plist in Install Additional Syntax Definitions */,
+				010891CA2268C4B300A874FF /* torquescript.plist in Install Additional Syntax Definitions */,
+				010891CB2268C4B300A874FF /* udo.plist in Install Additional Syntax Definitions */,
+				010891CC2268C4B300A874FF /* vb.plist in Install Additional Syntax Definitions */,
+				010891CD2268C4B300A874FF /* verilog.plist in Install Additional Syntax Definitions */,
+				010891CE2268C4B300A874FF /* vhdl.plist in Install Additional Syntax Definitions */,
+				010891CF2268C4B300A874FF /* xml.plist in Install Additional Syntax Definitions */,
+			);
+			name = "Install Additional Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		010891D02268C4BE00A874FF /* Install Additional Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				010891D12268C4D300A874FF /* actionscript.plist in Install Additional Syntax Definitions */,
+				010891D22268C4D300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */,
+				010891D32268C4D300A874FF /* active4d.plist in Install Additional Syntax Definitions */,
+				010891D42268C4D300A874FF /* ada.plist in Install Additional Syntax Definitions */,
+				010891D52268C4D300A874FF /* ampl.plist in Install Additional Syntax Definitions */,
+				010891D62268C4D300A874FF /* apache.plist in Install Additional Syntax Definitions */,
+				010891D72268C4D300A874FF /* apex.plist in Install Additional Syntax Definitions */,
+				010891D82268C4D300A874FF /* applescript.plist in Install Additional Syntax Definitions */,
+				010891D92268C4D300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */,
+				010891DA2268C4D300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */,
+				010891DB2268C4D300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */,
+				010891DC2268C4D300A874FF /* asp-js.plist in Install Additional Syntax Definitions */,
+				010891DD2268C4D300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */,
+				010891DE2268C4D300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */,
+				010891DF2268C4D300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */,
+				010891E02268C4D300A874FF /* awk.plist in Install Additional Syntax Definitions */,
+				010891E12268C4D300A874FF /* batch.plist in Install Additional Syntax Definitions */,
+				010891E22268C4D300A874FF /* c.plist in Install Additional Syntax Definitions */,
+				010891E32268C4D300A874FF /* cobol.plist in Install Additional Syntax Definitions */,
+				010891E42268C4D300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */,
+				010891E52268C4D300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */,
+				010891E62268C4D300A874FF /* cpp.plist in Install Additional Syntax Definitions */,
+				010891E72268C4D300A874FF /* csharp.plist in Install Additional Syntax Definitions */,
+				010891E82268C4D300A874FF /* csound.plist in Install Additional Syntax Definitions */,
+				010891E92268C4D300A874FF /* css.plist in Install Additional Syntax Definitions */,
+				010891EA2268C4D300A874FF /* d.plist in Install Additional Syntax Definitions */,
+				010891EB2268C4D300A874FF /* dylan.plist in Install Additional Syntax Definitions */,
+				010891EC2268C4D300A874FF /* eiffel.plist in Install Additional Syntax Definitions */,
+				010891ED2268C4D300A874FF /* erl.plist in Install Additional Syntax Definitions */,
+				010891EE2268C4D300A874FF /* eztpl.plist in Install Additional Syntax Definitions */,
+				010891EF2268C4D300A874FF /* f-script.plist in Install Additional Syntax Definitions */,
+				010891F02268C4D300A874FF /* fortran.plist in Install Additional Syntax Definitions */,
+				010891F12268C4D300A874FF /* freefem.plist in Install Additional Syntax Definitions */,
+				010891F22268C4D300A874FF /* gedcom.plist in Install Additional Syntax Definitions */,
+				010891F32268C4D300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */,
+				010891F42268C4D300A874FF /* graphviz.plist in Install Additional Syntax Definitions */,
+				010891F52268C4D300A874FF /* haskell.plist in Install Additional Syntax Definitions */,
+				010891F62268C4D300A874FF /* header.plist in Install Additional Syntax Definitions */,
+				010891F72268C4D300A874FF /* html.plist in Install Additional Syntax Definitions */,
+				010891F82268C4D300A874FF /* idl.plist in Install Additional Syntax Definitions */,
+				010891F92268C4D300A874FF /* java.plist in Install Additional Syntax Definitions */,
+				010891FA2268C4D300A874FF /* javafx.plist in Install Additional Syntax Definitions */,
+				010891FB2268C4D300A874FF /* javascript.plist in Install Additional Syntax Definitions */,
+				010891FC2268C4D300A874FF /* jsp.plist in Install Additional Syntax Definitions */,
+				010891FD2268C4D300A874FF /* latex.plist in Install Additional Syntax Definitions */,
+				010891FE2268C4D300A874FF /* lilypond.plist in Install Additional Syntax Definitions */,
+				010891FF2268C4D300A874FF /* lisp.plist in Install Additional Syntax Definitions */,
+				010892002268C4D300A874FF /* logtalk.plist in Install Additional Syntax Definitions */,
+				010892012268C4D300A874FF /* lsl.plist in Install Additional Syntax Definitions */,
+				010892022268C4D300A874FF /* lua.plist in Install Additional Syntax Definitions */,
+				010892032268C4D300A874FF /* markdown.plist in Install Additional Syntax Definitions */,
+				010892042268C4D300A874FF /* matlab.plist in Install Additional Syntax Definitions */,
+				010892052268C4D300A874FF /* mel.plist in Install Additional Syntax Definitions */,
+				010892062268C4D300A874FF /* metapost.plist in Install Additional Syntax Definitions */,
+				010892072268C4D300A874FF /* metaslang.plist in Install Additional Syntax Definitions */,
+				010892082268C4D300A874FF /* mysql.plist in Install Additional Syntax Definitions */,
+				010892092268C4D400A874FF /* nemerle.plist in Install Additional Syntax Definitions */,
+				0108920A2268C4D400A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */,
+				0108920B2268C4D400A874FF /* objectivec.plist in Install Additional Syntax Definitions */,
+				0108920C2268C4D400A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */,
+				0108920D2268C4D400A874FF /* ox.plist in Install Additional Syntax Definitions */,
+				0108920E2268C4D400A874FF /* pascal.plist in Install Additional Syntax Definitions */,
+				0108920F2268C4D400A874FF /* pdf.plist in Install Additional Syntax Definitions */,
+				010892102268C4D400A874FF /* perl.plist in Install Additional Syntax Definitions */,
+				010892112268C4D400A874FF /* php.plist in Install Additional Syntax Definitions */,
+				010892122268C4D400A874FF /* plist.plist in Install Additional Syntax Definitions */,
+				010892132268C4D400A874FF /* postscript.plist in Install Additional Syntax Definitions */,
+				010892142268C4D400A874FF /* prolog.plist in Install Additional Syntax Definitions */,
+				010892152268C4D400A874FF /* python.plist in Install Additional Syntax Definitions */,
+				010892162268C4D400A874FF /* r.plist in Install Additional Syntax Definitions */,
+				010892172268C4D400A874FF /* rhtml.plist in Install Additional Syntax Definitions */,
+				010892182268C4D400A874FF /* ruby.plist in Install Additional Syntax Definitions */,
+				010892192268C4D400A874FF /* scala.plist in Install Additional Syntax Definitions */,
+				0108921A2268C4D400A874FF /* sgml.plist in Install Additional Syntax Definitions */,
+				0108921B2268C4D400A874FF /* shell.plist in Install Additional Syntax Definitions */,
+				0108921C2268C4D400A874FF /* sml.plist in Install Additional Syntax Definitions */,
+				0108921D2268C4D400A874FF /* sql.plist in Install Additional Syntax Definitions */,
+				0108921E2268C4D400A874FF /* stata.plist in Install Additional Syntax Definitions */,
+				0108921F2268C4D400A874FF /* supercollider.plist in Install Additional Syntax Definitions */,
+				010892202268C4D400A874FF /* tcltk.plist in Install Additional Syntax Definitions */,
+				010892212268C4D400A874FF /* torquescript.plist in Install Additional Syntax Definitions */,
+				010892222268C4D400A874FF /* udo.plist in Install Additional Syntax Definitions */,
+				010892232268C4D400A874FF /* vb.plist in Install Additional Syntax Definitions */,
+				010892242268C4D400A874FF /* verilog.plist in Install Additional Syntax Definitions */,
+				010892252268C4D400A874FF /* vhdl.plist in Install Additional Syntax Definitions */,
+				010892262268C4D400A874FF /* xml.plist in Install Additional Syntax Definitions */,
+			);
+			name = "Install Additional Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		010892272268C50000A874FF /* Install Additional Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				010892282268C51300A874FF /* actionscript.plist in Install Additional Syntax Definitions */,
+				010892292268C51300A874FF /* actionscript3.plist in Install Additional Syntax Definitions */,
+				0108922A2268C51300A874FF /* active4d.plist in Install Additional Syntax Definitions */,
+				0108922B2268C51300A874FF /* ada.plist in Install Additional Syntax Definitions */,
+				0108922C2268C51300A874FF /* ampl.plist in Install Additional Syntax Definitions */,
+				0108922D2268C51300A874FF /* apache.plist in Install Additional Syntax Definitions */,
+				0108922E2268C51300A874FF /* apex.plist in Install Additional Syntax Definitions */,
+				0108922F2268C51300A874FF /* applescript.plist in Install Additional Syntax Definitions */,
+				010892302268C51300A874FF /* asm-m68k.plist in Install Additional Syntax Definitions */,
+				010892312268C51300A874FF /* asm-mips.plist in Install Additional Syntax Definitions */,
+				010892322268C51300A874FF /* asm-x86.plist in Install Additional Syntax Definitions */,
+				010892332268C51300A874FF /* asp-js.plist in Install Additional Syntax Definitions */,
+				010892342268C51300A874FF /* asp-vb.plist in Install Additional Syntax Definitions */,
+				010892352268C51300A874FF /* aspdotnet-cs.plist in Install Additional Syntax Definitions */,
+				010892362268C51300A874FF /* aspdotnet-vb.plist in Install Additional Syntax Definitions */,
+				010892372268C51300A874FF /* awk.plist in Install Additional Syntax Definitions */,
+				010892382268C51300A874FF /* batch.plist in Install Additional Syntax Definitions */,
+				010892392268C51300A874FF /* c.plist in Install Additional Syntax Definitions */,
+				0108923A2268C51300A874FF /* cobol.plist in Install Additional Syntax Definitions */,
+				0108923B2268C51300A874FF /* coffeescript.plist in Install Additional Syntax Definitions */,
+				0108923C2268C51300A874FF /* coldfusion.plist in Install Additional Syntax Definitions */,
+				0108923D2268C51300A874FF /* cpp.plist in Install Additional Syntax Definitions */,
+				0108923E2268C51300A874FF /* csharp.plist in Install Additional Syntax Definitions */,
+				0108923F2268C51300A874FF /* csound.plist in Install Additional Syntax Definitions */,
+				010892402268C51300A874FF /* css.plist in Install Additional Syntax Definitions */,
+				010892412268C51300A874FF /* d.plist in Install Additional Syntax Definitions */,
+				010892422268C51300A874FF /* dylan.plist in Install Additional Syntax Definitions */,
+				010892432268C51300A874FF /* eiffel.plist in Install Additional Syntax Definitions */,
+				010892442268C51300A874FF /* erl.plist in Install Additional Syntax Definitions */,
+				010892452268C51300A874FF /* eztpl.plist in Install Additional Syntax Definitions */,
+				010892462268C51300A874FF /* f-script.plist in Install Additional Syntax Definitions */,
+				010892472268C51300A874FF /* fortran.plist in Install Additional Syntax Definitions */,
+				010892482268C51300A874FF /* freefem.plist in Install Additional Syntax Definitions */,
+				010892492268C51300A874FF /* gedcom.plist in Install Additional Syntax Definitions */,
+				0108924A2268C51300A874FF /* gnuassembler.plist in Install Additional Syntax Definitions */,
+				0108924B2268C51300A874FF /* graphviz.plist in Install Additional Syntax Definitions */,
+				0108924C2268C51300A874FF /* haskell.plist in Install Additional Syntax Definitions */,
+				0108924D2268C51300A874FF /* header.plist in Install Additional Syntax Definitions */,
+				0108924E2268C51300A874FF /* html.plist in Install Additional Syntax Definitions */,
+				0108924F2268C51300A874FF /* idl.plist in Install Additional Syntax Definitions */,
+				010892502268C51300A874FF /* java.plist in Install Additional Syntax Definitions */,
+				010892512268C51300A874FF /* javafx.plist in Install Additional Syntax Definitions */,
+				010892522268C51300A874FF /* javascript.plist in Install Additional Syntax Definitions */,
+				010892532268C51300A874FF /* jsp.plist in Install Additional Syntax Definitions */,
+				010892542268C51300A874FF /* latex.plist in Install Additional Syntax Definitions */,
+				010892552268C51300A874FF /* lilypond.plist in Install Additional Syntax Definitions */,
+				010892562268C51300A874FF /* lisp.plist in Install Additional Syntax Definitions */,
+				010892572268C51300A874FF /* logtalk.plist in Install Additional Syntax Definitions */,
+				010892582268C51300A874FF /* lsl.plist in Install Additional Syntax Definitions */,
+				010892592268C51300A874FF /* lua.plist in Install Additional Syntax Definitions */,
+				0108925A2268C51300A874FF /* markdown.plist in Install Additional Syntax Definitions */,
+				0108925B2268C51300A874FF /* matlab.plist in Install Additional Syntax Definitions */,
+				0108925C2268C51300A874FF /* mel.plist in Install Additional Syntax Definitions */,
+				0108925D2268C51300A874FF /* metapost.plist in Install Additional Syntax Definitions */,
+				0108925E2268C51300A874FF /* metaslang.plist in Install Additional Syntax Definitions */,
+				0108925F2268C51300A874FF /* mysql.plist in Install Additional Syntax Definitions */,
+				010892602268C51300A874FF /* nemerle.plist in Install Additional Syntax Definitions */,
+				010892612268C51300A874FF /* nrnhoc.plist in Install Additional Syntax Definitions */,
+				010892622268C51300A874FF /* objectivec.plist in Install Additional Syntax Definitions */,
+				010892632268C51300A874FF /* objectivecaml.plist in Install Additional Syntax Definitions */,
+				010892642268C51300A874FF /* ox.plist in Install Additional Syntax Definitions */,
+				010892652268C51300A874FF /* pascal.plist in Install Additional Syntax Definitions */,
+				010892662268C51300A874FF /* pdf.plist in Install Additional Syntax Definitions */,
+				010892672268C51300A874FF /* perl.plist in Install Additional Syntax Definitions */,
+				010892682268C51300A874FF /* php.plist in Install Additional Syntax Definitions */,
+				010892692268C51300A874FF /* plist.plist in Install Additional Syntax Definitions */,
+				0108926A2268C51300A874FF /* postscript.plist in Install Additional Syntax Definitions */,
+				0108926B2268C51300A874FF /* prolog.plist in Install Additional Syntax Definitions */,
+				0108926C2268C51300A874FF /* python.plist in Install Additional Syntax Definitions */,
+				0108926D2268C51300A874FF /* r.plist in Install Additional Syntax Definitions */,
+				0108926E2268C51300A874FF /* rhtml.plist in Install Additional Syntax Definitions */,
+				0108926F2268C51300A874FF /* ruby.plist in Install Additional Syntax Definitions */,
+				010892702268C51300A874FF /* scala.plist in Install Additional Syntax Definitions */,
+				010892712268C51300A874FF /* sgml.plist in Install Additional Syntax Definitions */,
+				010892722268C51300A874FF /* shell.plist in Install Additional Syntax Definitions */,
+				010892732268C51300A874FF /* sml.plist in Install Additional Syntax Definitions */,
+				010892742268C51300A874FF /* sql.plist in Install Additional Syntax Definitions */,
+				010892752268C51300A874FF /* stata.plist in Install Additional Syntax Definitions */,
+				010892762268C51300A874FF /* supercollider.plist in Install Additional Syntax Definitions */,
+				010892772268C51300A874FF /* tcltk.plist in Install Additional Syntax Definitions */,
+				010892782268C51300A874FF /* torquescript.plist in Install Additional Syntax Definitions */,
+				010892792268C51300A874FF /* udo.plist in Install Additional Syntax Definitions */,
+				0108927A2268C51300A874FF /* vb.plist in Install Additional Syntax Definitions */,
+				0108927B2268C51300A874FF /* verilog.plist in Install Additional Syntax Definitions */,
+				0108927C2268C51300A874FF /* vhdl.plist in Install Additional Syntax Definitions */,
+				0108927D2268C51300A874FF /* xml.plist in Install Additional Syntax Definitions */,
+			);
+			name = "Install Additional Syntax Definitions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01F0D7141C120FC2000A08B6 /* Embed Frameworks */ = {
@@ -593,7 +1331,6 @@
 		01086FCF1C99E16E00C335DA /* metaslang.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = metaslang.plist; sourceTree = "<group>"; };
 		01086FD01C99E16E00C335DA /* mysql.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mysql.plist; sourceTree = "<group>"; };
 		01086FD11C99E16E00C335DA /* nemerle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nemerle.plist; sourceTree = "<group>"; };
-		01086FD21C99E16E00C335DA /* none.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = none.plist; sourceTree = "<group>"; };
 		01086FD31C99E16E00C335DA /* nrnhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nrnhoc.plist; sourceTree = "<group>"; };
 		01086FD41C99E16E00C335DA /* objectivec.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = objectivec.plist; sourceTree = "<group>"; };
 		01086FD51C99E16E00C335DA /* objectivecaml.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = objectivecaml.plist; sourceTree = "<group>"; };
@@ -614,7 +1351,6 @@
 		01086FE41C99E16E00C335DA /* shell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = shell.plist; sourceTree = "<group>"; };
 		01086FE51C99E16E00C335DA /* sml.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sml.plist; sourceTree = "<group>"; };
 		01086FE61C99E16E00C335DA /* sql.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sql.plist; sourceTree = "<group>"; };
-		01086FE71C99E16E00C335DA /* standard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = standard.plist; sourceTree = "<group>"; };
 		01086FE81C99E16E00C335DA /* stata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stata.plist; sourceTree = "<group>"; };
 		01086FE91C99E16E00C335DA /* supercollider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = supercollider.plist; sourceTree = "<group>"; };
 		01086FEA1C99E16E00C335DA /* tcltk.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tcltk.plist; sourceTree = "<group>"; };
@@ -628,6 +1364,8 @@
 		010870A21C99E24F00C335DA /* Midnight.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Midnight.plist; sourceTree = "<group>"; };
 		010870A31C99E24F00C335DA /* Solarized Dark.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Dark.plist"; sourceTree = "<group>"; };
 		010870A41C99E24F00C335DA /* Solarized Light.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Light.plist"; sourceTree = "<group>"; };
+		010890C42268C3CE00A874FF /* none.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = none.plist; sourceTree = "<group>"; };
+		010890C52268C3CE00A874FF /* standard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = standard.plist; sourceTree = "<group>"; };
 		011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberCacheTests.m; sourceTree = "<group>"; };
 		0121BA752152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSContextMenu.xib; sourceTree = "<group>"; };
 		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
@@ -913,7 +1651,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01086F991C99E16D00C335DA /* Syntax Definitions */ = {
+		01086F991C99E16D00C335DA /* Additional Syntax Definitions */ = {
 			isa = PBXGroup;
 			children = (
 				01086F9A1C99E16E00C335DA /* actionscript.plist */,
@@ -973,7 +1711,6 @@
 				01086FCF1C99E16E00C335DA /* metaslang.plist */,
 				01086FD01C99E16E00C335DA /* mysql.plist */,
 				01086FD11C99E16E00C335DA /* nemerle.plist */,
-				01086FD21C99E16E00C335DA /* none.plist */,
 				01086FD31C99E16E00C335DA /* nrnhoc.plist */,
 				01086FD41C99E16E00C335DA /* objectivec.plist */,
 				01086FD51C99E16E00C335DA /* objectivecaml.plist */,
@@ -994,7 +1731,6 @@
 				01086FE41C99E16E00C335DA /* shell.plist */,
 				01086FE51C99E16E00C335DA /* sml.plist */,
 				01086FE61C99E16E00C335DA /* sql.plist */,
-				01086FE71C99E16E00C335DA /* standard.plist */,
 				01086FE81C99E16E00C335DA /* stata.plist */,
 				01086FE91C99E16E00C335DA /* supercollider.plist */,
 				01086FEA1C99E16E00C335DA /* tcltk.plist */,
@@ -1005,7 +1741,7 @@
 				01086FEF1C99E16E00C335DA /* vhdl.plist */,
 				01086FF01C99E16E00C335DA /* xml.plist */,
 			);
-			path = "Syntax Definitions";
+			path = "Additional Syntax Definitions";
 			sourceTree = "<group>";
 		};
 		010870A01C99E24F00C335DA /* Colour Schemes */ = {
@@ -1017,6 +1753,15 @@
 				010870A41C99E24F00C335DA /* Solarized Light.plist */,
 			);
 			path = "Colour Schemes";
+			sourceTree = "<group>";
+		};
+		010890C32268C3CE00A874FF /* Integrated Syntax Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				010890C42268C3CE00A874FF /* none.plist */,
+				010890C52268C3CE00A874FF /* standard.plist */,
+			);
+			path = "Integrated Syntax Definitions";
 			sourceTree = "<group>";
 		};
 		013278651A81610E00D2DCA5 /* Syntax Definition Manager */ = {
@@ -1362,7 +2107,8 @@
 				01BB1BEB1A79620E006C0056 /* Text Editing UI */,
 				D00BB067213876F3007E5FA6 /* Localizable.strings */,
 				01AC7E711AA341AA00DF7620 /* Images.xcassets */,
-				01086F991C99E16D00C335DA /* Syntax Definitions */,
+				010890C32268C3CE00A874FF /* Integrated Syntax Definitions */,
+				01086F991C99E16D00C335DA /* Additional Syntax Definitions */,
 				010870A01C99E24F00C335DA /* Colour Schemes */,
 				AB69B62C118B745700903D1D /* Info.plist */,
 			);
@@ -1545,6 +2291,7 @@
 				01F0D6F81C120F7D000A08B6 /* Sources */,
 				01F0D6F91C120F7D000A08B6 /* Frameworks */,
 				01F0D6FA1C120F7D000A08B6 /* Resources */,
+				010892272268C50000A874FF /* Install Additional Syntax Definitions */,
 				01F0D7141C120FC2000A08B6 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1563,6 +2310,7 @@
 			buildConfigurationList = AB648E3211FB385900AEF7BD /* Build configuration list for PBXNativeTarget "Fragaria Doc" */;
 			buildPhases = (
 				AB648E2611FB385700AEF7BD /* Resources */,
+				010891222268C45500A874FF /* Install Additional Syntax Definitions */,
 				AB648E2711FB385700AEF7BD /* Sources */,
 				AB648E2811FB385700AEF7BD /* Frameworks */,
 				01FC48801C1C7EC700F4227E /* Embed Frameworks */,
@@ -1604,6 +2352,7 @@
 			buildConfigurationList = ABCA4DAC16137FC000E4849B /* Build configuration list for PBXNativeTarget "Fragaria Simple" */;
 			buildPhases = (
 				ABCA4D9B16137FC000E4849B /* Resources */,
+				010891D02268C4BE00A874FF /* Install Additional Syntax Definitions */,
 				ABCA4DA216137FC000E4849B /* Sources */,
 				ABCA4DA716137FC000E4849B /* Frameworks */,
 				ABCA4DAA16137FC000E4849B /* Frameworks */,
@@ -1626,6 +2375,7 @@
 				D0718B4C1AB551460073493A /* Sources */,
 				D0718B4D1AB551460073493A /* Frameworks */,
 				D0718B4E1AB551460073493A /* Resources */,
+				010891792268C49700A874FF /* Install Additional Syntax Definitions */,
 				D0718B7C1AB552720073493A /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1646,6 +2396,7 @@
 				D0C146481A87196200DDE90A /* Sources */,
 				D0C146491A87196200DDE90A /* Frameworks */,
 				D0C1464A1A87196200DDE90A /* Resources */,
+				010890CA2268C3FB00A874FF /* Install Additional Syntax Definitions */,
 				D0C146721A87198F00DDE90A /* Embed Frameworks */,
 			);
 			buildRules = (
