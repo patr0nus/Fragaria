@@ -59,7 +59,6 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
     self = [super init];
     [self setDefaults];
 
-    _syntaxDictionary = syntaxDictionary;
     _name = name;
     
     #define RETURN_NIL_IF_FALSE(b, ...) do { \

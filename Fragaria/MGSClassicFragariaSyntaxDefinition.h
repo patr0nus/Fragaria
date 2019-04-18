@@ -112,11 +112,6 @@
 @property (readonly) unichar decimalPointCharacter;
 
 
-/** A dictionary which describes this syntax definition. This method returns
- *  a representation of this syntax definition suitable as a parameter to
- *  -initFromSyntaxDictionary: to make a syntax definition equal to this
- *  one. */
-@property (readonly) NSDictionary *syntaxDictionary;
 /** A name associated with this syntax definition. Might be nil. */
 @property (readonly) NSString *name;
 
