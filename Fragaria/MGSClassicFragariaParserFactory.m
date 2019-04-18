@@ -11,9 +11,6 @@
 #import "MGSClassicFragariaSyntaxParser.h"
 
 
-NSString * const KMGSSyntaxDefinitions =  @"SyntaxDefinitions";
-NSString * const KMGSSyntaxDefinitionsExt = @"plist";
-NSString * const kMGSSyntaxDefinitionsFile = @"SyntaxDefinitions.plist";
 NSString * const KMGSSyntaxDictionaryExt = @"plist";
 NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 
@@ -70,12 +67,17 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
         if (!name)
             name = [[file URLByDeletingPathExtension] lastPathComponent];
         NSString *extensions = [root objectForKey:@"extensions"] ?: @"";
+        MGSClassicFragariaSyntaxDefinition *syndef = [[MGSClassicFragariaSyntaxDefinition alloc] initFromSyntaxDictionary:root name:name];
+        if (!syndef) {
+            NSLog(@"Syntax definition file %@ cannot be loaded; invalid format", file);
+            continue;
+        }
         
         NSDictionary *syntaxDefinition = @{
             @"name": name,
             @"file": file,
             @"extensions": extensions,
-            @"syntaxDictionary": root};
+            @"syntaxDefinition": syndef};
         
         // key is lowercase name
         [self.syntaxDefinitions setObject:syntaxDefinition forKey:[name lowercaseString]];
@@ -275,29 +277,14 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
-/*
- * - syntaxDictionaryWithName:
- */
-- (NSDictionary *)syntaxDictionaryWithName:(NSString *)name
+- (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)name
 {
     if (!name) {
         name = [[self class] standardSyntaxDefinitionName];
     }
     
     NSDictionary *definition = [self syntaxDefinitionWithName:name];
-    if (!definition)
-        return nil;
-    return [definition objectForKey:@"syntaxDictionary"];
-}
-
-
-- (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)syndef
-{
-    NSDictionary *syntaxDict;
-    MGSClassicFragariaSyntaxDefinition *syntaxDef;
-    
-    syntaxDict = [self syntaxDictionaryWithName:syndef];
-    syntaxDef = [[MGSClassicFragariaSyntaxDefinition alloc] initFromSyntaxDictionary:syntaxDict name:syndef];
+    MGSClassicFragariaSyntaxDefinition *syntaxDef = [definition objectForKey:@"syntaxDefinition"];
     return [[MGSClassicFragariaSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];
 }
 
