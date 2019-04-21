@@ -66,6 +66,15 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
         NSString *name = [root objectForKey:@"name"];
         if (!name)
             name = [[file URLByDeletingPathExtension] lastPathComponent];
+        NSString *namek = [name lowercaseString];
+        NSDictionary *clashingsyntax = [self.syntaxDefinitions objectForKey:namek];
+        if (clashingsyntax) {
+            NSURL *clashingfile = [clashingsyntax objectForKey:@"file"];
+            NSLog(@"Ignoring syntax definition file %@ as it defines language %@ already loaded"
+                "from file %@", file, name, clashingfile);
+            continue;
+        }
+        
         NSString *extensions = [root objectForKey:@"extensions"] ?: @"";
         MGSClassicFragariaSyntaxDefinition *syndef = [[MGSClassicFragariaSyntaxDefinition alloc] initFromSyntaxDictionary:root name:name];
         if (!syndef) {
@@ -80,7 +89,7 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
             @"syntaxDefinition": syndef};
         
         // key is lowercase name
-        [self.syntaxDefinitions setObject:syntaxDefinition forKey:[name lowercaseString]];
+        [self.syntaxDefinitions setObject:syntaxDefinition forKey:namek];
         [definitionNames addObject:name];
     }
     
