@@ -157,21 +157,39 @@
 
 - (void)testChildTextModification
 {
-    NSTextStorage *test = [[NSTextStorage alloc] initWithString:@"test"];
+    NSDictionary *attr1 = @{NSFontAttributeName: [NSFont fontWithName:@"Times" size:12.0]};
+    NSDictionary *attr2 = @{NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:12.0]};
+    NSDictionary *attr3 = @{NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:15.0]};
+    
+    NSTextStorage *test = [[NSTextStorage alloc] initWithString:@"test" attributes:attr1];
     MGSAttributeOverlayTextStorage *aots = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:test];
     MGSAttributeOverlayTextStorage *aots2 = [[MGSAttributeOverlayTextStorage alloc] initWithParentTextStorage:test];
     
     [aots replaceCharactersInRange:NSMakeRange(2, 1) withString:@"(TEST)s"];
+    [aots setAttributes:attr2 range:NSMakeRange(2, 6)];
     
     XCTAssertTrue([test.string isEqual:@"te(TEST)st"]);
     XCTAssertTrue([aots.string isEqual:@"te(TEST)st"]);
     XCTAssertTrue([aots2.string isEqual:@"te(TEST)st"]);
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 10) inTextStorage:test];
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 2) inTextStorage:aots];
+    [self checkAttributes:attr2 inRange:NSMakeRange(2, 6) inTextStorage:aots];
+    [self checkAttributes:attr1 inRange:NSMakeRange(8, 2) inTextStorage:aots];
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 10) inTextStorage:aots2];
     
     [aots2 replaceCharactersInRange:NSMakeRange(1, 0) withString:@"(REPLACED)"];
+    [aots2 setAttributes:attr3 range:NSMakeRange(1, 10)];
     
     XCTAssertTrue([test.string isEqual:@"t(REPLACED)e(TEST)st"]);
     XCTAssertTrue([aots.string isEqual:@"t(REPLACED)e(TEST)st"]);
     XCTAssertTrue([aots2.string isEqual:@"t(REPLACED)e(TEST)st"]);
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 10) inTextStorage:test];
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 12) inTextStorage:aots];
+    [self checkAttributes:attr2 inRange:NSMakeRange(12, 6) inTextStorage:aots];
+    [self checkAttributes:attr1 inRange:NSMakeRange(18, 2) inTextStorage:aots];
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 1) inTextStorage:aots2];
+    [self checkAttributes:attr3 inRange:NSMakeRange(1, 10) inTextStorage:aots2];
+    [self checkAttributes:attr1 inRange:NSMakeRange(11, 9) inTextStorage:aots2];
 }
 
 
