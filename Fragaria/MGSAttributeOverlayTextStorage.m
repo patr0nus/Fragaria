@@ -6,14 +6,13 @@
 //
 
 #import "MGSAttributeOverlayTextStorage.h"
+#import "MGSRangeEntries.h"
 
 
 static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_";
 
 
 @interface MGSAttributeOverlayTextStorage ()
-
-@property (readonly) NSString *overlayAttributePrefix;
 
 @end
 
@@ -22,6 +21,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 {
     NSInteger editingBlockLevel;
     BOOL parentEditInProgress;
+    MGSRangeEntries *attributeRanges;
 }
 
 
@@ -30,7 +30,8 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     self = [super init];
     
     _parentTextStorage = ts;
-    _overlayAttributePrefix = [NSString stringWithFormat:@"%@%p_", MGSAttributeOverlayPrefixBase, self];
+    attributeRanges = MGSCreateRangeToCopiedObjectEntries(0);
+    MGSRangeEntryInsert(attributeRanges, NSMakeRange(0, ts.length), @{});
     
     editingBlockLevel = 0;
     parentEditInProgress = NO;
@@ -50,6 +51,7 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    MGSFreeRangeEntries(attributeRanges);
 }
 
 
@@ -76,26 +78,25 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 
 - (NSDictionary *)attributesAtIndex:(NSUInteger)location effectiveRange:(NSRangePointer)range
 {
-    NSDictionary *attrib = [self.parentTextStorage attributesAtIndex:location effectiveRange:range];
-    NSMutableDictionary *base = [NSMutableDictionary dictionary];
-    NSMutableDictionary *ovl = [NSMutableDictionary dictionary];
-    NSMutableArray *remove = [NSMutableArray array];
+    NSRange pRange, myRange;
+    NSDictionary *pAttrib = [self.parentTextStorage attributesAtIndex:location effectiveRange:&pRange];
+    NSDictionary *myAttrib = MGSRangeEntryAtIndex(attributeRanges, location, &myRange);
+    if (!myAttrib) {
+        myAttrib = @{};
+    }
+    if (range) {
+        if (myRange.length == NSNotFound)
+            myRange.length = self.length - myRange.location;
+        *range = NSIntersectionRange(pRange, myRange);
+    }
     
-    [attrib enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if (![key hasPrefix:MGSAttributeOverlayPrefixBase]) {
-            [base setObject:obj forKey:key];
-        } else if ([key hasPrefix:self.overlayAttributePrefix]) {
-            NSString *realKey = [key substringFromIndex:self.overlayAttributePrefix.length];
-            if (![obj isKindOfClass:[NSNull class]])
-                [ovl setObject:obj forKey:realKey];
-            else
-                [remove addObject:realKey];
-        }
+    NSMutableDictionary *res = [pAttrib mutableCopy];
+    NSSet *removalSet = [myAttrib keysOfEntriesPassingTest:^BOOL(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        return obj == [NSNull null];
     }];
-    
-    [base removeObjectsForKeys:remove];
-    [base addEntriesFromDictionary:ovl];
-    return base;
+    [res addEntriesFromDictionary:myAttrib];
+    [res removeObjectsForKeys:[removalSet allObjects]];
+    return res;
 }
 
 
@@ -118,7 +119,11 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str
 {
     [self beginEditing];
+    NSInteger delta = str.length - range.length;
     [self.parentTextStorage replaceCharactersInRange:range withString:str];
+    MGSRangeEntriesExpandAndWipe(attributeRanges, range, delta);
+    if (MGSCountRangeEntries(attributeRanges) == 0)
+        MGSRangeEntryInsert(attributeRanges, NSMakeRange(0, self.parentTextStorage.length), @{});
     [self edited:NSTextStorageEditedCharacters range:range changeInLength:str.length-range.length];
     [self endEditing];
 }
@@ -128,33 +133,25 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 {
     [self beginEditing];
     
-    NSMutableDictionary *fixeddict = [NSMutableDictionary dictionary];
-    [attrs enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString *newkey = [self.overlayAttributePrefix stringByAppendingString:key];
-        [fixeddict setObject:obj forKey:newkey];
-    }];
-    
+    __block NSMutableDictionary *newAttributes = [NSMutableDictionary dictionary];
     [self.parentTextStorage
         enumerateAttributesInRange:range
         options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired
         usingBlock:^(NSDictionary<NSAttributedStringKey, id> * _Nonnull attrs, NSRange subrange, BOOL * _Nonnull stop)
     {
-        NSMutableDictionary *newAttributes = [NSMutableDictionary dictionary];
         for (NSString *key in attrs) {
-            if ([key hasPrefix:MGSAttributeOverlayPrefixBase]) {
-                if (![key hasPrefix:self.overlayAttributePrefix]) {
-                    [newAttributes setObject:attrs[key] forKey:key];
-                }
-            } else {
-                NSString *myid = [self.overlayAttributePrefix stringByAppendingString:key];
-                [newAttributes setObject:[NSNull null] forKey:myid];
-            }
+            [newAttributes setObject:[NSNull null] forKey:key];
         }
-        [newAttributes addEntriesFromDictionary:fixeddict];
-        
-        NSRange realrange = NSIntersectionRange(range, subrange);
-        [self.parentTextStorage setAttributes:newAttributes range:realrange];
     }];
+    [newAttributes addEntriesFromDictionary:attrs];
+    
+    if (self.parentTextStorage.length == 0) {
+        MGSResetRangeEntries(attributeRanges);
+        MGSRangeEntryInsert(attributeRanges, range, newAttributes);
+    } else if (range.length > 0) {
+        MGSRangeEntriesDivideAndConquer(attributeRanges, range);
+        MGSRangeEntryInsert(attributeRanges, range, newAttributes);
+    }
     
     [self edited:NSTextStorageEditedAttributes range:range changeInLength:0];
     [self endEditing];
