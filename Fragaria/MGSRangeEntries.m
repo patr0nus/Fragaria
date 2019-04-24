@@ -7,7 +7,6 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
 #import "MGSRangeEntries.h"
-#import <Foundation/NSString.h>
 
 /* this could be improved with more merging of adjacent entries after insert/remove */
 
@@ -90,6 +89,7 @@ static inline void insertEntryAtIndex(MGSRangeEntries *self, NSUInteger index, N
     value = [value copy];
 
     self->entries[index].range = range;
+    self->entries[index].value = nil;
     self->entries[index].value = value;
 }
 
@@ -141,7 +141,7 @@ void MGSRangeEntryInsert(MGSRangeEntries *self, NSRange range, id value)
     } else {
         if (insertAt > 0) {
             // Check if we can just merge the new entry with the previous one
-            if (range.length == 0 || [(id)(self->entries[insertAt - 1].value) isEqual:value]) {
+            if (range.length == 0 || [(self->entries[insertAt - 1].value) isEqual:value]) {
                 range = NSUnionRange(self->entries[insertAt - 1].range, range);
                 self->entries[insertAt - 1].range = range;
                 merged = YES;
@@ -149,7 +149,7 @@ void MGSRangeEntryInsert(MGSRangeEntries *self, NSRange range, id value)
         }
         if (insertAt < self->count) {
             // Check if we can just merge the new entry with the next one
-            if (range.length == 0 || [(id)(self->entries[insertAt].value) isEqual:value]) {
+            if (range.length == 0 || [(self->entries[insertAt].value) isEqual:value]) {
                 range = NSUnionRange(self->entries[insertAt].range, range);
                 if (merged) {
                     // We merged with both the previous entry and the next one - the next one isn't needed anymore
