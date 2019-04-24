@@ -69,7 +69,11 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
     parentEditInProgress = YES;
     
     NSRange range = self.parentTextStorage.editedRange;
-    range.length -= self.parentTextStorage.changeInLength;
+    NSInteger delta = self.parentTextStorage.changeInLength;
+    range.length -= delta;
+    MGSRangeEntriesExpandAndWipe(attributeRanges, range, delta);
+    if (MGSCountRangeEntries(attributeRanges) == 0)
+        MGSRangeEntryInsert(attributeRanges, NSMakeRange(0, self.parentTextStorage.length), @{});
     [self edited:self.parentTextStorage.editedMask range:range changeInLength:self.parentTextStorage.changeInLength];
     
     parentEditInProgress = NO;

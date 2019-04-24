@@ -183,7 +183,7 @@
     XCTAssertTrue([test.string isEqual:@"t(REPLACED)e(TEST)st"]);
     XCTAssertTrue([aots.string isEqual:@"t(REPLACED)e(TEST)st"]);
     XCTAssertTrue([aots2.string isEqual:@"t(REPLACED)e(TEST)st"]);
-    [self checkAttributes:attr1 inRange:NSMakeRange(0, 10) inTextStorage:test];
+    [self checkAttributes:attr1 inRange:NSMakeRange(0, 20) inTextStorage:test];
     [self checkAttributes:attr1 inRange:NSMakeRange(0, 12) inTextStorage:aots];
     [self checkAttributes:attr2 inRange:NSMakeRange(12, 6) inTextStorage:aots];
     [self checkAttributes:attr1 inRange:NSMakeRange(18, 2) inTextStorage:aots];
