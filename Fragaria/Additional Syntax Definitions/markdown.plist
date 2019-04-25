@@ -53,5 +53,18 @@
 	<string>Markdown</string>
 	<key>extensions</key>
 	<string>md</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>variable</key>
+		<string>number.formatting.md</string>
+		<key>keywords</key>
+		<string>number.formatting.md</string>
+		<key>number</key>
+		<string>number.formatting.md</string>
+		<key>instruction</key>
+		<string>instruction.link.md</string>
+		<key>command</key>
+		<string>command.tag</string>
+	</dict>
 </dict>
 </plist>

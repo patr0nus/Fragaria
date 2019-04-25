@@ -7,7 +7,7 @@
 	<key>endCommand</key>
 	<string> </string>
 	<key>beginInstruction</key>
-	<string>'(</string>
+	<string>&apos;(</string>
 	<key>endInstruction</key>
 	<string>)</string>
 	<key>beginVariable</key>
@@ -15,9 +15,9 @@
 	<key>endVariable</key>
 	<string> </string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
-	<string>'</string>
+	<string>&apos;</string>
 	<key>firstSingleLineComment</key>
 	<string>;</string>
 	<key>secondSingleLineComment</key>
@@ -473,5 +473,10 @@
 	<string>Lisp</string>
 	<key>extensions</key>
 	<string>lisp lsp</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>instruction</key>
+		<string>number.literalList</string>
+	</dict>
 </dict>
 </plist>

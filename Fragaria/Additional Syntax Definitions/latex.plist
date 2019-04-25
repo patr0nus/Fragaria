@@ -7,9 +7,9 @@
 	<key>endCommand</key>
 	<string>}</string>
 	<key>beginInstruction</key>
-	<string></string>
+	<string>[</string>
 	<key>endInstruction</key>
-	<string></string>
+	<string>]</string>
 	<key>beginVariable</key>
 	<string>\</string>
 	<key>endVariable</key>
@@ -49,5 +49,14 @@
 	<string>LaTeX</string>
 	<key>extensions</key>
 	<string>tex</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>variable</key>
+		<string>instruction</string>
+		<key>command</key>
+		<string>instruction.parameter.tex</string>
+		<key>instruction</key>
+		<string>instruction.parameter.tex</string>
+	</dict>
 </dict>
 </plist>

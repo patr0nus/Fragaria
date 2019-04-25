@@ -19,3 +19,6 @@
 "command.tag" = "HTML/XML Tag";
 "command.attributeList.dot" = "GraphViz Attribute List";
 "instruction.parameter.tex" = "TeX Instruction Argument List";
+"number.literalList" = "Lisp Literal List";
+"instruction.link.md" = "Markdown Link";
+"number.formatting.md" = "Markdown Formatting";

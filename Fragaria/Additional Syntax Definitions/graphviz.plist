@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>beginCommand</key>
-	<string></string>
+	<string>[</string>
 	<key>endCommand</key>
-	<string></string>
+	<string>]</string>
 	<key>beginInstruction</key>
-	<string>{[</string>
+	<string></string>
 	<key>endInstruction</key>
-	<string>]}</string>
+	<string></string>
 	<key>beginVariable</key>
 	<string></string>
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
-	<string>'</string>
+	<string>&apos;</string>
 	<key>firstSingleLineComment</key>
 	<string>//</string>
 	<key>secondSingleLineComment</key>
@@ -206,5 +206,10 @@
 	<string>GraphViz</string>
 	<key>extensions</key>
 	<string>gv dot</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>command</key>
+		<string>command.attributeList.dot</string>
+	</dict>
 </dict>
 </plist>

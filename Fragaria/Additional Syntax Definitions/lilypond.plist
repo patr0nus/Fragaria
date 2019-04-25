@@ -15,7 +15,7 @@
 	<key>endVariable</key>
 	<string> {}()[],?.;/:+=&gt;&lt;~</string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
 	<string></string>
 	<key>firstSingleLineComment</key>
@@ -318,5 +318,10 @@
 	<string>Lilypond</string>
 	<key>extensions</key>
 	<string>ly lytex</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>variable</key>
+		<string>instruction</string>
+	</dict>
 </dict>
 </plist>

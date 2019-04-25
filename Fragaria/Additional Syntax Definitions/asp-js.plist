@@ -15,9 +15,9 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
-	<string>'</string>
+	<string>&apos;</string>
 	<key>firstSingleLineComment</key>
 	<string>//</string>
 	<key>secondSingleLineComment</key>
@@ -423,6 +423,13 @@
 	</array>
 	<key>name</key>
 	<string>ASP - JavaScript</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>command</key>
+		<string>command.tag</string>
+		<key>instruction</key>
+		<string>command.scriptingDelimiter</string>
+	</dict>
 	<key>extensions</key>
 	<string>asp</string>
 </dict>
