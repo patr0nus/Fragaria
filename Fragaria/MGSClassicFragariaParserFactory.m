@@ -18,6 +18,7 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 @interface MGSClassicFragariaParserFactory ()
 
 @property (strong) NSMutableDictionary *syntaxDefinitions;
+@property (nonatomic, strong) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
 
 @end
 
@@ -51,6 +52,7 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 - (void)insertSyntaxDefinitions
 {
     NSArray <NSURL *> *syntaxDefFiles = [self searchSyntaxDefinitions];
+    NSMutableSet<SMLSyntaxGroup> *syntaxGroupsLoaded = [NSMutableSet set];
     
     //build a dictionary of definitions keyed by lowercase definition name
     self.syntaxDefinitions = [NSMutableDictionary dictionary];
@@ -91,9 +93,12 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
         // key is lowercase name
         [self.syntaxDefinitions setObject:syntaxDefinition forKey:namek];
         [definitionNames addObject:name];
+        
+        [syntaxGroupsLoaded addObjectsFromArray:[syndef usedSyntaxGroups]];
     }
     
     _syntaxDefinitionNames = [definitionNames copy];
+    _syntaxGroupsForParsers = [syntaxGroupsLoaded allObjects];
 }
 
 
@@ -295,21 +300,6 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
     NSDictionary *definition = [self syntaxDefinitionWithName:name];
     MGSClassicFragariaSyntaxDefinition *syntaxDef = [definition objectForKey:@"syntaxDefinition"];
     return [[MGSClassicFragariaSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];
-}
-
-
-- (NSArray<SMLSyntaxGroup> *)syntaxGroupsForParsers
-{
-    return @[
-        SMLSyntaxGroupNumber,
-        SMLSyntaxGroupCommand,
-        SMLSyntaxGroupInstruction,
-        SMLSyntaxGroupKeyword,
-        SMLSyntaxGroupAutoComplete,
-        SMLSyntaxGroupVariable,
-        SMLSyntaxGroupString,
-        SMLSyntaxGroupAttribute,
-        SMLSyntaxGroupComment];
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "MGSClassicFragariaSyntaxDefinition.h"
+#import "NSCharacterSet+Fragaria.h"
 
 
 // syntax definition dictionary keys
@@ -160,10 +161,13 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
     
     // variables
     value = [syntaxDictionary objectForKey:SMLSyntaxDefinitionVariableRegex];
-    if (value) {
+    if (value && ![value isEqual:@""]) {
         RETURN_NIL_IF_FALSE([value isKindOfClass:[NSString class]], @"NSString expected");
         _variableRegex = value;
+        _beginVariableCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@""];
+        _endVariableCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@""];
     } else {
+        _variableRegex = @"";
         // begin variable
         value = [syntaxDictionary valueForKey:SMLSyntaxDefinitionBeginVariable];
         if (value) {
@@ -319,6 +323,38 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
     temporaryCharacterSet = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
     [temporaryCharacterSet addCharactersInString:@" -"]; // If there are two spaces before an attribute
     _attributesCharacterSet = [temporaryCharacterSet copy];
+}
+
+
+- (NSArray <SMLSyntaxGroup> *)usedSyntaxGroups
+{
+    NSMutableArray <SMLSyntaxGroup> *res = [@[
+        SMLSyntaxGroupNumber,
+        SMLSyntaxGroupComment] mutableCopy];
+    
+    if (![self.beginCommand isEqual:@""])
+        [res addObject:SMLSyntaxGroupCommand];
+    if (![self.beginInstruction isEqual:@""] || self.instructions)
+        [res addObject:SMLSyntaxGroupInstruction];
+    if ([self.keywords count] > 0)
+        [res addObject:SMLSyntaxGroupKeyword];
+    if ([self.autocompleteWords count] > 0)
+        [res addObject:SMLSyntaxGroupAutoComplete];
+    if (![self.beginVariableCharacterSet isEmpty] || ![self.variableRegex isEqual:@""])
+        [res addObject:SMLSyntaxGroupVariable];
+    if (![self.secondString isEqual:@""] || ![self.firstString isEqual:@""])
+        [res addObject:SMLSyntaxGroupString];
+    if (![self.beginCommand isEqual:@""])
+        [res addObject:SMLSyntaxGroupAttribute];
+    
+    NSInteger c = res.count;
+    for (NSInteger i=0; i<c; i++) {
+        SMLSyntaxGroup old = [res objectAtIndex:i];
+        SMLSyntaxGroup new = [self specializationForSyntaxGroup:old];
+        [res replaceObjectAtIndex:i withObject:new];
+    }
+    
+    return [res copy];
 }
 
 

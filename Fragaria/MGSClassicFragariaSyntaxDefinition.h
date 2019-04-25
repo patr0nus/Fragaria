@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SMLAutoCompleteDelegate.h"
+#import "MGSSyntaxParserClient.h"
 
 
 @class MGSFragariaView;
@@ -66,8 +67,8 @@
 
 /** A regular expression that matches a variable.
  *  @discussion This property supersedes beginVariableCharacterSet and
- *       endVariableCharacterSet. If this property is nil, a syntax
- *       colourer should use these properties instead, otherwise they
+ *       endVariableCharacterSet. If this property is equal to @"",
+ *       a syntax colourer should use these properties instead, otherwise they
  *       should be ignored. */
 @property (readonly) NSString *variableRegex;
 /**  Characters that may start a variable. */
@@ -110,6 +111,11 @@
  *  numberCharacterSet - if it is the last character of the number.
  *  @discussion This property has no effect if numberDefinition is non-nil. */
 @property (readonly) unichar decimalPointCharacter;
+
+
+/** Returns the array of syntax groups that MGSClassicFragariaSyntaxParser
+ *  will use for colouring the text with this definition. */
+- (NSArray <SMLSyntaxGroup> *)usedSyntaxGroups;
 
 
 /** A name associated with this syntax definition. Might be nil. */
