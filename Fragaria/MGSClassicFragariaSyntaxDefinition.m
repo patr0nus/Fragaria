@@ -48,6 +48,7 @@ NSString *SMLSyntaxDefinitionExcludeFromKeywordEndCharacterSet = @"excludeFromKe
 NSString *SMLSyntaxDefinitionIncludeInKeywordStartCharacterSet = @"includeInKeywordStartCharacterSet";
 NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywordEndCharacterSet";
 
+NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
 
 
 @implementation MGSClassicFragariaSyntaxDefinition {
@@ -256,6 +257,12 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
         }
     }
     
+    value = [syntaxDictionary objectForKey:SMLSyntaxDefinitionGroupSpecialization];
+    if (value) {
+        RETURN_NIL_IF_FALSE([value isKindOfClass:[NSDictionary class]], @"NSDictionary expected");
+        _syntaxGroupSpecialization = value;
+    }
+    
     // exclude characters from keyword start character set
     value = [syntaxDictionary valueForKey:SMLSyntaxDefinitionExcludeFromKeywordStartCharacterSet];
     if (value) {
@@ -323,6 +330,15 @@ NSString *SMLSyntaxDefinitionIncludeInKeywordEndCharacterSet = @"includeInKeywor
     temporaryCharacterSet = [[NSCharacterSet alphanumericCharacterSet] mutableCopy];
     [temporaryCharacterSet addCharactersInString:@" -"]; // If there are two spaces before an attribute
     _attributesCharacterSet = [temporaryCharacterSet copy];
+}
+
+
+- (SMLSyntaxGroup)specializationForSyntaxGroup:(SMLSyntaxGroup)g
+{
+    SMLSyntaxGroup res = [self.syntaxGroupSpecialization objectForKey:g];
+    if (res && [res isKindOfClass:[NSString class]])
+        return res;
+    return g;
 }
 
 

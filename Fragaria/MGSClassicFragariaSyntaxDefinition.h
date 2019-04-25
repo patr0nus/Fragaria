@@ -117,6 +117,19 @@
  *  will use for colouring the text with this definition. */
 - (NSArray <SMLSyntaxGroup> *)usedSyntaxGroups;
 
+/** A dictionary that maps a base syntax group to a more specialized syntax group
+ *  to be used instead.
+ *  For example, if the dictionary contains a map from SMLSyntaxGroupComment to
+ *  "myGroup", the parser must associate the group "myGroup" where it otherwise
+ *  would use the SMLSyntaxGroupComment group. */
+@property (readonly) NSDictionary <SMLSyntaxGroup, SMLSyntaxGroup> *syntaxGroupSpecialization;
+
+/** An utility method that maps a base group to a specialized group.
+ *  @note All groups defined in MGSSyntaxParserClient.h are base syntax groups.
+ *  @param g The original syntax group.
+ *  @returns The syntax group the parser should use instead of g. */
+- (SMLSyntaxGroup)specializationForSyntaxGroup:(SMLSyntaxGroup)g;
+
 
 /** A name associated with this syntax definition. Might be nil. */
 @property (readonly) NSString *name;
