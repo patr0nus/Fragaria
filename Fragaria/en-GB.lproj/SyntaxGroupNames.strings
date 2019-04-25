@@ -22,3 +22,4 @@
 "number.literalList" = "Lisp Literal List";
 "instruction.link.md" = "Markdown Link";
 "number.formatting.md" = "Markdown Formatting";
+"instruction.block" = "Block";

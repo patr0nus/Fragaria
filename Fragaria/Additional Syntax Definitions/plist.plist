@@ -15,7 +15,7 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
 	<string></string>
 	<key>firstSingleLineComment</key>
@@ -57,5 +57,12 @@
 	<string>Plist</string>
 	<key>extensions</key>
 	<string>plist</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>command</key>
+		<string>command.tag</string>
+		<key>instruction</key>
+		<string>command.scriptingDelimiter</string>
+	</dict>
 </dict>
 </plist>

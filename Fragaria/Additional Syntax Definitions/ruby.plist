@@ -15,9 +15,9 @@
 	<key>endVariable</key>
 	<string> .</string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
-	<string>'</string>
+	<string>&apos;</string>
 	<key>firstSingleLineComment</key>
 	<string>#</string>
 	<key>secondSingleLineComment</key>
@@ -1075,5 +1075,10 @@
 	<string>Ruby</string>
 	<key>extensions</key>
 	<string>rb</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>instruction</key>
+		<string>instruction.block</string>
+	</dict>
 </dict>
 </plist>
