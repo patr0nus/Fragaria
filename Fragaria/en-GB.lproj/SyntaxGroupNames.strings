@@ -1,0 +1,21 @@
+/* 
+  SyntaxGroupNames.strings
+  Fragaria
+
+  Created by Daniele Cattaneo on 25/04/2019.
+  
+*/
+
+"number" = "Number";
+"command" = "Command";
+"instruction" = "Instruction";
+"keyword" = "Keyword";
+"autocomplete" = "Autocomplete";
+"variable" = "Variable";
+"strings" = "String";
+"attribute" = "Attribute";
+"comments" = "Comment";
+"command.scriptingDelimiter" = "Scripting Delimiter";
+"command.tag" = "HTML/XML Tag";
+"command.attributeList.dot" = "GraphViz Attribute List";
+"instruction.parameter.tex" = "TeX Instruction Argument List";

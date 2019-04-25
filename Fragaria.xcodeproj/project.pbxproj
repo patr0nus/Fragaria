@@ -470,6 +470,7 @@
 		0150B3822186051600CBA228 /* MGSAttributeOverlayTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */; };
 		0150B38421861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */; };
 		0150B3862186610300CBA228 /* FragariaMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150B3852186610300CBA228 /* FragariaMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01578BE42272115B003A6D13 /* SyntaxGroupNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01578BE122720760003A6D13 /* SyntaxGroupNames.strings */; };
 		016186362270C9DD006A6630 /* MGSRangeEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 016186342270C9DD006A6630 /* MGSRangeEntries.m */; };
 		0161863A22711DEB006A6630 /* NSCharacterSet+Fragaria.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161863822711DEB006A6630 /* NSCharacterSet+Fragaria.h */; };
 		0161863B22711DEB006A6630 /* NSCharacterSet+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161863922711DEB006A6630 /* NSCharacterSet+Fragaria.m */; };
@@ -1395,6 +1396,8 @@
 		0150B3802186051600CBA228 /* MGSAttributeOverlayTextStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSAttributeOverlayTextStorage.m; sourceTree = "<group>"; };
 		0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSAttributeOverlayTextStorageTest.m; sourceTree = "<group>"; };
 		0150B3852186610300CBA228 /* FragariaMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragariaMacros.h; sourceTree = "<group>"; };
+		01578BE022720760003A6D13 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SyntaxGroupNames.strings; sourceTree = "<group>"; };
+		01578BE222720789003A6D13 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/SyntaxGroupNames.strings"; sourceTree = "<group>"; };
 		016186342270C9DD006A6630 /* MGSRangeEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSRangeEntries.m; sourceTree = "<group>"; };
 		016186352270C9DD006A6630 /* MGSRangeEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSRangeEntries.h; sourceTree = "<group>"; };
 		0161863822711DEB006A6630 /* NSCharacterSet+Fragaria.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+Fragaria.h"; sourceTree = "<group>"; };
@@ -1923,6 +1926,7 @@
 		01E4D55821D573EA005AC122 /* Classic Fragaria Parser */ = {
 			isa = PBXGroup;
 			children = (
+				01578BE122720760003A6D13 /* SyntaxGroupNames.strings */,
 				01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */,
 				01E4D55121D51CE5005AC122 /* MGSClassicFragariaParserFactory.m */,
 				013278661A81614500D2DCA5 /* MGSClassicFragariaSyntaxDefinition.h */,
@@ -2547,6 +2551,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01578BE42272115B003A6D13 /* SyntaxGroupNames.strings in Resources */,
 				01AC7E721AA341AA00DF7620 /* Images.xcassets in Resources */,
 				D00BB055213876A3007E5FA6 /* SMLDetab.xib in Resources */,
 				ABA812DC11B6855200A29990 /* LICENSE-2.0.txt in Resources */,
@@ -2839,6 +2844,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		01578BE122720760003A6D13 /* SyntaxGroupNames.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01578BE022720760003A6D13 /* en */,
+				01578BE222720789003A6D13 /* en-GB */,
+			);
+			name = SyntaxGroupNames.strings;
+			sourceTree = "<group>";
+		};
 		01DE21C921FFAA860076770C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -13,6 +13,8 @@
 
 NSString * const KMGSSyntaxDictionaryExt = @"plist";
 NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
+NSString * const KMGSSyntaxGroupNamesFileName = @"SyntaxGroupNames";
+NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 
 
 @interface MGSClassicFragariaParserFactory ()
@@ -23,7 +25,9 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 @end
 
 
-@implementation MGSClassicFragariaParserFactory
+@implementation MGSClassicFragariaParserFactory {
+    NSDictionary<SMLSyntaxGroup, NSString *> *_localizedSyntaxGroupNamesCache;
+}
 
 
 @synthesize syntaxDefinitionNames = _syntaxDefinitionNames;
@@ -102,6 +106,16 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
+- (NSURL *)applicationSupportSyntaxDefinitionDirectory
+{
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    NSURL *appSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    appSupport = [appSupport URLByAppendingPathComponent:appName];
+    appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+    return appSupport;
+}
+
+
 - (NSArray <NSURL *> *)syntaxDefinitionSearchPaths
 {
     NSMutableArray *searchPaths = [NSMutableArray array];
@@ -114,10 +128,7 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
     if (appResources)
         [searchPaths addObject:appResources];
     
-    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    NSURL *appSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    appSupport = [appSupport URLByAppendingPathComponent:appName];
-    appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+    NSURL *appSupport = [self applicationSupportSyntaxDefinitionDirectory];
     if (appSupport)
         [searchPaths addObject:appSupport];
     
@@ -303,27 +314,45 @@ NSString * const KMGSSyntaxDefinitionsFolder = @"Syntax Definitions";
 }
 
 
+- (void)rebuildLocalizedSyntaxGroupNamesCache
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionary];
+    
+    NSURL *builtin = [[self bundle] URLForResource:KMGSSyntaxGroupNamesFileName withExtension:KMGSSyntaxGroupNamesFileExt];
+    if (builtin) {
+        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:builtin];
+        if (tmp)
+            [res addEntriesFromDictionary:tmp];
+    }
+    
+    NSURL *thisApp = [[NSBundle mainBundle] URLForResource:KMGSSyntaxGroupNamesFileName withExtension:KMGSSyntaxGroupNamesFileExt];
+    if (thisApp) {
+        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:thisApp];
+        if (tmp)
+            [res addEntriesFromDictionary:tmp];
+    }
+    
+    NSURL *appSupport = [self applicationSupportSyntaxDefinitionDirectory];
+    appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxGroupNamesFileName];
+    appSupport = [appSupport URLByAppendingPathExtension:KMGSSyntaxGroupNamesFileExt];
+    if (appSupport) {
+        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:appSupport];
+        if (tmp)
+            [res addEntriesFromDictionary:tmp];
+    }
+    
+    _localizedSyntaxGroupNamesCache = [res copy];
+}
+
+
 - (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
 {
-    if ([syntaxGroup isEqual:SMLSyntaxGroupNumber])
-        return NSLocalizedString(@"Number", @"Localized name of syntax group \"number\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupCommand])
-        return NSLocalizedString(@"Command", @"Localized name of syntax group \"command\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupInstruction])
-        return NSLocalizedString(@"Instruction", @"Localized name of syntax group \"instruction\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupKeyword])
-        return NSLocalizedString(@"Keyword", @"Localized name of syntax group \"keyword\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupAutoComplete])
-        return NSLocalizedString(@"Autocomplete", @"Localized name of syntax group \"autocomplete\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupVariable])
-        return NSLocalizedString(@"Variable", @"Localized name of syntax group \"variable\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupString])
-        return NSLocalizedString(@"String", @"Localized name of syntax group \"string\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupAttribute])
-        return NSLocalizedString(@"Attribute", @"Localized name of syntax group \"attribute\"");
-    if ([syntaxGroup isEqual:SMLSyntaxGroupComment])
-        return NSLocalizedString(@"Comment", @"Localized name of syntax group \"comment\"");
-    return nil;
+    if (!_localizedSyntaxGroupNamesCache) {
+        [self rebuildLocalizedSyntaxGroupNamesCache];
+    }
+    
+    NSString *res = [_localizedSyntaxGroupNamesCache objectForKey:syntaxGroup];
+    return res ?: syntaxGroup;
 }
 
 

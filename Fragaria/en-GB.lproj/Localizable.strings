@@ -1,30 +1,3 @@
-/* Localized name of syntax group \"attribute\" */
-"Attribute" = "Attribute";
-
-/* Localized name of syntax group \"autocomplete\" */
-"Autocomplete" = "Autocomplete";
-
-/* Localized name of syntax group \"command\" */
-"Command" = "Command";
-
-/* Localized name of syntax group \"comment\" */
-"Comment" = "Comment";
-
 /* Name for Custom Settings scheme. */
 "Custom Settings" = "Custom Settings";
-
-/* Localized name of syntax group \"instruction\" */
-"Instruction" = "Instruction";
-
-/* Localized name of syntax group \"keyword\" */
-"Keyword" = "Keyword";
-
-/* Localized name of syntax group \"number\" */
-"Number" = "Number";
-
-/* Localized name of syntax group \"string\" */
-"String" = "String";
-
-/* Localized name of syntax group \"variable\" */
-"Variable" = "Variable";
 
