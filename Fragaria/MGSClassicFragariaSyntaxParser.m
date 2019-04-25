@@ -60,6 +60,8 @@ typedef NSInteger SMLSyntaxGroupInteger;
 {
     NSString *firstString = self.syntaxDefinition.firstString;
     NSString *secondString = self.syntaxDefinition.secondString;
+    firstString = [NSRegularExpression escapedPatternForString:firstString];
+    secondString = [NSRegularExpression escapedPatternForString:secondString];
     
     firstStringPattern = [NSString stringWithFormat:@"\\W%@[^%@\\\\\\r\\n]*+(?:\\\\(?:.|$)[^%@\\\\\\r\\n]*+)*+%@", firstString, firstString, firstString, firstString];
     
