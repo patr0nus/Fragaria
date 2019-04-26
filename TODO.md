@@ -14,10 +14,4 @@
 1. Define source files in the bundle for each supported language type. These can be loaded in the example app to
    validate colouring. An NSStepper might be useful too.
 
-1. Delegate colouring protocol seems useful. Perhaps it can be extended.
-
-1. Would MGSTextView subclassing be beneficial? The client could pass in the required subclass name in the document
-   spec.
-
-1. Syntax definitions are currently loaded from the framework bundle. It would be useful if the client app could supply
-   an externally defined syntax definition dictionary to provide custom language support.
+1. Would MGSTextView subclassing be beneficial?

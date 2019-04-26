@@ -49,4 +49,4 @@ Other new features include:
 
 ## Version 1.x (`legacy` branch)
 
-This major version is compatible with the original API of the MGSFragaria project available (https://github.com/KosmicTask/Fragaria).
+This major version is compatible with the original API of the MGSFragaria project available at https://github.com/KosmicTask/Fragaria.
