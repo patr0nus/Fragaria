@@ -44,7 +44,7 @@ override class var autosavesInPlace: Bool {
 
     
 override var windowNibName: NSNib.Name? {
-    return NSNib.Name(rawValue: "Document")
+    return "Document"
 }
 
     

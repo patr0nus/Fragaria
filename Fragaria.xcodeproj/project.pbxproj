@@ -2467,7 +2467,7 @@
 					};
 					01F0D6FB1C120F7D000A08B6 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 					};
 					D0718B4F1AB551460073493A = {
 						CreatedOnToolsVersion = 6.2;
@@ -3219,7 +3219,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Applications/Fragaria Swift/Fragaria-Swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -3255,7 +3255,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.Fragaria-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Applications/Fragaria Swift/Fragaria-Swift-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Testing;
 		};
@@ -3291,7 +3291,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.Fragaria-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Applications/Fragaria Swift/Fragaria-Swift-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
