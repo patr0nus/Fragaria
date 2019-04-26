@@ -4,6 +4,7 @@
 //
 //  Created by Daniele Cattaneo on 25/04/2019.
 //
+/// @cond PRIVATE
 
 #import <Foundation/Foundation.h>
 
@@ -13,9 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCharacterSet (Fragaria)
 
-
-- (BOOL)isEmpty;
-
+- (BOOL)mgs_isEmpty;
 
 @end
 

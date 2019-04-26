@@ -4,6 +4,7 @@
 //
 //  Created by Daniele Cattaneo on 20/10/17.
 //
+/// @cond PRIVATE
 
 #import "MGSMutableColourScheme.h"
 

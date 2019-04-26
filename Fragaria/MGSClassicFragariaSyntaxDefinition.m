@@ -356,7 +356,7 @@ NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
         [res addObject:MGSSyntaxGroupKeyword];
     if ([self.autocompleteWords count] > 0)
         [res addObject:MGSSyntaxGroupAutoComplete];
-    if (![self.beginVariableCharacterSet isEmpty] || ![self.variableRegex isEqual:@""])
+    if (![self.beginVariableCharacterSet mgs_isEmpty] || ![self.variableRegex isEqual:@""])
         [res addObject:MGSSyntaxGroupVariable];
     if (![self.secondString isEqual:@""] || ![self.firstString isEqual:@""])
         [res addObject:MGSSyntaxGroupString];

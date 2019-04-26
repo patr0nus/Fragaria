@@ -1,46 +1,14 @@
 # MGSFragaria
 
-A fork of https://github.com/mugginsoft/Fragaria with a focus on fixing bugs, while adding some new features along
-the way.
+A fork of https://github.com/KosmicTask/Fragaria with a focus on fixing bugs, while adding some new features along the way.
+
+Have a look at the [ChangeLog](ChangeLog.md) to see what changed compared to the upstream MGSFragaria and across versions of this fork.
 
 ## What is it?
 
-Fragaria is an OS X Cocoa syntax colouring `NSTextView` implemented within a framework named `MGSFragaria`. It supports a
-wide range of programming languages and includes preference panel support.
+Fragaria is an OS X Cocoa syntax colouring `NSTextView` implemented within a framework named `MGSFragaria`. It supports a wide range of programming languages and includes preference panel support.
 
-## Why switching to this fork makes my code not build anymore?
-
-This fork of Fragaria is a significant departure from the original design. The `MGSFragaria` class was replaced by
-`MGSFragariaView`, and the old preference panels were replaced by a more flexible design. The settings which
-could only be set as user defaults were converted to properties of `MGSFragariaView`, and `MGSTextMenuController`
-was removed (you can directly make a connection to `MGSFragariaView` or to First Responder instead).
-
-If you want to update your app to this fork of Fragaria, to lessen the burden you can use 
-[the legacy branch](https://github.com/shysaur/Fragaria/tree/legacy) as a stepping stone.
-
-## Where can I see it in use
-
-You can see an old version of Fragaria used in the following projects and products:
-
-* [Appium Recorder](http://appium.io) : Appium is an open source, cross-platform test automation tool for native
-  and hybrid mobile apps. ([repo](https://github.com/appium/appium)).
-
-* [cocoa-rest-client](https://github.com/mmattozzi/cocoa-rest-client) A native OS X cocoa application for testing HTTP
-  endpoints.
-
-* [CocosBuilder](http://www.cocosbuilder.com/). CocosBuilder is a free tool (released under MIT-licence) for rapidly
-  developing games and apps. ([repo](https://github.com/cocos2d/CocosBuilder))
-
-* [Cocoduino](https://github.com/fabiankr/Cocoduino) is an IDE for the Arduino platform written in native Cocoa.
-
-* [KosmicTask](http://www.mugginsoft.com) is a multi (20+) language  scripting environment for OS X that features
-  script editing, network sharing, remote execution, and file processing.
-
-* [nib2objc](https://github.com/akosma/nib2objc) This utility converts NIB files (or XIB ones) into Objective-C code
-
-If you use Fragaria in your app and want it added to the list just let us know or edit the README.
-
-## Features
+### Features
 
 * Configurable syntax colouring
 * Configurable font type, size and colour.
@@ -55,12 +23,13 @@ If you use Fragaria in your app and want it added to the list just let us know o
 * Syntax error badges and underlines
 * Drag and drop
 * Split view support
+* Support for custom application-specific parsers
 
 ## How do I use it?
 
 The best way to learn how to use the framework is to look at the sample apps.
 
-* __Fragaria Simple__ : a simple editor window that features language selection, and a wired up text menu.
+* __Fragaria Simple__ : a simple editor window that features language selection, a wired up text menu, and custom parsers.
 
 * __Fragaria Doc__ : a simple `NSDocument` based editor with the new preferences panels.
 
@@ -70,9 +39,7 @@ The best way to learn how to use the framework is to look at the sample apps.
 
 ### Show me code
 
-First, place `MGSFragariaView` in your nib. Then create an outlet for it in your window controller class,
-wiring the newly placed view to it. Alternatively you can create `MGSFragariaView` programmatically like
-any other view. Then, you can initialize Fragaria using its ivar or property.
+First, place `MGSFragariaView` in your nib. Then create an outlet for it in your window controller class, wiring the newly placed view to it. Alternatively you can create `MGSFragariaView` programmatically like any other view. Then, you can initialize Fragaria using its properties.
 
 ```obj-c
 #import <Fragaria/Fragaria.h>
@@ -84,8 +51,7 @@ any other view. Then, you can initialize Fragaria using its ivar or property.
 [fragaria setString:@"// We don't need the future."];
 ```
 
-You can further customize the look of Fragaria by setting the appropriate properties. Have a look at 
-[MGSFragariaView.h](MGSFragariaView.h) for detailed documentation.
+You can further customize the look of Fragaria by setting the appropriate properties. Have a look at [MGSFragariaView.h](MGSFragariaView.h) for detailed documentation.
 
 ### Breakpoint Highlighting
 
@@ -96,13 +62,9 @@ Use the `breakpointDelegate` property to define a breakpoint delegate that confo
 [fragaria setBreakpointDelegate:self];
 ```
 
-If the delegates implements either `-colouredBreakpointsForFragaria:` or `-breakpointColourForLine:ofFragaria:`,
-you can set a custom color for your breakpoints. For example you can return a transparent `NSColor` for
-disabled breakpoints.
+If the delegates implements either `-colouredBreakpointsForFragaria:` or `-breakpointColourForLine:ofFragaria:`, you can set a custom color for your breakpoints. For example you can return a transparent `NSColor` for disabled breakpoints.
 
-When the user clicks on a line number in the gutter, Fragaria sends the `-toggleBreakpointForFragaria:onLine:`
-message to the delegate, which will then update its breakpoint data. If you need to manually update the
-breakpoints, you should refresh the gutter view manually afterwards:
+When the user clicks on a line number in the gutter, Fragaria sends the `-toggleBreakpointForFragaria:onLine:` message to the delegate, which will then update its breakpoint data. If you need to manually update the breakpoints, you should refresh the gutter view manually afterwards:
 
 ```obj-c
 [fragaria reloadBreakpointData];
@@ -123,22 +85,16 @@ syntaxError.length = 10;
 fragaria.syntaxErrors = @[syntaxError];
 ```
 
-You can specify a custom `warningLevel` to change the icon shown for the syntax error and its priority
-in case multiple syntax errors are assigned to the same line. To define custom priorities and icons you
-can subclass `MGSSyntaxError` and use the subclass.
+You can specify a custom `warningLevel` to change the icon shown for the syntax error and its priority in case multiple syntax errors are assigned to the same line. To define custom priorities and icons you can subclass `MGSSyntaxError` and use the subclass.
 
 ### Using the new preference panels
 
-The new preferences system allows for having multiple preference groups in the same apps, which can control
-all or some of the available options. Every `MGSFragariaView` that you want to be controlled by preferences
-must be added manually to a preference group; after you've done that, everything's automatic.
+The new preferences system allows for having multiple preference groups in the same apps, which can control all or some of the available options. Every `MGSFragariaView` that you want to be controlled by preferences must be added manually to a preference group; after you've done that, everything's automatic.
 
-The easiest way to use the new preference panels is to only use the global group; this results in a single
-set of preferences for all the instances of Fragaria in the app, which is what you want 90% of the time.
+The easiest way to use the new preference panels is to only use the global group; this results in a single set of preferences for all the instances of Fragaria in the app, which is what you want 90% of the time.
 
-First, you set the persistent flag on the group when the application initializes. This is typically done by the
-application delegate inside `-applicationWillFinishLaunching:` (not in `-applicationDidFinishLaunching:` because
-other initialization code which uses the defaults controller may be called before `-applicationDidFinishLaunching:`)
+To use the preference panels, first you must include the `FragariaDefaultsCoordinator` framework in your project in addition to the `Fragaria` framework.
+Then, you set the persistent flag on the group when the application initializes. This is typically done by the application delegate inside `-applicationWillFinishLaunching:` (not in `-applicationDidFinishLaunching:` because other initialization code which uses the defaults controller may be called before `-applicationDidFinishLaunching:`)
 
 ```obj-c
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification {
@@ -146,35 +102,83 @@ other initialization code which uses the defaults controller may be called befor
 }
 ```
 
-The global controller by default manages all the available properties of `MGSFragariaView`. If you want to
-manage some of these properties manually, you should also remove them from the managed properties set in this
-stage.
+The global controller by default manages all the available properties of `MGSFragariaView`. If you want to manage some of these properties manually, you should also remove them from the managed properties set in this stage.
 
-Then, when you create a new `MGSFragariaView`, you register it to the global group in this way:
+When you create a new `MGSFragariaView`, you can now register it to the global group in this way:
 
 ```obj-c
 [[MGSUserDefaultsController sharedController] addFragariaToManagedSet:fragaria];
 ```
 
-Before an `MGSFragariaView` registered to a defaults controller is deallocated, you should remove it from
-the controller's managed set. Not doing this may result in seemingly random crashes because the defaults
-controller does not retain the registered views (doing that would create a retain cycle).
+Before an `MGSFragariaView` registered to a defaults controller is deallocated, you should remove it from the controller's managed set. Not doing this may result in seemingly random crashes because the defaults controller does not retain the registered views (doing that would create a retain cycle).
 
 ```obj-c
 [[MGSUserDefaultsController sharedController] removeFragariaFromManagedSet:fragaria];
 ```
 
 Done this, to use the standard preference panels, you just use `MGSPrefsColourPropertiesViewController` and
-`MGSPrefsEditorPropertiesViewController`. See [ApplicationDelegate.m](Applications/Doc/ApplicationDelegate.m)
-in the Fragaria Doc example to see how to use these view controllers with the popular preference panel library
-[MASPreferences](https://github.com/shpakovski/MASPreferences).
+`MGSPrefsEditorPropertiesViewController`. See [ApplicationDelegate.m](Applications/Doc/ApplicationDelegate.m) in the Fragaria Doc example to see how to use these view controllers with the popular preference panel library [MASPreferences](https://github.com/shpakovski/MASPreferences).
 
 This feature is very new and still needs improvements, so it may change in potentially breaking ways.
 
-### Custom colouring
+### Custom colouring & parsing
 
-UPDATE ME
+There are three ways to customize colouring and parsing:
 
+1. Creating a language syntax file used with the standard built-in parser
+2. Creating a syntax parser class
+   - from scratch
+   - based on an existing parser class
+
+#### Creating a language syntax file used with the standard built-in parser
+
+To define a new syntax definition:
+
+1. Generate a plist that defines the language syntax. 
+2. Install the plist in the `Syntax Definitions` directory inside your application bundle's resources.
+
+The plist structure is simple and browsing the [existing definitions](Fragaria/Additional%20Syntax%20Definitions) should provide 
+some enlightenment. The plist keys are defined in [MGSClassicFragariaSyntaxDefinition.m](Fragaria/MGSClassicFragariaSyntaxDefinition.m). 
+
+For much deeper insight see the  `-colour...InRange:withRangeScanner:documentScanner` methods in `MGSSyntaxColouring` and the detailed comments in [MGSClassicFragariaSyntaxDefinition.h](Fragaria/MGSClassicFragariaSyntaxDefinition.h).
+
+#### Creating a syntax parser class
+
+If you want to create just one parser that does not require additional configuration, simply create a new class which inherits from `MGSSyntaxParser` and implements the `MGSParserFactory` interface. As a template, you can use the ExampleCustomParser class from the [Fragaria Simple](Applications/Fragaria Simple/) example.
+
+In this use case, your parser will be a singleton which supports just one language.
+
+The implementation of `-[MGSSyntaxParser parseForClient:]` will be the main entry point of your parser, where you put your parsing code.
+
+If you want to base your parser on an existing one, just fetch the existing parser by name through the `-[MGSSyntaxController parserForSyntaxDefinitionName:]` method and call its `-parseForClient:` method before your parsing code.
+
+For details, see the [Fragaria Simple](Applications/Fragaria Simple/) example and the documentation in [MGSSyntaxParser.h](Fragaria/MGSSyntaxParser.h), [MGSParserFactory.h](Fragaria/MGSParserFactory.h), [MGSSyntaxParserClient.h](Fragaria/MGSSyntaxParserClient.h) and [MGSSyntaxAwareEditor.h](Fragaria/MGSSyntaxAwareEditor.h).
+
+## Where can I see it in use
+
+The author of this fork is dog-feeding Fragaria in another project of his:
+
+* [Tricky68k](https://github.com/shysaur/Tricky68k) : A tool for playing around with assembly language for the Motorola 68k CPU.
+
+In the past, Fragaria has been used in the following projects and products (old links might be broken, and some project might have moved away from using Fragaria):
+
+* [Appium Recorder](http://appium.io) : Appium is an open source, cross-platform test automation tool for native
+  and hybrid mobile apps. ([repo](https://github.com/appium/appium)).
+
+* [cocoa-rest-client](https://github.com/mmattozzi/cocoa-rest-client) A native OS X cocoa application for testing HTTP
+  endpoints.
+
+* [CocosBuilder](http://www.cocosbuilder.com/). CocosBuilder is a free tool (released under MIT-licence) for rapidly
+  developing games and apps. ([repo](https://github.com/cocos2d/CocosBuilder))
+
+* [Cocoduino](https://github.com/fabiankr/Cocoduino) is an IDE for the Arduino platform written in native Cocoa.
+
+* [KosmicTask](http://www.mugginsoft.com) is a multi (20+) language  scripting environment for OS X that features
+  script editing, network sharing, remote execution, and file processing.
+
+* [nib2objc](https://github.com/akosma/nib2objc) This utility converts NIB files (or XIB ones) into Objective-C code
+
+If you use Fragaria in your app and want it added to the list just let us know or edit the README.
 
 ### Supported languages
 
@@ -187,6 +191,7 @@ active4d,
 ada, 
 ampl, 
 apache (config), 
+apex,
 applescript, 
 asm-mips, 
 asm-x86, 
@@ -305,25 +310,9 @@ vhdl
 #### X
 xml
 
-### Defining a new language syntax
-
-To define a new syntax definition:
-
-1. Generate a plist that defines the language syntax. 
-
-2. Insert a reference to the new plist into [SyntaxDefinitions.plist](SyntaxDefinitions.plist)
-
-The plist structure is simple and browsing the [existing definitions](Syntax%20Definitions) should provide 
-some enlightenment. The plist keys are defined in [MGSSyntaxDefinition.m](MGSSyntaxDefinition.m). 
-
-For much deeper insight see the  `-colour...InRange:withRangeScanner:documentScanner` methods in `MGSSyntaxColouring`
-and the detailed comments in [MGSSyntaxDefinition.h](MGSSyntaxDefinition.h).
 
 ## How can I contribute
 Take a look at the [TODO](TODO.md) list.
 
 ## Where did it come from?
-Fragaria started out as the vital pulp of Smultron, now called Fraise. If you want to add additional features to
-Fragaria then looking at the [Fraise](https://github.com/jfmoy/Fraise) and other forked sources is a good place to
-start. Fraise is a GC only app so you will need to consider memory management issues when importing code into Fragaria.
-
+Fragaria started out as the vital pulp of Smultron 3.4.1, which was open-sourced. Apart from Fragaria, the same code base was used to developed another text editor named Fraise, and the original author of Smultron has now resumed development.

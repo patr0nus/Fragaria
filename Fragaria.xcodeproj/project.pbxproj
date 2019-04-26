@@ -471,7 +471,6 @@
 		0150B3862186610300CBA228 /* FragariaMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 0150B3852186610300CBA228 /* FragariaMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01578BE42272115B003A6D13 /* SyntaxGroupNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01578BE122720760003A6D13 /* SyntaxGroupNames.strings */; };
 		016186362270C9DD006A6630 /* MGSRangeEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 016186342270C9DD006A6630 /* MGSRangeEntries.m */; };
-		0161863A22711DEB006A6630 /* NSCharacterSet+Fragaria.h in Headers */ = {isa = PBXBuildFile; fileRef = 0161863822711DEB006A6630 /* NSCharacterSet+Fragaria.h */; };
 		0161863B22711DEB006A6630 /* NSCharacterSet+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161863922711DEB006A6630 /* NSCharacterSet+Fragaria.m */; };
 		016B52A221D6861A00504081 /* ExampleCustomParserWithComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
@@ -2240,7 +2239,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0161863A22711DEB006A6630 /* NSCharacterSet+Fragaria.h in Headers */,
 				01F336901C8C962100B5F395 /* NSSet+Fragaria.h in Headers */,
 				019F56D51A9D3511009F9DCD /* MGSTextView+MGSDragging.h in Headers */,
 				019B80191A9E77330007D234 /* MGSFragariaTextViewDelegate.h in Headers */,

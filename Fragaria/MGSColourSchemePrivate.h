@@ -4,6 +4,7 @@
 //
 //  Created by Daniele Cattaneo on 20/09/18.
 //
+/// @cond PRIVATE
 
 #import <Foundation/Foundation.h>
 #import "MGSColourScheme.h"

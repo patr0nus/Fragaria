@@ -4,6 +4,7 @@
 //
 //  Created by Daniele Cattaneo on 27/12/2018.
 //
+/// @cond PRIVATE
 
 #import <Foundation/Foundation.h>
 #import "MGSParserFactory.h"

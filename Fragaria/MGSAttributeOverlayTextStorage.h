@@ -4,6 +4,7 @@
 //
 //  Created by Daniele Cattaneo on 28/10/2018.
 //
+/// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
 
@@ -18,10 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  storage will be reflected on this text storage if there is not an attribute
  *  set on this text storage which overrides it. Changes on the attributes of
  *  this text storage do not reflect to changes in the attributes of the parent
- *  text storage.
- *
- *  @note At the moment the implementation actually stores its private attributes
- *     on the parent text storage, instead of having its own attribute storage. */
+ *  text storage. */
 @interface MGSAttributeOverlayTextStorage : NSTextStorage
 
 

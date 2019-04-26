@@ -258,7 +258,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
             doColouring = [self.syntaxDefinition.autocompleteWords count] > 0;
             break;
         case kSMLSyntaxGroupVariable:
-            doColouring = (![self.syntaxDefinition.beginVariableCharacterSet isEmpty] || ![self.syntaxDefinition.variableRegex isEqual:@""]);
+            doColouring = (![self.syntaxDefinition.beginVariableCharacterSet mgs_isEmpty] || ![self.syntaxDefinition.variableRegex isEqual:@""]);
             break;
         case kSMLSyntaxGroupSecondString:
             doColouring = ![self.syntaxDefinition.secondString isEqual:@""];

@@ -11,7 +11,7 @@
 @implementation NSCharacterSet (Fragaria)
 
 
-- (BOOL)isEmpty
+- (BOOL)mgs_isEmpty
 {
     return [self isEqual:[NSCharacterSet characterSetWithCharactersInString:@""]];
 }
