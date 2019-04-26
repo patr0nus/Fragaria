@@ -343,8 +343,7 @@
 
     /* For fun, let's say that the global controller should manage these
        properties, and take away the power to do so from the groups. */
-	NSArray *colourProperties = [[MGSFragariaView propertyGroupTheme] allObjects];
-	NSMutableArray *globalProperties = [NSMutableArray arrayWithArray:colourProperties];
+	NSMutableArray *globalProperties = [NSMutableArray array];
 	[globalProperties addObjectsFromArray:@[
 											MGSFragariaDefaultsTextFont,
                                             MGSFragariaDefaultsGutterFont,
