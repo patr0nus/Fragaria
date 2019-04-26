@@ -73,9 +73,10 @@
     [self.viewBottom replaceTextStorage:self.viewTop.textStorage];
 	self.viewBottom.showsLineNumbers = YES;
 
-
 	/* Sample Syntax Error Definitions */
     self.viewTop.syntaxErrors = [self makeSyntaxErrors];
+    
+    self.viewTop.syntaxDefinitionName = @"HTML";
 }
 
 
