@@ -1,5 +1,5 @@
 //
-//  SMLSyntaxError.h
+//  MGSSyntaxError.h
 //  Fragaria
 //
 //  Created by Viktor Lidholt on 4/9/13.
@@ -10,11 +10,11 @@
 #import <Cocoa/Cocoa.h>
 
 
-/** @defgroup warninglevels SMLSyntaxError Warning Levels
+/** @defgroup warninglevels MGSSyntaxError Warning Levels
  *  These are Fragaria's default warning levels. Warning levels are used to
  *  decide which error badge will be shown on a line if more than one error
  *  is located on that line. Also, when the warningLevel property is set, the
- *  SMLSyntaxError's default image will also be set to one of various predefined
+ *  MGSSyntaxError's default image will also be set to one of various predefined
  *  images; each of these images correspond to one of the following
  *  constants. */
 
@@ -31,7 +31,7 @@ extern float const kMGSErrorCategoryDefault;  ///< kMGSErrorCategoryWarning
 
 
 /** 
- *  SMLSyntaxError is a model class that stores the syntax errors to be
+ *  MGSSyntaxError is a model class that stores the syntax errors to be
  *  shown in Fragaria's text view and gutter.
  *
  *  @discussion Components using this class are not currently KVO compliant and
@@ -42,14 +42,14 @@ extern float const kMGSErrorCategoryDefault;  ///< kMGSErrorCategoryWarning
  *              syntaxErrors array.
  */
 
-@interface SMLSyntaxError : NSObject
+@interface MGSSyntaxError : NSObject
 
 
 #pragma mark - Retrieving Default Images
 /// @name Retrieving Default Images
 
 
-/** The image which will be set on a SMLSyntaxError instance when the given
+/** The image which will be set on a MGSSyntaxError instance when the given
  *  warningLevel is set.
  *  @discussion The default images are stored in and loaded from the
  *              framework bundle automatically.
@@ -61,12 +61,12 @@ extern float const kMGSErrorCategoryDefault;  ///< kMGSErrorCategoryWarning
 /// @name Creating Instances
 
 
-/** Returns an SMLSyntaxError with its properties set as indicated by the
+/** Returns an MGSSyntaxError with its properties set as indicated by the
  *  given dictionary.
  *  @param dictionary A dictionary where each key is the property name. */
 + (instancetype)errorWithDictionary:(NSDictionary *)dictionary;
 
-/** Return an SMLSyntaxError with the specified properties.
+/** Return an MGSSyntaxError with the specified properties.
  *  @discussion The created error's character and length properties will be set
  *              to 1 and 0 respectively, and the error will not be hidden.
  *  @param desc The description of the error.
@@ -75,7 +75,7 @@ extern float const kMGSErrorCategoryDefault;  ///< kMGSErrorCategoryWarning
 + (instancetype)errorWithDescription:(NSString *)desc ofLevel:(float)level
                               atLine:(NSUInteger)line;
 
-/** Returns an SMLSyntaxError initialized as specified by the given dictionary.
+/** Returns an MGSSyntaxError initialized as specified by the given dictionary.
  *  @param dictionary A dictionary where each key is a property name. */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
@@ -115,9 +115,9 @@ extern float const kMGSErrorCategoryDefault;  ///< kMGSErrorCategoryWarning
 /** A contextual menu that will be shown when right clicking on the syntax
  *  error's warning image.
  *  @discussion Set this property to nil if you don't want to show any 
- *     contextual menu. It is nil by default. If multiple SMLSyntaxError
- *     are shown on the same line, only the SMLSyntaxError with the highest
- *     priority will be able to show a contextual menu. If a SMLSyntaxError is
+ *     contextual menu. It is nil by default. If multiple MGSSyntaxError
+ *     are shown on the same line, only the MGSSyntaxError with the highest
+ *     priority will be able to show a contextual menu. If a MGSSyntaxError is
  *     hidden, its contextual menu will not be accessible. */
 @property (nonatomic) NSMenu *contextualMenu;
 

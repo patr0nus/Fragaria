@@ -7,7 +7,7 @@
 /// @cond PRIVATE
 
 #import <Foundation/Foundation.h>
-#import "SMLAutoCompleteDelegate.h"
+#import "MGSAutoCompleteDelegate.h"
 #import "MGSSyntaxParserClient.h"
 
 
@@ -15,7 +15,7 @@
 
 
 /** An MGSClassicFragariaSyntaxDefinition is a model object that describes how
- *  SMLSyntaxColouring should behave. */
+ *  MGSSyntaxColouring should behave. */
 
 @interface MGSClassicFragariaSyntaxDefinition : NSObject
 
@@ -115,20 +115,20 @@
 
 /** Returns the array of syntax groups that MGSClassicFragariaSyntaxParser
  *  will use for colouring the text with this definition. */
-- (NSArray <SMLSyntaxGroup> *)usedSyntaxGroups;
+- (NSArray <MGSSyntaxGroup> *)usedSyntaxGroups;
 
 /** A dictionary that maps a base syntax group to a more specialized syntax group
  *  to be used instead.
- *  For example, if the dictionary contains a map from SMLSyntaxGroupComment to
+ *  For example, if the dictionary contains a map from MGSSyntaxGroupComment to
  *  "myGroup", the parser must associate the group "myGroup" where it otherwise
- *  would use the SMLSyntaxGroupComment group. */
-@property (readonly) NSDictionary <SMLSyntaxGroup, SMLSyntaxGroup> *syntaxGroupSpecialization;
+ *  would use the MGSSyntaxGroupComment group. */
+@property (readonly) NSDictionary <MGSSyntaxGroup, MGSSyntaxGroup> *syntaxGroupSpecialization;
 
 /** An utility method that maps a base group to a specialized group.
  *  @note All groups defined in MGSSyntaxParserClient.h are base syntax groups.
  *  @param g The original syntax group.
  *  @returns The syntax group the parser should use instead of g. */
-- (SMLSyntaxGroup)specializationForSyntaxGroup:(SMLSyntaxGroup)g;
+- (MGSSyntaxGroup)specializationForSyntaxGroup:(MGSSyntaxGroup)g;
 
 
 /** A name associated with this syntax definition. Might be nil. */

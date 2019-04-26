@@ -51,7 +51,7 @@
     fragaria.string = fileText;
 
     // define a syntax error
-    SMLSyntaxError *syntaxError = [SMLSyntaxError new];
+    MGSSyntaxError *syntaxError = [MGSSyntaxError new];
     syntaxError.errorDescription = @"Syntax errors can be defined.";
     syntaxError.line = 1;
     syntaxError.character = 1;

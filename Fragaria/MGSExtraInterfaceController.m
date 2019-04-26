@@ -21,11 +21,11 @@
 */
 
 #import "MGSExtraInterfaceController.h"
-#import "SMLTextView+MGSTextActions.h"
+#import "MGSTextView+MGSTextActions.h"
 
 
 @implementation MGSExtraInterfaceController {
-    SMLTextView *_completionTarget;
+    MGSTextView *_completionTarget;
 }
 
 
@@ -46,7 +46,7 @@
 /*
  * - displayEntab
  */
-- (void)displayEntabForTarget:(SMLTextView *)target
+- (void)displayEntabForTarget:(MGSTextView *)target
 {
     NSWindow *wnd;
     
@@ -66,7 +66,7 @@
 /*
  * - displayDetab
  */
-- (void)displayDetabForTarget:(SMLTextView *)target
+- (void)displayDetabForTarget:(MGSTextView *)target
 {
     NSWindow *wnd;
     
@@ -131,7 +131,7 @@
 /*
  * - displayGoToLine
  */
-- (void)displayGoToLineForTarget:(SMLTextView *)target
+- (void)displayGoToLineForTarget:(MGSTextView *)target
 {
     _completionTarget = target;
     NSWindow *wnd = [_completionTarget window];

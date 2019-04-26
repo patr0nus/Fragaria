@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <Fragaria/Fragaria.h>
 
-@class SMLTextView;
+@class MGSTextView;
 @class MGSSimpleBreakpointDelegate;
 
 @interface FragariaAppDelegate : NSObject <NSApplicationDelegate, MGSFragariaTextViewDelegate, MGSDragOperationDelegate>

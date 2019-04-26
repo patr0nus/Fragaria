@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 
 #import "MGSSyntaxErrorController.h"
-#import "SMLSyntaxError.h"
+#import "MGSSyntaxError.h"
 
 
 /**
@@ -34,39 +34,39 @@
     [super setUp];
 
     NSArray *tmp = @[
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 1.",
                                                            @"line" : @(4),
                                                            @"hidden" : @(NO),
                                                            @"warningLevel" : @(kMGSErrorCategoryAccess)
                                                            }],
 
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 2.",
                                                            @"line" : @(4),
                                                            @"hidden" : @(YES),
                                                            @"warningLevel" : @(kMGSErrorCategoryPanic)
                                                            }],
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 3.",
                                                            @"line" : @(37),
                                                            @"hidden" : @(NO),
                                                            @"warningLevel" : @(kMGSErrorCategoryDocument)
                                                            }],
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 4.",
                                                            @"line" : @(37),
                                                            @"hidden" : @(NO),
                                                            @"warningLevel" : @(kMGSErrorCategoryDocument)
                                                            }],
                      [NSString stringWithFormat:@"%@", @"I don't belong here."],
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 5.",
                                                            @"line" : @(189),
                                                            @"hidden" : @(NO),
                                                            @"warningLevel" : @(kMGSErrorCategoryError)
                                                            }],
-                     [SMLSyntaxError errorWithDictionary:@{
+                     [MGSSyntaxError errorWithDictionary:@{
                                                            @"errorDescription" : @"Sample error 6.",
                                                            @"line" : @(212),
                                                            @"hidden" : @(YES),
@@ -134,7 +134,7 @@
  */
 - (void)test_errorsForLine
 {
-    SMLSyntaxError *testContent = [[self.errorController errorsForLine:4] objectAtIndex:0];
+    MGSSyntaxError *testContent = [[self.errorController errorsForLine:4] objectAtIndex:0];
     NSInteger testQuantity = [[self.errorController errorsForLine:37] count];
 
     XCTAssert([testContent.errorDescription isEqualToString:@"Sample error 1."] && testQuantity == 2);
@@ -158,7 +158,7 @@
 - (void)test_errorDecorations
 {
     NSDictionary *resultDict = [self.errorController errorDecorations];
-    SMLSyntaxError *decor = [resultDict objectForKey:@(189)];
+    MGSSyntaxError *decor = [resultDict objectForKey:@(189)];
 
     XCTAssert(decor.line == 189);
 }

@@ -29,7 +29,7 @@ extern NSString * const MGSColourSchemeKeySyntaxGroupOptions;
 @interface MGSColourScheme ()
 {
     @protected
-    NSMutableDictionary<SMLSyntaxGroup, MGSColourSchemeGroupData *> *_groupData;
+    NSMutableDictionary<MGSSyntaxGroup, MGSColourSchemeGroupData *> *_groupData;
 }
 
 - (BOOL)loadFromSchemeFileURL:(NSURL *)file error:(NSError **)err;
@@ -43,7 +43,7 @@ extern NSString * const MGSColourSchemeKeySyntaxGroupOptions;
 @property (nonatomic, strong) NSColor *currentLineHighlightColour;
 @property (nonatomic, strong) NSColor *insertionPointColor;
 
-@property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+@property (nonatomic, copy) NSDictionary<MGSSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 @end
 

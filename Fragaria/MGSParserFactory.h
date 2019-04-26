@@ -58,13 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray <NSString *> *)guessSyntaxDefinitionNamesFromFirstLine:(NSString *)firstLine;
 
 
-/** The list of SMLSyntaxGroups that the parsers provided by this
+/** The list of MGSSyntaxGroups that the parsers provided by this
  *  factory can use, intended for UX purposes.
  *  @note This property is not intended as an exhaustive list, but as an
  *    implementation aid for colour scheme editors. Thus, if the parsers
  *    only wrap an existing parser already registered by another parser
  *    factory, this method can be ignored. */
-@property (nonatomic, readonly) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
+@property (nonatomic, readonly) NSArray<MGSSyntaxGroup> *syntaxGroupsForParsers;
 
 /** Returns a user-consumable name for a syntax group.
  *  @param syntaxGroup The syntax group identifier.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @note Typically this method is called only with the syntax groups
  *    returned by syntaxGroupsForParsers. It is not necessary to return
  *    a string for syntax groups declared by Fragaria itself. */
-- (nullable NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (nullable NSString *)localizedDisplayNameForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 
 @end

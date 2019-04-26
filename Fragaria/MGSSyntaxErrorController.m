@@ -8,10 +8,10 @@
 
 #define FRAGARIA_PRIVATE
 #import "MGSSyntaxErrorController.h"
-#import "SMLLayoutManager.h"
-#import "SMLSyntaxError.h"
+#import "MGSLayoutManager.h"
+#import "MGSSyntaxError.h"
 #import "MGSLineNumberView.h"
-#import "SMLTextView.h"
+#import "MGSTextView.h"
 #import "NSTextStorage+Fragaria.h"
 
 
@@ -50,7 +50,7 @@
 - (void)setSyntaxErrors:(NSArray *)syntaxErrors
 {
     NSPredicate *filter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [evaluatedObject isKindOfClass:[SMLSyntaxError class]];
+        return [evaluatedObject isKindOfClass:[MGSSyntaxError class]];
     }];
     _syntaxErrors = [syntaxErrors filteredArrayUsingPredicate:filter];
     [self updateSyntaxErrorsDisplay];
@@ -115,7 +115,7 @@
 }
 
 
-- (void)setTextView:(SMLTextView *)textView
+- (void)setTextView:(MGSTextView *)textView
 {
     [self layoutManagerWillChangeTextStorage];
     _textView = textView;
@@ -150,7 +150,7 @@
 
 - (void)highlightErrors
 {
-    SMLTextView* textView = self.textView;
+    MGSTextView* textView = self.textView;
     NSString* text = [textView string];
     NSLayoutManager *layoutManager = [textView layoutManager];
     NSRange wholeRange = NSMakeRange(0, text.length);
@@ -165,7 +165,7 @@
     // Highlight all lines with errors
     NSMutableSet* highlightedRows = [NSMutableSet set];
     
-    for (SMLSyntaxError* err in self.nonHiddenErrors)
+    for (MGSSyntaxError* err in self.nonHiddenErrors)
     {
         // Highlight an erroneous line
         NSUInteger zbc = err.character - (err.character != 0);
@@ -222,7 +222,7 @@
 }
 
 
-- (SMLSyntaxError *)errorForLine:(NSInteger)line
+- (MGSSyntaxError *)errorForLine:(NSInteger)line
 {
     float highestErrorLevel = [[[self errorsForLine:line] valueForKeyPath:@"@max.warningLevel"] floatValue];
     NSArray* errors = [[self errorsForLine:line] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"warningLevel = %@", @(highestErrorLevel)]];

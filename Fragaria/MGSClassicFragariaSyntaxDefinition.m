@@ -333,40 +333,40 @@ NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
 }
 
 
-- (SMLSyntaxGroup)specializationForSyntaxGroup:(SMLSyntaxGroup)g
+- (MGSSyntaxGroup)specializationForSyntaxGroup:(MGSSyntaxGroup)g
 {
-    SMLSyntaxGroup res = [self.syntaxGroupSpecialization objectForKey:g];
+    MGSSyntaxGroup res = [self.syntaxGroupSpecialization objectForKey:g];
     if (res && [res isKindOfClass:[NSString class]])
         return res;
     return g;
 }
 
 
-- (NSArray <SMLSyntaxGroup> *)usedSyntaxGroups
+- (NSArray <MGSSyntaxGroup> *)usedSyntaxGroups
 {
-    NSMutableArray <SMLSyntaxGroup> *res = [@[
-        SMLSyntaxGroupNumber,
-        SMLSyntaxGroupComment] mutableCopy];
+    NSMutableArray <MGSSyntaxGroup> *res = [@[
+        MGSSyntaxGroupNumber,
+        MGSSyntaxGroupComment] mutableCopy];
     
     if (![self.beginCommand isEqual:@""])
-        [res addObject:SMLSyntaxGroupCommand];
+        [res addObject:MGSSyntaxGroupCommand];
     if (![self.beginInstruction isEqual:@""] || self.instructions)
-        [res addObject:SMLSyntaxGroupInstruction];
+        [res addObject:MGSSyntaxGroupInstruction];
     if ([self.keywords count] > 0)
-        [res addObject:SMLSyntaxGroupKeyword];
+        [res addObject:MGSSyntaxGroupKeyword];
     if ([self.autocompleteWords count] > 0)
-        [res addObject:SMLSyntaxGroupAutoComplete];
+        [res addObject:MGSSyntaxGroupAutoComplete];
     if (![self.beginVariableCharacterSet isEmpty] || ![self.variableRegex isEqual:@""])
-        [res addObject:SMLSyntaxGroupVariable];
+        [res addObject:MGSSyntaxGroupVariable];
     if (![self.secondString isEqual:@""] || ![self.firstString isEqual:@""])
-        [res addObject:SMLSyntaxGroupString];
+        [res addObject:MGSSyntaxGroupString];
     if (![self.beginCommand isEqual:@""])
-        [res addObject:SMLSyntaxGroupAttribute];
+        [res addObject:MGSSyntaxGroupAttribute];
     
     NSInteger c = res.count;
     for (NSInteger i=0; i<c; i++) {
-        SMLSyntaxGroup old = [res objectAtIndex:i];
-        SMLSyntaxGroup new = [self specializationForSyntaxGroup:old];
+        MGSSyntaxGroup old = [res objectAtIndex:i];
+        MGSSyntaxGroup new = [self specializationForSyntaxGroup:old];
         [res replaceObjectAtIndex:i withObject:new];
     }
     

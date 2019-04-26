@@ -32,7 +32,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 {
     BOOL updatingFromDefaults;
     BOOL savingToDefaults;
-    NSArray<SMLSyntaxGroup> *_colouringGroupsCache;
+    NSArray<MGSSyntaxGroup> *_colouringGroupsCache;
 }
 
 /*
@@ -149,7 +149,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 #pragma mark - Highlighting Table View Delegate / Data Source
 
 
-- (NSArray<SMLSyntaxGroup> *)colouringGroups
+- (NSArray<MGSSyntaxGroup> *)colouringGroups
 {
     if (!_colouringGroupsCache) {
         NSArray *tmp = [[MGSSyntaxController sharedInstance] syntaxGroupsForParsers];
@@ -168,7 +168,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     MGSColourSchemeTableCellView *view = [tableView makeViewWithIdentifier:@"normalRow" owner:self];
-    SMLSyntaxGroup group = [[self colouringGroups] objectAtIndex:row];
+    MGSSyntaxGroup group = [[self colouringGroups] objectAtIndex:row];
     view.syntaxGroup = group;
     view.parentVc = self;
     [view updateView];
@@ -185,7 +185,7 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 - (void)updateView
 {
     MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
-    SMLSyntaxGroup resolvedGrp = [scheme resolveSyntaxGroup:self.syntaxGroup];
+    MGSSyntaxGroup resolvedGrp = [scheme resolveSyntaxGroup:self.syntaxGroup];
     
     BOOL colors = [scheme coloursSyntaxGroup:resolvedGrp];
     NSNumber *isManagedGlobal = [self.parentVc.managedGlobalProperties valueForKey:@"colourScheme"];

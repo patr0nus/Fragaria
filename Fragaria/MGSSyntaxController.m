@@ -36,7 +36,7 @@ static MGSSyntaxController *sharedInstance = nil;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id <MGSParserFactory>> *definitionToFactory;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *disambiguatedDefinitions;
 
-@property (nonatomic) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
+@property (nonatomic) NSArray<MGSSyntaxGroup> *syntaxGroupsForParsers;
 
 @end
 
@@ -44,7 +44,7 @@ static MGSSyntaxController *sharedInstance = nil;
 @implementation MGSSyntaxController
 {
     NSArray<NSString *> *_syntaxDefinitionNamesCache;
-    NSMutableDictionary<SMLSyntaxGroup, NSString *> *_localizedGroupNameCache;
+    NSMutableDictionary<MGSSyntaxGroup, NSString *> *_localizedGroupNameCache;
 }
 
 
@@ -119,7 +119,7 @@ static MGSSyntaxController *sharedInstance = nil;
         self.syntaxGroupsForParsers = [syntaxGrps allObjects];
         
         if ([parserFactory respondsToSelector:@selector(localizedDisplayNameForSyntaxGroup:)]) {
-            for (SMLSyntaxGroup grp in newGrps) {
+            for (MGSSyntaxGroup grp in newGrps) {
                 NSString *str = [parserFactory localizedDisplayNameForSyntaxGroup:grp];
                 if (str)
                     [_localizedGroupNameCache setObject:str forKey:grp];
@@ -193,7 +193,7 @@ static MGSSyntaxController *sharedInstance = nil;
 }
 
 
-- (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+- (NSString *)localizedDisplayNameForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup
 {
     NSString *res = [_localizedGroupNameCache objectForKey:syntaxGroup];
     if (!res)

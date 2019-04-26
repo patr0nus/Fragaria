@@ -8,7 +8,7 @@
 
 @class MGSSyntaxErrorController;
 @class MGSLineNumberView;
-@class SMLSyntaxColouring;
+@class MGSSyntaxColouring;
 @class MGSMutableColourScheme;
 
 
@@ -19,7 +19,7 @@
 
 
 /** Fragaria's syntax colouring object. */
-@property (nonatomic, assign, readonly) SMLSyntaxColouring *syntaxColouring;
+@property (nonatomic, assign, readonly) MGSSyntaxColouring *syntaxColouring;
 
 /** Fragaria's gutter view. */
 @property (nonatomic, strong, readonly) MGSLineNumberView *gutterView;

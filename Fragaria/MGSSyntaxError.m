@@ -1,12 +1,12 @@
 //
-//  SMLSyntaxError.m
+//  MGSSyntaxError.m
 //  Fragaria
 //
 //  Created by Viktor Lidholt on 4/9/13.
 //
 //
 
-#import "SMLSyntaxError.h"
+#import "MGSSyntaxError.h"
 
 
 float const kMGSErrorCategoryAccess   =  50.0;
@@ -19,7 +19,7 @@ float const kMGSErrorCategoryPanic    = 650.0;
 float const kMGSErrorCategoryDefault  = 450.0;
 
 
-@implementation SMLSyntaxError {
+@implementation MGSSyntaxError {
     BOOL manualImage;
 }
 
@@ -66,9 +66,9 @@ float const kMGSErrorCategoryDefault  = 450.0;
 + (instancetype)errorWithDescription:(NSString *)desc ofLevel:(float)level
   atLine:(NSUInteger)line
 {
-    SMLSyntaxError *res;
+    MGSSyntaxError *res;
     
-    res = [[SMLSyntaxError alloc] init];
+    res = [[MGSSyntaxError alloc] init];
     res.errorDescription = desc;
     res.line = line;
     res.warningLevel = level;

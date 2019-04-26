@@ -110,11 +110,11 @@ breakpoints, you should refresh the gutter view manually afterwards:
 
 ### Syntax Error Highlighting
 
-To add clickable syntax error highlights define an `NSArray` of `SMLSyntaxError`s.
+To add clickable syntax error highlights define an `NSArray` of `MGSSyntaxError`s.
 
 ```obj-c
 // define a syntax error
-SMLSyntaxError *syntaxError = [[SMLSyntaxError new] autorelease];
+MGSSyntaxError *syntaxError = [[MGSSyntaxError new] autorelease];
 syntaxError.errorDescription = @"Syntax errors can be defined";
 syntaxError.line = 1;
 syntaxError.character = 1;
@@ -125,7 +125,7 @@ fragaria.syntaxErrors = @[syntaxError];
 
 You can specify a custom `warningLevel` to change the icon shown for the syntax error and its priority
 in case multiple syntax errors are assigned to the same line. To define custom priorities and icons you
-can subclass `SMLSyntaxError` and use the subclass.
+can subclass `MGSSyntaxError` and use the subclass.
 
 ### Using the new preference panels
 
@@ -316,7 +316,7 @@ To define a new syntax definition:
 The plist structure is simple and browsing the [existing definitions](Syntax%20Definitions) should provide 
 some enlightenment. The plist keys are defined in [MGSSyntaxDefinition.m](MGSSyntaxDefinition.m). 
 
-For much deeper insight see the  `-colour...InRange:withRangeScanner:documentScanner` methods in `SMLSyntaxColouring`
+For much deeper insight see the  `-colour...InRange:withRangeScanner:documentScanner` methods in `MGSSyntaxColouring`
 and the detailed comments in [MGSSyntaxDefinition.h](MGSSyntaxDefinition.h).
 
 ## How can I contribute

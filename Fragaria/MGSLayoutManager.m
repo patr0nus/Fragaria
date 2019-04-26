@@ -21,7 +21,7 @@
  specific language governing permissions and limitations under the License.
 */
 
-#import "SMLLayoutManager.h"
+#import "MGSLayoutManager.h"
 
 
 #if __MAC_OS_X_VERSION_MAX_ALLOWED < 101100
@@ -53,7 +53,7 @@ static CGFloat SquiggleFunction(CGFloat x) {
 
 
 
-@implementation SMLLayoutManager {
+@implementation MGSLayoutManager {
     NSMutableDictionary *invisibleCharacterSubstitutes;
     NSMutableDictionary *lineRefCacheCharactersSubstitute;
 }

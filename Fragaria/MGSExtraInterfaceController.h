@@ -26,11 +26,11 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class SMLTextView;
+@class MGSTextView;
 
 
 /** MGSExtraInterfaceController displays and controls the NSPanels and the
- *  NSMenus used by SMLTextView's methods which require an interaction with
+ *  NSMenus used by MGSTextView's methods which require an interaction with
  *  the user. */
 
 @interface MGSExtraInterfaceController : NSObject {
@@ -64,23 +64,23 @@
 /// @name Accessing the user interface
 
 
-/** A context menu for use by SMLTextView. */
+/** A context menu for use by MGSTextView. */
 @property (nonatomic) IBOutlet NSMenu *contextMenu;
 
 /** Displays the entab sheet.
  *  @param target The text view to send a performEntab message to if the user
  *                confirmed the action. */
-- (void)displayEntabForTarget:(SMLTextView *)target;
+- (void)displayEntabForTarget:(MGSTextView *)target;
 
 /** Displays the detab sheet.
  *  @param target The text view to send a performDetab message to if the user
  *                confirmed the action. */
-- (void)displayDetabForTarget:(SMLTextView *)target;
+- (void)displayDetabForTarget:(MGSTextView *)target;
 
 /** Displays the go to line sheet.
  *  @param target The text view to send a performGoToLine:setSelected: message
  *                to if the user confirmed the action. */
-- (void)displayGoToLineForTarget:(SMLTextView *)target;                                             
+- (void)displayGoToLineForTarget:(MGSTextView *)target;                                             
 
 
 @end

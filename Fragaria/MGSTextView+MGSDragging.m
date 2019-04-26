@@ -1,23 +1,23 @@
 //
-//  SMLTextView+JSDExtension.m
+//  MGSTextView+JSDExtension.m
 //  Fragaria
 //
 //  File created by Jim Derry on 2015/02/07.
 //
-//  - Extends SMLTextView to use its delegate to pass off its <NSDraggingDestination> methods to the delegate.
+//  - Extends MGSTextView to use its delegate to pass off its <NSDraggingDestination> methods to the delegate.
 //  - Implements the required <NSDraggingDestination> protocol classes, passing them on to the delegate.
 //  - Defines the <MGSDragOperationDelegate> that delegates may conform to.
 //
 
 #import <objc/runtime.h>
-#import "SMLTextView+MGSDragging.h"
+#import "MGSTextView+MGSDragging.h"
 #import "MGSDragOperationDelegate.h"
 
 
-@implementation SMLTextView (MGSDragging)
+@implementation MGSTextView (MGSDragging)
 
 
-#pragma mark - <NSDraggingDestination> adherence for SMLTextView
+#pragma mark - <NSDraggingDestination> adherence for MGSTextView
 
 
 /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*

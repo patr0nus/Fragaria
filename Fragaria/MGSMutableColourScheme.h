@@ -52,18 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
 /** Sets if the specified syntax group will be coloured.
  *  @param enabled YES to enable the syntax group, NO otherwise.
  *  @param group The syntax group identifier. */
-- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group;
+- (void)setColours:(BOOL)enabled syntaxGroup:(MGSSyntaxGroup)group;
 
 /** Sets the highlighting colour for the specified syntax group.
  *  @param color The colour to use for highlighting the group.
  *  @param group The syntax group identifier. */
-- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group;
+- (void)setColour:(NSColor *)color forSyntaxGroup:(MGSSyntaxGroup)group;
 
 /** Sets the font variant used for highlighting the specified syntax
  *  group.
  *  @param variant The font variant to use for highlighting the group.
  *  @param syntaxGroup The syntax group identifier. */
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** Sets the options for the specified syntax group to the values in the
  *  given dictionary.
@@ -71,11 +71,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param syntaxGroup The syntax group identifier.
  *  @note When an option key is missing from the dictionary, the default values
  *    are set for that option instead. */
-- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** A dictionary containing the option dictionaries of all
  *  syntax groups recognized by this colour scheme. */
-@property (nonatomic, copy) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+@property (nonatomic, copy) NSDictionary<MGSSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 
 @end

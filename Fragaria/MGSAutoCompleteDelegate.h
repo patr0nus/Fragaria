@@ -1,5 +1,5 @@
 //
-//  SMLAutoCompleteDelegate.h
+//  MGSAutoCompleteDelegate.h
 //  Fragaria
 //
 //  Created by Viktor Lidholt on 4/12/13.
@@ -10,10 +10,10 @@
 
 
 /**
- *  The SMLAutoCompleteDelegate defines an interface for allowing a delegate to
+ *  The MGSAutoCompleteDelegate defines an interface for allowing a delegate to
  *  return a list of suitable autocomplete choices.
  **/
-@protocol SMLAutoCompleteDelegate <NSObject>
+@protocol MGSAutoCompleteDelegate <NSObject>
 
 - (NSArray<NSString *> *) completions;   ///< A dictionary of words that can be used for autocompletion.
 

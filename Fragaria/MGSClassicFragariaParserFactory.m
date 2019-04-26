@@ -20,13 +20,13 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 @interface MGSClassicFragariaParserFactory ()
 
 @property (strong) NSMutableDictionary *syntaxDefinitions;
-@property (nonatomic, strong) NSArray<SMLSyntaxGroup> *syntaxGroupsForParsers;
+@property (nonatomic, strong) NSArray<MGSSyntaxGroup> *syntaxGroupsForParsers;
 
 @end
 
 
 @implementation MGSClassicFragariaParserFactory {
-    NSDictionary<SMLSyntaxGroup, NSString *> *_localizedSyntaxGroupNamesCache;
+    NSDictionary<MGSSyntaxGroup, NSString *> *_localizedSyntaxGroupNamesCache;
 }
 
 
@@ -56,7 +56,7 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 - (void)insertSyntaxDefinitions
 {
     NSArray <NSURL *> *syntaxDefFiles = [self searchSyntaxDefinitions];
-    NSMutableSet<SMLSyntaxGroup> *syntaxGroupsLoaded = [NSMutableSet set];
+    NSMutableSet<MGSSyntaxGroup> *syntaxGroupsLoaded = [NSMutableSet set];
     
     //build a dictionary of definitions keyed by lowercase definition name
     self.syntaxDefinitions = [NSMutableDictionary dictionary];
@@ -345,7 +345,7 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-- (NSString *)localizedDisplayNameForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup
+- (NSString *)localizedDisplayNameForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup
 {
     if (!_localizedSyntaxGroupNamesCache) {
         [self rebuildLocalizedSyntaxGroupNamesCache];

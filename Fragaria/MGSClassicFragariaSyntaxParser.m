@@ -76,16 +76,16 @@ typedef NSInteger SMLSyntaxGroupInteger;
 #pragma mark - Common colouring methods
 
 
-- (void)setBaseGroup:(SMLSyntaxGroup)base range:(NSRange)range atomic:(BOOL)atomic
+- (void)setBaseGroup:(MGSSyntaxGroup)base range:(NSRange)range atomic:(BOOL)atomic
 {
-    SMLSyntaxGroup final = [self.syntaxDefinition specializationForSyntaxGroup:base];
+    MGSSyntaxGroup final = [self.syntaxDefinition specializationForSyntaxGroup:base];
     [self.client setGroup:final forTokenInRange:range atomic:atomic];
 }
 
 
-- (BOOL)tokenAtIndex:(NSInteger)idx hasBaseGroup:(SMLSyntaxGroup)base
+- (BOOL)tokenAtIndex:(NSInteger)idx hasBaseGroup:(MGSSyntaxGroup)base
 {
-    SMLSyntaxGroup final = [self.syntaxDefinition specializationForSyntaxGroup:base];
+    MGSSyntaxGroup final = [self.syntaxDefinition specializationForSyntaxGroup:base];
     return [[self.client groupOfTokenAtCharacterIndex:idx] isEqual:final];
 }
 
@@ -120,7 +120,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         }
         if ([keywords containsObject:keywordTestString]) {
             if (!self.syntaxDefinition.recolourKeywordIfAlreadyColoured) {
-                if ([self tokenAtIndex:colourStartLocation + rangeLocation hasBaseGroup:SMLSyntaxGroupCommand]) {
+                if ([self tokenAtIndex:colourStartLocation + rangeLocation hasBaseGroup:MGSSyntaxGroupCommand]) {
                     continue;
                 }
             }
@@ -336,7 +336,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     
     
     if (self.syntaxDefinition.numberDefinition) {
-        [self recognizeMatchesOfPattern:self.syntaxDefinition.numberDefinition ofGroup:SMLSyntaxGroupNumber inString:documentString range:colouringRange atomicTokens:YES];
+        [self recognizeMatchesOfPattern:self.syntaxDefinition.numberDefinition ofGroup:MGSSyntaxGroupNumber inString:documentString range:colouringRange atomicTokens:YES];
         return;
     }
     
@@ -380,7 +380,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
             }
         }
         
-        [self setBaseGroup:SMLSyntaxGroupNumber range:NSMakeRange(colourStartLocation + rangeLocation, colourEndLocation - colourStartLocation) atomic:YES];
+        [self setBaseGroup:MGSSyntaxGroupNumber range:NSMakeRange(colourStartLocation + rangeLocation, colourEndLocation - colourStartLocation) atomic:YES];
     }
 }
 
@@ -433,7 +433,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
             }
         }
         
-        [self setBaseGroup:SMLSyntaxGroupCommand range:NSMakeRange(colourStartLocation + rangeLocation, [rangeScanner scanLocation] - colourStartLocation) atomic:NO];
+        [self setBaseGroup:MGSSyntaxGroupCommand range:NSMakeRange(colourStartLocation + rangeLocation, [rangeScanner scanLocation] - colourStartLocation) atomic:NO];
     }
 }
 
@@ -448,7 +448,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     NSUInteger maxRangeLocation = NSMaxRange(rangeToRecolour);
     
     if (self.syntaxDefinition.instructions) {
-        [self recognizeKeywordsFromSet:self.syntaxDefinition.instructions ofGroup:SMLSyntaxGroupInstruction inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:NO];
+        [self recognizeKeywordsFromSet:self.syntaxDefinition.instructions ofGroup:MGSSyntaxGroupInstruction inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:NO];
         return;
     }
     
@@ -486,7 +486,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
             }
         }
         
-        [self setBaseGroup:SMLSyntaxGroupInstruction range:NSMakeRange(colourStartLocation, [documentScanner scanLocation] - colourStartLocation) atomic:NO];
+        [self setBaseGroup:MGSSyntaxGroupInstruction range:NSMakeRange(colourStartLocation, [documentScanner scanLocation] - colourStartLocation) atomic:NO];
         if ([documentScanner scanLocation] > maxRangeLocation) {
             break;
         }
@@ -497,13 +497,13 @@ typedef NSInteger SMLSyntaxGroupInteger;
 
 - (void)colourKeywordsInRange:(NSRange)rangeToRecolour withRangeScanner:(NSScanner*)rangeScanner documentScanner:(NSScanner*)documentScanner
 {
-    [self recognizeKeywordsFromSet:self.syntaxDefinition.keywords ofGroup:SMLSyntaxGroupKeyword inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:YES];
+    [self recognizeKeywordsFromSet:self.syntaxDefinition.keywords ofGroup:MGSSyntaxGroupKeyword inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:YES];
 }
 
 
 - (void)colourAutocompleteInRange:(NSRange)rangeToRecolour withRangeScanner:(NSScanner*)rangeScanner documentScanner:(NSScanner*)documentScanner
 {
-    [self recognizeKeywordsFromSet:self.syntaxDefinition.autocompleteWords ofGroup:SMLSyntaxGroupAutoComplete inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:YES];
+    [self recognizeKeywordsFromSet:self.syntaxDefinition.autocompleteWords ofGroup:MGSSyntaxGroupAutoComplete inRange:rangeToRecolour withRangeScanner:rangeScanner documentScanner:documentScanner atomicTokens:YES];
 }
 
 
@@ -516,7 +516,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     NSUInteger rangeStringLength = [rangeString length];
     
     if (![self.syntaxDefinition.variableRegex isEqual:@""]) {
-        [self recognizeMatchesOfPattern:self.syntaxDefinition.variableRegex ofGroup:SMLSyntaxGroupVariable inString:documentScanner.string range:rangeToRecolour atomicTokens:YES];
+        [self recognizeMatchesOfPattern:self.syntaxDefinition.variableRegex ofGroup:MGSSyntaxGroupVariable inString:documentScanner.string range:rangeToRecolour atomicTokens:YES];
         return;
     }
     
@@ -543,7 +543,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
             }
         }
         
-        [self setBaseGroup:SMLSyntaxGroupVariable range:NSMakeRange(colourStartLocation + rangeLocation, colourLength) atomic:YES];
+        [self setBaseGroup:MGSSyntaxGroupVariable range:NSMakeRange(colourStartLocation + rangeLocation, colourLength) atomic:YES];
     }
 }
 
@@ -566,7 +566,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     
     [regex enumerateMatchesInString:rangeString options:0 range:NSMakeRange(0, [rangeString length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
         NSRange foundRange = [match range];
-        [self setBaseGroup:SMLSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
+        [self setBaseGroup:MGSSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
     }];
 }
 
@@ -591,7 +591,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         NSRange foundRange = [match range];
         if ([self tokenAtIndex:foundRange.location + rangeLocation hasBaseGroup:@"strings"])
             return;
-        [self setBaseGroup:SMLSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
+        [self setBaseGroup:MGSSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
     }];
 }
 
@@ -613,7 +613,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         } else {
             break;
         }
-        if (![self tokenAtIndex:(colourStartLocation + rangeLocation) hasBaseGroup:SMLSyntaxGroupCommand]) {
+        if (![self tokenAtIndex:(colourStartLocation + rangeLocation) hasBaseGroup:MGSSyntaxGroupCommand]) {
             continue;
         }
         
@@ -625,7 +625,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
         }
         
         if ([documentString characterAtIndex:colourEndLocation + rangeLocation] == '=') {
-            [self setBaseGroup:SMLSyntaxGroupAttribute range:NSMakeRange(colourStartLocation + rangeLocation, colourEndLocation - colourStartLocation) atomic:YES];
+            [self setBaseGroup:MGSSyntaxGroupAttribute range:NSMakeRange(colourStartLocation + rangeLocation, colourEndLocation - colourStartLocation) atomic:YES];
         }
     }
 }
@@ -643,7 +643,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     NSUInteger searchSyntaxLength;
     
     if (self.syntaxDefinition.singleLineCommentRegex) {
-        [self recognizeMatchesOfPattern:self.syntaxDefinition.singleLineCommentRegex ofGroup:SMLSyntaxGroupComment inString:documentString range:rangeToRecolour atomicTokens:YES];
+        [self recognizeMatchesOfPattern:self.syntaxDefinition.singleLineCommentRegex ofGroup:MGSSyntaxGroupComment inString:documentString range:rangeToRecolour atomicTokens:YES];
         return;
     }
     
@@ -706,7 +706,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
                 [rangeScanner mgs_setScanLocation:endOfLine];
                 
                 // colour the comment
-                [self setBaseGroup:SMLSyntaxGroupComment range:NSMakeRange(colourStartLocation + rangeLocation, [rangeScanner scanLocation] - colourStartLocation) atomic:YES];
+                [self setBaseGroup:MGSSyntaxGroupComment range:NSMakeRange(colourStartLocation + rangeLocation, [rangeScanner scanLocation] - colourStartLocation) atomic:YES];
             }
         }
     } // end for
@@ -813,7 +813,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
                 }
                 
                 // Colour the range
-                [self setBaseGroup:SMLSyntaxGroupComment range:NSMakeRange(colourStartLocation, colourLength) atomic:YES];
+                [self setBaseGroup:MGSSyntaxGroupComment range:NSMakeRange(colourStartLocation, colourLength) atomic:YES];
                 
                 // We may be done
                 if ([documentScanner scanLocation] > maxRangeLocation) {
@@ -847,7 +847,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     [regex enumerateMatchesInString:rangeString options:0 range:NSMakeRange(0, [rangeString length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
         NSRange foundRange = [match range];
         if ([self tokenAtIndex:foundRange.location + rangeLocation hasBaseGroup:@"strings"] || [self tokenAtIndex:foundRange.location + rangeLocation hasBaseGroup:@"comments"]) return;
-        [self setBaseGroup:SMLSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
+        [self setBaseGroup:MGSSyntaxGroupString range:NSMakeRange(foundRange.location + rangeLocation + 1, foundRange.length - 1) atomic:YES];
     }];
 }
 

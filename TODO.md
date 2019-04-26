@@ -16,7 +16,7 @@
 
 1. Delegate colouring protocol seems useful. Perhaps it can be extended.
 
-1. Would SMLTextView subclassing be beneficial? The client could pass in the required subclass name in the document
+1. Would MGSTextView subclassing be beneficial? The client could pass in the required subclass name in the document
    spec.
 
 1. Syntax definitions are currently loaded from the framework bundle. It would be useful if the client app could supply

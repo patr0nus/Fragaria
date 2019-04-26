@@ -1,5 +1,5 @@
 //
-//  SMLTextView+MGSTextActions.m
+//  MGSTextView+MGSTextActions.m
 //  Fragaria
 //
 //  Created by Daniele Cattaneo on 09/02/15.
@@ -7,10 +7,10 @@
 //
 
 #define FRAGARIA_PRIVATE
-#import "SMLTextView.h"
-#import "SMLTextViewPrivate.h"
-#import "SMLTextView+MGSTextActions.h"
-#import "SMLSyntaxColouring.h"
+#import "MGSTextView.h"
+#import "MGSTextViewPrivate.h"
+#import "MGSTextView+MGSTextActions.h"
+#import "MGSSyntaxColouring.h"
 #import "MGSExtraInterfaceController.h"
 #import "MGSMutableSubstring.h"
 #import "NSString+Fragaria.h"
@@ -18,7 +18,7 @@
 #import "MGSSyntaxParser.h"
 
 
-@implementation SMLTextView (MGSTextActions)
+@implementation MGSTextView (MGSTextActions)
 
 
 /*

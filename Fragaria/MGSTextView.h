@@ -30,13 +30,13 @@
 @class MGSColourScheme;
 
 @protocol MGSDragOperationDelegate;
-@protocol SMLAutoCompleteDelegate;
+@protocol MGSAutoCompleteDelegate;
 
 
-/** The SMLTextView is the text view used by Fragaria. It implements most of
+/** The MGSTextView is the text view used by Fragaria. It implements most of
  *  Fragaria's functionality. */
 
-@interface SMLTextView : NSTextView
+@interface MGSTextView : NSTextView
 
 
 #pragma mark - Accessing Text Content
@@ -113,11 +113,11 @@
 /// @name Configuring Autocompletion
 
 
-/** The autocomplete delegate for this instance of SMLTextView. The autocomplete
+/** The autocomplete delegate for this instance of MGSTextView. The autocomplete
 *  delegate provides a list of words that can be used by the autocomplete
 *  feature. If this property is nil, then the list of autocomplete words will
 *  be read from the current syntax highlighting dictionary. */
-@property (weak) id<SMLAutoCompleteDelegate> autoCompleteDelegate;
+@property (weak) id<MGSAutoCompleteDelegate> autoCompleteDelegate;
 
 /** Specifies the delay time for autocomplete, in seconds. */
 @property double autoCompleteDelay;
@@ -253,7 +253,7 @@
 
 
 /** An internal object used by Fragaria. Do not access. */
-@property (readonly, assign) NSTextStorage *textStorage FRAGARIA_PUB_UNAVAIL_MSG("do not use -textStorage on SMLTextView");
+@property (readonly, assign) NSTextStorage *textStorage FRAGARIA_PUB_UNAVAIL_MSG("do not use -textStorage on MGSTextView");
 
 
 @end

@@ -20,31 +20,31 @@
  specific language governing permissions and limitations under the License.
 */
 
-#import "SMLSyntaxColouring.h"
-#import "SMLLayoutManager.h"
+#import "MGSSyntaxColouring.h"
+#import "MGSLayoutManager.h"
 #import "MGSSyntaxController.h"
-#import "SMLTextView.h"
+#import "MGSTextView.h"
 #import "NSScanner+Fragaria.h"
 #import "MGSColourScheme.h"
 #import "MGSSyntaxParser.h"
 
 
 // syntax colouring information dictionary keys
-NSAttributedStringKey SMLSyntaxGroupAttributeName = @"group";
+NSAttributedStringKey MGSSyntaxGroupAttributeName = @"group";
 
 // syntax colouring group names
-NSString * const SMLSyntaxGroupNumber       = @"number";
-NSString * const SMLSyntaxGroupCommand      = @"command";
-NSString * const SMLSyntaxGroupInstruction  = @"instruction";
-NSString * const SMLSyntaxGroupKeyword      = @"keyword";
-NSString * const SMLSyntaxGroupAutoComplete = @"autocomplete";
-NSString * const SMLSyntaxGroupVariable     = @"variable";
-NSString * const SMLSyntaxGroupString       = @"strings";
-NSString * const SMLSyntaxGroupAttribute    = @"attribute";
-NSString * const SMLSyntaxGroupComment      = @"comments";
+NSString * const MGSSyntaxGroupNumber       = @"number";
+NSString * const MGSSyntaxGroupCommand      = @"command";
+NSString * const MGSSyntaxGroupInstruction  = @"instruction";
+NSString * const MGSSyntaxGroupKeyword      = @"keyword";
+NSString * const MGSSyntaxGroupAutoComplete = @"autocomplete";
+NSString * const MGSSyntaxGroupVariable     = @"variable";
+NSString * const MGSSyntaxGroupString       = @"strings";
+NSString * const MGSSyntaxGroupAttribute    = @"attribute";
+NSString * const MGSSyntaxGroupComment      = @"comments";
 
 
-@interface SMLSyntaxColouring()
+@interface MGSSyntaxColouring()
 
 @property (nonatomic, assign) BOOL coloursChanged;
 
@@ -55,9 +55,9 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
 @end
 
 
-@implementation SMLSyntaxColouring
+@implementation MGSSyntaxColouring
 {
-    SMLLayoutManager __weak *layoutManager;
+    MGSLayoutManager __weak *layoutManager;
 }
 
 
@@ -70,7 +70,7 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
 /*
  * - initWithLayoutManager:
  */
-- (instancetype)initWithLayoutManager:(SMLLayoutManager *)lm
+- (instancetype)initWithLayoutManager:(MGSLayoutManager *)lm
 {
     if ((self = [super init])) {
         layoutManager = lm;
@@ -215,7 +215,7 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
 /*
  * - invalidateVisibleRange
  */
-- (void)invalidateVisibleRangeOfTextView:(SMLTextView *)textView
+- (void)invalidateVisibleRangeOfTextView:(MGSTextView *)textView
 {
     NSMutableIndexSet *validRanges;
 
@@ -266,7 +266,7 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
         return NSMakeRange(i, 0);
     
     NSRange effectiveRange = NSMakeRange(0,0);
-    NSString *attr = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:i longestEffectiveRange:&effectiveRange inRange:bounds];
+    NSString *attr = [self.textStorage attribute:MGSSyntaxGroupAttributeName atIndex:i longestEffectiveRange:&effectiveRange inRange:bounds];
     
     if (attr && [attr hasPrefix:@"A_"])
         return effectiveRange;
@@ -285,7 +285,7 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
         NSFontAttributeName: self.textFont,
         NSUnderlineStyleAttributeName: @(0)};
     [self.textStorage addAttributes:attributes range:realrange];
-    [self.textStorage removeAttribute:SMLSyntaxGroupAttributeName range:realrange];
+    [self.textStorage removeAttribute:MGSSyntaxGroupAttributeName range:realrange];
     
     return realrange;
 }
@@ -299,7 +299,7 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
     NSString *attr;
     
     while (NSLocationInRange(i, range)) {
-        attr = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:i
+        attr = [self.textStorage attribute:MGSSyntaxGroupAttributeName atIndex:i
           longestEffectiveRange:&effectiveRange inRange:bounds];
         if (attr && [attr hasPrefix:@"A_"]) {
             [self resetTokenGroupsInRange:effectiveRange];
@@ -316,30 +316,30 @@ NSString * const SMLSyntaxGroupComment      = @"comments";
     } else {
         realgroup = [@"a_" stringByAppendingString:group];
     }
-    [self.textStorage addAttribute:SMLSyntaxGroupAttributeName value:realgroup range:range];
+    [self.textStorage addAttribute:MGSSyntaxGroupAttributeName value:realgroup range:range];
 }
 
 
 - (BOOL)existsTokenAtIndex:(NSUInteger)index
 {
-    return !![self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+    return !![self.textStorage attribute:MGSSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
 }
 
 
-- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index
+- (nullable MGSSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index
 {
     return [self groupOfTokenAtCharacterIndex:index isAtomic:NULL range:NULL];
 }
 
 
-- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range
+- (nullable MGSSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range
 {
     NSString *raw;
     if (!range) {
-        raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
+        raw = [self.textStorage attribute:MGSSyntaxGroupAttributeName atIndex:index effectiveRange:NULL];
     } else {
         NSRange wholeRange = NSMakeRange(0, self.textStorage.length);
-        raw = [self.textStorage attribute:SMLSyntaxGroupAttributeName atIndex:index longestEffectiveRange:range inRange:wholeRange];
+        raw = [self.textStorage attribute:MGSSyntaxGroupAttributeName atIndex:index longestEffectiveRange:range inRange:wholeRange];
     }
     if (!raw)
         return nil;

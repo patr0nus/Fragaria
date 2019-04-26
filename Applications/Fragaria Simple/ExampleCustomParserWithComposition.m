@@ -51,11 +51,11 @@
     ^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
         /* Ignore whatever is inside a string */
         NSString *g = [client groupOfTokenAtCharacterIndex:substringRange.location];
-        if ([SMLSyntaxGroupString isEqual:g])
+        if ([MGSSyntaxGroupString isEqual:g])
             return;
         
         if ([substring length] > 0 && [substring hasPrefix:@"NS"]) {
-            [client setGroup:SMLSyntaxGroupCommand forTokenInRange:substringRange atomic:YES];
+            [client setGroup:MGSSyntaxGroupCommand forTokenInRange:substringRange atomic:YES];
         }
     }];
     

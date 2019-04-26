@@ -10,10 +10,10 @@
 #import "FragariaMacros.h"
 
 
-@class SMLTextView;
+@class MGSTextView;
 @class MGSColourScheme;
 
-@protocol SMLAutoCompleteDelegate;
+@protocol MGSAutoCompleteDelegate;
 @protocol MGSBreakpointDelegate;
 @protocol MGSFragariaTextViewDelegate;
 @protocol MGSDragOperationDelegate;
@@ -45,7 +45,7 @@ IB_DESIGNABLE
 
 
 /** Fragaria's text view. */
-@property (nonatomic, strong, readonly, nonnull) SMLTextView *textView;
+@property (nonatomic, strong, readonly, nonnull) MGSTextView *textView;
 /** Fragaria's scroll view. */
 @property (nonatomic, strong, readonly, nonnull) NSScrollView *scrollView;
 
@@ -159,7 +159,7 @@ IB_DESIGNABLE
  *  delegate provides a list of words that can be used by the autocomplete
  *  feature. If this property is nil, then the list of autocomplete words will
  *  be read from the current syntax highlighting dictionary. */
-@property (nonatomic, weak, nullable) IBOutlet id<SMLAutoCompleteDelegate> autoCompleteDelegate;
+@property (nonatomic, weak, nullable) IBOutlet id<MGSAutoCompleteDelegate> autoCompleteDelegate;
 
 /** Specifies the delay time for autocomplete, in seconds.*/
 @property double autoCompleteDelay;
@@ -209,7 +209,7 @@ IB_DESIGNABLE
 /// @name Showing Syntax Errors
 
 
-/** When set to an array containing SMLSyntaxError instances, Fragaria
+/** When set to an array containing MGSSyntaxError instances, Fragaria
  *  use these instances to provide feedback to the user in the form of:
  *   - highlighting lines and syntax errors in the text view.
  *   - displaying warning icons in the gutter.

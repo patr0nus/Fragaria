@@ -68,7 +68,7 @@ NSColor *MGSTestRandomColor(void)
     outputPath = [tmpdir URLByAppendingPathComponent:@"test_propertiesToFile.plist"];
 	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
-    [scheme setColour:expects2 forSyntaxGroup:SMLSyntaxGroupComment];
+    [scheme setColour:expects2 forSyntaxGroup:MGSSyntaxGroupComment];
 	
 	XCTAssert([scheme writeToSchemeFileURL:outputPath error:nil]);
 	
@@ -79,7 +79,7 @@ NSColor *MGSTestRandomColor(void)
     [[NSFileManager defaultManager] removeItemAtURL:outputPath error:nil];
 	
 	XCTAssert([scheme.displayName isEqualToString:expects1]);
-    XCTAssert([[scheme colourForSyntaxGroup:SMLSyntaxGroupComment] mgs_isEqualToColor:expects2 transformedThrough:@"MGSColourToPlainTextTransformer"]);
+    XCTAssert([[scheme colourForSyntaxGroup:MGSSyntaxGroupComment] mgs_isEqualToColor:expects2 transformedThrough:@"MGSColourToPlainTextTransformer"]);
 }
 
 
@@ -133,12 +133,12 @@ NSColor *MGSTestRandomColor(void)
     // Assert that they are equal.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
 
-    [scheme1 setColour:expects1 forSyntaxGroup:SMLSyntaxGroupNumber];
+    [scheme1 setColour:expects1 forSyntaxGroup:MGSSyntaxGroupNumber];
 
     // Changing a color is detectable as a difference.
     XCTAssert(![scheme1 isEqualToScheme:scheme2]);
 
-    [scheme2 setColour:expects1 forSyntaxGroup:SMLSyntaxGroupNumber];
+    [scheme2 setColour:expects1 forSyntaxGroup:MGSSyntaxGroupNumber];
 
     // Now equal again.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
@@ -147,13 +147,13 @@ NSColor *MGSTestRandomColor(void)
     scheme1 = [[MGSMutableColourScheme alloc] init];
     scheme2 = [[MGSMutableColourScheme alloc] init];
 
-    BOOL coloursStrings = [scheme1 coloursSyntaxGroup:SMLSyntaxGroupString];
-    [scheme1 setColours:!coloursStrings syntaxGroup:SMLSyntaxGroupString];
+    BOOL coloursStrings = [scheme1 coloursSyntaxGroup:MGSSyntaxGroupString];
+    [scheme1 setColours:!coloursStrings syntaxGroup:MGSSyntaxGroupString];
 
     // Should be not the same.
     XCTAssert(![scheme1 isEqualToScheme:scheme2]);
 
-    [scheme2 setColours:!coloursStrings syntaxGroup:SMLSyntaxGroupString];
+    [scheme2 setColours:!coloursStrings syntaxGroup:MGSSyntaxGroupString];
 
     // Should be the same.
     XCTAssert([scheme1 isEqualToScheme:scheme2]);
@@ -174,7 +174,7 @@ NSColor *MGSTestRandomColor(void)
     
 	MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] init];
 	scheme.displayName = expects1;
-    [scheme setColour:expects2 forSyntaxGroup:SMLSyntaxGroupKeyword];
+    [scheme setColour:expects2 forSyntaxGroup:MGSSyntaxGroupKeyword];
 	
     NSError *err;
 	[scheme writeToSchemeFileURL:outputPath error:&err];
@@ -223,14 +223,14 @@ NSColor *MGSTestRandomColor(void)
 - (void)test_groupResolution
 {
     MGSMutableColourScheme *cs = [[MGSMutableColourScheme alloc] init];
-    XCTAssertEqualObjects(SMLSyntaxGroupNumber, [cs resolveSyntaxGroup:SMLSyntaxGroupNumber]);
-    XCTAssertEqualObjects(SMLSyntaxGroupNumber, [cs resolveSyntaxGroup:@"number.test"]);
+    XCTAssertEqualObjects(MGSSyntaxGroupNumber, [cs resolveSyntaxGroup:MGSSyntaxGroupNumber]);
+    XCTAssertEqualObjects(MGSSyntaxGroupNumber, [cs resolveSyntaxGroup:@"number.test"]);
     XCTAssertEqualObjects(nil, [cs resolveSyntaxGroup:@"nonexistent"]);
     [cs setColour:[NSColor redColor] forSyntaxGroup:@"strings.example"];
     XCTAssertEqualObjects(@"strings.example", [cs resolveSyntaxGroup:@"strings.example.nonexistent"]);
     XCTAssertEqualObjects(@"strings.example", [cs resolveSyntaxGroup:@"strings.example"]);
-    XCTAssertEqualObjects(SMLSyntaxGroupString, [cs resolveSyntaxGroup:@"strings"]);
-    XCTAssertEqualObjects(SMLSyntaxGroupString, [cs resolveSyntaxGroup:@"strings.nonexistent"]);
+    XCTAssertEqualObjects(MGSSyntaxGroupString, [cs resolveSyntaxGroup:@"strings"]);
+    XCTAssertEqualObjects(MGSSyntaxGroupString, [cs resolveSyntaxGroup:@"strings.nonexistent"]);
 }
 
 

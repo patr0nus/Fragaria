@@ -37,7 +37,7 @@
 @property (nonatomic) IBOutlet NSSegmentedControl *textVariant;
 
 @property (nonatomic, weak) MGSPrefsColourPropertiesViewController *parentVc;
-@property (nonatomic) SMLSyntaxGroup syntaxGroup;
+@property (nonatomic) MGSSyntaxGroup syntaxGroup;
 
 - (void)updateView;
 - (IBAction)updateScheme:(id)sender;

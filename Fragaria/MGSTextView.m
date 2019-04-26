@@ -22,11 +22,11 @@
  */
 
 #define FRAGARIA_PRIVATE
-#import "SMLTextView.h"
-#import "SMLTextViewPrivate.h"
-#import "SMLTextView+MGSTextActions.h"
-#import "SMLLayoutManager.h"
-#import "SMLSyntaxColouring.h"
+#import "MGSTextView.h"
+#import "MGSTextViewPrivate.h"
+#import "MGSTextView+MGSTextActions.h"
+#import "MGSLayoutManager.h"
+#import "MGSSyntaxColouring.h"
 #import "MGSExtraInterfaceController.h"
 #import "NSString+Fragaria.h"
 #import "NSTextStorage+Fragaria.h"
@@ -75,7 +75,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 #pragma mark - Implementation
 
 
-@implementation SMLTextView {
+@implementation MGSTextView {
     BOOL isDragging;
     NSPoint startPoint;
     NSPoint startOrigin;
@@ -376,12 +376,12 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 - (id)initWithFrame:(NSRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        SMLLayoutManager *layoutManager = [[SMLLayoutManager alloc] init];
+        MGSLayoutManager *layoutManager = [[MGSLayoutManager alloc] init];
         [[self textContainer] replaceLayoutManager:layoutManager];
         
         _interfaceController = [[MGSExtraInterfaceController alloc] init];
         
-        _syntaxColouring = [[SMLSyntaxColouring alloc] initWithLayoutManager:layoutManager];
+        _syntaxColouring = [[MGSSyntaxColouring alloc] initWithLayoutManager:layoutManager];
         _syntaxColoured = YES;
 
         [self setDefaults];
@@ -1323,7 +1323,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
  */
 - (NSArray*)completionsForPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index
 {
-    id <SMLAutoCompleteDelegate> delegate;
+    id <MGSAutoCompleteDelegate> delegate;
     
     if (!self.autoCompleteDelegate)
         delegate = self.syntaxColouring.parser;

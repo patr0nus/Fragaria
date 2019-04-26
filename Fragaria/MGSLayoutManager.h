@@ -31,9 +31,9 @@ enum {
 
 
 /**
- *  SMLLayoutManager handles the layout of all of the glyphs in the text editor.
+ *  MGSLayoutManager handles the layout of all of the glyphs in the text editor.
  **/
-@interface SMLLayoutManager : NSLayoutManager
+@interface MGSLayoutManager : NSLayoutManager
 
 /**
  *  Returns an attributed string with temporary attributes having been

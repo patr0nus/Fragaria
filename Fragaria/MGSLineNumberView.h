@@ -36,7 +36,7 @@
 /// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
-#import "SMLTextView.h"
+#import "MGSTextView.h"
 
 
 @class MGSFragariaView;
@@ -59,7 +59,7 @@
 /** A reference to the owning Fragaria instance. */
 @property (nonatomic, weak, readonly) MGSFragariaView *fragaria;
 /** The text view client of this ruler. */
-@property (assign) SMLTextView *clientView;
+@property (assign) MGSTextView *clientView;
 
 /** The display font for the text editor. */
 @property (nonatomic) NSFont *font;

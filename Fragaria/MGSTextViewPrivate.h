@@ -1,5 +1,5 @@
 //
-//  SMLTextViewPrivate.h
+//  MGSTextViewPrivate.h
 //  Fragaria
 //
 //  Created by Daniele Cattaneo on 26/02/15.
@@ -7,16 +7,16 @@
 /// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
-#import "SMLTextView.h"
+#import "MGSTextView.h"
 
 
 @class MGSExtraInterfaceController;
-@class SMLSyntaxColouring;
-@class SMLLayoutManager;
+@class MGSSyntaxColouring;
+@class MGSLayoutManager;
 @class MGSMutableColourScheme;
 
 
-@interface SMLTextView ()
+@interface MGSTextView ()
 
 
 /// @name Private properties
@@ -27,11 +27,11 @@
 @property (readonly) MGSExtraInterfaceController *interfaceController;
 
 /** Instances of this class will perform syntax highlighting in text views. */
-@property (readonly) SMLSyntaxColouring *syntaxColouring;
+@property (readonly) MGSSyntaxColouring *syntaxColouring;
 
-/** SMLTextView's layout manager is an SMLLayoutManager internally, but that
+/** MGSTextView's layout manager is an MGSLayoutManager internally, but that
  * class is not exposed. */
-@property (assign, readonly) SMLLayoutManager *layoutManager;
+@property (assign, readonly) MGSLayoutManager *layoutManager;
 
 /** The shared color scheme, set by MGSFragariaView */
 @property (nonatomic, strong) MGSMutableColourScheme *colourScheme;

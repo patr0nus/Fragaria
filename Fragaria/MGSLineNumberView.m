@@ -180,9 +180,9 @@ typedef enum {
 }
 
 
-- (void)setClientView:(SMLTextView *)aView
+- (void)setClientView:(MGSTextView *)aView
 {
-	SMLTextView *oldClientView;
+	MGSTextView *oldClientView;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
 	oldClientView = [self clientView];
@@ -368,7 +368,7 @@ typedef enum {
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    SMLTextView	*view;
+    MGSTextView	*view;
     NSRect visibleRect;
     NSLayoutManager	*layoutManager;
     NSTextStorage *ts;
@@ -532,7 +532,7 @@ typedef enum {
 {
 	NSUInteger i;
 	NSRect visibleRect;
-    SMLTextView *view;
+    MGSTextView *view;
     CGFloat insptdist;
     
 	view = [self clientView];

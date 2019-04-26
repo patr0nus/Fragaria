@@ -19,21 +19,21 @@ NS_ASSUME_NONNULL_BEGIN
  *  colouring settings, but recursively fallback to the settings of the
  *  supergroup otherwise. For example, "number.hex" is a subgroup of
  *  the "number" group. */
-typedef NSString *SMLSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString *MGSSyntaxGroup NS_EXTENSIBLE_STRING_ENUM;
 /** Syntax group for numeric literals */
-extern SMLSyntaxGroup const SMLSyntaxGroupNumber;
+extern MGSSyntaxGroup const MGSSyntaxGroupNumber;
 /** Syntax group for language keywords */
-extern SMLSyntaxGroup const SMLSyntaxGroupKeyword;
+extern MGSSyntaxGroup const MGSSyntaxGroupKeyword;
 /** Syntax group for variable identifiers */
-extern SMLSyntaxGroup const SMLSyntaxGroupVariable;
+extern MGSSyntaxGroup const MGSSyntaxGroupVariable;
 /** Syntax group for string literals */
-extern SMLSyntaxGroup const SMLSyntaxGroupString;
+extern MGSSyntaxGroup const MGSSyntaxGroupString;
 /** Syntax group for comments */
-extern SMLSyntaxGroup const SMLSyntaxGroupComment;
-extern SMLSyntaxGroup const SMLSyntaxGroupCommand;
-extern SMLSyntaxGroup const SMLSyntaxGroupInstruction;
-extern SMLSyntaxGroup const SMLSyntaxGroupAutoComplete;
-extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
+extern MGSSyntaxGroup const MGSSyntaxGroupComment;
+extern MGSSyntaxGroup const MGSSyntaxGroupCommand;
+extern MGSSyntaxGroup const MGSSyntaxGroupInstruction;
+extern MGSSyntaxGroup const MGSSyntaxGroupAutoComplete;
+extern MGSSyntaxGroup const MGSSyntaxGroupAttribute;
 
 
 /** MGSSyntaxParserClient specifies the methods used by MGSSyntaxParser
@@ -81,7 +81,7 @@ extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
  *  @param range The string range which will be assigned to the group, creating
  *     the token.
  *  @param atomic If the new token will be atomic. */
-- (void)setGroup:(SMLSyntaxGroup)group forTokenInRange:(NSRange)range atomic:(BOOL)atomic;
+- (void)setGroup:(MGSSyntaxGroup)group forTokenInRange:(NSRange)range atomic:(BOOL)atomic;
 
 
 #pragma mark - Inspecting Existing Tokens
@@ -98,7 +98,7 @@ extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
  *  return its group.
  *  @param index The index of a character in the token to search.
  *  @returns The group of the token, or nil if no token was found. */
-- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index;
+- (nullable MGSSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index;
 
 /** Searches for the token containing the character at the specified index, then
  *  return its group and range in the string.
@@ -108,7 +108,7 @@ extern SMLSyntaxGroup const SMLSyntaxGroupAttribute;
  *  @param range Optional pointer to an NSRange which will be assigned the range of
  *    the token in the text, if it is found.
  *  @returns The group of the token, or nil if no token was found. */
-- (nullable SMLSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range;
+- (nullable MGSSyntaxGroup)groupOfTokenAtCharacterIndex:(NSUInteger)index isAtomic:(nullable BOOL *)atomic range:(nullable NSRangePointer)range;
 
 
 @end

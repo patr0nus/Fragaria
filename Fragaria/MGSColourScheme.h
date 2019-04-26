@@ -48,7 +48,7 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
  *
  *  A colour scheme includes both global properties like the colour of the
  *  text and the background, and a collection of options specific to each
- *  SMLSyntaxGroup. The options can be accessed by methods that handle
+ *  MGSSyntaxGroup. The options can be accessed by methods that handle
  *  one option at a time, one syntax group at a time, or all syntax group at
  *  once.
  */
@@ -150,25 +150,25 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
 /** Returns the highlighting colour of specified syntax group, or nil
  *  if the specified group is not associated with an highlighting colour.
  *  @param syntaxGroup The syntax group identifier. */
-- (nullable NSColor *)colourForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (nullable NSColor *)colourForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** Returns the font variant used for highlighting the specified syntax
  *  group.
  *  @param syntaxGroup The syntax group identifier. */
-- (MGSFontVariant)fontVariantForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (MGSFontVariant)fontVariantForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** Returns if the specified syntax group will be highlighted.
  *  @param syntaxGroup The syntax group identifier. */
-- (BOOL)coloursSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (BOOL)coloursSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** Returns a dictionary containing all the options associated to the
  *  highlighting of the specified syntax group.
  *  @param syntaxGroup The syntax group identifier. */
-- (nullable NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionsForSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (nullable NSDictionary<MGSColourSchemeGroupOptionKey, id> *)optionsForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 
 /** A dictionary containing the option dictionaries of all
  *  syntax groups recognized by this colour scheme. */
-@property (nonatomic, copy, readonly) NSDictionary<SMLSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
+@property (nonatomic, copy, readonly) NSDictionary<MGSSyntaxGroup, NSDictionary<MGSColourSchemeGroupOptionKey, id> *> *syntaxGroupOptions;
 
 
 #pragma mark - Resolving Syntax Groups for Highlighting
@@ -180,14 +180,14 @@ extern MGSColourSchemeGroupOptionKey MGSColourSchemeGroupOptionKeyFontVariant;
  *  @param group A syntax group
  *  @returns The resolved syntax group or nil if no super-group
  *    of the specified group is known to this colour scheme. */
-- (nullable SMLSyntaxGroup)resolveSyntaxGroup:(SMLSyntaxGroup)group;
+- (nullable MGSSyntaxGroup)resolveSyntaxGroup:(MGSSyntaxGroup)group;
 
 /** Returns the dictionary of attributes to use for colouring a
  *  token of a given syntax group.
  *  @param group The syntax group of the token.
  *  @param font The font used for non-highlighted text.
  *  @note This method also does syntax group resolution. */
-- (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(SMLSyntaxGroup)group textFont:(NSFont *)font;
+- (NSDictionary<NSAttributedStringKey, id> *)attributesForSyntaxGroup:(MGSSyntaxGroup)group textFont:(NSFont *)font;
 
 
 #pragma mark - Checking Equality

@@ -9,9 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class SMLTextView;
+@class MGSTextView;
 @class MGSLineNumberView;
-@class SMLSyntaxError;
+@class MGSSyntaxError;
 
 
 /**
@@ -43,8 +43,8 @@
 /** The MGSLineNumberView where to show the error decorations (icons) */
 @property (nonatomic) MGSLineNumberView *lineNumberView;
 
-/** The SMLTextView where to highlight the lines where the errors are. */
-@property (nonatomic) SMLTextView *textView;
+/** The MGSTextView where to highlight the lines where the errors are. */
+@property (nonatomic) MGSTextView *textView;
 
 
 /// @name Instance Methods
@@ -68,7 +68,7 @@
  *  Syntax errors that have hidden == true will not be counted.
  *  @param line is the line number to check.
  **/
-- (SMLSyntaxError *)errorForLine:(NSInteger)line;
+- (MGSSyntaxError *)errorForLine:(NSInteger)line;
 
 /**
  *  Returns an array of all of the errors assigned to line `line`.

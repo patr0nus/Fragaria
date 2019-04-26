@@ -13,8 +13,8 @@
 #import "NSObject+Fragaria.h"
 #import "MGSFragariaView.h"
 #import "MGSFragariaViewPrivate.h"
-#import "SMLLayoutManager.h"
-#import "SMLSyntaxColouring.h"
+#import "MGSLayoutManager.h"
+#import "MGSSyntaxColouring.h"
 #import "MGSExtraInterfaceController.h"
 #import "MGSLineNumberView.h"
 #import "MGSSyntaxController.h"
@@ -23,10 +23,10 @@
 #import "MGSMutableColourScheme.h"
 #import "MGSSyntaxParser.h"
 #import "MGSSyntaxErrorController.h"
-#import "SMLSyntaxError.h"
-#import "SMLTextView.h"
-#import "SMLTextViewPrivate.h"
-#import "SMLTextView+MGSTextActions.h"
+#import "MGSSyntaxError.h"
+#import "MGSTextView.h"
+#import "MGSTextViewPrivate.h"
+#import "MGSTextView+MGSTextActions.h"
 #import "MGSAttributeOverlayTextStorage.h"
 
 
@@ -94,7 +94,7 @@
 /*
  * @property syntaxColouring
  */
-- (SMLSyntaxColouring *)syntaxColouring
+- (MGSSyntaxColouring *)syntaxColouring
 {
 	return self.textView.syntaxColouring;
 }
@@ -259,12 +259,12 @@
 /*
  * @property autoCompleteDelegate
  */
-- (void)setAutoCompleteDelegate:(id<SMLAutoCompleteDelegate>)autoCompleteDelegate
+- (void)setAutoCompleteDelegate:(id<MGSAutoCompleteDelegate>)autoCompleteDelegate
 {
     self.textView.autoCompleteDelegate = autoCompleteDelegate;
 }
 
-- (id<SMLAutoCompleteDelegate>)autoCompleteDelegate
+- (id<MGSAutoCompleteDelegate>)autoCompleteDelegate
 {
     return self.textView.autoCompleteDelegate;
 }
@@ -901,7 +901,7 @@
 	self.hasVerticalScroller = YES;
 	
 	// create textview
-	_textView = [[SMLTextView alloc] initWithFrame:NSMakeRect(0, 0, contentSize.width, contentSize.height)];
+	_textView = [[MGSTextView alloc] initWithFrame:NSMakeRect(0, 0, contentSize.width, contentSize.height)];
     [self replaceTextStorage:[[NSTextStorage alloc] init]];
 	[self.scrollView setDocumentView:self.textView];
 	

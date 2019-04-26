@@ -35,7 +35,7 @@
 }
 
 
-- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (void)setOptions:(NSDictionary<MGSColourSchemeGroupOptionKey, id> *)options forSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 {
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
     
@@ -46,7 +46,7 @@
 }
 
 
-- (MGSColourSchemeGroupData *)returnOrCreateDataForGroup:(SMLSyntaxGroup)group
+- (MGSColourSchemeGroupData *)returnOrCreateDataForGroup:(MGSSyntaxGroup)group
 {
     MGSColourSchemeGroupData *data = [_groupData objectForKey:group];
     if (data)
@@ -57,7 +57,7 @@
 }
 
 
-- (void)setColour:(NSColor *)color forSyntaxGroup:(SMLSyntaxGroup)group
+- (void)setColour:(NSColor *)color forSyntaxGroup:(MGSSyntaxGroup)group
 {
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
     
@@ -68,7 +68,7 @@
 }
 
 
-- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(SMLSyntaxGroup)syntaxGroup;
+- (void)setFontVariant:(MGSFontVariant)variant forSyntaxGroup:(MGSSyntaxGroup)syntaxGroup;
 {
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
     
@@ -79,7 +79,7 @@
 }
 
 
-- (void)setColours:(BOOL)enabled syntaxGroup:(SMLSyntaxGroup)group
+- (void)setColours:(BOOL)enabled syntaxGroup:(MGSSyntaxGroup)group
 {
     [self willChangeValueForKey:NSStringFromSelector(@selector(syntaxGroupOptions))];
     

@@ -1,12 +1,12 @@
 //
-//  SMLTextView+MGSTextActions.h
+//  MGSTextView+MGSTextActions.h
 //  Fragaria
 //
 //  Created by Daniele Cattaneo on 09/02/15.
 //
 //
 
-#import "SMLTextView.h"
+#import "MGSTextView.h"
 
 
 /** 
@@ -15,7 +15,7 @@
  *  a "Text" menu. 
  */
 
-@interface SMLTextView (MGSTextActions)
+@interface MGSTextView (MGSTextActions)
 
 
 /** Removes trailing whitespace in the currently selected range.

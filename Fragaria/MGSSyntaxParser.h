@@ -8,7 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MGSSyntaxParserClient.h"
 #import "MGSSyntaxAwareEditor.h"
-#import "SMLAutoCompleteDelegate.h"
+#import "MGSAutoCompleteDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  depending on the colour scheme chosen by the user.
  *
  *  In the context of Fragaria, a token is a contiguous range of characters
- *  with the same SMLSyntaxGroup attribute.
+ *  with the same MGSSyntaxGroup attribute.
  *  There are two types of tokens: atomic tokens and non-atomic tokens. Their
  *  behavior is different when the characters that were already part of the
  *  token are assigned to a new group. Since a character can only be part of
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  The distinction between atomic and non-atomic tokens is largely irrelevent
  *  for single-pass parsers. */
-@interface MGSSyntaxParser : NSObject <MGSSyntaxAwareEditor, SMLAutoCompleteDelegate>
+@interface MGSSyntaxParser : NSObject <MGSSyntaxAwareEditor, MGSAutoCompleteDelegate>
 
 
 #pragma mark - Entry Point for Parsing

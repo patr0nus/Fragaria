@@ -27,19 +27,19 @@ Copyright 2004-2009 Peter Borg
 #import "MGSSyntaxParserClient.h"
 
 
-@class SMLLayoutManager;
+@class MGSLayoutManager;
 @class MGSFragariaView;
-@class SMLTextView;
+@class MGSTextView;
 @class MGSColourScheme;
 @class MGSSyntaxParser;
 
-@protocol SMLAutoCompleteDelegate;
+@protocol MGSAutoCompleteDelegate;
 
 
 /**
  *  Performs syntax colouring on the text editor document.
  **/
-@interface SMLSyntaxColouring : NSObject <MGSSyntaxParserClient>
+@interface MGSSyntaxColouring : NSObject <MGSSyntaxParserClient>
 
 
 /// @name Properties - Internal
@@ -97,7 +97,7 @@ Copyright 2004-2009 Peter Borg
 /** Marks as invalid the colouring in the range currently visible (not clipped)
  *  in the specified text view.
  *  @param textView The text view from which to get a character range. */
-- (void)invalidateVisibleRangeOfTextView:(SMLTextView *)textView;
+- (void)invalidateVisibleRangeOfTextView:(MGSTextView *)textView;
 
 /** Marks the entire text's colouring as invalid and removes all coloring
  *  attributes applied. */
