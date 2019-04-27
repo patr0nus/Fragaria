@@ -5,7 +5,8 @@
 //  Created by Daniele Cattaneo on 27/04/2019.
 //
 
-#import <Fragaria/Fragaria.h>
+#import "MGSSyntaxParser.h"
+#import "MGSParserFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

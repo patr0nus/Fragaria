@@ -7,6 +7,7 @@
  *
  */
 
+#undef FRAGARIA_PRIVATE
 #import "FragariaMacros.h"
 
 #import "MGSBreakpointDelegate.h"           
