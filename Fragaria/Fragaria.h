@@ -26,6 +26,7 @@
 #import "MGSSyntaxParserClient.h"
 #import "MGSSyntaxAwareEditor.h"
 #import "MGSSyntaxParser.h"
+#import "MGSClassicFragariaParserFactory.h"
 
 #import "MGSColourScheme.h"
 #import "MGSMutableColourScheme.h"

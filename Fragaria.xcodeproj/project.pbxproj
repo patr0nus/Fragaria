@@ -473,6 +473,7 @@
 		0161863B22711DEB006A6630 /* NSCharacterSet+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161863922711DEB006A6630 /* NSCharacterSet+Fragaria.m */; };
 		016B52A221D6861A00504081 /* ExampleCustomParserWithComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */; };
 		017CBBC922749B980061B4BF /* MGSStandardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 017CBBC722749B980061B4BF /* MGSStandardParser.m */; };
+		017CBBCA2274A1C40061B4BF /* MGSClassicFragariaParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
 		018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */; };
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
@@ -2264,6 +2265,7 @@
 				01E4D55B21D57410005AC122 /* MGSSyntaxParserClient.h in Headers */,
 				01A0EC4F1E6C761400818624 /* MGSMutableSubstring.h in Headers */,
 				01E4D55A21D5740D005AC122 /* MGSSyntaxAwareEditor.h in Headers */,
+				017CBBCA2274A1C40061B4BF /* MGSClassicFragariaParserFactory.h in Headers */,
 				01E4D55921D57409005AC122 /* MGSSyntaxParser.h in Headers */,
 				01FBB3382153D591001E590C /* MGSMutableColourScheme.h in Headers */,
 				01A0EC4E1E6C755700818624 /* NSTextStorage+Fragaria.h in Headers */,

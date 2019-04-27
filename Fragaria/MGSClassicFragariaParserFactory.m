@@ -26,27 +26,59 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 
 
 @implementation MGSClassicFragariaParserFactory {
-    NSDictionary<MGSSyntaxGroup, NSString *> *_localizedSyntaxGroupNamesCache;
+    NSDictionary<MGSSyntaxGroup, NSString *> *_localizedSyntaxGroupNames;
 }
 
 
 @synthesize syntaxDefinitionNames = _syntaxDefinitionNames;
 
 
-- (id)init
+- (instancetype)init
+{
+    NSArray *bundles = @[[[self class] bundle], [NSBundle mainBundle]];
+    NSArray *paths = @[[[self class] applicationSupportSyntaxDefinitionDirectory]];
+    
+    NSMutableArray *defsPaths = [NSMutableArray array];
+    [defsPaths addObjectsFromArray:[[self class] syntaxDefinitionSearchPathsFromBundles:bundles]];
+    [defsPaths addObjectsFromArray:paths];
+    NSArray <NSURL *> *defs = [[self class] searchSyntaxDefinitionsInSearchPaths:defsPaths];
+    
+    NSMutableArray *names = [NSMutableArray array];
+    [names addObjectsFromArray:[[self class] searchSyntaxGroupNamesInBundles:bundles]];
+    [names addObjectsFromArray:[[self class] searchSyntaxGroupNamesInSearchPaths:paths]];
+    
+    return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:names];
+}
+
+
+- (instancetype)initWithSyntaxDefinitionsInBundles:(NSArray <NSBundle *> *)bundles
+{
+    NSArray <NSURL *> *defssp = [[self class] syntaxDefinitionSearchPathsFromBundles:bundles];
+    NSArray <NSURL *> *defs = [[self class] searchSyntaxDefinitionsInSearchPaths:defssp];
+    NSArray <NSURL *> *names = [[self class] searchSyntaxGroupNamesInBundles:bundles];
+    return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:names];
+}
+
+
+- (instancetype)initWithSyntaxDefinitionDirectories:(NSArray <NSURL *> *)searchPaths
+{
+    NSArray <NSURL *> *defs = [[self class] searchSyntaxDefinitionsInSearchPaths:searchPaths];
+    NSArray <NSURL *> *names = [[self class] searchSyntaxGroupNamesInSearchPaths:searchPaths];
+    return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:names];
+}
+
+
+- (instancetype)initWithSyntaxDefinitionFiles:(NSArray <NSURL *> *)f syntaxGroupNameFiles:(NSArray <NSURL *> *)strf
 {
     self = [super init];
-    
-    if (self) {
-        [self insertSyntaxDefinitions];
-    }
+    [self loadSyntaxDefinitionsFromFiles:f];
+    [self loadSyntaxGroupNamesFromFiles:strf];
     return self;
 }
 
 
-- (void)insertSyntaxDefinitions
+- (void)loadSyntaxDefinitionsFromFiles:(NSArray <NSURL *> *)syntaxDefFiles
 {
-    NSArray <NSURL *> *syntaxDefFiles = [self searchSyntaxDefinitions];
     NSMutableSet<MGSSyntaxGroup> *syntaxGroupsLoaded = [NSMutableSet set];
     
     //build a dictionary of definitions keyed by lowercase definition name
@@ -97,7 +129,31 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-- (NSURL *)applicationSupportSyntaxDefinitionDirectory
+- (void)loadSyntaxGroupNamesFromFiles:(NSArray <NSURL *> *)groupNamesFiles
+{
+    NSMutableDictionary *res = [NSMutableDictionary dictionary];
+    
+    for (NSURL *fn in groupNamesFiles) {
+        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:fn];
+        if (tmp)
+            [res addEntriesFromDictionary:tmp];
+    }
+    
+    _localizedSyntaxGroupNames = [res copy];
+}
+
+
+#pragma mark - Utility Methods & File Locators
+
+
++ (NSBundle *)bundle
+{
+    NSBundle *frameworkBundle = [NSBundle bundleForClass:self];
+    return frameworkBundle;
+}
+
+
++ (NSURL *)applicationSupportSyntaxDefinitionDirectory
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     NSURL *appSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
@@ -107,31 +163,24 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-- (NSArray <NSURL *> *)syntaxDefinitionSearchPaths
++ (NSArray <NSURL *> *)syntaxDefinitionSearchPathsFromBundles:(NSArray <NSBundle *> *)bundles
 {
     NSMutableArray *searchPaths = [NSMutableArray array];
     
-    NSURL *fwkResources = [[[self bundle] resourceURL] URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
-    if (fwkResources)
-        [searchPaths addObject:fwkResources];
-    
-    NSURL *appResources = [[[NSBundle mainBundle] resourceURL] URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
-    if (appResources)
-        [searchPaths addObject:appResources];
-    
-    NSURL *appSupport = [self applicationSupportSyntaxDefinitionDirectory];
-    if (appSupport)
-        [searchPaths addObject:appSupport];
-    
+    for (NSBundle *bundle in bundles) {
+        NSURL *fwkResources = [[bundle resourceURL] URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
+        if (fwkResources)
+            [searchPaths addObject:fwkResources];
+    }
+
     return [searchPaths copy];
 }
 
 
-- (NSArray <NSURL *> *)searchSyntaxDefinitions
++ (NSArray <NSURL *> *)searchSyntaxDefinitionsInSearchPaths:(NSArray <NSURL *> *)searchPaths
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSMutableArray <NSURL *> *res = [NSMutableArray array];
-    NSArray <NSURL *> *searchPaths = [self syntaxDefinitionSearchPaths];
     
     for (NSURL *path in searchPaths) {
         NSURL *realPath = [path URLByResolvingSymlinksInPath];
@@ -152,14 +201,31 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-#pragma mark - Utilities
-
-
-- (NSBundle *)bundle
++ (NSArray <NSURL *> *)searchSyntaxGroupNamesInBundles:(NSArray <NSBundle *> *)bundles
 {
-    NSBundle *frameworkBundle = [NSBundle bundleForClass:[self class]];
+    NSMutableArray *files = [NSMutableArray array];
+    
+    for (NSBundle *bundle in bundles) {
+        NSURL *fn = [bundle URLForResource:KMGSSyntaxGroupNamesFileName withExtension:KMGSSyntaxGroupNamesFileExt];
+        if (fn)
+            [files addObject:fn];
+    }
+    
+    return [files copy];
+}
 
-    return frameworkBundle;
+
++ (NSArray <NSURL *> *)searchSyntaxGroupNamesInSearchPaths:(NSArray <NSURL *> *)searchPaths
+{
+    NSMutableArray *files = [NSMutableArray array];
+    
+    for (NSURL *dirn in searchPaths) {
+        NSURL *fn = [dirn URLByAppendingPathComponent:KMGSSyntaxGroupNamesFileName];
+        fn = [fn URLByAppendingPathExtension:KMGSSyntaxGroupNamesFileExt];
+        [files addObject:fn];
+    }
+    
+    return [files copy];
 }
 
 
@@ -288,44 +354,9 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-- (void)rebuildLocalizedSyntaxGroupNamesCache
-{
-    NSMutableDictionary *res = [NSMutableDictionary dictionary];
-    
-    NSURL *builtin = [[self bundle] URLForResource:KMGSSyntaxGroupNamesFileName withExtension:KMGSSyntaxGroupNamesFileExt];
-    if (builtin) {
-        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:builtin];
-        if (tmp)
-            [res addEntriesFromDictionary:tmp];
-    }
-    
-    NSURL *thisApp = [[NSBundle mainBundle] URLForResource:KMGSSyntaxGroupNamesFileName withExtension:KMGSSyntaxGroupNamesFileExt];
-    if (thisApp) {
-        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:thisApp];
-        if (tmp)
-            [res addEntriesFromDictionary:tmp];
-    }
-    
-    NSURL *appSupport = [self applicationSupportSyntaxDefinitionDirectory];
-    appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxGroupNamesFileName];
-    appSupport = [appSupport URLByAppendingPathExtension:KMGSSyntaxGroupNamesFileExt];
-    if (appSupport) {
-        NSDictionary *tmp = [NSDictionary dictionaryWithContentsOfURL:appSupport];
-        if (tmp)
-            [res addEntriesFromDictionary:tmp];
-    }
-    
-    _localizedSyntaxGroupNamesCache = [res copy];
-}
-
-
 - (NSString *)localizedDisplayNameForSyntaxGroup:(MGSSyntaxGroup)syntaxGroup
 {
-    if (!_localizedSyntaxGroupNamesCache) {
-        [self rebuildLocalizedSyntaxGroupNamesCache];
-    }
-    
-    NSString *res = [_localizedSyntaxGroupNamesCache objectForKey:syntaxGroup];
+    NSString *res = [_localizedSyntaxGroupNames objectForKey:syntaxGroup];
     return res ?: syntaxGroup;
 }
 

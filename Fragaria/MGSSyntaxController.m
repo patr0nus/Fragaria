@@ -21,6 +21,7 @@
  specific language governing permissions and limitations under the License.
  */
 
+#define FRAGARIA_PRIVATE
 #import "MGSSyntaxController.h"
 #import "MGSSyntaxParser.h"
 #import "MGSParserFactory.h"
