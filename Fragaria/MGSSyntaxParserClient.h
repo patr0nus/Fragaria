@@ -30,9 +30,26 @@ extern MGSSyntaxGroup const MGSSyntaxGroupVariable;
 extern MGSSyntaxGroup const MGSSyntaxGroupString;
 /** Syntax group for comments */
 extern MGSSyntaxGroup const MGSSyntaxGroupComment;
+/** Syntax group for commands. By "commands" we intend any
+ *  semantically imperative syntax which is not a keyword and
+ *  defines a structure that can contain attributes.
+ *  @note Since the definition of "commands" is fuzzy, it is
+ *  advisable to specialize this group whenever possible. */
 extern MGSSyntaxGroup const MGSSyntaxGroupCommand;
+/** Syntax group for instructions. By "instructions" we intend
+ *  semantically imperative syntax and/or keywords distinct in
+ *  use from the MGSSyntaxGroupKeyword group.
+ *  @note Since the definition of "instructions" is fuzzy, it is
+ *  advisable to specialize this group whenever possible. */
 extern MGSSyntaxGroup const MGSSyntaxGroupInstruction;
+/** Syntax group for keywords also used as the auto-completion set. */
 extern MGSSyntaxGroup const MGSSyntaxGroupAutoComplete;
+/** Syntax group for attributes. Attributes are the left hand
+ *  side in structures of the form <lhs>=<rhs>. This corresponds
+ *  to the attributes in HTML. Attributes can only appear inside
+ *  commands.
+ *  @note Since the definition of "attributes" is overly specialized,
+ *  it is advisable to not use this syntax group in custom parsers. */
 extern MGSSyntaxGroup const MGSSyntaxGroupAttribute;
 
 
