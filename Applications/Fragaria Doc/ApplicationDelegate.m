@@ -8,6 +8,7 @@
 
 #import "ApplicationDelegate.h"
 #import <Fragaria/Fragaria.h>
+#import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
 #import "MASPreferencesWindowController.h"
 
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beginCommand</key>
+	<string>&lt;</string>
+	<key>endCommand</key>
+	<string>&gt;</string>
+	<key>beginInstruction</key>
+	<string>&lt;?</string>
+	<key>endInstruction</key>
+	<string>?&gt;</string>
+	<key>beginVariable</key>
+	<string></string>
+	<key>endVariable</key>
+	<string></string>
+	<key>firstString</key>
+	<string>&quot;</string>
+	<key>secondString</key>
+	<string>&apos;</string>
+	<key>firstSingleLineComment</key>
+	<string></string>
+	<key>secondSingleLineComment</key>
+	<string></string>
+	<key>beginFirstMultiLineComment</key>
+	<string>&lt;!--</string>
+	<key>endFirstMultiLineComment</key>
+	<string>--&gt;</string>
+	<key>beginSecondMultiLineComment</key>
+	<string></string>
+	<key>endSecondMultiLineComment</key>
+	<string></string>
+	<key>functionDefinition</key>
+	<string></string>
+	<key>removeFromFunction</key>
+	<string></string>
+	<key>keywordsCaseSensitive</key>
+	<false/>
+	<key>recolourKeywordIfAlreadyColoured</key>
+	<true/>
+	<key>keywords</key>
+	<array>
+		<string>CDATA</string>
+		<string>EMPTY</string>
+		<string>INCLUDE</string>
+		<string>IGNORE</string>
+		<string>NDATA</string>
+		<string>#IMPLIED</string>
+		<string>#PCDATA</string>
+		<string>#REQUIRED</string>
+	</array>
+	<key>autocompleteWords</key>
+	<array/>
+	<key>name</key>
+	<string>XML</string>
+	<key>extensions</key>
+	<string>xml dtd xsd xsl</string>
+	<key>groupSpecialization</key>
+	<dict>
+		<key>command</key>
+		<string>command.tag</string>
+		<key>instruction</key>
+		<string>command.scriptingDelimiter</string>
+	</dict>
+</dict>
+</plist>

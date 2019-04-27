@@ -8,6 +8,8 @@
 
 #import "MyDocument.h"
 #import <Fragaria/Fragaria.h>
+#import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
+
 
 @implementation MyDocument{
     __weak IBOutlet MGSFragariaView *fragaria;

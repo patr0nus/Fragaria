@@ -70,12 +70,13 @@
 	self.viewTop.showsLineNumbers = YES;
 
     /* Make the lower view interesting. */
-    [self.viewBottom replaceTextStorage:self.viewTop.textView.textStorage];
+    [self.viewBottom replaceTextStorage:self.viewTop.textStorage];
 	self.viewBottom.showsLineNumbers = YES;
-
 
 	/* Sample Syntax Error Definitions */
     self.viewTop.syntaxErrors = [self makeSyntaxErrors];
+    
+    self.viewTop.syntaxDefinitionName = @"HTML";
 }
 
 
@@ -172,7 +173,7 @@
  *–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 - (NSArray *)makeSyntaxErrors
 {
-    SMLSyntaxError *error1 = [SMLSyntaxError errorWithDictionary:@{
+    MGSSyntaxError *error1 = [MGSSyntaxError errorWithDictionary:@{
                                                                    @"errorDescription" : @"Syntax errors can be defined",
                                                                    @"line" : @(4),
                                                                    @"character" : @(3),
@@ -181,7 +182,7 @@
                                                                    @"warningLevel" : @(kMGSErrorCategoryError)
                                                                    }];
 
-    SMLSyntaxError *error2 = [[SMLSyntaxError alloc] initWithDictionary:@{
+    MGSSyntaxError *error2 = [[MGSSyntaxError alloc] initWithDictionary:@{
                                                                           @"errorDescription" : @"Multiple syntax errors can be defined for the same line, too.",
                                                                           @"line" : @(4),
                                                                           @"character" : @(12),
@@ -190,7 +191,7 @@
                                                                           @"warningLevel" : @(kMGSErrorCategoryAccess)
                                                                           }];
 
-    SMLSyntaxError *error3 = [[SMLSyntaxError alloc] init];
+    MGSSyntaxError *error3 = [[MGSSyntaxError alloc] init];
     error3.errorDescription = @"This error will appear on top of a line break.";
     error3.line = 6;
     error3.character = 1;
@@ -198,14 +199,14 @@
     error3.hidden = NO;
     error3.warningLevel = kMGSErrorCategoryConfig;
 
-    SMLSyntaxError *error4 = [SMLSyntaxError new];
+    MGSSyntaxError *error4 = [MGSSyntaxError new];
     error4.errorDescription = @"This error will not be hidden.";
     error4.line = 10;
     error4.character = 12;
     error4.length = 7;
     error4.hidden = NO;
     
-    SMLSyntaxError *error5 = [SMLSyntaxError errorWithDescription:@"Yet another error" ofLevel:-912454 atLine:5];
+    MGSSyntaxError *error5 = [MGSSyntaxError errorWithDescription:@"Yet another error" ofLevel:-912454 atLine:5];
 
     return @[error1, error2, error3, error4, error5];
 }

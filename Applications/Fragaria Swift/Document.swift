@@ -8,6 +8,7 @@
 
 import Cocoa
 import Fragaria
+import FragariaDefaultsCoordinator
 
 
 class Document: NSDocument {
@@ -43,7 +44,7 @@ override class var autosavesInPlace: Bool {
 
     
 override var windowNibName: NSNib.Name? {
-    return NSNib.Name(rawValue: "Document")
+    return "Document"
 }
 
     

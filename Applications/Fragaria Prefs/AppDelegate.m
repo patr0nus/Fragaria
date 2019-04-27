@@ -11,6 +11,7 @@
 
 #import "AppDelegate.h"
 #import <Fragaria/Fragaria.h>
+#import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
 #import "MGSSampleBreakpointDelegate.h"
 #import "MASPreferencesWindowController.h"
 
@@ -80,7 +81,7 @@
     self.viewTop.syntaxDefinitionName = @"HTML";
 
     /* Make the lower view interesting. */
-    [self.viewBottom replaceTextStorage:self.viewTop.textView.textStorage];
+    [self.viewBottom replaceTextStorage:self.viewTop.textStorage];
     self.viewBottom.syntaxDefinitionName = @"HTML";
 	
 	/* Use an external breakpoint delegate for the bottom view. */
@@ -342,8 +343,7 @@
 
     /* For fun, let's say that the global controller should manage these
        properties, and take away the power to do so from the groups. */
-	NSArray *colourProperties = [[MGSFragariaView propertyGroupTheme] allObjects];
-	NSMutableArray *globalProperties = [NSMutableArray arrayWithArray:colourProperties];
+	NSMutableArray *globalProperties = [NSMutableArray array];
 	[globalProperties addObjectsFromArray:@[
 											MGSFragariaDefaultsTextFont,
                                             MGSFragariaDefaultsGutterFont,
@@ -375,12 +375,12 @@
         static, and they only make real sense when used with the
         default document that loads at startup. Your implementation
         will be rather less static.
-    see SMLSyntaxError.h for property descriptions.
+    see MGSSyntaxError.h for property descriptions.
  *–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 - (NSArray *)makeSyntaxErrors
 {
     /* Errors can be instantiated via a class method from a dictionary: */
-    SMLSyntaxError *error1 = [SMLSyntaxError errorWithDictionary:
+    MGSSyntaxError *error1 = [MGSSyntaxError errorWithDictionary:
         @{ @"errorDescription" : @"This is a sample error, and it has the highest warning level.",
            @"line" : @(4),
            @"character" : @(2),
@@ -389,7 +389,7 @@
            @"warningLevel" : @(kMGSErrorCategoryError) }];
 
     /* They can also be created manually and initialized from a dictionary: */
-    SMLSyntaxError *error2 = [[SMLSyntaxError alloc] initWithDictionary:
+    MGSSyntaxError *error2 = [[MGSSyntaxError alloc] initWithDictionary:
         @{ @"errorDescription" : @"This is a lower level error on the same line.",
            @"line" : @(4),
            @"character" : @(13),
@@ -398,7 +398,7 @@
            @"warningLevel" : @(kMGSErrorCategoryAccess) }];
 
     /* You can create syntax errors and address their properties directly: */
-    SMLSyntaxError *error3 = [[SMLSyntaxError alloc] init];
+    MGSSyntaxError *error3 = [[MGSSyntaxError alloc] init];
     error3.errorDescription = @"This error is hidden and will not appear.";
     error3.line = 7;
     error3.character = 2;
@@ -406,7 +406,7 @@
     error3.hidden = YES;
     error3.warningLevel = kMGSErrorCategoryConfig;
 
-    SMLSyntaxError *error4 = [SMLSyntaxError new];
+    MGSSyntaxError *error4 = [MGSSyntaxError new];
     error4.errorDescription = @"The red squigglies represent errors, not misspellings.";
     error4.line = 11;
     error4.character = 11;

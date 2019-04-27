@@ -9,6 +9,8 @@
 #import "FragariaAppDelegate.h"
 #import <Fragaria/Fragaria.h>
 #import "MGSSimpleBreakpointDelegate.h"
+#import "ExampleCustomParser.h"
+#import "ExampleCustomParserWithComposition.h"
 
 
 @implementation FragariaAppDelegate {
@@ -26,14 +28,17 @@
  */
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
 {
+    /* Register our custom parser factories.
+     * The custom parsers will appear in the list of languages, toghether with the
+     * other standard ones. */
+    [[MGSSyntaxController sharedInstance] registerParserFactory:[[ExampleCustomParser alloc] init]];
+    [[MGSSyntaxController sharedInstance] registerParserFactory:[[ExampleCustomParserWithComposition alloc] init]];
+    
 	// define initial object configuration
 	//
 	// see Fragaria.h for details
 	//
     fragaria.textViewDelegate = self;
-	
-    // set the syntax colouring delegate
-    fragaria.syntaxColouringDelegate = self;
 
 	// set our syntax definition
 	[self setSyntaxDefinition:@"Objective-C"];
@@ -46,7 +51,7 @@
     fragaria.string = fileText;
 
     // define a syntax error
-    SMLSyntaxError *syntaxError = [SMLSyntaxError new];
+    MGSSyntaxError *syntaxError = [MGSSyntaxError new];
     syntaxError.errorDescription = @"Syntax errors can be defined.";
     syntaxError.line = 1;
     syntaxError.character = 1;
@@ -189,212 +194,6 @@
     // Use this method to query the pasteboard for additional pasteboard content
     // that may be relevant to the application: eg: a plist that may contain custom data.
     NSLog(@"notification : %@", [aNotification name]);
-}
-
-
-#pragma mark - SMLSyntaxColouringDelegate
-
-/*
- * For more information on custom colouring see SMLSyntaxColouringDelegate.h
- */
-
-
-/*
- * - fragariaDocument:shouldColourWithBlock:string:range:info
- */
-- (BOOL)fragariaDocument:(MGSFragariaView *)fragaria shouldColourWithBlock:(BOOL (^)(NSDictionary<NSString *, id> *, NSRange))colourWithBlock string:(NSString *)string range:(NSRange)range info:(NSDictionary <NSString *, id> *)info
-{
-    // query info
-    BOOL willColour = [[info objectForKey:SMLSyntaxWillColour] boolValue];
-    NSDictionary *syntaxInfo = [info objectForKey:SMLSyntaxInfo];
-
-    // provide compiler comfort
-    (void)syntaxInfo, (void)willColour;
-    
-    NSLog(@"Should colour document.");
-    
-    // we can call colourWithBlock to perform initial colouring
-    
-    // YES: Fragaria should colour document
-    // NO: Fragaria should not colour document
-    return YES;
-}
-
-
-/*
- * - fragariaDocument:shouldColourGroupWithBlock:string:range:info
- */
-- (BOOL)fragariaDocument:(MGSFragariaView *)fragaria shouldColourGroupWithBlock:(BOOL (^)(NSDictionary<NSString *, id> *, NSRange))colourWithBlock string:(NSString *)string range:(NSRange)range info:(NSDictionary<NSString *, id> *)info
-{
-    BOOL fragariaShouldColour = YES;
-    
-    // query info
-    NSString *group = [info objectForKey:SMLSyntaxGroup];
-    NSInteger groupID = [[info objectForKey:SMLSyntaxGroupID] integerValue];
-    BOOL willColour = [[info objectForKey:SMLSyntaxWillColour] boolValue];
-    
-    // for key values see SMLSyntaxDefinition.h
-    NSDictionary *syntaxInfo = [info objectForKey:SMLSyntaxInfo];
-
-    // provide compiler comfort
-    (void)syntaxInfo;
-
-    // follow the default behaviour. if we don't then colouring occurs even when we turn
-    // syntax colouring off in the preferences. this is fine in practice but confusing in a demo app.
-    fragariaShouldColour = willColour;
-    
-    // this amount of logging makes the app sluggish
-    NSLog(@"%@ group : %@ id : %li caller will colour : %@", NSStringFromSelector(_cmd), group, groupID, (willColour ? @"YES" : @"NO"));
-    
-    // group
-    switch (groupID) {
-        case kSMLSyntaxGroupNumber:
-            // we can call colourWithBlock to perform initial group colouration
-#if 0
-                // colour the whole string with the number group colour
-                colourWithBlock(attributes, range);
-                
-                fragariaShouldColour = NO;
-#endif
-            break;
-            
-        case kSMLSyntaxGroupCommand:
-            break;
-            
-        case kSMLSyntaxGroupInstruction:
-            break;
-            
-        case kSMLSyntaxGroupKeyword:
-            break;
-            
-        case kSMLSyntaxGroupAutoComplete:
-            break;
-            
-        case kSMLSyntaxGroupVariable:
-            break;
-            
-        case kSMLSyntaxGroupFirstString:
-            break;
-            
-        case kSMLSyntaxGroupSecondString:
-            break;
-            
-        case kSMLSyntaxGroupAttribute:
-            break;
-
-        case kSMLSyntaxGroupSingleLineComment:
-            break;
-            
-        case kSMLSyntaxGroupMultiLineComment:
-            
-            // we can prevent colouring of this group by returning NO
-            if (NO) {
-                fragariaShouldColour = NO;
-            }
-            
-            break;
-            
-        case kSMLSyntaxGroupSecondStringPass2:
-            break;
-    }
-
-    
-    // YES: Fragaria should colour group
-    // NO: Fragaria should not colour group
-    return fragariaShouldColour;
-}
-
-
-/*
- * - fragariaDocument:didColourGroupWithBlock:string:range:info
- */
-- (void)fragariaDocument:(MGSFragariaView *)fragaria didColourGroupWithBlock:(BOOL (^)(NSDictionary<NSString *, id> *, NSRange))colourWithBlock string:(NSString *)string range:(NSRange)range info:(NSDictionary<NSString *, id> *)info
-{
-    // query info
-    NSString *group = [info objectForKey:SMLSyntaxGroup];
-    NSInteger groupID = [[info objectForKey:SMLSyntaxGroupID] integerValue];
-    BOOL willColour = [[info objectForKey:SMLSyntaxWillColour] boolValue];
-    NSDictionary *attributes = [info objectForKey:SMLSyntaxAttributes];
-    NSDictionary *syntaxInfo = [info objectForKey:SMLSyntaxInfo];
-    
-    // compiler comfort
-    (void)syntaxInfo;
-    
-    // this amount of logging makes the app sluggish
-    NSLog(@"%@ group : %@ id : %li caller will colour : %@",  NSStringFromSelector(_cmd), group, groupID, (willColour ? @"YES" : @"NO"));
-    
-    NSString *subString = [string substringWithRange:range];
-    NSScanner *rangeScanner = [NSScanner scannerWithString:subString];
-    [rangeScanner setScanLocation:0];
-    
-    // group
-    switch (groupID) {
-        case kSMLSyntaxGroupNumber:
-            break;
-            
-        case kSMLSyntaxGroupCommand:
-            break;
-            
-        case kSMLSyntaxGroupInstruction:
-            break;
-            
-        case kSMLSyntaxGroupKeyword:
-        {
-            // we can iterate over the string using an NSScanner to identiy our substrings or use a regex.
-            // in this simple case we just colour the occurence of a given string as a false keyword.
-            NSString *fauxKeyword = @"kosmic";
-            while (YES) {
-                
-                // look for the keyword
-                [rangeScanner scanUpToString:fauxKeyword intoString:nil];
-                if ([rangeScanner isAtEnd]) break;
-                     
-                NSUInteger location = [rangeScanner scanLocation];
-                if ([rangeScanner scanString:fauxKeyword intoString:NULL]) {
-                    NSRange colourRange = NSMakeRange(range.location + location, [rangeScanner scanLocation] - location);
-                    
-                    // the block will colour the string
-                    colourWithBlock(attributes, colourRange);
-                }
-            }
-        }
-            break;
-            
-        case kSMLSyntaxGroupAutoComplete:
-            break;
-            
-        case kSMLSyntaxGroupVariable:
-            break;
-            
-        case kSMLSyntaxGroupFirstString:
-            break;
-            
-        case kSMLSyntaxGroupSecondString:
-            break;
-            
-        case kSMLSyntaxGroupAttribute:
-            break;
-            
-        case kSMLSyntaxGroupSingleLineComment:
-            break;
-            
-        case kSMLSyntaxGroupMultiLineComment:
-            break;
-            
-        case kSMLSyntaxGroupSecondStringPass2:
-            break;
-    }
-}
-
-
-/*
- * - fragariaDocument:didColourWithBlock:string:range:info
- */
-- (void)fragariaDocument:(MGSFragariaView *)fragaria didColourWithBlock:(BOOL (^)(NSDictionary<NSString *, id> *, NSRange))block string:(NSString *)string range:(NSRange)range info:(NSDictionary<NSString *, id> *)info
-{
-    NSLog(@"Did colour document.");
-    
-    // we can call colourWithBlock to perform final colouring
 }
 
 

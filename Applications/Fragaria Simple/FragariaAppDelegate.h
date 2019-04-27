@@ -9,10 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <Fragaria/Fragaria.h>
 
-@class SMLTextView;
+@class MGSTextView;
 @class MGSSimpleBreakpointDelegate;
 
-@interface FragariaAppDelegate : NSObject <NSApplicationDelegate, MGSFragariaTextViewDelegate, SMLSyntaxColouringDelegate, MGSDragOperationDelegate>
+@interface FragariaAppDelegate : NSObject <NSApplicationDelegate, MGSFragariaTextViewDelegate, MGSDragOperationDelegate>
 
 - (IBAction)copyToPasteBoard:(id)sender;
 - (IBAction)reloadString:(id)sender;
