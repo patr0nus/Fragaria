@@ -58,7 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Finding Syntax Definitions
 
 
-/** Returns the definition name for syntax "standard". */
+/** Returns the definition name for the Standard syntax definition.
+ *  The Standard syntax definition is an unremarkable syntax which performs
+ *  no colouring but is always available. */
 + (NSString *)standardSyntaxDefinitionName;
 
 /** Array of all known syntax definition names. */

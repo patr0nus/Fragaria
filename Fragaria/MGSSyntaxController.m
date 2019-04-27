@@ -24,6 +24,7 @@
 #import "MGSSyntaxController.h"
 #import "MGSSyntaxParser.h"
 #import "MGSParserFactory.h"
+#import "MGSStandardParser.h"
 #import "MGSClassicFragariaParserFactory.h"
 
 
@@ -64,7 +65,7 @@ static MGSSyntaxController *sharedInstance = nil;
 
 + (NSString *)standardSyntaxDefinitionName
 {
-	return [MGSClassicFragariaParserFactory standardSyntaxDefinitionName];
+	return [MGSStandardParser standardSyntaxDefinitionName];
 }
 
 
@@ -76,6 +77,7 @@ static MGSSyntaxController *sharedInstance = nil;
     _definitionToFactory = [[NSMutableDictionary alloc] init];
     _disambiguatedDefinitions = [[NSMutableDictionary alloc] init];
     _localizedGroupNameCache = [[NSMutableDictionary alloc] init];
+    [self registerParserFactory:[[MGSStandardParser alloc] init]];
     [self registerParserFactory:[[MGSClassicFragariaParserFactory alloc] init]];
     
     return self;

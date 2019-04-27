@@ -15,9 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MGSClassicFragariaParserFactory : NSObject <MGSParserFactory>
 
 
-+ (NSString *)standardSyntaxDefinitionName;
-
-
 @end
 
 

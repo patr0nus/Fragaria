@@ -44,15 +44,6 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
-/*
- * + standardSyntaxDefinitionName
- */
-+ (NSString *)standardSyntaxDefinitionName
-{
-    return @"Standard";
-}
-
-
 - (void)insertSyntaxDefinitions
 {
     NSArray <NSURL *> *syntaxDefFiles = [self searchSyntaxDefinitions];
@@ -176,19 +167,6 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 
 
 /*
- *- standardSyntaxDefinition
- */
-- (NSDictionary *)standardSyntaxDefinition
-{
-    // key is lowercase name
-    NSString *name = [[self class] standardSyntaxDefinitionName];
-    NSDictionary *definition = [self.syntaxDefinitions objectForKey:[name lowercaseString]];
-    NSAssert(definition, @"standard syntax definition not found");
-    return definition;
-}
-
-
-/*
  * - syntaxDefinitionWithName:
  */
 - (NSDictionary *)syntaxDefinitionWithName:(NSString *)name
@@ -304,10 +282,6 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 
 - (MGSSyntaxParser *)parserForSyntaxDefinitionName:(NSString *)name
 {
-    if (!name) {
-        name = [[self class] standardSyntaxDefinitionName];
-    }
-    
     NSDictionary *definition = [self syntaxDefinitionWithName:name];
     MGSClassicFragariaSyntaxDefinition *syntaxDef = [definition objectForKey:@"syntaxDefinition"];
     return [[MGSClassicFragariaSyntaxParser alloc] initWithSyntaxDefinition:syntaxDef];

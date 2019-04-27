@@ -26,7 +26,6 @@
 		010870A81C99E26E00C335DA /* Solarized Dark.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A31C99E24F00C335DA /* Solarized Dark.plist */; };
 		010870A91C99E26E00C335DA /* Solarized Light.plist in Copy Colour Schemes */ = {isa = PBXBuildFile; fileRef = 010870A41C99E24F00C335DA /* Solarized Light.plist */; };
 		010890C82268C3ED00A874FF /* none.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 010890C42268C3CE00A874FF /* none.plist */; };
-		010890C92268C3ED00A874FF /* standard.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 010890C52268C3CE00A874FF /* standard.plist */; };
 		010890CB2268C41B00A874FF /* actionscript.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9A1C99E16E00C335DA /* actionscript.plist */; };
 		010890CC2268C41B00A874FF /* actionscript3.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9B1C99E16E00C335DA /* actionscript3.plist */; };
 		010890CD2268C41B00A874FF /* active4d.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086F9C1C99E16E00C335DA /* active4d.plist */; };
@@ -473,6 +472,7 @@
 		016186362270C9DD006A6630 /* MGSRangeEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 016186342270C9DD006A6630 /* MGSRangeEntries.m */; };
 		0161863B22711DEB006A6630 /* NSCharacterSet+Fragaria.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161863922711DEB006A6630 /* NSCharacterSet+Fragaria.m */; };
 		016B52A221D6861A00504081 /* ExampleCustomParserWithComposition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */; };
+		017CBBC922749B980061B4BF /* MGSStandardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 017CBBC722749B980061B4BF /* MGSStandardParser.m */; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
 		018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */; };
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
@@ -717,7 +717,6 @@
 			dstSubfolderSpec = 7;
 			files = (
 				010890C82268C3ED00A874FF /* none.plist in Copy Syntax Definitions */,
-				010890C92268C3ED00A874FF /* standard.plist in Copy Syntax Definitions */,
 			);
 			name = "Copy Syntax Definitions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1367,7 +1366,6 @@
 		010870A31C99E24F00C335DA /* Solarized Dark.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Dark.plist"; sourceTree = "<group>"; };
 		010870A41C99E24F00C335DA /* Solarized Light.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Solarized Light.plist"; sourceTree = "<group>"; };
 		010890C42268C3CE00A874FF /* none.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = none.plist; sourceTree = "<group>"; };
-		010890C52268C3CE00A874FF /* standard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = standard.plist; sourceTree = "<group>"; };
 		011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberCacheTests.m; sourceTree = "<group>"; };
 		0121BA752152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSContextMenu.xib; sourceTree = "<group>"; };
 		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
@@ -1405,6 +1403,8 @@
 		01684A861B15FBD9008A900D /* MGSFontWell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSFontWell.m; sourceTree = "<group>"; };
 		016B52A021D6861A00504081 /* ExampleCustomParserWithComposition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleCustomParserWithComposition.h; sourceTree = "<group>"; };
 		016B52A121D6861A00504081 /* ExampleCustomParserWithComposition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleCustomParserWithComposition.m; sourceTree = "<group>"; };
+		017CBBC622749B980061B4BF /* MGSStandardParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSStandardParser.h; sourceTree = "<group>"; };
+		017CBBC722749B980061B4BF /* MGSStandardParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSStandardParser.m; sourceTree = "<group>"; };
 		017FD5861A7A992700B305FB /* MGSLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSLineNumberView.h; sourceTree = "<group>"; };
 		017FD5871A7A992700B305FB /* MGSLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberView.m; sourceTree = "<group>"; };
 		018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineRangeForCharacterTests.m; sourceTree = "<group>"; };
@@ -1767,7 +1767,6 @@
 			isa = PBXGroup;
 			children = (
 				010890C42268C3CE00A874FF /* none.plist */,
-				010890C52268C3CE00A874FF /* standard.plist */,
 			);
 			path = "Integrated Syntax Definitions";
 			sourceTree = "<group>";
@@ -1789,6 +1788,7 @@
 				01C35C1521B2FDA2009A12AB /* MGSSyntaxAwareEditor.h */,
 				013645072187E7A70088B324 /* MGSSyntaxParser.h */,
 				013645062187E7A70088B324 /* MGSSyntaxParser.m */,
+				017CBBC522749B540061B4BF /* Standard Parser */,
 				01E4D55821D573EA005AC122 /* Classic Fragaria Parser */,
 			);
 			name = Parser;
@@ -1808,6 +1808,15 @@
 				D06653D71AC02A0400ACE8B0 /* NSColor+TransformedCompare.m */,
 			);
 			name = "Colour Scheme";
+			sourceTree = "<group>";
+		};
+		017CBBC522749B540061B4BF /* Standard Parser */ = {
+			isa = PBXGroup;
+			children = (
+				017CBBC622749B980061B4BF /* MGSStandardParser.h */,
+				017CBBC722749B980061B4BF /* MGSStandardParser.m */,
+			);
+			name = "Standard Parser";
 			sourceTree = "<group>";
 		};
 		01919E24217D20A800E26B9D /* FragariaDefaultsCoordinator */ = {
@@ -2710,6 +2719,7 @@
 				0150B3822186051600CBA228 /* MGSAttributeOverlayTextStorage.m in Sources */,
 				AB3971CB118C1F8A00AEF388 /* MGSSyntaxController.m in Sources */,
 				01E4D55721D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m in Sources */,
+				017CBBC922749B980061B4BF /* MGSStandardParser.m in Sources */,
 				D0C145C71A85F2C900DDE90A /* MGSTextView+MGSDragging.m in Sources */,
 				01B50A801B07AD8C00C9A856 /* NSString+Fragaria.m in Sources */,
 				D06653D91AC02A0400ACE8B0 /* NSColor+TransformedCompare.m in Sources */,
