@@ -18,6 +18,7 @@ New features:
   - Replaces `SMLSyntaxColouringDelegate`, which has been removed
   - Allows customization of existing parsers through composition, similarly to what was possible through `SMLSyntaxColouringDelegate`
   - Provides an API for applications to implement new first-class parsers from scratch.
+  - Makes it possible to load syntax definition files from custom locations.
   - See the **Fragaria Simple** example application for details.
 * The list of syntax colouring groups is now arbitrarily extensible by parsers.
   - Allows for more specific tags based on the language (for example, the `Instruction` and `Command` categories are less ambiguous now)
