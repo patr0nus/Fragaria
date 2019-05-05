@@ -144,7 +144,7 @@ For much deeper insight see the  `-colour...InRange:withRangeScanner:documentSca
 
 #### Creating a syntax parser class
 
-If you want to create just one parser that does not require additional configuration, simply create a new class which inherits from `MGSSyntaxParser` and implements the `MGSParserFactory` interface. As a template, you can use the ExampleCustomParser class from the [Fragaria Simple](Applications/Fragaria Simple/) example.
+If you want to create just one parser that does not require additional configuration, simply create a new class which inherits from `MGSSyntaxParser` and implements the `MGSParserFactory` interface. As a template, you can use the ExampleCustomParser class from the [Fragaria Simple](Applications/Fragaria%20Simple) example.
 
 In this use case, your parser will be a singleton which supports just one language.
 
