@@ -476,6 +476,7 @@
 		017CBBCA2274A1C40061B4BF /* MGSClassicFragariaParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		017FD58B1A7A992700B305FB /* MGSLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017FD5871A7A992700B305FB /* MGSLineNumberView.m */; };
 		018546711C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */; };
+		0189E26A227E342A004CF9D4 /* MGSSyntaxControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0189E269227E342A004CF9D4 /* MGSSyntaxControllerTests.m */; };
 		018CFA0D1AE46B8F00334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0C1AE46B8F00334011 /* main.m */; };
 		018CFA101AE46BA100334011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 018CFA0E1AE46B9800334011 /* main.m */; };
 		01919E2C217D20A900E26B9D /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */; };
@@ -1409,6 +1410,7 @@
 		017FD5861A7A992700B305FB /* MGSLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSLineNumberView.h; sourceTree = "<group>"; };
 		017FD5871A7A992700B305FB /* MGSLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineNumberView.m; sourceTree = "<group>"; };
 		018546701C1F1ABC00F1B79B /* MGSLineRangeForCharacterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSLineRangeForCharacterTests.m; sourceTree = "<group>"; };
+		0189E269227E342A004CF9D4 /* MGSSyntaxControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSSyntaxControllerTests.m; sourceTree = "<group>"; };
 		018CFA0C1AE46B8F00334011 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		018CFA0E1AE46B9800334011 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01919E23217D20A800E26B9D /* FragariaDefaultsCoordinator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FragariaDefaultsCoordinator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1965,7 +1967,7 @@
 			name = "Classic Fragaria Parser";
 			sourceTree = "<group>";
 		};
-		01F01AAE1F9CCDA2008E721D /* TestCaseData */ = {
+		01F01AAE1F9CCDA2008E721D /* ColorSchemeTestCases */ = {
 			isa = PBXGroup;
 			children = (
 				01F01AAC1F9CCD9D008E721D /* ColorScheme_WrongRootObject.plist */,
@@ -1974,7 +1976,7 @@
 				01F01AB31F9CCE42008E721D /* ColorScheme_WrongType2.plist */,
 				01F01AB41F9CCE58008E721D /* ColorScheme_WrongType3.plist */,
 			);
-			path = TestCaseData;
+			path = ColorSchemeTestCases;
 			sourceTree = "<group>";
 		};
 		01F0D6FD1C120F7D000A08B6 /* Fragaria Swift */ = {
@@ -2212,6 +2214,7 @@
 				D0E521071A90E307005CB80B /* MGSSyntaxErrorControllerTests.m */,
 				D0AB50EF1A91CDC200A6DF58 /* MGSSyntaxErrorTests.m */,
 				0150B38321861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m */,
+				0189E269227E342A004CF9D4 /* MGSSyntaxControllerTests.m */,
 				D0E5210F1A90E34F005CB80B /* Supporting Files */,
 			);
 			path = FragariaTests;
@@ -2221,7 +2224,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E521101A90E34F005CB80B /* Info.plist */,
-				01F01AAE1F9CCDA2008E721D /* TestCaseData */,
+				01F01AAE1F9CCDA2008E721D /* ColorSchemeTestCases */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2785,6 +2788,7 @@
 				D0AB50F01A91CDC200A6DF58 /* MGSSyntaxErrorTests.m in Sources */,
 				0150B38421861B7F00CBA228 /* MGSAttributeOverlayTextStorageTest.m in Sources */,
 				01FBC3831C1EADDF00837F04 /* MGSStringColumnTests.m in Sources */,
+				0189E26A227E342A004CF9D4 /* MGSSyntaxControllerTests.m in Sources */,
 				D0E5211A1A90E399005CB80B /* MGSSyntaxErrorControllerTests.m in Sources */,
 				D0718BAE1AB721280073493A /* MGSColourSchemeTests.m in Sources */,
 				019B02EF1C1F4FE20026548F /* MGSFragariaRowColumnFunctionsTests.m in Sources */,
