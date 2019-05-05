@@ -32,11 +32,27 @@
 static MGSSyntaxController *sharedInstance = nil;
 
 
+@interface MGSAmbiguousSyntaxDefinition : NSObject
+
+@property (nonatomic, strong) id <MGSParserFactory> parserFactory;
+@property (nonatomic, strong) NSString *factoryName;
+@property (nonatomic, strong) NSString *exposedName;
+
+@end
+
+
+@implementation MGSAmbiguousSyntaxDefinition
+
+@end
+
+
 @interface MGSSyntaxController()
 
 @property (nonatomic, strong) NSMutableArray<id <MGSParserFactory>> *allFactories;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id <MGSParserFactory>> *definitionToFactory;
-@property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *disambiguatedDefinitions;
+
+@property (nonatomic, strong) NSMutableSet<NSString *> *ambiguousDefinitions;
+@property (nonatomic, strong) NSMutableArray<MGSAmbiguousSyntaxDefinition *> *ambiguousDefinitionData;
 
 @property (nonatomic) NSArray<MGSSyntaxGroup> *syntaxGroupsForParsers;
 
@@ -76,7 +92,8 @@ static MGSSyntaxController *sharedInstance = nil;
     
     _allFactories = [[NSMutableArray alloc] init];
     _definitionToFactory = [[NSMutableDictionary alloc] init];
-    _disambiguatedDefinitions = [[NSMutableDictionary alloc] init];
+    _ambiguousDefinitions = [[NSMutableSet alloc] init];
+    _ambiguousDefinitionData = [[NSMutableArray alloc] init];
     _localizedGroupNameCache = [[NSMutableDictionary alloc] init];
     [self registerParserFactory:[[MGSStandardParser alloc] init]];
     [self registerParserFactory:[[MGSClassicFragariaParserFactory alloc] init]];
@@ -107,7 +124,21 @@ static MGSSyntaxController *sharedInstance = nil;
             counter++;
         }
         if (counter != 1) {
-            [self.disambiguatedDefinitions setObject:def forKey:disambigDef];
+            if (![self.ambiguousDefinitions containsObject:def]) {
+                [self.ambiguousDefinitions addObject:def];
+                id <MGSParserFactory> existing = [self.definitionToFactory objectForKey:def];
+                MGSAmbiguousSyntaxDefinition *asd = [[MGSAmbiguousSyntaxDefinition alloc] init];
+                asd.factoryName = def;
+                asd.exposedName = def;
+                asd.parserFactory = existing;
+                [self.ambiguousDefinitionData addObject:asd];
+            }
+            [self.ambiguousDefinitions addObject:disambigDef];
+            MGSAmbiguousSyntaxDefinition *asd = [[MGSAmbiguousSyntaxDefinition alloc] init];
+            asd.factoryName = def;
+            asd.exposedName = disambigDef;
+            asd.parserFactory = parserFactory;
+            [self.ambiguousDefinitionData addObject:asd];
         }
         
         [self.definitionToFactory setObject:parserFactory forKey:disambigDef];
@@ -134,6 +165,45 @@ static MGSSyntaxController *sharedInstance = nil;
 }
 
 
+- (NSString *)ambiguousSyntaxDefinitionNameFromUniqueName:(NSString *)name
+{
+    if (![self.ambiguousDefinitions containsObject:name])
+        return name;
+    for (MGSAmbiguousSyntaxDefinition *sddata in self.ambiguousDefinitionData) {
+        if ([sddata.exposedName isEqual:name])
+            return sddata.factoryName;
+    }
+    [NSException raise:NSInternalInconsistencyException format:@"ambiguousDefinitions set is inconsistent with ambiguousDefinitionData (name = %@)", name];
+    return nil;
+}
+
+
+- (NSString *)uniqueSyntaxDefinitionNameFromAmbiguousName:(NSString *)name parserFactory:(id <MGSParserFactory>)pf
+{
+    if (![self.ambiguousDefinitions containsObject:name])
+        return name;
+    for (MGSAmbiguousSyntaxDefinition *sddata in self.ambiguousDefinitionData) {
+        if (sddata.parserFactory != pf)
+            continue;
+        if ([sddata.factoryName isEqual:name])
+            return sddata.exposedName;
+    }
+    [NSException raise:NSInternalInconsistencyException format:@"ambiguousDefinitions set is inconsistent with ambiguousDefinitionData, or parser factory %@ is buggy (name = %@)", pf, name];
+    return nil;
+}
+
+
+- (NSArray<NSString *> *)uniqueSyntaxDefinitionNamesFromAmbiguousNames:(NSArray<NSString *> *)names parserFactory:(id <MGSParserFactory>)pf
+{
+    NSMutableArray *res = [NSMutableArray array];
+    for (NSString *name in names) {
+        NSString *newName = [self uniqueSyntaxDefinitionNameFromAmbiguousName:name parserFactory:pf];
+        [res addObject:newName];
+    }
+    return [res copy];
+}
+
+
 - (NSArray<NSString *> *)syntaxDefinitionNames
 {
     if (_syntaxDefinitionNamesCache)
@@ -152,6 +222,7 @@ static MGSSyntaxController *sharedInstance = nil;
         if (![factory respondsToSelector:@selector(syntaxDefinitionNamesWithExtension:)])
             continue;
         NSArray *names = [factory syntaxDefinitionNamesWithExtension:extension];
+        names = [self uniqueSyntaxDefinitionNamesFromAmbiguousNames:names parserFactory:factory];
         [res addObjectsFromArray:names];
     }
     return res;
@@ -165,7 +236,8 @@ static MGSSyntaxController *sharedInstance = nil;
         return @[];
     if (![factory respondsToSelector:@selector(extensionsForSyntaxDefinitionName:)])
         return @[];
-    return [factory extensionsForSyntaxDefinitionName:sdname];
+    NSString *realname = [self ambiguousSyntaxDefinitionNameFromUniqueName:sdname];
+    return [factory extensionsForSyntaxDefinitionName:realname];
 }
 
 
@@ -176,6 +248,7 @@ static MGSSyntaxController *sharedInstance = nil;
         if (![factory respondsToSelector:@selector(syntaxDefinitionNamesWithUTI:)])
             continue;
         NSArray *names = [factory syntaxDefinitionNamesWithUTI:uti];
+        names = [self uniqueSyntaxDefinitionNamesFromAmbiguousNames:names parserFactory:factory];
         [res addObjectsFromArray:names];
     }
     return res;
@@ -189,6 +262,7 @@ static MGSSyntaxController *sharedInstance = nil;
         if (![factory respondsToSelector:@selector(guessSyntaxDefinitionNamesFromFirstLine:)])
             continue;
         NSArray *names = [factory guessSyntaxDefinitionNamesFromFirstLine:firstLine];
+        names = [self uniqueSyntaxDefinitionNamesFromAmbiguousNames:names parserFactory:factory];
         [res addObjectsFromArray:names];
     }
     return res;
@@ -200,9 +274,7 @@ static MGSSyntaxController *sharedInstance = nil;
     id <MGSParserFactory> factory = [self.definitionToFactory objectForKey:syndef];
     if (!factory)
         return nil;
-    NSString *realid = [self.disambiguatedDefinitions objectForKey:syndef];
-    if (!realid)
-        realid = syndef;
+    NSString *realid = [self ambiguousSyntaxDefinitionNameFromUniqueName:syndef];
     return [factory parserForSyntaxDefinitionName:realid];
 }
 
