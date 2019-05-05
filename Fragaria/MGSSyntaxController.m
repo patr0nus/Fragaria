@@ -158,6 +158,17 @@ static MGSSyntaxController *sharedInstance = nil;
 }
 
 
+- (NSArray <NSString *> *)extensionsForSyntaxDefinitionName:(NSString *)sdname
+{
+    id <MGSParserFactory> factory = [self.definitionToFactory objectForKey:sdname];
+    if (!factory)
+        return @[];
+    if (![factory respondsToSelector:@selector(extensionsForSyntaxDefinitionName:)])
+        return @[];
+    return [factory extensionsForSyntaxDefinitionName:sdname];
+}
+
+
 - (NSArray<NSString *> *)syntaxDefinitionNamesWithUTI:(NSString *)uti
 {
     NSMutableArray *res = [NSMutableArray array];

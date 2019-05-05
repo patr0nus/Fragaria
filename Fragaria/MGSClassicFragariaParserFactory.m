@@ -104,7 +104,16 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
             continue;
         }
         
-        NSString *extensions = [root objectForKey:@"extensions"] ?: @"";
+        NSArray *extensionsList;
+        NSString *extensions = [root objectForKey:@"extensions"];
+        if (extensions) {
+            NSMutableString *extensionsString = [NSMutableString stringWithString:extensions];
+            [extensionsString replaceOccurrencesOfString:@"." withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [extensionsString length])];
+            extensionsList = [extensionsString componentsSeparatedByString:@" "];
+        } else {
+            extensionsList = @[];
+        }
+        
         MGSClassicFragariaSyntaxDefinition *syndef = [[MGSClassicFragariaSyntaxDefinition alloc] initFromSyntaxDictionary:root name:name];
         if (!syndef) {
             NSLog(@"Syntax definition file %@ cannot be loaded; invalid format", file);
@@ -114,7 +123,7 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
         NSDictionary *syntaxDefinition = @{
             @"name": name,
             @"file": file,
-            @"extensions": extensions,
+            @"extensions": extensionsList,
             @"syntaxDefinition": syndef};
         
         // key is lowercase name
@@ -257,6 +266,15 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 }
 
 
+- (NSArray<NSString *> *)extensionsForSyntaxDefinitionName:(NSString *)sdname
+{
+    NSArray *extList = [[self syntaxDefinitionWithName:sdname] objectForKey:@"extensions"];
+    if (!extList)
+        return @[];
+    return extList;
+}
+
+
 /*
  * - syntaxDefinitionWithExtension
  */
@@ -267,19 +285,12 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
     extension = [extension lowercaseString];
     
     for (id item in self.syntaxDefinitions) {
-        NSString *extensions = [self.syntaxDefinitions[item] valueForKey:@"extensions"];
+        NSArray *extList = [self extensionsForSyntaxDefinitionName:item];
         
-        if (!extensions || [extensions isEqualToString:@""]) {
-            continue;
-        }
-        
-        NSMutableString *extensionsString = [NSMutableString stringWithString:extensions];
-        [extensionsString replaceOccurrencesOfString:@"." withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [extensionsString length])];
-        if ([[extensionsString componentsSeparatedByString:@" "] containsObject:extension]) {
+        if ([extList containsObject:extension]) {
             definition = self.syntaxDefinitions[item];
             break;
         }
-
     }
     
     return definition;

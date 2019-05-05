@@ -41,6 +41,14 @@ NS_ASSUME_NONNULL_BEGIN
  *        syntaxDefinitionNames. */
 - (NSArray <NSString *> *)syntaxDefinitionNamesWithExtension:(NSString *)extension;
 
+/** Returns a list of file extensions corresponding to the given
+ *  language identifier.
+ *  @param sdname The language identifier.
+ *  @returns A list of file extensions (without dot prefixes).
+ *  @note The list of extensions returned must be coherent with the return values
+ *    of -syntaxDefinitionNamesWithExtension:. */
+- (NSArray <NSString *> *)extensionsForSyntaxDefinitionName:(NSString *)sdname;
+
 /** Returns a list of language identifiers corresponding to the given
  *  Universal Type Identifier (UTI).
  *  @param uti The UTI for which to search matching languages.
