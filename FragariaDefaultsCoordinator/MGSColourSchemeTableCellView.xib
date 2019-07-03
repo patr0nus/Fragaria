@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="normalRow" id="QwY-MD-kiX" customClass="MGSColourSchemeTableCellView">
+            <rect key="frame" x="0.0" y="0.0" width="425" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qDe-Su-mRk">
+                    <rect key="frame" x="2" y="2" width="22" height="18"/>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xhF-tU-Xv8">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="updateScheme:" target="QwY-MD-kiX" id="lDs-DV-nsf"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eNm-M2-tBZ">
+                    <rect key="frame" x="24" y="3" width="37" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Va3-Ub-IpW">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Yy3-ly-sqm">
+                    <rect key="frame" x="377" y="0.0" width="44" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="bWy-2K-2AZ"/>
+                    </constraints>
+                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="updateScheme:" target="QwY-MD-kiX" id="c2t-gl-0d2"/>
+                    </connections>
+                </colorWell>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKB-i4-kWU">
+                    <rect key="frame" x="303" y="0.0" width="68" height="21"/>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectAny" id="9ux-Y4-Ot0">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment image="MGSBold" imageScaling="none" width="20"/>
+                            <segment image="MGSItalic" imageScaling="none" width="20"/>
+                            <segment image="MGSUnderline" imageScaling="none" width="20"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="updateScheme:" target="QwY-MD-kiX" id="pJw-jE-biR"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="IKB-i4-kWU" firstAttribute="centerY" secondItem="QwY-MD-kiX" secondAttribute="centerY" id="0PL-Ly-U4H"/>
+                <constraint firstItem="eNm-M2-tBZ" firstAttribute="firstBaseline" secondItem="qDe-Su-mRk" secondAttribute="firstBaseline" id="3gT-LZ-4pz"/>
+                <constraint firstItem="qDe-Su-mRk" firstAttribute="leading" secondItem="QwY-MD-kiX" secondAttribute="leading" constant="4" id="8fE-gr-g5x"/>
+                <constraint firstAttribute="bottom" secondItem="qDe-Su-mRk" secondAttribute="bottom" constant="4" id="94c-He-hf0"/>
+                <constraint firstItem="Yy3-ly-sqm" firstAttribute="top" secondItem="QwY-MD-kiX" secondAttribute="top" id="Ml7-yX-gX0"/>
+                <constraint firstItem="IKB-i4-kWU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eNm-M2-tBZ" secondAttribute="trailing" constant="8" symbolic="YES" id="N90-FZ-O5F"/>
+                <constraint firstAttribute="bottom" secondItem="Yy3-ly-sqm" secondAttribute="bottom" id="crx-D7-zXB"/>
+                <constraint firstItem="eNm-M2-tBZ" firstAttribute="leading" secondItem="qDe-Su-mRk" secondAttribute="trailing" constant="4" id="mS4-Rz-zkT"/>
+                <constraint firstItem="qDe-Su-mRk" firstAttribute="top" secondItem="QwY-MD-kiX" secondAttribute="top" constant="4" id="mwh-Ni-77c"/>
+                <constraint firstItem="Yy3-ly-sqm" firstAttribute="leading" secondItem="IKB-i4-kWU" secondAttribute="trailing" constant="8" id="nXC-AV-vI4"/>
+                <constraint firstAttribute="trailing" secondItem="Yy3-ly-sqm" secondAttribute="trailing" constant="4" id="olH-p2-dNr"/>
+            </constraints>
+            <connections>
+                <outlet property="colorWell" destination="Yy3-ly-sqm" id="WKn-PR-ca2"/>
+                <outlet property="enabled" destination="qDe-Su-mRk" id="UkK-NR-s1M"/>
+                <outlet property="label" destination="eNm-M2-tBZ" id="DeU-U6-0BU"/>
+                <outlet property="textVariant" destination="IKB-i4-kWU" id="ZS5-8t-KLe"/>
+            </connections>
+        </customView>
+    </objects>
+    <resources>
+        <image name="MGSBold" width="16" height="16"/>
+        <image name="MGSItalic" width="16" height="16"/>
+        <image name="MGSUnderline" width="16" height="16"/>
+    </resources>
+</document>

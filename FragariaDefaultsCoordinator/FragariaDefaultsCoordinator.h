@@ -23,4 +23,5 @@ FOUNDATION_EXPORT const unsigned char FragariaDefaultsCoordinatorVersionString[]
 #import "MGSPrefsViewController.h"
 #import "MGSPrefsColourPropertiesViewController.h"
 #import "MGSPrefsEditorPropertiesViewController.h"
+#import "MGSColourSchemeTableViewDataSource.h"
 

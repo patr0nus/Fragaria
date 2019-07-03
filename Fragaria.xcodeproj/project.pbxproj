@@ -536,6 +536,9 @@
 		01D81AD21AA7E37E006DF8B8 /* Features.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81ACF1AA7E37E006DF8B8 /* Features.xib */; };
 		01D81AD31AA7E37E006DF8B8 /* Lorem.html in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD01AA7E37E006DF8B8 /* Lorem.html */; };
 		01D81AD41AA7E37E006DF8B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D81AD11AA7E37E006DF8B8 /* MainMenu.xib */; };
+		01D9740B22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D9740922CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01D9740C22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9740A22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.m */; };
+		01D9740E22CBF0B5003C41FA /* MGSColourSchemeTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D9740D22CBF0B5003C41FA /* MGSColourSchemeTableCellView.xib */; };
 		01DE21C721FFAA860076770C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01DE21C921FFAA860076770C /* Localizable.strings */; };
 		01E4D55321D51CE5005AC122 /* MGSClassicFragariaParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55121D51CE5005AC122 /* MGSClassicFragariaParserFactory.m */; };
 		01E4D55721D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4D55521D5723D005AC122 /* MGSClassicFragariaSyntaxParser.m */; };
@@ -1437,6 +1440,9 @@
 		01D81ACF1AA7E37E006DF8B8 /* Features.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Features.xib; sourceTree = "<group>"; };
 		01D81AD01AA7E37E006DF8B8 /* Lorem.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Lorem.html; sourceTree = "<group>"; };
 		01D81AD11AA7E37E006DF8B8 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		01D9740922CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSColourSchemeTableViewDataSource.h; sourceTree = "<group>"; };
+		01D9740A22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSColourSchemeTableViewDataSource.m; sourceTree = "<group>"; };
+		01D9740D22CBF0B5003C41FA /* MGSColourSchemeTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MGSColourSchemeTableCellView.xib; sourceTree = "<group>"; };
 		01DE21C821FFAA860076770C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01DE21CA21FFAA880076770C /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		01E4D55021D51CE5005AC122 /* MGSClassicFragariaParserFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSClassicFragariaParserFactory.h; sourceTree = "<group>"; };
@@ -1871,6 +1877,9 @@
 				D0718B461AB54EA70073493A /* MGSPrefsColourPropertiesViewController.h */,
 				D0718B471AB54EA70073493A /* MGSPrefsColourPropertiesViewController.m */,
 				D00BB05B213876D3007E5FA6 /* MGSPrefsColourProperties.xib */,
+				01D9740922CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h */,
+				01D9740A22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.m */,
+				01D9740D22CBF0B5003C41FA /* MGSColourSchemeTableCellView.xib */,
 				D0718B421AB54E8C0073493A /* MGSPrefsEditorPropertiesViewController.h */,
 				D0718B431AB54E8C0073493A /* MGSPrefsEditorPropertiesViewController.m */,
 				D00BB05F213876D3007E5FA6 /* MGSPrefsEditorProperties.xib */,
@@ -2241,6 +2250,7 @@
 				01919E4D217D220F00E26B9D /* MGSUserDefaultsControllerProtocol.h in Headers */,
 				01919E60217D24DA00E26B9D /* MGSPrefsColourPropertiesViewController.h in Headers */,
 				01919E4B217D21F600E26B9D /* MGSFragariaView+Definitions.h in Headers */,
+				01D9740B22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h in Headers */,
 				01919E62217D24EC00E26B9D /* MGSPrefsViewController.h in Headers */,
 				01919E4F217D221E00E26B9D /* MGSHybridUserDefaultsController.h in Headers */,
 				01919E4C217D220900E26B9D /* MGSUserDefaultsDelegate.h in Headers */,
@@ -2531,6 +2541,7 @@
 			files = (
 				01919E56217D234C00E26B9D /* MGSPrefsEditorProperties.xib in Resources */,
 				01DE21C721FFAA860076770C /* Localizable.strings in Resources */,
+				01D9740E22CBF0B5003C41FA /* MGSColourSchemeTableCellView.xib in Resources */,
 				01B5779C21FB78BD0046EC22 /* Images.xcassets in Resources */,
 				01919E50217D233B00E26B9D /* MGSPrefsCommonViews.xib in Resources */,
 				01919E55217D234C00E26B9D /* MGSPrefsColourProperties.xib in Resources */,
@@ -2661,6 +2672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01D9740C22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.m in Sources */,
 				01919E51217D234000E26B9D /* MGSFontWell.m in Sources */,
 				01919E44217D20E400E26B9D /* MGSHybridUserDefaultsController.m in Sources */,
 				01919E53217D234400E26B9D /* MGSPrefsColourPropertiesViewController.m in Sources */,

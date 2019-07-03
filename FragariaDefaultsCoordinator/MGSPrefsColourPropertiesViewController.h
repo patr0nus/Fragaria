@@ -27,19 +27,3 @@
 
 
 @end
-
-
-@interface MGSColourSchemeTableCellView: NSView
-
-@property (nonatomic) IBOutlet NSButton *enabled;
-@property (nonatomic) IBOutlet NSTextField *label;
-@property (nonatomic) IBOutlet NSColorWell *colorWell;
-@property (nonatomic) IBOutlet NSSegmentedControl *textVariant;
-
-@property (nonatomic, weak) MGSPrefsColourPropertiesViewController *parentVc;
-@property (nonatomic) MGSSyntaxGroup syntaxGroup;
-
-- (void)updateView;
-- (IBAction)updateScheme:(id)sender;
-
-@end
