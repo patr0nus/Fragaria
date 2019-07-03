@@ -30,6 +30,7 @@
 
 #import "MGSColourScheme.h"
 #import "MGSMutableColourScheme.h"
+#import "MGSMutableColourSchemeFromPlistTransformer.h"
 
 #import "NSTextStorage+Fragaria.h"
 #import "MGSMutableSubstring.h"
