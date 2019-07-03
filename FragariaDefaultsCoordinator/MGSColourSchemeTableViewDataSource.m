@@ -39,8 +39,14 @@
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSNib *tcvnib = [[NSNib alloc] initWithNibNamed:@"MGSColourSchemeTableCellView" bundle:bundle];
     [tableView registerNib:tcvnib forIdentifier:@"normalRow"];
-    [tableView setDelegate:self];
-    [tableView setDataSource:self];
+    tableView.rowHeight = 22;
+    tableView.allowsEmptySelection = YES;
+    tableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
+    NSArray *otherColumns = [tableView tableColumns];
+    for (NSUInteger i=1; i<otherColumns.count; i++)
+        [tableView removeTableColumn:otherColumns[i]];
+    tableView.delegate = self;
+    tableView.dataSource = self;
     [tableView reloadData];
     _tableView = tableView;
 }
