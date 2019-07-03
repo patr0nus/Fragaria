@@ -6,6 +6,7 @@
 //
 //
 
+#import "MGSFragariaView+Definitions.h"
 #import "MGSPrefsEditorPropertiesViewController.h"
 #import "MGSUserDefaultsController.h"
 #import "MGSFontWell.h"

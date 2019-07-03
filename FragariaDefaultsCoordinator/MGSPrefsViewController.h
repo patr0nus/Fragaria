@@ -10,7 +10,6 @@
 #import "MGSUserDefaultsControllerProtocol.h"
 
 
-
 /** 
  *  MGSPrefsViewController is an abstract class for other MGSPrefsViewController
  *  classes. It is not to be used directly.

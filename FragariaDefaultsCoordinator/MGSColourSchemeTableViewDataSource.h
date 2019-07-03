@@ -6,7 +6,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MGSSyntaxParserClient.h"
+#import <Fragaria/Fragaria.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

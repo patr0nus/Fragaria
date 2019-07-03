@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MGSFragariaView.h"
+#import <Fragaria/Fragaria.h>
 
 
 /**

@@ -6,8 +6,9 @@
 //
 //
 
+#import <Fragaria/Fragaria.h>
+#import "MGSFragariaView+Definitions.h"
 #import "MGSUserDefaults.h"
-#import "MGSColourScheme.h"
 
 
 @implementation MGSUserDefaults

@@ -13,9 +13,8 @@ FOUNDATION_EXPORT double FragariaDefaultsCoordinatorVersionNumber;
 //! Project version string for FragariaDefaultsCoordinator.
 FOUNDATION_EXPORT const unsigned char FragariaDefaultsCoordinatorVersionString[];
 
-
+#import <Fragaria/Fragaria.h>
 #import "MGSFragariaView+Definitions.h"
-
 #import "MGSUserDefaultsDelegate.h"
 #import "MGSUserDefaultsControllerProtocol.h"
 #import "MGSUserDefaultsController.h"

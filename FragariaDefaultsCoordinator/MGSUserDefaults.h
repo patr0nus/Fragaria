@@ -7,7 +7,7 @@
 /// @cond PRIVATE
 
 #import <Foundation/Foundation.h>
-#import "MGSFragariaView+Definitions.h"
+#import <Fragaria/Fragaria.h>
 
 
 /** This macro defines the groupID that should correspond to the global group

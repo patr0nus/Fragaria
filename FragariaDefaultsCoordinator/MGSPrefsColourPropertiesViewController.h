@@ -6,8 +6,8 @@
 //
 //
 
+#import <Fragaria/Fragaria.h>
 #import "MGSPrefsViewController.h"
-#import "MGSSyntaxParserClient.h"
 
 @class MGSMutableColourScheme;
 
