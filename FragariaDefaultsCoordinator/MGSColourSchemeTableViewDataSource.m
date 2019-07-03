@@ -9,11 +9,20 @@
 #import "MGSFragariaView+Definitions.h"
 #import "MGSMutableColourScheme.h"
 #import "MGSSyntaxController.h"
+#import "NSObject+Fragaria.h"
 
 
 @implementation MGSColourSchemeTableViewDataSource
 {
     NSArray<MGSSyntaxGroup> *_colouringGroupsCache;
+}
+
+
++ (void)initialize
+{
+    if ([self class] != [MGSColourSchemeTableViewDataSource class])
+        return;
+    [self exposeBinding:NSStringFromSelector(@selector(currentScheme))];
 }
 
 
@@ -41,6 +50,7 @@
 {
     _currentScheme = currentScheme;
     [self.tableView reloadData];
+    [self mgs_propagateValue:_currentScheme forBinding:NSStringFromSelector(@selector(currentScheme))];
 }
 
 
@@ -128,6 +138,7 @@
         forSyntaxGroup:self.syntaxGroup];
     
     [self.parentVc updateView:self];
+    [self.parentVc mgs_propagateValue:scheme forBinding:NSStringFromSelector(@selector(currentScheme))];
 }
 
 
