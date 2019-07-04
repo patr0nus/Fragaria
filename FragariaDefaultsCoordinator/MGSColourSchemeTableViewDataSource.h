@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) IBOutlet NSTableView *tableView;
 @property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
 
+@property (nonatomic) BOOL showGroupProperties;
 @property (nonatomic) BOOL showGroupGlobalProperties;
 @property (nonatomic) BOOL showHeaders;
 

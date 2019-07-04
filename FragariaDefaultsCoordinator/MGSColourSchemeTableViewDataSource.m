@@ -26,6 +26,7 @@
 - (instancetype)init
 {
     self = [super init];
+    _showGroupProperties = YES;
     _currentScheme = [[MGSMutableColourScheme alloc] init];
     return self;
 }
@@ -56,6 +57,13 @@
     _currentScheme = currentScheme;
     [self.tableView reloadData];
     [self mgs_propagateValue:_currentScheme forBinding:NSStringFromSelector(@selector(currentScheme))];
+}
+
+
+- (void)setShowGroupProperties:(BOOL)showGroupProperties
+{
+    _showGroupProperties = showGroupProperties;
+    [self.tableView reloadData];
 }
 
 
@@ -146,11 +154,9 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     NSInteger header = self.showHeaders ? 1 : 0;
-    if (!self.showGroupGlobalProperties) {
-        return header + [[self colouringGroups] count];
-    } else {
-        return (header + [[self globalProperties] count]) + (header + [[self colouringGroups] count]);
-    }
+    NSInteger group = self.showGroupProperties ? header + [[self colouringGroups] count] : 0;
+    NSInteger global = self.showGroupGlobalProperties ? header + [[self globalProperties] count] : 0;
+    return group + global;
 }
 
 
@@ -160,8 +166,9 @@
         return NO;
     if (row == 0)
         return YES;
-    if (self.showGroupGlobalProperties && row == (NSInteger)(1 + [[self globalProperties] count]))
-        return YES;
+    if (self.showGroupGlobalProperties && self.showGroupProperties)
+        if (row == (NSInteger)(1 + [[self globalProperties] count]))
+            return YES;
     return NO;
 }
 
