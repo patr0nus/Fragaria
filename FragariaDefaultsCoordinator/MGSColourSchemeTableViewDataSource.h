@@ -19,7 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) IBOutlet NSTableView *tableView;
 @property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
 
+@property (nonatomic) BOOL showGroupGlobalProperties;
+@property (nonatomic) BOOL showHeaders;
+
 - (void)updateView:(MGSColourSchemeTableCellView *)theView;
+- (void)prepareForReuseView:(MGSColourSchemeTableCellView *)theView;
+
+@property (nonatomic, readonly) NSArray<MGSSyntaxGroup> *colouringGroups;
+@property (nonatomic, readonly) NSArray<NSString *> *globalProperties;
+- (NSString *)localizedStringForGlobalProperty:(NSString *)prop;
 
 @end
 
@@ -32,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) IBOutlet NSSegmentedControl *textVariant;
 
 @property (nonatomic, weak) MGSColourSchemeTableViewDataSource *parentVc;
-@property (nonatomic) MGSSyntaxGroup syntaxGroup;
+@property (nonatomic, nullable) MGSSyntaxGroup syntaxGroup;
+@property (nonatomic, nullable) NSString *globalPropertyKeyPath;
 
 - (void)updateView;
 - (IBAction)updateScheme:(id)sender;

@@ -76,6 +76,27 @@
                 <outlet property="textVariant" destination="IKB-i4-kWU" id="ZS5-8t-KLe"/>
             </connections>
         </customView>
+        <customView identifier="headerRow" id="3Jp-5t-S03" customClass="NSTableCellView">
+            <rect key="frame" x="0.0" y="0.0" width="425" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tEJ-zR-98U">
+                    <rect key="frame" x="2" y="4" width="40" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="yFW-Db-P0H">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="tEJ-zR-98U" firstAttribute="leading" secondItem="3Jp-5t-S03" secondAttribute="leading" constant="4" id="0if-0f-Y9a"/>
+                <constraint firstItem="tEJ-zR-98U" firstAttribute="centerY" secondItem="3Jp-5t-S03" secondAttribute="centerY" constant="-1" id="QaE-97-a1w"/>
+            </constraints>
+            <connections>
+                <outlet property="textField" destination="tEJ-zR-98U" id="lT7-K1-WZ2"/>
+            </connections>
+        </customView>
     </objects>
     <resources>
         <image name="MGSBold" width="16" height="16"/>

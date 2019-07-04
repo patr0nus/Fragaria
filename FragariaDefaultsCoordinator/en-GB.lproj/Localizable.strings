@@ -1,3 +1,6 @@
+/* Color Scheme Table View Global Option */
+"Background" = "Background";
+
 /* String for cancel button. */
 "Cancel" = "Cancel";
 
@@ -22,6 +25,15 @@
 /* Toolbar item name for the Editor preference pane */
 "Editor" = "Editor";
 
+/* Colour Scheme Table Header */
+"Global Properties" = "Global Properties";
+
+/* Color Scheme Table View Global Option */
+"Insertion Point" = "Insertion Point";
+
+/* Color Scheme Table View Global Option */
+"Invisible Characters" = "Invisible Characters";
+
 /* Hint explaining why certain items are bold. */
 "Items in bold affect all of your views." = "Items in bold affect all of your views.";
 
@@ -30,4 +42,16 @@
 
 /* The text for the save/delete scheme button when it should read Save Scheme… */
 "Save Scheme…" = "Save Scheme…";
+
+/* Color Scheme Table View Global Option */
+"Selected Line Background" = "Selected Line Background";
+
+/* Colour Scheme Table Header */
+"Syntax Highlighting" = "Syntax Highlighting";
+
+/* Color Scheme Table View Global Option */
+"Syntax Error Background" = "Syntax Error Background";
+
+/* Color Scheme Table View Global Option */
+"Text" = "Text";
 
