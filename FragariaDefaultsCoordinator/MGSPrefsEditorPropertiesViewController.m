@@ -42,7 +42,8 @@
 
 - (NSString *)toolbarItemLabel
 {
-    return NSLocalizedString(@"Editor", @"Toolbar item name for the Editor preference pane");
+    NSBundle *b = [NSBundle bundleForClass:[MGSPrefsEditorPropertiesViewController class]];
+    return NSLocalizedStringFromTableInBundle(@"Editor", nil, b, @"Toolbar item name for the Editor preference pane");
 }
 
 

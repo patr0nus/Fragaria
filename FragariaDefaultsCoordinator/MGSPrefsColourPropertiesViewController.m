@@ -122,7 +122,8 @@ static void *DefaultsChangedContext = &DefaultsChangedContext;
 
 - (NSString *)toolbarItemLabel
 {
-    return NSLocalizedString(@"Colors", @"Toolbar item name for the Colors preference pane");
+    NSBundle *b = [NSBundle bundleForClass:[MGSPrefsColourPropertiesViewController class]];
+    return NSLocalizedStringFromTableInBundle(@"Colors", nil, b, @"Toolbar item name for the Colors preference pane");
 }
 
 
