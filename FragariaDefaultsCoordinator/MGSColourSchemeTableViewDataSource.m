@@ -13,6 +13,11 @@
 
 
 @implementation MGSColourSchemeTableViewDataSource
+{
+    NSMutableArray *_tableRows;
+    NSNib *_tableCellsNib;
+    NSCache <NSString *, NSMutableArray *> *_tableCellsCache;
+}
 
 
 + (void)initialize
@@ -26,19 +31,22 @@
 - (instancetype)init
 {
     self = [super init];
+    
     _showGroupProperties = YES;
     _currentScheme = [[MGSMutableColourScheme alloc] init];
+    
+    NSBundle *bundle = [NSBundle bundleForClass:[MGSColourSchemeTableViewDataSource class]];
+    _tableCellsNib = [[NSNib alloc] initWithNibNamed:@"MGSColourSchemeTableCellView" bundle:bundle];
+    _tableRows = [NSMutableArray array];
+    _tableCellsCache = [[NSCache alloc] init];
+    [self _rebuild];
+    
     return self;
 }
 
 
 - (void)setTableView:(NSTableView *)tableView
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[MGSColourSchemeTableViewDataSource class]];
-    NSNib *tcvnib = [[NSNib alloc] initWithNibNamed:@"MGSColourSchemeTableCellView" bundle:bundle];
-    [tableView registerNib:tcvnib forIdentifier:@"normalRow"];
-    [tableView registerNib:tcvnib forIdentifier:@"headerRow"];
-    
     tableView.rowHeight = 22;
     tableView.allowsEmptySelection = YES;
     tableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
@@ -63,21 +71,21 @@
 - (void)setShowGroupProperties:(BOOL)showGroupProperties
 {
     _showGroupProperties = showGroupProperties;
-    [self.tableView reloadData];
+    [self _rebuild];
 }
 
 
 - (void)setShowGroupGlobalProperties:(BOOL)showGroupGlobalProperties
 {
     _showGroupGlobalProperties = showGroupGlobalProperties;
-    [self.tableView reloadData];
+    [self _rebuild];
 }
 
 
 - (void)setShowHeaders:(BOOL)showHeaders
 {
     _showHeaders = showHeaders;
-    [self.tableView reloadData];
+    [self _rebuild];
 }
 
 
@@ -151,72 +159,120 @@
 }
 
 
+/*
+ * View-based NSTableViews using -makeViewWithIdentifier:owner: to create views are allergic
+ * to modal interface components like NSColorWheel, because while you want to deactivate NSColorWheel
+ * in -prepareForReuse to avoid having the focus on the color wheel shuffle around the
+ * table view with the view-reusing madness ensuing a -reloadData, this also causes the color wheel
+ * to deactivate as soon as it is used.
+ *
+ *   To solve the issue, we avoid using -makeViewWithIdentifier:owner: and we keep a static array of
+ * the table cells we are using to always return the same view for the same location in the table.
+ * We rebuild the array only when the table *structure* changes.
+ *
+ *   Even though we could cheap out and reinstantiate the nib objects every time the view array
+ * is rebuild, it turns out that even for small tables instantiating a nib is crazy slow. So we have to
+ * basically reimplement the caching logic in -makeViewWithIdentifier:owner: to keep the UI from visibly
+ * lagging.
+ *
+ *   Yes, @nibroc, cell-based NSTableViews were not that bad of an idea after all.
+ */
+- (id)_makeTableCellViewWithIdentifier:(NSString *)ident
+{
+    NSMutableArray *cacheForIdent = [_tableCellsCache objectForKey:ident];
+    if (cacheForIdent && cacheForIdent.count > 0) {
+        NSView *view = [cacheForIdent lastObject];
+        [cacheForIdent removeLastObject];
+        [view prepareForReuse];
+        return view;
+    }
+    
+    /* If you're curious, yes, this is almost exactly what NSTableView does in
+     * -makeViewWithIdentifier:owner: */
+    NSMutableArray *topLevelObj = [NSMutableArray array];
+    [_tableCellsNib instantiateWithOwner:self topLevelObjects:&topLevelObj];
+    for (id obj in topLevelObj) {
+        if (![obj isKindOfClass:[NSView class]])
+            continue;
+        if ([[obj identifier] isEqual:ident])
+            return obj;
+    }
+    return nil;
+}
+
+
+- (void)_prepareDisposalOfTableCellView:(NSView *)view
+{
+    NSMutableArray *cacheForIdent = [_tableCellsCache objectForKey:view.identifier];
+    if (!cacheForIdent)
+        cacheForIdent = [NSMutableArray array];
+    [cacheForIdent addObject:view];
+    [_tableCellsCache setObject:cacheForIdent forKey:view.identifier];
+}
+
+
+- (void)_rebuild
+{
+    NSBundle *b = [NSBundle bundleForClass:[MGSColourSchemeTableViewDataSource class]];
+    
+    for (NSView *row in _tableRows)
+        [self _prepareDisposalOfTableCellView:row];
+    [_tableRows removeAllObjects];
+    
+    if (self.showGroupGlobalProperties) {
+        if (self.showHeaders) {
+            NSTableCellView *view = [self _makeTableCellViewWithIdentifier:@"headerRow"];
+            view.textField.stringValue = NSLocalizedStringFromTableInBundle(@"Global Properties", nil, b, @"Colour Scheme Table Header");
+            [_tableRows addObject:view];
+        }
+        
+        for (NSString *key in self.globalProperties) {
+            MGSColourSchemeTableCellView *view = [self _makeTableCellViewWithIdentifier:@"normalRow"];
+            view.globalPropertyKeyPath = key;
+            view.parentVc = self;
+            [_tableRows addObject:view];
+        }
+    }
+    
+    if (self.showGroupProperties) {
+        if (self.showHeaders) {
+            NSTableCellView *view = [self _makeTableCellViewWithIdentifier:@"headerRow"];
+            view.textField.stringValue = NSLocalizedStringFromTableInBundle(@"Syntax Highlighting", nil, b, @"Colour Scheme Table Header");
+            [_tableRows addObject:view];
+        }
+        
+        for (NSString *group in self.colouringGroups) {
+            MGSColourSchemeTableCellView *view = [self _makeTableCellViewWithIdentifier:@"normalRow"];
+            view.syntaxGroup = group;
+            view.parentVc = self;
+            [_tableRows addObject:view];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    NSInteger header = self.showHeaders ? 1 : 0;
-    NSInteger group = self.showGroupProperties ? header + [[self colouringGroups] count] : 0;
-    NSInteger global = self.showGroupGlobalProperties ? header + [[self globalProperties] count] : 0;
-    return group + global;
+    return _tableRows.count;
 }
 
 
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row
 {
-    if (!self.showHeaders)
+    id rowview = _tableRows[row];
+    if ([rowview isKindOfClass:[MGSColourSchemeTableCellView class]])
         return NO;
-    if (row == 0)
-        return YES;
-    if (self.showGroupGlobalProperties && self.showGroupProperties)
-        if (row == (NSInteger)(1 + [[self globalProperties] count]))
-            return YES;
-    return NO;
+    return YES;
 }
 
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    BOOL isGlobal;
-    NSInteger groupRow;
-    NSInteger header = self.showHeaders ? 1 : 0;
-    
-    NSInteger globalCutoff;
-    if (self.showGroupGlobalProperties)
-        globalCutoff = header + [[self globalProperties] count];
-    else
-        globalCutoff = 0;
-    if (row < globalCutoff) {
-        isGlobal = YES;
-        groupRow = row;
-    } else {
-        isGlobal = NO;
-        groupRow = row - globalCutoff;
-    }
-    groupRow = groupRow + (1 - header);
-    
-    /* headers */
-    if (groupRow == 0) {
-        NSTableCellView *view = [tableView makeViewWithIdentifier:@"headerRow" owner:self];
-        NSBundle *b = [NSBundle bundleForClass:[MGSColourSchemeTableViewDataSource class]];
-        if (isGlobal) {
-            view.textField.stringValue = NSLocalizedStringFromTableInBundle(@"Global Properties", nil, b, @"Colour Scheme Table Header");
-        } else {
-            view.textField.stringValue = NSLocalizedStringFromTableInBundle(@"Syntax Highlighting", nil, b, @"Colour Scheme Table Header");
-        }
-        return view;
-    }
-    
-    MGSColourSchemeTableCellView *view = [tableView makeViewWithIdentifier:@"normalRow" owner:self];
-    if (isGlobal) {
-        NSString *key = [[self globalProperties] objectAtIndex:groupRow-1];
-        view.globalPropertyKeyPath = key;
-        view.syntaxGroup = nil;
-    } else {
-        MGSSyntaxGroup group = [[self colouringGroups] objectAtIndex:groupRow-1];
-        view.globalPropertyKeyPath = nil;
-        view.syntaxGroup = group;
-    }
-    view.parentVc = self;
-    [self updateView:view];
+    id view = _tableRows[row];
+    if ([view isKindOfClass:[MGSColourSchemeTableCellView class]])
+        [self updateView:view];
     return view;
 }
 
@@ -324,8 +380,10 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    [self.colorWell deactivate];
     [self.parentVc prepareForReuseView:self];
+    [self.colorWell deactivate];
+    self.syntaxGroup = nil;
+    self.globalPropertyKeyPath = nil;
 }
 
 
