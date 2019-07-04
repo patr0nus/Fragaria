@@ -31,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
  *     - The "Syntax Definitions" directory inside the "Application Support" directory of
  *       the current application.
  *  - Syntax group name files from:
- *     - The Resources directory of the Fragaria framework bundle
+ *     - The Resources directory of the Fragaria framework bundle (the built-in syntax
+ *       group names)
  *     - The Resources directory of the current application bundle
  *     - The "Syntax Definitions" directory inside the "Application Support" directory of
  *       the current application.
@@ -50,20 +51,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Returns a parser factory which loads syntax definitions from the
  *  "Resources/Syntax Definitions" directory in the specified bundle and
- *  syntax group names from a localized resource named "SyntaxGroupNames.strings". */
+ *  syntax group names from a localized resource named "SyntaxGroupNames.strings".
+ *  @param bundles The bundle where to search for syntax definitions and group names.
+ *  @note All built-in syntax group names are loaded as well, but the names loaded
+ *     from the specified bundles always take precedence. */
 - (instancetype)initWithSyntaxDefinitionsInBundles:(NSArray <NSBundle *> *)bundles;
 
 /** Returns a parser factory which loads syntax definitions from the
  *  specified directories and syntax group names from strings files named
  *  "SyntaxGroupNames.strings" and located in the same directories.
  *  @param searchPaths An array of directories where to search syntax definition
- *    files and syntax group name files.*/
+ *    files and syntax group name files.
+ *  @note All built-in syntax group names are loaded as well, but the names loaded
+ *     from the specified paths always take precedence. */
 - (instancetype)initWithSyntaxDefinitionDirectories:(NSArray <NSURL *> *)searchPaths;
 
 /** Returns a parser factory which loads the specified syntax definition
  *  files and the specified syntax group name files.
  *  @param f An array of syntax definition file URLs.
- *  @param strf An array of syntax group name strings file URLs. */
+ *  @param strf An array of syntax group name strings file URLs.
+ *  @note When using this method, the default syntax group names are not loaded.
+ *    In general, prefer using the other initializers when possible. */
 - (instancetype)initWithSyntaxDefinitionFiles:(NSArray <NSURL *> *)f syntaxGroupNameFiles:(NSArray <NSURL *> *)strf NS_DESIGNATED_INITIALIZER;
 
 

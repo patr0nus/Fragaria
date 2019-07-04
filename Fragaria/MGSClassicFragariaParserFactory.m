@@ -55,7 +55,8 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 {
     NSArray <NSURL *> *defssp = [[self class] syntaxDefinitionSearchPathsFromBundles:bundles];
     NSArray <NSURL *> *defs = [[self class] searchSyntaxDefinitionsInSearchPaths:defssp];
-    NSArray <NSURL *> *names = [[self class] searchSyntaxGroupNamesInBundles:bundles];
+    NSArray <NSBundle *> *namesBundles = [@[[[self class] bundle]] arrayByAddingObjectsFromArray:bundles];
+    NSArray <NSURL *> *names = [[self class] searchSyntaxGroupNamesInBundles:namesBundles];
     return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:names];
 }
 
@@ -63,8 +64,9 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 - (instancetype)initWithSyntaxDefinitionDirectories:(NSArray <NSURL *> *)searchPaths
 {
     NSArray <NSURL *> *defs = [[self class] searchSyntaxDefinitionsInSearchPaths:searchPaths];
+    NSArray <NSURL *> *baseNames = [[self class] searchSyntaxGroupNamesInBundles:@[[[self class] bundle]]];
     NSArray <NSURL *> *names = [[self class] searchSyntaxGroupNamesInSearchPaths:searchPaths];
-    return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:names];
+    return [self initWithSyntaxDefinitionFiles:defs syntaxGroupNameFiles:[baseNames arrayByAddingObjectsFromArray:names]];
 }
 
 
