@@ -12,6 +12,13 @@
 #import "NSObject+Fragaria.h"
 
 
+@interface MGSColourSchemeTableViewDataSource ()
+
+@property (nonatomic, strong) MGSMutableColourScheme *editableScheme;
+
+@end
+
+
 @implementation MGSColourSchemeTableViewDataSource
 {
     NSMutableArray *_tableRows;
@@ -60,11 +67,25 @@
 }
 
 
-- (void)setCurrentScheme:(MGSMutableColourScheme *)currentScheme
+- (void)setCurrentScheme:(MGSColourScheme *)currentScheme
 {
     _currentScheme = currentScheme;
+    if ([_currentScheme isKindOfClass:[MGSMutableColourScheme class]])
+        _editableScheme = (MGSMutableColourScheme *)_currentScheme;
+    else
+        _editableScheme = [_currentScheme mutableCopy];
     [self.tableView reloadData];
     [self mgs_propagateValue:_currentScheme forBinding:NSStringFromSelector(@selector(currentScheme))];
+}
+
+
+- (void)updateCurrentScheme
+{
+    [self willChangeValueForKey:NSStringFromSelector(@selector(currentScheme))];
+    if (_currentScheme != _editableScheme)
+        _currentScheme = [_editableScheme copy];
+    [self mgs_propagateValue:_currentScheme forBinding:NSStringFromSelector(@selector(currentScheme))];
+    [self didChangeValueForKey:NSStringFromSelector(@selector(currentScheme))];
 }
 
 
@@ -294,7 +315,7 @@
 
 - (void)_updateView_global
 {
-    MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
+    MGSMutableColourScheme *scheme = self.parentVc.editableScheme;
     
     self.label.stringValue = [self.parentVc localizedStringForGlobalProperty:self.globalPropertyKeyPath];
     
@@ -310,7 +331,7 @@
 
 - (void)_updateView_group
 {
-    MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
+    MGSMutableColourScheme *scheme = self.parentVc.editableScheme;
     MGSSyntaxGroup resolvedGrp = [scheme resolveSyntaxGroup:self.syntaxGroup];
     
     BOOL colors = [scheme coloursSyntaxGroup:resolvedGrp];
@@ -343,19 +364,19 @@
 
 - (void)_updateScheme_global
 {
-    MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
+    MGSMutableColourScheme *scheme = self.parentVc.editableScheme;
     
     NSColor *newColor = self.colorWell.color;
     [scheme setValue:newColor forKeyPath:self.globalPropertyKeyPath];
     
     [self.parentVc updateView:self];
-    [self.parentVc mgs_propagateValue:scheme forBinding:NSStringFromSelector(@selector(currentScheme))];
+    [self.parentVc updateCurrentScheme];
 }
 
 
 - (void)_updateScheme_group
 {
-    MGSMutableColourScheme *scheme = self.parentVc.currentScheme;
+    MGSMutableColourScheme *scheme = self.parentVc.editableScheme;
     
     BOOL newColors = self.enabled.state == NSControlStateValueOn ? YES : NO;
     
@@ -373,7 +394,7 @@
         forSyntaxGroup:self.syntaxGroup];
     
     [self.parentVc updateView:self];
-    [self.parentVc mgs_propagateValue:scheme forBinding:NSStringFromSelector(@selector(currentScheme))];
+    [self.parentVc updateCurrentScheme];
 }
 
 

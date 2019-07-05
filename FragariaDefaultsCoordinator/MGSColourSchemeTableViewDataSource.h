@@ -14,10 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class MGSColourSchemeTableCellView;
 
 
+/**
+ *  A bindings-compatible controller-layer class for displaying and editing the contents of a
+ *  MGSMutableColourScheme through a NSTableView.
+ */
 @interface MGSColourSchemeTableViewDataSource : NSObject <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic) IBOutlet NSTableView *tableView;
-@property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
+@property (nonatomic, strong) MGSColourScheme *currentScheme;
 
 @property (nonatomic) BOOL showGroupProperties;
 @property (nonatomic) BOOL showGroupGlobalProperties;
