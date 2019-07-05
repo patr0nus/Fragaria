@@ -2305,6 +2305,7 @@
 				01919E1F217D20A800E26B9D /* Sources */,
 				01919E20217D20A800E26B9D /* Frameworks */,
 				01919E21217D20A800E26B9D /* Resources */,
+				01CB884C22CEC69E00A6DA19 /* Write Version */,
 			);
 			buildRules = (
 			);
@@ -2657,7 +2658,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "which -s git\nif [ $? -eq 0 ]; then\n  BUILDN=$(git describe --always --tags --long)\n  VERN=$(git describe --always --tags | sed 's/release-//');\nelse\n  echo fallback! git not found\n  BUILDN=1\n  VERN=2.00000000.0;\nfi\necho build $BUILDN , version $VERN\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILDN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $VERN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+			shellScript = "which -s git\nif [ $? -eq 0 ]; then\n  BUILDN=$(git describe --always --tags --long)\n  VERN=$(git describe --always --tags | sed 's/release-//');\nelse\n  echo fallback! git not found\n  BUILDN=1\n  VERN=3.00000000.0;\nfi\necho build $BUILDN , version $VERN\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILDN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $VERN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+		};
+		01CB884C22CEC69E00A6DA19 /* Write Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Write Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "which -s git\nif [ $? -eq 0 ]; then\n  BUILDN=$(git describe --always --tags --long)\n  VERN=$(git describe --always --tags | sed 's/release-//');\nelse\n  echo fallback! git not found\n  BUILDN=1\n  VERN=3.00000000.0;\nfi\necho build $BUILDN , version $VERN\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILDN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $VERN\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
 		};
 		D0E520F11A88DC81005CB80B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
