@@ -24,15 +24,18 @@
                 <binding destination="-2" name="contentObject" keyPath="userDefaultsController.values" id="ppr-RK-Fh3"/>
             </connections>
         </objectController>
-        <objectController id="POX-Qr-aHg" userLabel="Color Scheme Controller">
+        <objectController objectClassName="MGSMutableColourScheme" id="POX-Qr-aHg" userLabel="Color Scheme Controller">
             <connections>
-                <binding destination="-2" name="contentObject" keyPath="currentScheme" id="Xg8-He-b05"/>
+                <binding destination="x5m-Ak-VJo" name="contentObject" keyPath="selection.colourScheme" id="swc-bf-wtd">
+                    <dictionary key="options">
+                        <bool key="NSHandlesContentAsCompoundValue" value="YES"/>
+                    </dictionary>
+                </binding>
             </connections>
         </objectController>
         <arrayController objectClassName="MGSColourScheme" automaticallyRearrangesObjects="YES" id="z8u-bs-3l4" userLabel="Colour Scheme List Controller" customClass="MGSColourSchemeListController">
             <connections>
                 <outlet property="colourSchemeController" destination="POX-Qr-aHg" id="vYq-ac-0g6"/>
-                <outlet property="parentViewController" destination="-2" id="Bjc-Sk-D41"/>
                 <outlet property="schemeMenu" destination="cfm-EI-KQe" id="i0a-jy-Jsv"/>
                 <outlet property="schemeSaveDeleteButton" destination="soo-KG-LXb" id="OuI-uw-TkN"/>
             </connections>
@@ -281,8 +284,8 @@
                     </constraints>
                     <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.textColor" id="dZe-GI-hq3"/>
                         <binding destination="-2" name="enabled" keyPath="self.managedProperties.colourScheme" id="SgL-B8-W72"/>
+                        <binding destination="POX-Qr-aHg" name="value" keyPath="selection.textColor" id="wgI-BB-vJm"/>
                     </connections>
                 </colorWell>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="V8C-Iz-4On">
@@ -528,7 +531,7 @@
         </customView>
         <customObject id="JvL-9o-knG" customClass="MGSManagedColourSchemeTableViewDataSource">
             <connections>
-                <outlet property="parentVc" destination="-2" id="Ezw-Vm-itX"/>
+                <outlet property="parentVc" destination="-2" id="2fc-6C-53V"/>
                 <outlet property="tableView" destination="2rq-OV-oYW" id="cAr-de-zm2"/>
             </connections>
         </customObject>

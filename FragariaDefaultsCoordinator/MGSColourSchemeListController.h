@@ -70,9 +70,6 @@
  *  and buttonSaveDeleteEnabled respectively. */
 @property (nonatomic, assign) IBOutlet NSButton *schemeSaveDeleteButton;
 
-/** A reference to the parent view controller. */
-@property (nonatomic, assign) IBOutlet MGSPrefsColourPropertiesViewController *parentViewController;
-
 
 #pragma mark - Properties - Bindable for UI Use
 /// @name Properties - Bindable for UI Use

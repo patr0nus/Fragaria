@@ -23,7 +23,4 @@
 @property (nonatomic, weak) IBOutlet NSObjectController *currentSchemeObjectController;
 
 
-@property (nonatomic, strong) MGSMutableColourScheme *currentScheme;
-
-
 @end

@@ -97,7 +97,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     [self setupObservers];
 
     /* Set our current scheme based on the view settings. */
-    self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:self.parentViewController.currentScheme];
+    self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:self.colourSchemeController.content];
 
     /* If the current scheme matches an existing theme, then set it. */
     [self findAndSetCurrentScheme];
@@ -139,12 +139,13 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     // - If the current scheme is not built-in, can delete.
     // - Otherwise the button should read as saving (will be disabled).
 
-    if ( self.currentSchemeIsCustom || self.currentScheme.loadedFromBundle)
+    NSBundle *b = [NSBundle bundleForClass:[MGSColourSchemeListController class]];
+    if (self.currentSchemeIsCustom || self.currentScheme.loadedFromBundle)
     {
-        return NSLocalizedStringFromTableInBundle(@"Save Scheme…", nil, [NSBundle bundleForClass:[self class]],  @"The text for the save/delete scheme button when it should read Save Scheme…");
+        return NSLocalizedStringFromTableInBundle(@"Save Scheme…", nil, b, @"The text for the save/delete scheme button when it should read Save Scheme…");
     }
 
-    return NSLocalizedStringFromTableInBundle(@"Delete Scheme…", nil, [NSBundle bundleForClass:[self class]],  @"The text for the save/delete scheme button when it should read Delete Scheme…");
+    return NSLocalizedStringFromTableInBundle(@"Delete Scheme…", nil, b, @"The text for the save/delete scheme button when it should read Delete Scheme…");
 }
 
 
@@ -319,7 +320,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (void)applyColourSchemeToView
 {
     self.ignoreObservations = YES;
-    self.parentViewController.currentScheme = [self.currentScheme mutableCopy];
+    [self.colourSchemeController addObject:[self.currentScheme mutableCopy]];
     self.ignoreObservations = NO;
 }
 
@@ -331,7 +332,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 - (void)findAndSetCurrentScheme
 {
-	MGSColourScheme *currentViewScheme = self.parentViewController.currentScheme;
+	MGSColourScheme *currentViewScheme = self.colourSchemeController.content;
     MGSColourSchemeOption *matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
 
 	if (matchingScheme)
