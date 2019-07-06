@@ -25,9 +25,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 @property (nonatomic, strong, readwrite) NSMutableArray *colourSchemes;
 
-@property (nonatomic, strong) MGSColourSchemeOption *currentScheme;
-@property (nonatomic, assign) BOOL currentSchemeIsCustom;
-
 @property (nonatomic, assign) BOOL ignoreObservations;
 
 @property (nonatomic, strong) MGSColourSchemeSaveController *saveController;
@@ -73,7 +70,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     /* Load our schemes and get them ready for use. */
 	[self loadColourSchemes];
 	
-    [self setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:@"displayName"
+    [self setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:@"colourScheme.displayName"
                                                             ascending:YES
                                                              selector:@selector(localizedCaseInsensitiveCompare:)]
                                 ]];
@@ -96,10 +93,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     /* Setup observation of the properties of the connected outlets. */
     [self setupObservers];
 
-    /* Set our current scheme based on the view settings. */
-    self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:self.colourSchemeController.content];
-
-    /* If the current scheme matches an existing theme, then set it. */
+    /* Set the current scheme from the object controller. */
     [self findAndSetCurrentScheme];
 }
 
@@ -111,14 +105,14 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 + (NSSet *)keyPathsForValuesAffectingButtonSaveDeleteEnabled
 {
-    return [NSSet setWithArray:@[ @"self.selectionIndex", @"self.currentScheme", @"self.schemeMenu.selectedObject", @"self.currentScheme.loadedFromBundle" ]];
+    return [NSSet setWithArray:@[@"selectionIndex"]];
 }
 
 - (BOOL)buttonSaveDeleteEnabled
 {
     BOOL result;
-    result = self.currentScheme && !self.currentScheme.loadedFromBundle;
-    result = result || self.currentSchemeIsCustom;
+    MGSColourSchemeOption *opt = self.selectedObjects.firstObject;
+    result = !opt.loadedFromBundle || opt.transient;
 
     return result;
 }
@@ -129,7 +123,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 + (NSSet *)keyPathsForValuesAffectingButtonSaveDeleteTitle
 {
-    return [NSSet setWithArray:@[ @"self.selectionIndex", @"self.currentScheme", @"self.schemeMenu.selectedObject", @"self.currentScheme.loadedFromBundle" ]];
+    return [NSSet setWithArray:@[ @"selectionIndex"]];
 }
 
 - (NSString *)buttonSaveDeleteTitle
@@ -140,7 +134,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     // - Otherwise the button should read as saving (will be disabled).
 
     NSBundle *b = [NSBundle bundleForClass:[MGSColourSchemeListController class]];
-    if (self.currentSchemeIsCustom || self.currentScheme.loadedFromBundle)
+    MGSColourSchemeOption *opt = self.selectedObjects.firstObject;
+    if (opt.transient || opt.loadedFromBundle)
     {
         return NSLocalizedStringFromTableInBundle(@"Save Scheme…", nil, b, @"The text for the save/delete scheme button when it should read Save Scheme…");
     }
@@ -161,7 +156,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     // - If the current scheme is not built-in, will delete.
     // - Otherwise someone forgot to bind to the enabled property properly.
 
-    if (self.currentSchemeIsCustom)
+    MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
+    if (selection.transient)
     {
         NSURL *path = [self applicationSupportDirectory];
         path = [path URLByAppendingPathComponent:KMGSColourSchemesFolder];
@@ -182,16 +178,16 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
             NSString *schemefilename = [NSString stringWithFormat:@"%@.%@", self.saveController.fileName, KMGSColourSchemeExt];
             NSURL *schemeurl = [path URLByAppendingPathComponent:schemefilename];
-            self.currentScheme.displayName = self.saveController.schemeName;
-            [self.currentScheme writeToSchemeFileURL:schemeurl error:nil];
+            selection.colourScheme.displayName = self.saveController.schemeName;
+            [selection.colourScheme writeToSchemeFileURL:schemeurl error:nil];
             [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
-            self.currentSchemeIsCustom = NO;
+            selection.transient = NO;
             [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
         }];
     }
-    else if (!self.currentScheme.loadedFromBundle)
+    else if (!selection.loadedFromBundle)
     {
         self.saveController = [[MGSColourSchemeSaveController alloc] init];
         NSWindow *senderWindow = ((NSButton *)sender).window;
@@ -200,12 +196,12 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         [panel beginSheetModalForWindow:senderWindow completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
                 NSError *error;
-                [[NSFileManager defaultManager] removeItemAtPath:self.currentScheme.sourceFile error:&error];
+                [[NSFileManager defaultManager] removeItemAtURL:selection.sourceURL error:&error];
                 if (error)
                 {
                     NSLog(@"%@", error);
                 }
-                [self removeObject:self.currentScheme];
+                [self removeObject:selection];
             }
         }];
     }
@@ -260,14 +256,11 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
             MGSColourSchemeOption *newScheme = [self.arrangedObjects objectAtIndex:self.selectionIndex];
-            if (self.currentSchemeIsCustom && newScheme != self.currentScheme)
-            {
+            if (!newScheme.transient) {
                 self.ignoreObservations = YES;
-                [self removeObject:self.currentScheme];
-                self.currentSchemeIsCustom = NO;
+                [self removeTransientSchemes];
                 self.ignoreObservations = NO;
             }
-            self.currentScheme = newScheme;
             [self applyColourSchemeToView];
             [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
@@ -277,6 +270,17 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 #pragma mark - Private/Internal
+
+
+- (void)removeTransientSchemes
+{
+    NSMutableArray *toRemove = [NSMutableArray array];
+    for (MGSColourSchemeOption *opt in self.colourSchemes) {
+        if (opt.transient)
+            [toRemove addObject:opt];
+    }
+    [self removeObjects:toRemove];
+}
 
 
 /*
@@ -290,7 +294,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
     // ignore the custom theme if it's in the list. Convoluted, but avoids string checking.
     list = [list objectsAtIndexes:[list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        return !( self.currentSchemeIsCustom && [self.currentScheme isEqual:obj] );
+        return ![obj isTransient];
     }]];
 
     /* Convert all schemes to a plist before converting to factor in the
@@ -301,7 +305,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     [schemetest setDisplayName:@""];
     
     for (MGSColourSchemeOption *item in list) {
-        NSDictionary *itemplist = [item propertyListRepresentation];
+        NSDictionary *itemplist = [item.colourScheme propertyListRepresentation];
         MGSMutableColourScheme *itemtest = [[MGSMutableColourScheme alloc] initWithPropertyList:itemplist error:nil];
         [itemtest setDisplayName:@""];
 
@@ -320,7 +324,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (void)applyColourSchemeToView
 {
     self.ignoreObservations = YES;
-    [self.colourSchemeController addObject:[self.currentScheme mutableCopy]];
+    MGSColourSchemeOption *sel = [self.selectedObjects firstObject];
+    [self.colourSchemeController addObject:[sel.colourScheme mutableCopy]];
     self.ignoreObservations = NO;
 }
 
@@ -332,36 +337,33 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  */
 - (void)findAndSetCurrentScheme
 {
-	MGSColourScheme *currentViewScheme = self.colourSchemeController.content;
+    MGSColourScheme *currentViewScheme = self.colourSchemeController.content;
+    MGSColourSchemeOption *currentSelection = self.selectedObjects.firstObject;
+    if (currentSelection.transient) {
+        /* already editing an existing transient scheme; just update it */
+        NSString *name = currentSelection.colourScheme.displayName;
+        currentSelection.colourScheme = [currentViewScheme mutableCopy];
+        currentSelection.colourScheme.displayName = name;
+        return;
+    }
+    
+    [self removeTransientSchemes];
     MGSColourSchemeOption *matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
 
-	if (matchingScheme)
-    {
-        if (self.currentSchemeIsCustom)
-        {
-            [self removeObject:self.currentScheme];
-        }
-		self.currentScheme = matchingScheme;
-        self.selectionIndex = [self.arrangedObjects indexOfObject:self.currentScheme];
-        self.currentSchemeIsCustom = NO;
-    }
-    else
-    {
+	if (!matchingScheme) {
         // Take the current controller values.
-        self.currentScheme = [[MGSColourSchemeOption alloc] initWithColourScheme:currentViewScheme];
-        
-        if (!self.currentSchemeIsCustom)
-        {
-            // Create and activate a custom scheme.
-            self.currentScheme.displayName = NSLocalizedStringFromTableInBundle(
-                @"Custom Settings", nil, [NSBundle bundleForClass:[MGSColourScheme class]],
-                @"Name for Custom Settings scheme.");
-            self.currentSchemeIsCustom = YES;
-            self.ignoreObservations = YES;
-            [self addObject:self.currentScheme];
-            self.ignoreObservations = NO;
-		}
+        matchingScheme = [[MGSColourSchemeOption alloc] init];
+        matchingScheme.colourScheme = [currentViewScheme mutableCopy];
+        matchingScheme.transient = YES;
+        matchingScheme.colourScheme.displayName = NSLocalizedStringFromTableInBundle(
+            @"Custom Settings", nil, [NSBundle bundleForClass:[MGSColourScheme class]],
+            @"Name for Custom Settings scheme.");
+        self.ignoreObservations = YES;
+        [self addObject:matchingScheme];
+        self.ignoreObservations = NO;
     }
+    
+    [self setSelectedObjects:@[matchingScheme]];
 }
 
 
@@ -414,7 +416,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     
     NSArray<MGSColourScheme *> *builtinSchemes = [MGSColourScheme builtinColourSchemes];
     for (MGSColourScheme *scheme in builtinSchemes) {
-        MGSColourSchemeOption *option = [[MGSColourSchemeOption alloc] initWithColourScheme:scheme];
+        MGSColourSchemeOption *option = [[MGSColourSchemeOption alloc] init];
+        option.colourScheme = [scheme mutableCopy];
         [option setLoadedFromBundle:YES];
         [self.colourSchemes addObject:option];
     }
@@ -455,9 +458,15 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     for (NSURL *file in fileArray) {
         if (![[file pathExtension] isEqual:KMGSColourSchemeExt])
             continue;
-        MGSColourSchemeOption *scheme = [[MGSColourSchemeOption alloc] initWithSchemeFileURL:file error:nil];
-        scheme.loadedFromBundle = bundleFlag;
-        [self.colourSchemes addObject:scheme];
+        MGSMutableColourScheme *scheme = [[MGSMutableColourScheme alloc] initWithSchemeFileURL:file error:nil];
+        if (scheme) {
+            MGSColourSchemeOption *option = [[MGSColourSchemeOption alloc] init];
+            option.colourScheme = scheme;
+            option.loadedFromBundle = bundleFlag;
+            if (!option.loadedFromBundle)
+                option.sourceURL = file;
+            [self.colourSchemes addObject:option];
+        }
     }
 }
 

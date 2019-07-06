@@ -369,7 +369,7 @@
     NSColor *newColor = self.colorWell.color;
     [scheme setValue:newColor forKeyPath:self.globalPropertyKeyPath];
     
-    [self.parentVc updateView:self];
+    [self.parentVc.tableView reloadData];
     [self.parentVc updateCurrentScheme];
 }
 
@@ -393,7 +393,7 @@
             MGSColourSchemeGroupOptionKeyFontVariant: @(variant)}
         forSyntaxGroup:self.syntaxGroup];
     
-    [self.parentVc updateView:self];
+    [self.parentVc.tableView reloadData];
     [self.parentVc updateCurrentScheme];
 }
 

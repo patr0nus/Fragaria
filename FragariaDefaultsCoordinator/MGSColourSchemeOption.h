@@ -9,16 +9,22 @@
 #import "MGSMutableColourScheme.h"
 
 
-/** A subclass of MGSColorScheme that stores preferences-UI-only properties. */
-@interface MGSColourSchemeOption : MGSMutableColourScheme
+/** Class which stores information for one menu entry of MGSColourSchemeListController. */
+@interface MGSColourSchemeOption : NSObject
 
+
+/** The colour scheme */
+@property (nonatomic) MGSMutableColourScheme *colourScheme;
+
+/** True if this scheme is a custom scheme not yet saved */
+@property (nonatomic, assign, getter=isTransient) BOOL transient;
 
 /** Indicates if this definition was loaded from a bundle. */
 @property (nonatomic, assign) BOOL loadedFromBundle;
 
 /** Indicates the complete and path and filename this instance was loaded
  *  from (if any). */
-@property (nonatomic, strong) NSString *sourceFile;
+@property (nonatomic, strong) NSURL *sourceURL;
 
 
 @end
