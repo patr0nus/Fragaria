@@ -457,6 +457,7 @@
 		0108927C2268C51300A874FF /* vhdl.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FEF1C99E16E00C335DA /* vhdl.plist */; };
 		0108927D2268C51300A874FF /* xml.plist in Install Additional Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 01086FF01C99E16E00C335DA /* xml.plist */; };
 		011B56D71C1DC7AB00540669 /* MGSLineNumberCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 011B56D61C1DC7AB00540669 /* MGSLineNumberCacheTests.m */; };
+		01211DB222D145410055BBBA /* MGSColourSchemeListController.h in Headers */ = {isa = PBXBuildFile; fileRef = D0718BA91AB71FE00073493A /* MGSColourSchemeListController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01281839206FD3E6004D2C3B /* example.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01281838206FD3E5004D2C3B /* example.txt */; };
 		0132786A1A81650300D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 013278671A81614600D2DCA5 /* MGSClassicFragariaSyntaxDefinition.m */; };
 		013645082187E7A70088B324 /* MGSSyntaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 013645062187E7A70088B324 /* MGSSyntaxParser.m */; };
@@ -2252,6 +2253,7 @@
 				01919E60217D24DA00E26B9D /* MGSPrefsColourPropertiesViewController.h in Headers */,
 				01919E4B217D21F600E26B9D /* MGSFragariaView+Definitions.h in Headers */,
 				01D9740B22CBF08F003C41FA /* MGSColourSchemeTableViewDataSource.h in Headers */,
+				01211DB222D145410055BBBA /* MGSColourSchemeListController.h in Headers */,
 				01919E62217D24EC00E26B9D /* MGSPrefsViewController.h in Headers */,
 				01919E4F217D221E00E26B9D /* MGSHybridUserDefaultsController.h in Headers */,
 				01919E4C217D220900E26B9D /* MGSUserDefaultsDelegate.h in Headers */,
