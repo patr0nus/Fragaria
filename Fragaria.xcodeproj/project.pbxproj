@@ -504,7 +504,6 @@
 		01919E56217D234C00E26B9D /* MGSPrefsEditorProperties.xib in Resources */ = {isa = PBXBuildFile; fileRef = D00BB05F213876D3007E5FA6 /* MGSPrefsEditorProperties.xib */; };
 		01919E57217D234C00E26B9D /* MGSColourSchemeSave.xib in Resources */ = {isa = PBXBuildFile; fileRef = D00BB061213876D3007E5FA6 /* MGSColourSchemeSave.xib */; };
 		01919E58217D235200E26B9D /* MGSColourSchemeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */; };
-		01919E59217D235200E26B9D /* MGSColourSchemeOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C1D31F9A861000638B38 /* MGSColourSchemeOption.m */; };
 		01919E5A217D235200E26B9D /* MGSColourSchemeSaveController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C13BBA1ABD12A400E191A9 /* MGSColourSchemeSaveController.m */; };
 		01919E5B217D235500E26B9D /* MGSBoolToColourTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D06653CD1AC00CCD00ACE8B0 /* MGSBoolToColourTransformer.m */; };
 		01919E5C217D235500E26B9D /* MGSBoolToGlobalHintTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D07717AF1AC25A8800B23867 /* MGSBoolToGlobalHintTransformer.m */; };
@@ -1428,8 +1427,6 @@
 		0191FA7C1A881F280099B50D /* MGSDragOperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSDragOperationDelegate.h; sourceTree = "<group>"; };
 		0191FA7F1A8829930099B50D /* MGSTextView+MGSTextActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MGSTextView+MGSTextActions.h"; sourceTree = "<group>"; };
 		0191FA801A8829930099B50D /* MGSTextView+MGSTextActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MGSTextView+MGSTextActions.m"; sourceTree = "<group>"; };
-		0193C1D21F9A861000638B38 /* MGSColourSchemeOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSColourSchemeOption.h; sourceTree = "<group>"; };
-		0193C1D31F9A861000638B38 /* MGSColourSchemeOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSColourSchemeOption.m; sourceTree = "<group>"; };
 		019B02EE1C1F4FE20026548F /* MGSFragariaRowColumnFunctionsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSFragariaRowColumnFunctionsTests.m; sourceTree = "<group>"; };
 		019B80181A9E77330007D234 /* MGSFragariaTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSFragariaTextViewDelegate.h; sourceTree = "<group>"; };
 		01AC7E711AA341AA00DF7620 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1901,8 +1898,6 @@
 			children = (
 				D0718BA91AB71FE00073493A /* MGSColourSchemeListController.h */,
 				D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */,
-				0193C1D21F9A861000638B38 /* MGSColourSchemeOption.h */,
-				0193C1D31F9A861000638B38 /* MGSColourSchemeOption.m */,
 				D0C13BB91ABD12A400E191A9 /* MGSColourSchemeSaveController.h */,
 				D0C13BBA1ABD12A400E191A9 /* MGSColourSchemeSaveController.m */,
 			);
@@ -2702,7 +2697,6 @@
 				01919E51217D234000E26B9D /* MGSFontWell.m in Sources */,
 				01919E44217D20E400E26B9D /* MGSHybridUserDefaultsController.m in Sources */,
 				01919E53217D234400E26B9D /* MGSPrefsColourPropertiesViewController.m in Sources */,
-				01919E59217D235200E26B9D /* MGSColourSchemeOption.m in Sources */,
 				01919E5C217D235500E26B9D /* MGSBoolToGlobalHintTransformer.m in Sources */,
 				01919E43217D20E400E26B9D /* MGSFragariaView+Definitions.m in Sources */,
 				01919E5B217D235500E26B9D /* MGSBoolToColourTransformer.m in Sources */,

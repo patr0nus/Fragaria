@@ -7,7 +7,6 @@
 //
 
 #import "MGSColourSchemeListController.h"
-#import "MGSColourSchemeOption.h"
 #import "MGSColourSchemeSaveController.h"
 #import "MGSPrefsColourPropertiesViewController.h"
 
@@ -32,7 +31,20 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 @end
 
 
+@interface MGSColourSchemeOption ()
+
+/** True if this scheme is a custom scheme not yet saved */
+@property (nonatomic, assign, getter=isTransient) BOOL transient;
+
+@end
+
+
 #pragma mark - Implementation
+
+
+@implementation MGSColourSchemeOption
+
+@end
 
 
 @implementation MGSColourSchemeListController
@@ -68,7 +80,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (void)setupEarly
 {
     /* Load our schemes and get them ready for use. */
-	[self loadColourSchemes];
+	self.colourSchemes = [[self loadColourSchemes] mutableCopy];
 	
     [self setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:@"colourScheme.displayName"
                                                             ascending:YES
@@ -159,27 +171,18 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
     if (selection.transient)
     {
-        NSURL *path = [self applicationSupportDirectory];
-        path = [path URLByAppendingPathComponent:KMGSColourSchemesFolder];
-
-        [[NSFileManager defaultManager] createDirectoryAtURL: path
-                                  withIntermediateDirectories:YES
-                                                   attributes:nil
-                                                        error:nil];
-
         self.saveController = [[MGSColourSchemeSaveController alloc] init];
-        self.saveController.schemeName = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[self class]],  @"Default name for new schemes.");
+        self.saveController.schemeName = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[MGSColourSchemeListController class]],  @"Default name for new schemes.");
 
         NSWindow *senderWindow = ((NSButton *)sender).window;
         [senderWindow beginSheet:self.saveController.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode != NSModalResponseOK ) {
+            if (returnCode != NSModalResponseOK)
                 return;
-            }
-
-            NSString *schemefilename = [NSString stringWithFormat:@"%@.%@", self.saveController.fileName, KMGSColourSchemeExt];
-            NSURL *schemeurl = [path URLByAppendingPathComponent:schemefilename];
             selection.colourScheme.displayName = self.saveController.schemeName;
-            [selection.colourScheme writeToSchemeFileURL:schemeurl error:nil];
+            NSError *err;
+            if (![self saveColourScheme:selection error:&err]) {
+                NSLog(@"could not save colour scheme, error %@", err);
+            }
             [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
             selection.transient = NO;
@@ -195,13 +198,11 @@ static NSString * const KMGSColourSchemeExt = @"plist";
         
         [panel beginSheetModalForWindow:senderWindow completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
-                NSError *error;
-                [[NSFileManager defaultManager] removeItemAtURL:selection.sourceURL error:&error];
-                if (error)
-                {
-                    NSLog(@"%@", error);
-                }
                 [self removeObject:selection];
+                NSError *err;
+                if (![self deleteColourScheme:selection error:&err]) {
+                    NSLog(@"could not delete colour scheme, error %@", err);
+                };
             }
         }];
     }
@@ -406,22 +407,26 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 }
 
 
-/*
- * - loadColourSchemes
- *   Look in several possible locations for scheme files.
- */
-- (void)loadColourSchemes
+- (NSArray <MGSColourSchemeOption *> *)loadColourSchemes
 {
-    self.colourSchemes = [[NSMutableArray alloc] init];
+    NSMutableArray <MGSColourSchemeOption *> *res = [[NSMutableArray alloc] init];
     
     NSArray<MGSColourScheme *> *builtinSchemes = [MGSColourScheme builtinColourSchemes];
     for (MGSColourScheme *scheme in builtinSchemes) {
         MGSColourSchemeOption *option = [[MGSColourSchemeOption alloc] init];
         option.colourScheme = [scheme mutableCopy];
         [option setLoadedFromBundle:YES];
-        [self.colourSchemes addObject:option];
+        [res addObject:option];
     }
     
+    [res addObjectsFromArray:[self loadApplicationColourSchemes]];
+    return res;
+}
+
+
+- (NSArray <MGSColourSchemeOption *> *)loadApplicationColourSchemes
+{
+    NSMutableArray <MGSColourSchemeOption *> *res = [[NSMutableArray alloc] init];
     NSDictionary <NSURL *, NSNumber *> *searchPaths = @{
         [[NSBundle mainBundle] resourceURL]: @(YES),
         [self applicationSupportDirectory]: @(NO)
@@ -429,8 +434,9 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
     for (NSURL *path in searchPaths) {
         BOOL bundleflag = [[searchPaths objectForKey:path] boolValue];
-        [self addColourSchemesFromURL:path bundleFlag:bundleflag];
+        [res addObjectsFromArray:[self _loadApplicationColourSchemesFromURL:path bundleFlag:bundleflag]];
     }
+    return res;
 }
 
 
@@ -438,7 +444,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
  * - addColourSchemesFromPath
  *   Given a directory path, load all of the plist files that are there.
  */
-- (void)addColourSchemesFromURL:(NSURL *)path bundleFlag:(BOOL)bundleFlag
+- (NSArray <MGSColourSchemeOption *> *)_loadApplicationColourSchemesFromURL:(NSURL *)path bundleFlag:(BOOL)bundleFlag
 {
     // Build list of files to load.
     NSURL *directory = [path URLByAppendingPathComponent:KMGSColourSchemesFolder];
@@ -447,10 +453,12 @@ static NSString * const KMGSColourSchemeExt = @"plist";
     NSError *e;
     NSArray *fileArray = [fileManager contentsOfDirectoryAtURL:directory includingPropertiesForKeys:@[] options:0 error:&e];
     if (!fileArray) {
-//        NSLog(@"failed to add color schemes from %@; error %@", path, e);
-        return;
+        NSLog(@"failed to add color schemes from %@; error %@", path, e);
+        return @[];
     }
 
+    NSMutableArray <MGSColourSchemeOption *> *res = [[NSMutableArray alloc] init];
+    
     // Append each file to the dictionary of colour schemes. By design,
     // subsequently loaded schemes with the same name replace existing.
     // This lets the application bundle override the framework, and lets
@@ -465,9 +473,38 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             option.loadedFromBundle = bundleFlag;
             if (!option.loadedFromBundle)
                 option.sourceURL = file;
-            [self.colourSchemes addObject:option];
+            [res addObject:option];
         }
     }
+    
+    return res;
+}
+
+
+- (BOOL)saveColourScheme:(MGSColourSchemeOption *)selection error:(NSError **)err
+{
+    NSURL *path = [self applicationSupportDirectory];
+    path = [path URLByAppendingPathComponent:KMGSColourSchemesFolder];
+    if (![[NSFileManager defaultManager] createDirectoryAtURL:path
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:err]) {
+        return NO;
+    }
+
+    NSCharacterSet *dirtyCharacters = [NSCharacterSet characterSetWithCharactersInString:@"/\\?%*|\"<>"];
+    NSString *schemeName = selection.colourScheme.displayName;
+    NSString *fileName = [[schemeName componentsSeparatedByCharactersInSet:dirtyCharacters] componentsJoinedByString:@""];
+    NSString *schemefilename = [NSString stringWithFormat:@"%@.%@", fileName, KMGSColourSchemeExt];
+    NSURL *schemeurl = [path URLByAppendingPathComponent:schemefilename];
+    selection.sourceURL = schemeurl;
+    return [selection.colourScheme writeToSchemeFileURL:schemeurl error:err];
+}
+
+
+- (BOOL)deleteColourScheme:(MGSColourSchemeOption *)selection error:(NSError **)err
+{
+    return [[NSFileManager defaultManager] removeItemAtURL:selection.sourceURL error:err];
 }
 
 

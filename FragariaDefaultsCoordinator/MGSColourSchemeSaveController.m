@@ -58,8 +58,6 @@
     NSModalResponse response;
     
     if (sender == self.bSave) {
-        NSCharacterSet *cleanCharacters = [NSCharacterSet characterSetWithCharactersInString:@"/\\?%*|\"<>"];
-        self.fileName = [[self.schemeName componentsSeparatedByCharactersInSet:cleanCharacters] componentsJoinedByString:@""];
         response = NSModalResponseOK;
     } else {
         response = NSModalResponseCancel;

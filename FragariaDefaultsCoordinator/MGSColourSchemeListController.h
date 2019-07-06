@@ -10,6 +10,27 @@
 
 @class MGSPreferencesController;
 @class MGSPrefsColourPropertiesViewController;
+@class MGSMutableColourScheme;
+
+
+/** Class which stores information for one menu entry of MGSColourSchemeListController. */
+@interface MGSColourSchemeOption : NSObject
+
+/** The colour scheme */
+@property (nonatomic) MGSMutableColourScheme *colourScheme;
+
+/** Indicates if this definition was loaded from a bundle, and thus
+ *  it should not be editable. */
+@property (nonatomic, assign) BOOL loadedFromBundle;
+
+/** Indicates the complete and path and filename this instance was loaded
+ *  from (if any).
+ *  @note If you are saving the schemes to a file, you can leverage the
+ *    default implementation of -deleteColourScheme:error: in
+ *    MGSColourSchemeListController if you set this property accordingly. */
+@property (nonatomic, strong) NSURL *sourceURL;
+
+@end
 
 
 /**
@@ -24,7 +45,8 @@
  *  By default, schemes are loaded first from the framework bundle, then the
  *  application bundle, then finally from the application's Application Support
  *  folder. Schemes are saved in the application's Application Support/Colour
- *  Schemes directory, and only those schemes can be deleted.
+ *  Schemes directory, and only those schemes can be deleted. You can customize
+ *  this behavior by overriding the appropriate load and save methods.
  *
  *  To create a new scheme, the user modifies an already existing scheme through
  *  the colourSchemeController, at which point the name of the scheme changes to
@@ -61,6 +83,36 @@
  *  @param sender The object that sent the action. */
 - (IBAction)addDeleteButtonAction:(id)sender;
 
+
+#pragma mark - Color Scheme Saving and Loading
+/// @name Color Scheme Saving and Loading
+
+/** Loads the initial list of color schemes.
+ *  @note The default implementation creates the list from the built-in
+ *    color schemes exported by MGSColourScheme, and from the options
+ *    returned by -loadApplicationColourSchemes.
+ *  @returns A list of colour scheme options. */
+- (NSArray <MGSColourSchemeOption *> *)loadColourSchemes;
+
+/** Loads the initial list of application-specific color schemes.
+ *  @note The default implementation loads schemes from the "Colour Schemes"
+ *    directory in the Resources directory of the application bundle, and
+ *    from the "Colour Schemes" directory in the Application Support directory
+ *    of the application.
+ *  @returns A list of colour scheme options. */
+- (NSArray <MGSColourSchemeOption *> *)loadApplicationColourSchemes;
+
+/** Saves the color scheme in the specified option to persistent storage.
+ *  @param scheme The option containing the colour scheme to save.
+ *  @param err Set when an error occurs while saving.
+ *  @return YES if saving has succeeded, otherwise NO. */
+- (BOOL)saveColourScheme:(MGSColourSchemeOption *)scheme error:(NSError **)err;
+
+/** Deletes from persistent storage the color scheme in the specified option.
+ *  @param scheme The option containing the colour scheme to delete.
+ *  @param err Set when an error occurs while deleting.
+ *  @returns YES if the deletion has succeeded, otherwise NO. */
+- (BOOL)deleteColourScheme:(MGSColourSchemeOption *)scheme error:(NSError **)err;
 
 
 @end
