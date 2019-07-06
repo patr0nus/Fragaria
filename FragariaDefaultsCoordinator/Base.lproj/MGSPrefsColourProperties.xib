@@ -36,8 +36,6 @@
         <arrayController objectClassName="MGSColourSchemeOption" automaticallyRearrangesObjects="YES" id="z8u-bs-3l4" userLabel="Colour Scheme List Controller" customClass="MGSColourSchemeListController">
             <connections>
                 <outlet property="colourSchemeController" destination="POX-Qr-aHg" id="vYq-ac-0g6"/>
-                <outlet property="schemeMenu" destination="cfm-EI-KQe" id="i0a-jy-Jsv"/>
-                <outlet property="schemeSaveDeleteButton" destination="soo-KG-LXb" id="OuI-uw-TkN"/>
             </connections>
         </arrayController>
         <customView id="xfo-Mv-vNh" userLabel="Color Scheme View">
