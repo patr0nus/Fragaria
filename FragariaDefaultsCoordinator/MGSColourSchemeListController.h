@@ -10,6 +10,7 @@
 
 @class MGSPreferencesController;
 @class MGSPrefsColourPropertiesViewController;
+@class MGSColourScheme;
 @class MGSMutableColourScheme;
 
 
@@ -63,6 +64,21 @@
 /** A reference to the NSObjectController whose content is the instance of
  *  MGSColourScheme being edited. */
 @property (nonatomic, weak) IBOutlet NSObjectController *colourSchemeController;
+
+
+#pragma mark - Behavior for Custom Schemes
+/// @name Behavior for Custom Schemes
+
+/** Set to YES if you don't want to support scheme editing.
+ *  @discussion When set to YES; any modification to colourSchemeController which
+ *     results in a scheme not already in the list, will cause the value
+ *     of colourSchemeController to reset to the scheme returned by
+ *     the defaultScheme property. */
+@property (nonatomic) BOOL disableCustomSchemes;
+
+/** The default colour scheme to use when disableCustomSchemes is YES and
+ *  colourSchemeController is set to a scheme not in the list. */
+@property (nonatomic, readonly) MGSColourScheme *defaultScheme;
 
 
 #pragma mark - Support for a Save/Delete button

@@ -74,6 +74,10 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
 {
     /* Load our schemes and get them ready for use. */
 	self.colourSchemes = [[self loadColourSchemes] mutableCopy];
+    if (self.colourSchemes.count == 0) {
+        NSLog(@"%@ WARNING: loadColourSchemes returned an empty array!", self);
+        [self.colourSchemes addObject:[[MGSColourScheme alloc] init]];
+    }
 	
     [self setSortDescriptors:@[ [[NSSortDescriptor alloc] initWithKey:@"colourScheme.displayName"
                                                             ascending:YES
@@ -253,9 +257,16 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
  */
 - (void)teardownObservers
 {
-    [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation" context:@"colourSchemeChanged"];
     @try {
-        [self removeObserver:self forKeyPath:@"selectionIndex" context:@"schemeMenu"];
+        [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation"];
+    } @catch (NSException *exception) { }
+    
+    @try {
+        [self removeObserver:self forKeyPath:@"colourSchemeController.content"];
+    } @catch (NSException *exception) { }
+    
+    @try {
+        [self removeObserver:self forKeyPath:@"selectionIndex"];
     } @catch (NSException *exception) { }
 }
 
@@ -360,37 +371,59 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
 }
 
 
+- (MGSColourScheme *)defaultScheme
+{
+    return [[MGSColourScheme alloc] init];
+}
+
+
 /*
  * - findAndSetCurrentScheme
- *   If the view's settings match a known scheme, then set that as the active
+ * If the view's settings match a known scheme, then set that as the active
  *   scheme, otherwise create a new (unsaved) scheme.
+ * If custom schemes are disabled, instead of creating a new unsaved scheme
+ *   reset to the defaultScheme.
  */
 - (void)findAndSetCurrentScheme
 {
     MGSColourScheme *currentViewScheme = self.colourSchemeController.content;
-    MGSColourSchemeOption *currentSelection = self.selectedObjects.firstObject;
-    if (currentSelection.transient) {
-        /* already editing an existing transient scheme; just update it */
-        NSString *name = currentSelection.colourScheme.displayName;
-        currentSelection.colourScheme = [currentViewScheme mutableCopy];
-        currentSelection.colourScheme.displayName = name;
-        return;
-    }
+    MGSColourSchemeOption *matchingScheme;
     
-    [self removeTransientSchemes];
-    MGSColourSchemeOption *matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
+    if (self.disableCustomSchemes) {
+        [self removeTransientSchemes];
+        matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
+        if (!matchingScheme)
+            matchingScheme = [self findMatchingSchemeForScheme:self.defaultScheme];
+        if (!matchingScheme) {
+            NSLog(@"%@ WARNING: defaultScheme returned a scheme not in the list", self);
+            matchingScheme = [self.arrangedObjects firstObject];
+        }
+        
+    } else {
+        MGSColourSchemeOption *currentSelection = self.selectedObjects.firstObject;
+        if (currentSelection.transient) {
+            /* already editing an existing transient scheme; just update it */
+            NSString *name = currentSelection.colourScheme.displayName;
+            currentSelection.colourScheme = [currentViewScheme mutableCopy];
+            currentSelection.colourScheme.displayName = name;
+            return;
+        }
+        
+        [self removeTransientSchemes];
+        matchingScheme = [self findMatchingSchemeForScheme:currentViewScheme];
 
-	if (!matchingScheme) {
-        // Take the current controller values.
-        matchingScheme = [[MGSColourSchemeOption alloc] init];
-        matchingScheme.colourScheme = [currentViewScheme mutableCopy];
-        matchingScheme.transient = YES;
-        matchingScheme.colourScheme.displayName = NSLocalizedStringFromTableInBundle(
-            @"Custom Settings", nil, [NSBundle bundleForClass:[MGSColourScheme class]],
-            @"Name for Custom Settings scheme.");
-        self.ignoreObservations = YES;
-        [self addObject:matchingScheme];
-        self.ignoreObservations = NO;
+        if (!matchingScheme) {
+            // Take the current controller values.
+            matchingScheme = [[MGSColourSchemeOption alloc] init];
+            matchingScheme.colourScheme = [currentViewScheme mutableCopy];
+            matchingScheme.transient = YES;
+            matchingScheme.colourScheme.displayName = NSLocalizedStringFromTableInBundle(
+                @"Custom Settings", nil, [NSBundle bundleForClass:[MGSColourScheme class]],
+                @"Name for Custom Settings scheme.");
+            self.ignoreObservations = YES;
+            [self addObject:matchingScheme];
+            self.ignoreObservations = NO;
+        }
     }
     
     [self setSelectedObjects:@[matchingScheme]];
