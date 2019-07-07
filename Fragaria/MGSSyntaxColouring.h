@@ -24,14 +24,13 @@ Copyright 2004-2009 Peter Borg
 /// @cond PRIVATE
 
 #import <Cocoa/Cocoa.h>
+#import "MGSAbstractSyntaxColouring.h"
 #import "MGSSyntaxParserClient.h"
 
 
 @class MGSLayoutManager;
 @class MGSFragariaView;
 @class MGSTextView;
-@class MGSColourScheme;
-@class MGSSyntaxParser;
 
 @protocol MGSAutoCompleteDelegate;
 
@@ -39,41 +38,21 @@ Copyright 2004-2009 Peter Borg
 /**
  *  Performs syntax colouring on the text editor document.
  **/
-@interface MGSSyntaxColouring : NSObject <MGSSyntaxParserClient>
-
-
-/// @name Properties - Internal
-
-/** The layout manager of the text view */
-@property (readonly, weak) NSLayoutManager *layoutManager;
-
-/** The parser currently used for colouring the text. */
-@property (nonatomic, strong /*, nonnull */) MGSSyntaxParser *parser;
-
-/** Indicates the character ranges where colouring is valid. */
-@property (strong, readonly) NSMutableIndexSet *inspectedCharacterIndexes;
-
-
-/// @name Properties - Appearance and Behavior
-
-
-/** The colour scheme */
-@property (nonatomic, strong) MGSColourScheme *colourScheme;
-/** The base font to use for highlighting */
-@property (nonatomic, strong) NSFont *textFont;
-
-/** If multiline strings should be coloured. */
-@property (nonatomic, assign) BOOL coloursMultiLineStrings;
-/** If coloring should end at end of line. */
-@property (nonatomic, assign) BOOL coloursOnlyUntilEndOfLine;
-
-
-/// @name Instance Methods
+@interface MGSSyntaxColouring : MGSAbstractSyntaxColouring
 
 
 /** Initialize a new instance using the specified layout manager.
  * @param lm The layout manager associated with this instance. */
 - (id)initWithLayoutManager:(NSLayoutManager *)lm;
+
+
+/// @name Setting the object of coloring
+
+/** The layout manager of the text view */
+@property (readonly, weak) NSLayoutManager *layoutManager;
+
+
+/// @name Reacting to text changes
 
 /** Inform this syntax colourer that its layout manager's text storage
  *  will change.
@@ -89,27 +68,12 @@ Copyright 2004-2009 Peter Borg
 - (void)layoutManagerDidChangeTextStorage;
 
 
-/** Recolors the invalid characters in the specified range.
- * @param range A character range where, when this method returns, all syntax
- *              colouring will be guaranteed to be up-to-date. */
-- (void)recolourRange:(NSRange)range;
+/// @name Performing Highlighting
 
 /** Marks as invalid the colouring in the range currently visible (not clipped)
  *  in the specified text view.
  *  @param textView The text view from which to get a character range. */
 - (void)invalidateVisibleRangeOfTextView:(MGSTextView *)textView;
-
-/** Marks the entire text's colouring as invalid and removes all coloring
- *  attributes applied. */
-- (void)invalidateAllColouring;
-
-/** Forces a recolouring of the character range specified. The recolouring will
- * be done anew even if the specified range is already valid (wholly or in
- * part).
- * @param rangeToRecolour Indicates the range to be recoloured.
- * @return The range that was effectively coloured. The returned range always
- *         contains entirely the initial range. */
-- (NSRange)recolourChangedRange:(NSRange)rangeToRecolour;
 
 
 @end

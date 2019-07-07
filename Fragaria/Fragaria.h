@@ -9,6 +9,7 @@
 
 #undef FRAGARIA_PRIVATE
 #import "FragariaMacros.h"
+#import "FragariaUtilities.h"
 
 #import "MGSBreakpointDelegate.h"           
 #import "MGSDragOperationDelegate.h"        
