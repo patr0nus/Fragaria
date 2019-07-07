@@ -227,7 +227,9 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 - (void)teardownObservers
 {
     [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation" context:@"colourSchemeChanged"];
-    [self removeObserver:self forKeyPath:@"selectionIndex" context:@"schemeMenu"];
+    @try {
+        [self removeObserver:self forKeyPath:@"selectionIndex" context:@"schemeMenu"];
+    } @catch (NSException *exception) { }
 }
 
 

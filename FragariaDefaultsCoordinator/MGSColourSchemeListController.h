@@ -62,7 +62,7 @@
 
 /** A reference to the NSObjectController whose content is the instance of
  *  MGSColourScheme being edited. */
-@property (nonatomic, assign) IBOutlet NSObjectController *colourSchemeController;
+@property (nonatomic, weak) IBOutlet NSObjectController *colourSchemeController;
 
 
 #pragma mark - Support for a Save/Delete button
