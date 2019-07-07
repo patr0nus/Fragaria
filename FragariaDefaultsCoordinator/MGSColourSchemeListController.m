@@ -188,6 +188,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
             selection.transient = NO;
             [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
             [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
+            [self rearrangeObjects];
         }];
     }
     else if (!selection.loadedFromBundle)
