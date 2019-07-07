@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "MGSUserDefaultsController.h"
-#import "MGSPrefsEditorPropertiesViewController.h"
+#import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
 
 
 /**
