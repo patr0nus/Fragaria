@@ -12,6 +12,13 @@
 #import "NSObject+Fragaria.h"
 
 
+@interface MGSColourSchemeTableCellView ()
+
+- (void)updateView;
+
+@end
+
+
 @interface MGSColourSchemeTableViewDataSource ()
 
 @property (nonatomic, strong) MGSMutableColourScheme *editableScheme;
