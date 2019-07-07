@@ -50,6 +50,9 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
 
 
 @implementation MGSColourSchemeListController
+{
+    BOOL _setupComplete;
+}
 
 
 #pragma mark - Initialization and Startup
@@ -106,13 +109,18 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
 
     /* Set the current scheme from the object controller. */
     [self findAndSetCurrentScheme];
+    
+    _setupComplete = YES;
 }
 
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self teardownObservers];
+    if (_setupComplete)
+        [self teardownObservers];
+    else
+        [self removeObserver:self forKeyPath:@"colourSchemeController.content" context:@"objectController"];
 }
 
 
@@ -257,17 +265,8 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
  */
 - (void)teardownObservers
 {
-    @try {
-        [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation"];
-    } @catch (NSException *exception) { }
-    
-    @try {
-        [self removeObserver:self forKeyPath:@"colourSchemeController.content"];
-    } @catch (NSException *exception) { }
-    
-    @try {
-        [self removeObserver:self forKeyPath:@"selectionIndex"];
-    } @catch (NSException *exception) { }
+    [self.colourSchemeController removeObserver:self forKeyPath:@"selection.dictionaryRepresentation" context:@"colourSchemeChanged"];
+    [self removeObserver:self forKeyPath:@"selectionIndex" context:@"schemeMenu"];
 }
 
 

@@ -63,7 +63,7 @@
 
 /** A reference to the NSObjectController whose content is the instance of
  *  MGSColourScheme being edited. */
-@property (nonatomic, weak) IBOutlet NSObjectController *colourSchemeController;
+@property (nonatomic) IBOutlet NSObjectController *colourSchemeController;
 
 
 #pragma mark - Behavior for Custom Schemes
