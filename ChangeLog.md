@@ -5,6 +5,14 @@ This document summarizes the major API history relative to this fork of Fragaria
 Similarly to the [Semantic Versioning Specification](https://semver.org), major API changes are performed only across major version number changes.
 
 
+## Version 3.20190707.x
+
+New features:
+
+* Added new classes to FragariaDefaultsCoordinator to make it easier to implement color scheme editing in your own app, even if you choose to not leverage the rest of FragariaDefaultsCoordinator.
+* Added a way to perform syntax highlighting on a string without having to instantiate a new MGSFragariaView.
+
+
 ## Version 3.x
 
 New features:

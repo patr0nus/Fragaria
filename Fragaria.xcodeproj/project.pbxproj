@@ -1381,6 +1381,7 @@
 		011DD2D522D2252000FA26D1 /* MGSAbstractSyntaxColouring.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSAbstractSyntaxColouring.m; sourceTree = "<group>"; };
 		011DD2D822D22B1E00FA26D1 /* FragariaUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragariaUtilities.h; sourceTree = "<group>"; };
 		011DD2D922D22B1E00FA26D1 /* FragariaUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FragariaUtilities.m; sourceTree = "<group>"; };
+		011DD2F522D2A0E500FA26D1 /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
 		0121BA752152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MGSContextMenu.xib; sourceTree = "<group>"; };
 		0121BA762152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLDetab.xib; sourceTree = "<group>"; };
 		0121BA772152BE13005AA2A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SMLEntab.xib; sourceTree = "<group>"; };
@@ -2049,6 +2050,7 @@
 			isa = PBXGroup;
 			children = (
 				ABA1C12116144D3F00C8723F /* README.md */,
+				011DD2F522D2A0E500FA26D1 /* ChangeLog.md */,
 				AB8387CC171D7F1D004408F4 /* TODO.md */,
 				ABA812DB11B6855200A29990 /* LICENSE-2.0.txt */,
 				AB92A4151192B66A0055A3E7 /* Applications */,
