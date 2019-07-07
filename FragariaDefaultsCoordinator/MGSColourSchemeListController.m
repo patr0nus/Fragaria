@@ -16,6 +16,8 @@
 static NSString * const KMGSColourSchemesFolder = @"Colour Schemes";
 static NSString * const KMGSColourSchemeExt = @"plist";
 
+static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSchemeListDidChangeNotification";
+
 
 #pragma mark - Category
 
@@ -66,15 +68,6 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 
 /*
- * - dealloc
- */
-- (void)dealloc
-{
-    [self teardownObservers];
-}
-
-
-/*
  * - setupEarly
  */
 - (void)setupEarly
@@ -88,6 +81,8 @@ static NSString * const KMGSColourSchemeExt = @"plist";
                                 ]];
 
     [self setContent:self.colourSchemes];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorSchemeListDidChange:) name:MGSColourSchemeListDidChangeNotification object:nil];
     
     /* Listen for the objectController to connect, if it didn't already */
     if (!self.colourSchemeController.content)
@@ -107,6 +102,13 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
     /* Set the current scheme from the object controller. */
     [self findAndSetCurrentScheme];
+}
+
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self teardownObservers];
 }
 
 
@@ -158,9 +160,7 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
 #pragma mark - Actions
 
-/*
- * - addDeleteButtonAction
- */
+
 - (IBAction)addDeleteButtonAction:(id)sender
 {
     // Rules:
@@ -170,43 +170,69 @@ static NSString * const KMGSColourSchemeExt = @"plist";
 
     MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
     if (selection.transient)
-    {
-        self.saveController = [[MGSColourSchemeSaveController alloc] init];
-        self.saveController.schemeName = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[MGSColourSchemeListController class]],  @"Default name for new schemes.");
-
-        NSWindow *senderWindow = ((NSButton *)sender).window;
-        [senderWindow beginSheet:self.saveController.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode != NSModalResponseOK)
-                return;
-            selection.colourScheme.displayName = self.saveController.schemeName;
-            NSError *err;
-            if (![self saveColourScheme:selection error:&err]) {
-                NSLog(@"could not save colour scheme, error %@", err);
-            }
-            [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
-            [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
-            selection.transient = NO;
-            [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
-            [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
-            [self rearrangeObjects];
-        }];
-    }
+        [self saveCurrentScheme:sender];
     else if (!selection.loadedFromBundle)
-    {
-        self.saveController = [[MGSColourSchemeSaveController alloc] init];
-        NSWindow *senderWindow = ((NSButton *)sender).window;
-        NSAlert *panel = self.saveController.alertPanel;
+        [self deleteCurrentScheme:sender];
+}
+
+
+- (void)saveCurrentScheme:(id)sender
+{
+    MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
+    self.saveController = [[MGSColourSchemeSaveController alloc] init];
+    self.saveController.schemeName = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[MGSColourSchemeListController class]],  @"Default name for new schemes.");
+
+    NSWindow *senderWindow = ((NSButton *)sender).window;
+    [senderWindow beginSheet:self.saveController.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode != NSModalResponseOK)
+            return;
+        selection.colourScheme.displayName = self.saveController.schemeName;
+        NSError *err;
+        if (![self saveColourScheme:selection error:&err]) {
+            NSLog(@"could not save colour scheme, error %@", err);
+        }
+        [self willChangeValueForKey:@"buttonSaveDeleteEnabled"];
+        [self willChangeValueForKey:@"buttonSaveDeleteTitle"];
+        selection.transient = NO;
+        [self didChangeValueForKey:@"buttonSaveDeleteEnabled"];
+        [self didChangeValueForKey:@"buttonSaveDeleteTitle"];
+        [self rearrangeObjects];
         
-        [panel beginSheetModalForWindow:senderWindow completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == NSAlertFirstButtonReturn) {
-                [self removeObject:selection];
-                NSError *err;
-                if (![self deleteColourScheme:selection error:&err]) {
-                    NSLog(@"could not delete colour scheme, error %@", err);
-                };
+        [[NSNotificationCenter defaultCenter] postNotificationName:MGSColourSchemeListDidChangeNotification object:self];
+    }];
+}
+
+
+- (void)deleteCurrentScheme:(id)sender
+{
+    MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
+    self.saveController = [[MGSColourSchemeSaveController alloc] init];
+    NSWindow *senderWindow = ((NSButton *)sender).window;
+    NSAlert *panel = self.saveController.alertPanel;
+
+    [panel beginSheetModalForWindow:senderWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self removeObject:selection];
+            NSError *err;
+            if (![self deleteColourScheme:selection error:&err]) {
+                NSLog(@"could not delete colour scheme, error %@", err);
             }
-        }];
-    }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:MGSColourSchemeListDidChangeNotification object:self];
+        }
+    }];
+}
+
+
+- (void)colorSchemeListDidChange:(NSNotification *)notif
+{
+    if (notif.object == self)
+        return;
+    
+    self.colourSchemes = [[self loadColourSchemes] mutableCopy];
+    self.content = self.colourSchemes;
+    [self findAndSetCurrentScheme];
+    [self rearrangeObjects];
 }
 
 
