@@ -21,10 +21,4 @@
  **/
 @property (nonatomic, strong) NSString *schemeName;
 
-
-/**
- *  Provide a pre-made alert panel for deleting a scheme.
- */
-- (NSAlert *)alertPanel;
-
 @end

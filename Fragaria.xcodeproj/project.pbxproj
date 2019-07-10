@@ -1895,7 +1895,6 @@
 				D0718B421AB54E8C0073493A /* MGSPrefsEditorPropertiesViewController.h */,
 				D0718B431AB54E8C0073493A /* MGSPrefsEditorPropertiesViewController.m */,
 				D00BB05F213876D3007E5FA6 /* MGSPrefsEditorProperties.xib */,
-				D00BB061213876D3007E5FA6 /* MGSColourSchemeSave.xib */,
 				01919E49217D213100E26B9D /* Scheme Controller */,
 				01919E4A217D214000E26B9D /* Categories and Transformers */,
 			);
@@ -1909,6 +1908,7 @@
 				D0718BAA1AB71FE00073493A /* MGSColourSchemeListController.m */,
 				D0C13BB91ABD12A400E191A9 /* MGSColourSchemeSaveController.h */,
 				D0C13BBA1ABD12A400E191A9 /* MGSColourSchemeSaveController.m */,
+				D00BB061213876D3007E5FA6 /* MGSColourSchemeSave.xib */,
 			);
 			name = "Scheme Controller";
 			sourceTree = "<group>";

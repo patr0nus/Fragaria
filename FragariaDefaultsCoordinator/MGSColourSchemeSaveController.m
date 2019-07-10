@@ -83,22 +83,7 @@
 }
 
 
-#pragma mark - Delete Dialogue
 
 
-/*
- * - alertPanel
- */
-- (NSAlert *)alertPanel
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Delete", nil, [NSBundle bundleForClass:[self class]],  @"String for delete button.")];
-    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", nil, [NSBundle bundleForClass:[self class]],  @"String for cancel button.")];
-    [alert setMessageText:NSLocalizedStringFromTableInBundle(@"Delete the scheme?", nil, [NSBundle bundleForClass:[self class]],  @"String to alert.")];
-    [alert setInformativeText:NSLocalizedStringFromTableInBundle(@"Deleted schemes cannot be restored.", nil, [NSBundle bundleForClass:[self class]],  @"String for alert information.")];
-    [alert setAlertStyle:NSWarningAlertStyle];
-
-    return alert;
-}
 
 @end

@@ -220,7 +220,7 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
     MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
     self.saveController = [[MGSColourSchemeSaveController alloc] init];
     NSWindow *senderWindow = ((NSButton *)sender).window;
-    NSAlert *panel = self.saveController.alertPanel;
+    NSAlert *panel = [[self class] schemeDeletionAlert];
 
     [panel beginSheetModalForWindow:senderWindow completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
@@ -233,6 +233,19 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
             [[NSNotificationCenter defaultCenter] postNotificationName:MGSColourSchemeListDidChangeNotification object:self];
         }
     }];
+}
+
+
++ (NSAlert *)schemeDeletionAlert
+{
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Delete", nil, [NSBundle bundleForClass:[self class]],  @"String for delete button.")];
+    [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Cancel", nil, [NSBundle bundleForClass:[self class]],  @"String for cancel button.")];
+    [alert setMessageText:NSLocalizedStringFromTableInBundle(@"Delete the scheme?", nil, [NSBundle bundleForClass:[self class]],  @"String to alert.")];
+    [alert setInformativeText:NSLocalizedStringFromTableInBundle(@"Deleted schemes cannot be restored.", nil, [NSBundle bundleForClass:[self class]],  @"String for alert information.")];
+    [alert setAlertStyle:NSWarningAlertStyle];
+
+    return alert;
 }
 
 
