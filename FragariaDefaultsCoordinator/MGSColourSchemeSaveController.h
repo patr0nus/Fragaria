@@ -15,6 +15,8 @@
 @interface MGSColourSchemeSaveController : NSWindowController
 
 
+@property (nonatomic) NSSet <NSString *> *usedSchemeNames;
+
 /**
  *  The name of the scheme. You can retrieve this after showSchemeNameGetter
  *  returns.

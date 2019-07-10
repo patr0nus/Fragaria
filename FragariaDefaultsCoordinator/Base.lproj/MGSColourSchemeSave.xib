@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,7 @@
             <windowStyleMask key="styleMask" titled="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="272" y="176" width="380" height="91"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1470" height="820"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="Lcc-CH-ojl" userLabel="Scheme Name">
                 <rect key="frame" x="0.0" y="0.0" width="380" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -35,7 +35,7 @@
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Poe-JX-xav">
                         <rect key="frame" x="130" y="49" width="230" height="22"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="K7C-wh-1gS">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Scheme Name" drawsBackground="YES" id="K7C-wh-1gS">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -50,8 +50,23 @@
                             </binding>
                         </connections>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zF3-bC-LIv">
+                        <rect key="frame" x="100" y="23" width="114" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Name already in use!" id="lQV-8s-1jI">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="hidden" keyPath="self.nameInUse" id="Ypd-N4-UsI">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PV8-8b-ENm">
-                        <rect key="frame" x="270" y="13" width="96" height="32"/>
+                        <rect key="frame" x="296" y="13" width="70" height="32"/>
                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4AT-Y3-jSQ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -62,7 +77,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dMT-JN-UGP">
-                        <rect key="frame" x="174" y="13" width="96" height="32"/>
+                        <rect key="frame" x="214" y="13" width="82" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dmo-Dy-1WF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -76,21 +91,21 @@ Gw
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PV8-8b-ENm" firstAttribute="leading" secondItem="dMT-JN-UGP" secondAttribute="trailing" constant="12" symbolic="YES" id="9V2-Xt-FCC"/>
+                    <constraint firstItem="PV8-8b-ENm" firstAttribute="bottom" secondItem="dMT-JN-UGP" secondAttribute="bottom" id="8QD-UL-A9K"/>
+                    <constraint firstItem="dMT-JN-UGP" firstAttribute="baseline" secondItem="zF3-bC-LIv" secondAttribute="baseline" id="8xg-iH-48g"/>
                     <constraint firstItem="Gui-9s-AWF" firstAttribute="baseline" secondItem="Poe-JX-xav" secondAttribute="baseline" id="ASS-9D-7il"/>
                     <constraint firstAttribute="trailing" secondItem="Poe-JX-xav" secondAttribute="trailing" constant="20" symbolic="YES" id="BPL-tx-Sbv"/>
-                    <constraint firstAttribute="bottom" secondItem="PV8-8b-ENm" secondAttribute="bottom" constant="20" symbolic="YES" id="GQz-mA-jaq"/>
                     <constraint firstItem="Gui-9s-AWF" firstAttribute="leading" secondItem="Lcc-CH-ojl" secondAttribute="leading" constant="20" symbolic="YES" id="HqL-2T-JYG"/>
-                    <constraint firstItem="PV8-8b-ENm" firstAttribute="width" secondItem="dMT-JN-UGP" secondAttribute="width" id="TFR-in-nAR"/>
+                    <constraint firstItem="dMT-JN-UGP" firstAttribute="leading" secondItem="zF3-bC-LIv" secondAttribute="trailing" constant="8" id="I0Z-ld-H8N"/>
+                    <constraint firstItem="PV8-8b-ENm" firstAttribute="top" secondItem="Poe-JX-xav" secondAttribute="bottom" constant="8" id="I75-6k-Fsb"/>
+                    <constraint firstItem="zF3-bC-LIv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lcc-CH-ojl" secondAttribute="leading" constant="20" symbolic="YES" id="L4r-b8-A2P"/>
                     <constraint firstAttribute="trailing" secondItem="PV8-8b-ENm" secondAttribute="trailing" constant="20" symbolic="YES" id="TSL-qZ-Shs"/>
-                    <constraint firstItem="PV8-8b-ENm" firstAttribute="top" secondItem="Poe-JX-xav" secondAttribute="bottom" constant="8" symbolic="YES" id="VQB-Uj-6h3"/>
-                    <constraint firstItem="dMT-JN-UGP" firstAttribute="top" secondItem="Poe-JX-xav" secondAttribute="bottom" constant="8" symbolic="YES" id="avS-0I-F1O"/>
-                    <constraint firstItem="dMT-JN-UGP" firstAttribute="leading" secondItem="Poe-JX-xav" secondAttribute="leading" constant="50" id="lrG-xT-xUY"/>
+                    <constraint firstItem="PV8-8b-ENm" firstAttribute="leading" secondItem="dMT-JN-UGP" secondAttribute="trailing" constant="12" id="b02-vh-Nwf"/>
                     <constraint firstItem="Poe-JX-xav" firstAttribute="top" secondItem="Lcc-CH-ojl" secondAttribute="top" constant="20" symbolic="YES" id="oJF-Eb-Ehx"/>
                     <constraint firstItem="Poe-JX-xav" firstAttribute="leading" secondItem="Gui-9s-AWF" secondAttribute="trailing" constant="8" symbolic="YES" id="pNY-aF-Igm"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="467" y="720"/>
+            <point key="canvasLocation" x="467" y="719.5"/>
         </window>
     </objects>
 </document>

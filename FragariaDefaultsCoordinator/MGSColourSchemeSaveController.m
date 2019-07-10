@@ -17,11 +17,13 @@
 @property (nonatomic, strong) IBOutlet NSButton *bSave;
 
 @property (nonatomic, assign) BOOL saveButtonEnabled;
+@property (nonatomic, assign) BOOL nameInUse;
 
 @end
 
-@implementation MGSColourSchemeSaveController {
 
+@implementation MGSColourSchemeSaveController
+{
     void (^deleteCompletion)(BOOL);
 }
 
@@ -30,10 +32,7 @@
  */
 - (instancetype)init
 {
-    if ((self = [self initWithWindowNibName:@"MGSColourSchemeSave" owner:self]))
-    {
-    }
-
+    self = [self initWithWindowNibName:@"MGSColourSchemeSave" owner:self];
     return self;
 }
 
@@ -72,18 +71,26 @@
  */
 + (NSSet *)keyPathsForValuesAffectingSaveButtonEnabled
 {
-    return [NSSet setWithObject:@"schemeName"];
+    return [NSSet setWithObjects:@"schemeName", @"usedSchemeNames", nil];
 }
+
 
 - (BOOL)saveButtonEnabled
 {
-    NSString *untitled = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[self class]],  @"Default name for new schemes.");
-    
-    return (self.schemeName && [self.schemeName length] > 0 && ![self.schemeName isEqualToString:untitled]);
+    return self.schemeName && [self.schemeName length] > 0 && ![self.usedSchemeNames containsObject:self.schemeName];
 }
 
 
++ (NSSet *)keyPathsForValuesAffectingNameInUse
+{
+    return [NSSet setWithObjects:@"schemeName", @"usedSchemeNames", nil];
+}
 
+
+- (BOOL)nameInUse
+{
+    return [self.usedSchemeNames containsObject:self.schemeName];
+}
 
 
 @end

@@ -192,7 +192,12 @@ static NSString * const MGSColourSchemeListDidChangeNotification = @"MGSColourSc
 {
     MGSColourSchemeOption *selection = self.selectedObjects.firstObject;
     self.saveController = [[MGSColourSchemeSaveController alloc] init];
-    self.saveController.schemeName = NSLocalizedStringFromTableInBundle(@"New Scheme", nil, [NSBundle bundleForClass:[MGSColourSchemeListController class]],  @"Default name for new schemes.");
+    
+    NSMutableSet *usedNames = [NSMutableSet set];
+    for (MGSColourSchemeOption *opt in self.colourSchemes) {
+        [usedNames addObject:opt.colourScheme.displayName];
+    }
+    self.saveController.usedSchemeNames = usedNames;
 
     NSWindow *senderWindow = ((NSButton *)sender).window;
     [senderWindow beginSheet:self.saveController.window completionHandler:^(NSModalResponse returnCode) {
