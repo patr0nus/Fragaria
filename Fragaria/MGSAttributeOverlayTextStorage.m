@@ -162,4 +162,10 @@ static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_
 }
 
 
+- (id)debugQuickLookObject
+{
+    return [[NSAttributedString alloc] initWithAttributedString:self];
+}
+
+
 @end
