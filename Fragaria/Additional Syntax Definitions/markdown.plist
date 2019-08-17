@@ -29,7 +29,7 @@
 	<key>firstString</key>
 	<string></string>
 	<key>numberDefinition</key>
-	<string>(\n\s?(=|-|\*\s|\+\s)*\n|((?&lt;=&gt;\s)|(?&lt;!-))[0-9]+\.\s|\n?(?&lt;![\*\+-])[\*\+-]{1}\s)</string>
+	<string>^(\s?(=|-|\*\s|\+\s)*\n|((?&lt;=&gt;\s)|(?&lt;!-))[0-9]+\.\s|\n?(?&lt;![\*\+-])[\*\+-]{1}\s)</string>
 	<key>keywords</key>
 	<array>
 		<string>#</string>
