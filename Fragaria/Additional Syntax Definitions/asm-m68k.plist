@@ -13,13 +13,11 @@
 	<key>endVariable</key>
 	<string></string>
 	<key>firstString</key>
-	<string>"</string>
+	<string>&quot;</string>
 	<key>secondString</key>
-	<string>'</string>
-	<key>firstSingleLineComment</key>
-	<string>;</string>
-	<key>secondSingleLineComment</key>
-	<string></string>
+	<string>&apos;</string>
+	<key>singleLineCommentRegex</key>
+	<string>(\;|(^\*)).*$</string>
 	<key>beginFirstMultiLineComment</key>
 	<string></string>
 	<key>endFirstMultiLineComment</key>
