@@ -93,7 +93,8 @@ NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
     value = [syntaxDictionary objectForKey:SMLSyntaxDefinitionAlternativeNumberRegex];
     if (value) {
         RETURN_NIL_IF_FALSE([value isKindOfClass:[NSString class]], @"NSString expected");
-        _numberDefinition = value;
+        _numberDefinition = [NSRegularExpression regularExpressionWithPattern:value options:NSRegularExpressionAnchorsMatchLines error:nil];
+        RETURN_NIL_IF_FALSE(_numberDefinition, @"Incorrect regex syntax in %@", SMLSyntaxDefinitionAlternativeNumberRegex);
     }
     
     // keywords
@@ -164,11 +165,11 @@ NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
     value = [syntaxDictionary objectForKey:SMLSyntaxDefinitionVariableRegex];
     if (value && ![value isEqual:@""]) {
         RETURN_NIL_IF_FALSE([value isKindOfClass:[NSString class]], @"NSString expected");
-        _variableRegex = value;
+        _variableRegex = [NSRegularExpression regularExpressionWithPattern:value options:NSRegularExpressionAnchorsMatchLines error:nil];
+        RETURN_NIL_IF_FALSE(_variableRegex, @"Incorrect regex syntax in %@", SMLSyntaxDefinitionVariableRegex);
         _beginVariableCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@""];
         _endVariableCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@""];
     } else {
-        _variableRegex = @"";
         // begin variable
         value = [syntaxDictionary valueForKey:SMLSyntaxDefinitionBeginVariable];
         if (value) {
@@ -209,7 +210,8 @@ NSString *SMLSyntaxDefinitionGroupSpecialization = @"groupSpecialization";
     value = [syntaxDictionary objectForKey:SMLSyntaxDefinitionSingleLineCommentRegex];
     if (value) {
         RETURN_NIL_IF_FALSE([value isKindOfClass:[NSString class]], @"NSString expected");
-        _singleLineCommentRegex = value;
+        _singleLineCommentRegex = [NSRegularExpression regularExpressionWithPattern:value options:NSRegularExpressionAnchorsMatchLines error:nil];
+        RETURN_NIL_IF_FALSE(_singleLineCommentRegex, @"Incorrect regex syntax in %@", SMLSyntaxDefinitionSingleLineCommentRegex);
     } else {
         _singleLineComments = [NSMutableArray arrayWithCapacity:2];
         

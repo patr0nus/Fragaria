@@ -67,10 +67,10 @@
 
 /** A regular expression that matches a variable.
  *  @discussion This property supersedes beginVariableCharacterSet and
- *       endVariableCharacterSet. If this property is equal to @"",
+ *       endVariableCharacterSet. If this property is equal to nil,
  *       a syntax colourer should use these properties instead, otherwise they
  *       should be ignored. */
-@property (readonly) NSString *variableRegex;
+@property (readonly) NSRegularExpression *variableRegex;
 /**  Characters that may start a variable. */
 @property (readonly) NSCharacterSet *beginVariableCharacterSet;
 /**  Characters that may terminate a variable. */
@@ -80,7 +80,7 @@
  *  @discussion This property supersedes singleLineComments. If this property
  *      is nil, a syntax colourer should use singleLineComments instead,
  *      otherwise it is ignored. */
-@property (readonly) NSString *singleLineCommentRegex;
+@property (readonly) NSRegularExpression *singleLineCommentRegex;
 /** An array of strings that should mark the beginning of a single-line comment.
  *  This kind of comments extends from the characters that mark its start
  *  to the end of its line. */
@@ -100,7 +100,7 @@
  *      and decimalPointCharacter. If this property is nil, a syntax
  *      colourer should use those properties instead, otherwise they are
  *      ignored. */
-@property (readonly) NSString *numberDefinition;
+@property (readonly) NSRegularExpression *numberDefinition;
 /** Characters to be coloured as numbers, if numberDefinition is nil. This
  *  includes eventual decimal separators. */
 @property (readonly) NSCharacterSet *numberCharacterSet;

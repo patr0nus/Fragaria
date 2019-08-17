@@ -130,9 +130,8 @@ typedef NSInteger SMLSyntaxGroupInteger;
 }
 
 
-- (void)recognizeMatchesOfPattern:(NSString*)pattern ofGroup:(NSString*)group inString:(NSString *)documentString range:(NSRange)colouringRange atomicTokens:(BOOL)atomic
+- (void)recognizeMatchesOfPattern:(NSRegularExpression *)regex ofGroup:(NSString*)group inString:(NSString *)documentString range:(NSRange)colouringRange atomicTokens:(BOOL)atomic
 {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
     if (!regex) return;
     
     [regex enumerateMatchesInString:documentString options:0 range:colouringRange usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop) {
@@ -515,7 +514,7 @@ typedef NSInteger SMLSyntaxGroupInteger;
     NSString *rangeString = [rangeScanner string];
     NSUInteger rangeStringLength = [rangeString length];
     
-    if (![self.syntaxDefinition.variableRegex isEqual:@""]) {
+    if (self.syntaxDefinition.variableRegex) {
         [self recognizeMatchesOfPattern:self.syntaxDefinition.variableRegex ofGroup:MGSSyntaxGroupVariable inString:documentScanner.string range:rangeToRecolour atomicTokens:YES];
         return;
     }
