@@ -178,7 +178,11 @@ NSString * const MGSSyntaxGroupComment      = @"comments";
 - (NSRange)resetTokenGroupsInRange:(NSRange)range
 {
     NSRange lexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location];
-    NSRange rexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location + range.length];
+    NSRange rexpand;
+    if (range.length > 0)
+        rexpand = [self rangeOfAtomicTokenAtCharacterIndex:range.location + range.length - 1];
+    else
+        rexpand = range;
     NSRange realrange = NSUnionRange(lexpand, NSUnionRange(range, rexpand));
     
     NSDictionary *attributes = @{
