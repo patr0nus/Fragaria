@@ -39,7 +39,7 @@ void MGSHighlightAttributedString(NSMutableAttributedString *str, MGSSyntaxParse
     colorer.textStorage = str;
     colorer.parser = parser;
     colorer.colourScheme = scheme;
-    colorer.textFont = font;
+    colorer.textFont = font ?: [NSFont userFontOfSize:12.0];
     [colorer recolourChangedRange:NSMakeRange(0, str.length)];
 }
 
