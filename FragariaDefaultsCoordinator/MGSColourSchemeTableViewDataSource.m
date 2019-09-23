@@ -338,24 +338,35 @@
 
 - (void)_updateView_group
 {
+    self.label.stringValue = [[MGSSyntaxController sharedInstance] localizedDisplayNameForSyntaxGroup:self.syntaxGroup];
+    
     MGSMutableColourScheme *scheme = self.parentVc.editableScheme;
     MGSSyntaxGroup resolvedGrp = [scheme resolveSyntaxGroup:self.syntaxGroup];
     
-    BOOL colors = [scheme coloursSyntaxGroup:resolvedGrp];
+    BOOL enabled;
+    NSColor *color;
+    MGSFontVariant variant;
     
-    self.label.stringValue = [[MGSSyntaxController sharedInstance] localizedDisplayNameForSyntaxGroup:self.syntaxGroup];
+    if (resolvedGrp) {
+        enabled = [scheme coloursSyntaxGroup:resolvedGrp];
+        color = [scheme colourForSyntaxGroup:resolvedGrp];
+        variant = [scheme fontVariantForSyntaxGroup:resolvedGrp];
+    } else {
+        enabled = NO;
+        color = scheme.textColor;
+        variant = 0;
+    }
     
-    self.colorWell.color = [scheme colourForSyntaxGroup:resolvedGrp];
-    self.colorWell.enabled = colors;
+    self.colorWell.color = color;
+    self.colorWell.enabled = enabled;
     
     self.enabled.hidden = NO;
-    self.enabled.state = colors ? NSControlStateValueOn : NSControlStateValueOff;
+    self.enabled.state = enabled ? NSControlStateValueOn : NSControlStateValueOff;
     
-    MGSFontVariant variant = [scheme fontVariantForSyntaxGroup:resolvedGrp];
     [self.textVariant setSelected:!!(variant & MGSFontVariantBold) forSegment:0];
     [self.textVariant setSelected:!!(variant & MGSFontVariantItalic) forSegment:1];
     [self.textVariant setSelected:!!(variant & MGSFontVariantUnderline) forSegment:2];
-    self.textVariant.enabled = colors;
+    self.textVariant.enabled = enabled;
     self.textVariant.hidden = NO;
 }
 
