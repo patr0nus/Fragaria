@@ -9,9 +9,6 @@
 #import "MGSRangeEntries.h"
 
 
-static NSString * const MGSAttributeOverlayPrefixBase = @"__MGSAttributeOverlay_";
-
-
 @interface MGSAttributeOverlayTextStorage ()
 
 @end
