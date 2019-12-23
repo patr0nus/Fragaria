@@ -2498,7 +2498,7 @@
 			attributes = {
 				CLASSPREFIX = MGS;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					01919E22217D20A800E26B9D = {
 						CreatedOnToolsVersion = 10.0;
@@ -2692,6 +2692,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "Write Version";
 			outputFileListPaths = (
