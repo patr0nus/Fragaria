@@ -35,8 +35,14 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 
 - (instancetype)init
 {
-    NSArray *bundles = @[[[self class] bundle], [NSBundle mainBundle]];
-    NSArray *paths = @[[[self class] applicationSupportSyntaxDefinitionDirectory]];
+    NSMutableArray *bundles = [@[[[self class] bundle]] mutableCopy];
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    if (mainBundle)
+        [bundles addObject:mainBundle];
+    NSMutableArray *paths = [@[] mutableCopy];
+    NSURL *applSupportPath = [[self class] applicationSupportSyntaxDefinitionDirectory];
+    if (applSupportPath)
+        [paths addObject:applSupportPath];
     
     NSMutableArray *defsPaths = [NSMutableArray array];
     [defsPaths addObjectsFromArray:[[self class] syntaxDefinitionSearchPathsFromBundles:bundles]];
@@ -167,6 +173,8 @@ NSString * const KMGSSyntaxGroupNamesFileExt = @"strings";
 + (NSURL *)applicationSupportSyntaxDefinitionDirectory
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    if (!appName)
+        return nil;
     NSURL *appSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
     appSupport = [appSupport URLByAppendingPathComponent:appName];
     appSupport = [appSupport URLByAppendingPathComponent:KMGSSyntaxDefinitionsFolder];
