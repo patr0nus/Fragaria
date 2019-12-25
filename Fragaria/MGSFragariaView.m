@@ -364,6 +364,10 @@
 - (void)setShowsGutter:(BOOL)showsGutter
 {
 	self.scrollView.rulersVisible = showsGutter;
+    if (@available(macOS 10.14, *)) {
+        /* work around a dumb bug in NSScrollView's code */
+        [self.textView updateLineWrap];
+    }
 	[self mgs_propagateValue:@(showsGutter) forBinding:NSStringFromSelector(@selector(showsGutter))];
 }
 

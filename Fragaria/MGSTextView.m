@@ -1407,7 +1407,8 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
  *   see http://developer.apple.com/library/mac/#samplecode/TextSizingExample
  *   The readme file in the above example has very good info on how to configure NSTextView instances.
  */
-- (void)updateLineWrap {
+- (void)updateLineWrap
+{
     NSSize contentSize;
 
     // get control properties
@@ -1417,6 +1418,11 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     if (textScrollView) {
         // content view is clipview
         contentSize = [textScrollView contentSize];
+        if (@available(macOS 10.14, *)) {
+            if (textScrollView.rulersVisible) {
+                contentSize.width -= textScrollView.verticalRulerView.frame.size.width;
+            }
+        }
     } else {
         /* scroll view may not be already there */
         contentSize = [self frame].size;
@@ -1478,6 +1484,16 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
 
         // setup scroll view
         [textScrollView setHasHorizontalScroller:YES];
+    }
+    
+    if (@available(macOS 10.14, *)) {
+        NSPoint origin = self.frame.origin;
+        if (textScrollView.rulersVisible) {
+            origin.x = textScrollView.verticalRulerView.frame.size.width;
+        } else {
+            origin.x = 0;
+        }
+        [self setFrameOrigin:origin];
     }
 
     // invalidate the glyph layout

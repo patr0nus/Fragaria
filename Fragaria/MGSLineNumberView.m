@@ -38,6 +38,8 @@
 #import <tgmath.h>
 #import "MGSFragariaView.h"
 #import "MGSLineNumberView.h"
+#import "MGSLayoutManager.h"
+#import "MGSTextViewPrivate.h"
 #import "MGSBreakpointDelegate.h"
 #import "NSTextStorage+Fragaria.h"
 #import "NSSet+Fragaria.h"
@@ -329,6 +331,16 @@ typedef enum {
         [self willChangeValueForKey:@"requiredThickness"];
         [self setRuleThickness:newThickness];
         [self didChangeValueForKey:@"requiredThickness"];
+    }
+}
+
+
+- (void)setRuleThickness:(CGFloat)ruleThickness
+{
+    [super setRuleThickness:ruleThickness];
+    if (@available(macOS 10.14, *)) {
+        /* work around apple's bugs */
+        [self.clientView updateLineWrap];
     }
 }
 
