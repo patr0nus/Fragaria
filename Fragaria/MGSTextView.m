@@ -1428,11 +1428,8 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
         contentSize = [self frame].size;
     }
     
-    NSRect visRect = self.visibleRect;
-    NSPoint centerTopVisPoint = NSMakePoint(visRect.origin.x + visRect.size.width / 2.0, visRect.origin.y);
-    NSUInteger topChar = [self.layoutManager characterIndexForPoint:centerTopVisPoint inTextContainer:self.textContainer fractionOfDistanceBetweenInsertionPoints:NULL];
-    if (topChar == self.string.length && topChar != 0)
-        topChar -= 1;
+    CGFloat scrollYPos = textScrollView.contentView.bounds.origin.y;
+    CGFloat scrollYPosFrac = MAX(0.0, MIN(scrollYPos / (self.bounds.size.height - contentSize.height), 1.0));
 
     if (self.lineWrap) {
 
@@ -1506,13 +1503,10 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [[self layoutManager] textContainerChangedGeometry:textContainer];
 
     // redraw the display and reposition scrollers
-    if (topChar != 0) {
-        NSRange gr = [self.layoutManager glyphRangeForCharacterRange:NSMakeRange(topChar, 1) actualCharacterRange:NULL];
-        NSRect grr = [self.layoutManager boundingRectForGlyphRange:gr inTextContainer:self.textContainer];
-        grr.origin.x = 0;
-        [textScrollView scrollClipView:textScrollView.contentView toPoint:grr.origin];
-        [textScrollView.contentView scrollToPoint:grr.origin];
-    }
+    NSPoint scrollPos = textScrollView.contentView.bounds.origin;
+    scrollPos.y = (self.bounds.size.height - contentSize.height) * scrollYPosFrac;
+    [textScrollView scrollClipView:textScrollView.contentView toPoint:scrollPos];
+    [textScrollView.contentView scrollToPoint:scrollPos];
     [textScrollView reflectScrolledClipView:textScrollView.contentView];
     [textScrollView setNeedsDisplay:YES];
 }
