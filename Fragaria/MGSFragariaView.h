@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "FragariaMacros.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 @class MGSTextView;
 @class MGSColourScheme;
@@ -45,9 +47,9 @@ IB_DESIGNABLE
 
 
 /** Fragaria's text view. */
-@property (nonatomic, strong, readonly, nonnull) MGSTextView *textView;
+@property (nonatomic, strong, readonly) MGSTextView *textView;
 /** Fragaria's scroll view. */
-@property (nonatomic, strong, readonly, nonnull) NSScrollView *scrollView;
+@property (nonatomic, strong, readonly) NSScrollView *scrollView;
 
 
 #pragma mark - Accessing Text Content
@@ -55,15 +57,15 @@ IB_DESIGNABLE
 
 
 /** The plain text string of the text editor.*/
-@property (nonatomic, assign, nonnull) NSString *string;
+@property (nonatomic, copy) NSString *string;
 
 /** The text editor string, including the style changes applied by
  *  the syntax highlighter. */
-- (nonnull NSAttributedString *)attributedStringWithSyntaxColouring;
+- (NSAttributedString *)attributedStringWithSyntaxColouring;
 
 /** The text storage associated with this instance of Fragaria.
  *  @warning Do not use textView.textStorage instead! */
-- (nonnull NSTextStorage *)textStorage;
+- (NSTextStorage *)textStorage;
 
 
 #pragma mark - Getting Line and Column Information
@@ -132,7 +134,7 @@ IB_DESIGNABLE
  *       properly.
  *
  *  @param textStorage The new text storage for this instance of Fragaria. */
-- (void)replaceTextStorage:(nonnull NSTextStorage *)textStorage;
+- (void)replaceTextStorage:(NSTextStorage *)textStorage;
 
 
 #pragma mark - Configuring Syntax Highlighting
@@ -143,7 +145,7 @@ IB_DESIGNABLE
 @property (nonatomic, getter=isSyntaxColoured) BOOL syntaxColoured;
 
 /** Specifies the current syntax definition name.*/
-@property (nonatomic, assign, nonnull) NSString *syntaxDefinitionName;
+@property (nonatomic, assign) NSString *syntaxDefinitionName;
 
 /** Indicates if multiline strings should be coloured.*/
 @property BOOL coloursMultiLineStrings;
@@ -198,11 +200,11 @@ IB_DESIGNABLE
 @property (nonatomic, assign) NSUInteger startingLineNumber;
 
 /** Specifies the standard font for the line numbers in the gutter.*/
-@property (nonatomic, assign, nonnull) IBInspectable NSFont *gutterFont;
+@property (nonatomic, assign) IBInspectable NSFont *gutterFont;
 /** Specifies the standard color of the line numbers in the gutter.*/
-@property (nonatomic, assign, nonnull) IBInspectable NSColor *gutterTextColour;
+@property (nonatomic, assign) IBInspectable NSColor *gutterTextColour;
 /** Specifies the background colour of the gutter view */
-@property (nonatomic, assign, nonnull) IBInspectable NSColor *gutterBackgroundColour;
+@property (nonatomic, assign) IBInspectable NSColor *gutterBackgroundColour;
 
 
 #pragma mark - Showing Syntax Errors
@@ -312,20 +314,20 @@ IB_DESIGNABLE
 /**
  *  Add a substitute `substitute` for invisible character `character`
  **/
-- (void)addSubstitute:(NSString * _Nonnull)substitute forInvisibleCharacter:(unichar)character;
+- (void)addSubstitute:(NSString *)substitute forInvisibleCharacter:(unichar)character;
 
 #pragma mark - Configuring Text Appearance and Color Schemes
 /// @name Configuring Text Appearance and Color Schemes
 
 
 /** Specifies the text editor font.*/
-@property (nonatomic, nonnull) IBInspectable NSFont *textFont;
+@property (nonatomic) IBInspectable NSFont *textFont;
 /** The real line height as a multiple of the natural line height for the
  *  current font. */
 @property (nonatomic) CGFloat lineHeightMultiple;
 
 /** The current color scheme applied to Fragaria */
-@property (nonatomic, copy, nonnull) MGSColourScheme *colourScheme;
+@property (nonatomic, copy) MGSColourScheme *colourScheme;
 
 
 
@@ -355,12 +357,15 @@ IB_DESIGNABLE
 @interface MGSFragariaView (MGSDeprecated)
 
 
-@property (copy, nonnull) NSColor *textColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonnull) NSColor *backgroundColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *defaultSyntaxErrorHighlightingColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *textInvisibleCharactersColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *currentLineHighlightColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
-@property (nonatomic, assign, nonnull) NSColor *insertionPointColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property (copy) NSColor *textColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property NSColor *backgroundColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property (nonatomic, assign) NSColor *defaultSyntaxErrorHighlightingColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property (nonatomic, assign) NSColor *textInvisibleCharactersColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property (nonatomic, assign) NSColor *currentLineHighlightColour FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
+@property (nonatomic, assign) NSColor *insertionPointColor FRAGARIA_DEPRECATED_MSG("use colourScheme instead");
 
 
 @end
+
+
+NS_ASSUME_NONNULL_END
