@@ -130,6 +130,7 @@ typedef enum {
 - (void)setStartingLineNumber:(NSUInteger)startingLineNumber
 {
     _startingLineNumber = startingLineNumber;
+    [self setRuleThickness:[self requiredThickness]];
     [self setNeedsDisplay:YES];
 }
 

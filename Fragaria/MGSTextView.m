@@ -1420,7 +1420,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
         contentSize = [textScrollView contentSize];
         if (@available(macOS 10.14, *)) {
             if (textScrollView.rulersVisible) {
-                contentSize.width -= textScrollView.verticalRulerView.frame.size.width;
+                contentSize.width -= textScrollView.verticalRulerView.ruleThickness;
             }
         }
     } else {
@@ -1492,7 +1492,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     if (@available(macOS 10.14, *)) {
         NSPoint origin = self.frame.origin;
         if (textScrollView.rulersVisible) {
-            origin.x = textScrollView.verticalRulerView.frame.size.width;
+            origin.x = textScrollView.verticalRulerView.ruleThickness;
         } else {
             origin.x = 0;
         }
@@ -1509,6 +1509,7 @@ static unichar ClosingBraceForOpeningBrace(unichar c)
     [textScrollView.contentView scrollToPoint:scrollPos];
     [textScrollView reflectScrolledClipView:textScrollView.contentView];
     [textScrollView setNeedsDisplay:YES];
+    [textScrollView setNeedsLayout:YES];
 }
 
 
