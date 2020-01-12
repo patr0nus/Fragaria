@@ -188,15 +188,15 @@
 
 
 /*
- * View-based NSTableViews using -makeViewWithIdentifier:owner: to create views are allergic
- * to modal interface components like NSColorWheel, because while you want to deactivate NSColorWheel
- * in -prepareForReuse to avoid having the focus on the color wheel shuffle around the
- * table view with the view-reusing madness ensuing a -reloadData, this also causes the color wheel
- * to deactivate as soon as it is used.
+ * View-based NSTableViews which use -makeViewWithIdentifier:owner: to create views are allergic
+ * to modal interface components like NSColorWheel. Even though it is desirable to deactivate the
+ * NSColorWheel in -prepareForReuse -- to avoid the effect where the focused color wheel shuffles
+ * around the table view as soon as its view is reused -- this also causes the color wheel
+ * to deactivate as soon as it is used, because -reloadData triggers the aforementioned view reuse.
  *
- *   To solve the issue, we avoid using -makeViewWithIdentifier:owner: and we keep a static array of
- * the table cells we are using to always return the same view for the same location in the table.
- * We rebuild the array only when the table *structure* changes.
+ *   To solve the issue, we avoid using -makeViewWithIdentifier:owner:, and we keep a static array of
+ * the table cells we are using. In this way, we can always return the same view for the same location
+ * in the table. We rebuild the array only when the table *structure* changes.
  *
  *   Even though we could cheap out and reinstantiate the nib objects every time the view array
  * is rebuild, it turns out that even for small tables instantiating a nib is crazy slow. So we have to
