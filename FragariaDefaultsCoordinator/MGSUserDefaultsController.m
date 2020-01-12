@@ -34,6 +34,7 @@ static NSCountedSet *allNonGlobalProperties;
 
 
 @implementation MGSUserDefaultsController {
+    BOOL _setupComplete;
     NSHashTable *_managedInstances;
 }
 
@@ -57,7 +58,7 @@ static NSCountedSet *allNonGlobalProperties;
         else if ((res = [controllerInstances objectForKey:groupID]))
 			return res;
 	
-		res = [[[self class] alloc] initWithGroupID:groupID];
+		res = [[[self class] alloc] _initWithGroupID:groupID];
 		[controllerInstances setObject:res forKey:groupID];
         
 		return res;
@@ -248,10 +249,17 @@ static NSCountedSet *allNonGlobalProperties;
 
 #pragma mark - Initializers (not exposed)
 
+
+- (instancetype)init
+{
+    return [[self class] sharedController];
+}
+
+
 /*
  *  - initWithGroupID:
  */
-- (instancetype)initWithGroupID:(NSString *)groupID
+- (instancetype)_initWithGroupID:(NSString *)groupID
 {
     NSDictionary *defaults;
     
@@ -289,6 +297,7 @@ static NSCountedSet *allNonGlobalProperties;
         [NSApp addObserver:self forKeyPath:@"effectiveAppearance" options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionNew context:nil];
     }
     
+    _setupComplete = YES;
     return self;
 }
 
@@ -298,9 +307,9 @@ static NSCountedSet *allNonGlobalProperties;
  *    Just in case someone tries to create their own instance
  *    of this class, we'll make sure it's always "Global".
  */
-- (instancetype)init
+- (instancetype)_init
 {
-	return [self initWithGroupID:MGSUSERDEFAULTS_GLOBAL_ID];
+	return [self _initWithGroupID:MGSUSERDEFAULTS_GLOBAL_ID];
 }
 
 
@@ -309,6 +318,9 @@ static NSCountedSet *allNonGlobalProperties;
  */
 - (void)dealloc
 {
+    if (!_setupComplete)
+        return;
+        
     if (@available(macos 10.14, *))
     {
         [NSApp removeObserver:self forKeyPath:@"effectiveAppearance"];
